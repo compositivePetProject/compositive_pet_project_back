@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.project.pet.repository.AdoptationBoardMapper">
+    <resultMap id="AdoptationBoardAnimalCategoryResultMap" type="com.project.pet.entity.AdoptationBoardAnimalCategory">
+       <id property="boardAnimalCategoryName" column="board_animal_category_id"/>
+        <result property="boardAnimalCategoryName"/>
+    </resultMap>
+    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+
+    </resultMap>
+    <resultMap id="AdoptationBoardResultMap" type="com.project.pet.entity.AdoptationBoard">
+        <id property="adoptationBoardId" column="adoptation_board_id"/>
+        <result property="adoptationBoardTitle" column="adoptation_board_title"/>
+        <result property="adoptationBoardContent" column="adoptation_board_content"/>
+        <result property="boardAnimalCategoryId" column="board_animal_category_id"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <association property="adoptationBoardAnimalCategory" resultMap=""/>
+        <association property="user" resultMap=""/>
+
+    </resultMap>
+    <insert id="postAdoptationBoard" parameterType="com.project.pet.entity.AdoptationBoard">
+        insert into
+            adoptation_board_tb
+        values(0,#{userId},#{adoptationBoardTitle},#{adoptationBoardContent},#{boardAnimalCategoryId},now(),now())
+    </insert>
+    <select id="getAdoptationBoardByBoardId"
+            parameterType="com.project.pet.entity.AdoptationBoard"
+            resultMap="AdoptationBoardResultMap">
+        select
+            adoptation_board_id,
+            user_id,
+            adoptation_board_title,
+            adoptation_board_content,
+            board_animal_category_id,
+            create_date,
+            update_date
+        from
+            adoptation_board_tb
+
+        where
+            adoptation_board_id = #{adoptationBoardId}
+    </select>
+
+
+</mapper>
