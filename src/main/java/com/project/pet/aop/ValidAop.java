@@ -1,13 +1,19 @@
 package com.project.pet.aop;
 
+import com.project.pet.dto.auth.request.AuthNicknameCheckRequestDto;
+import com.project.pet.dto.auth.request.AuthSignupRequestDto;
+import com.project.pet.dto.auth.request.AuthUsernameCheckRequestDto;
 import com.project.pet.exception.ValidException;
+import com.project.pet.repository.UserMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +22,9 @@ import java.util.Map;
 @Aspect
 @Component
 public class ValidAop {
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Pointcut("@annotation(com.project.pet.aop.annotation.ValidAspect)")
     private void pointCut() {
@@ -34,6 +43,49 @@ public class ValidAop {
                 bindingResult = (BeanPropertyBindingResult) arg;
             }
         }
+        if(methodName.equals("usernameCheck")) {
+            AuthUsernameCheckRequestDto authUsernameCheckRequestDto = null;
+            for(Object arg : args) {
+                if(arg.getClass() == AuthUsernameCheckRequestDto.class) {
+                    authUsernameCheckRequestDto = (AuthUsernameCheckRequestDto) arg;
+                }
+            }
+            if(userMapper.findUserByUsername(authUsernameCheckRequestDto.getUsername()) != null){
+                ObjectError objectError = new FieldError("username", "username", "이미 존재하는 사용자이름입니다.");
+                bindingResult.addError(objectError);
+            }
+        }
+
+        if(methodName.equals("nicknameCheck")) {
+            AuthNicknameCheckRequestDto authNicknameCheckRequestDto = null;
+            for(Object arg : args) {
+                if(arg.getClass() == AuthNicknameCheckRequestDto.class) {
+                    authNicknameCheckRequestDto = (AuthNicknameCheckRequestDto) arg;
+                }
+            }
+            if(userMapper.findUserByNickname(authNicknameCheckRequestDto.getNickname()) != null){
+                ObjectError objectError = new FieldError("nickname", "nickname", "이미 존재하는 닉네임입니다.");
+                bindingResult.addError(objectError);
+            }
+        }
+
+        if(methodName.equals("signup")) {
+            AuthSignupRequestDto authSignupRequestDto = null;
+            for(Object arg : args) {
+                if(arg.getClass() == AuthSignupRequestDto.class) {
+                    authSignupRequestDto = (AuthSignupRequestDto) arg;
+                }
+            }
+            if(userMapper.findUserByUsername(authSignupRequestDto.getUsername()) != null){
+                ObjectError objectError = new FieldError("username", "username", "이미 존재하는 사용자이름입니다.");
+                bindingResult.addError(objectError);
+            }
+            if(userMapper.findUserByNickname(authSignupRequestDto.getNickname()) != null) {
+               ObjectError objectError = new FieldError("nickname", "nickname", "이미 존재하는 닉네임입니다.");
+               bindingResult.addError(objectError);
+            }
+        }
+
 
 
         if (bindingResult.hasErrors()) {
@@ -49,4 +101,4 @@ public class ValidAop {
 
         return proceedingJoinPoint.proceed();
         }
-    }
+}
