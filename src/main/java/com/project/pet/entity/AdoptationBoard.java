@@ -28,6 +28,8 @@ public class AdoptationBoard {
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
 
+
+    // Entity -> ResponseDto
     public GetAdoptationBoardRespDto toGetAdoptationBoardRespDto () {
         return GetAdoptationBoardRespDto.builder()
                 .adoptationBoardId(adoptationBoardId)
