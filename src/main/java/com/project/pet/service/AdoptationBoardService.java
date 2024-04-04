@@ -21,17 +21,11 @@ public class AdoptationBoardService {
         adoptationBoardMapper.postAdoptationBoard(postAdoptationBoardReqDto.toEntity());
     }
 
-    public List<GetAdoptationBoardRespDto> GetAdoptationBoardbyBoardId (GetAdoptationBoardReqDto getAdoptationBoardReqDto) {
-        List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardByBoardId(
-            getAdoptationBoardReqDto.getAdoptationBoardId()
-        );
 
 
 
-        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
 
 
-    }
 
 
 }

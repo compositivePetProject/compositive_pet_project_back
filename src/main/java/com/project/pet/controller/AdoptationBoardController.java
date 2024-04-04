@@ -24,9 +24,6 @@ public class AdoptationBoardController {
         return ResponseEntity.created(null).body(true);
     }
 
-    @GetMapping("/getBoard")
-    public ResponseEntity<?> getAdoptationBoard (@RequestBody GetAdoptationBoardReqDto getAdoptationBoardReqDto) {
-        return ResponseEntity.ok(adoptationBoardService.GetAdoptationBoardbyBoardId(getAdoptationBoardReqDto)) ;
-    }
+
 
 }

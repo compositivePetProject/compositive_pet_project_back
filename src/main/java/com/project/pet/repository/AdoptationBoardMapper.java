@@ -12,5 +12,4 @@ public interface AdoptationBoardMapper {
 
     public int postAdoptationBoard(AdoptationBoard adoptationBoard);
 
-    public List<AdoptationBoard> getAdoptationBoardByBoardId(int boardId);
 }
