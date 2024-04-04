@@ -3,6 +3,7 @@ package com.project.pet.aop;
 import com.project.pet.dto.auth.request.AuthNicknameCheckRequestDto;
 import com.project.pet.dto.auth.request.AuthSignupRequestDto;
 import com.project.pet.dto.auth.request.AuthUsernameCheckRequestDto;
+import com.project.pet.dto.oauth2.request.OAuth2SignupRequestDto;
 import com.project.pet.exception.ValidException;
 import com.project.pet.repository.UserMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -86,6 +87,26 @@ public class ValidAop {
             }
         }
 
+        if(methodName.equals("oAuth2Signup")) {
+            OAuth2SignupRequestDto oAuth2SignupRequestDto = null;
+            for(Object arg : args) {
+                if(arg.getClass() == OAuth2SignupRequestDto.class) {
+                    oAuth2SignupRequestDto = (OAuth2SignupRequestDto) arg;
+                }
+            }
+            if(userMapper.findUserByUsername(oAuth2SignupRequestDto.getUsername()) != null){
+                ObjectError objectError = new FieldError("username", "username", "이미 존재하는 사용자이름입니다.");
+                bindingResult.addError(objectError);
+            }
+            if(userMapper.findUserByNickname(oAuth2SignupRequestDto.getNickname()) != null) {
+                ObjectError objectError = new FieldError("nickname", "nickname", "이미 존재하는 닉네임입니다.");
+                bindingResult.addError(objectError);
+            }
+            if(userMapper.findUserByOAuth2name(oAuth2SignupRequestDto.getOauth2Name()) != null) {
+                ObjectError objectError = new FieldError("message", "error", "로그인한 기록이 있습니다.");
+                bindingResult.addError(objectError);
+            }
+        }
 
 
         if (bindingResult.hasErrors()) {
