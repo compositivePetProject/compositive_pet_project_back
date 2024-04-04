@@ -95,7 +95,8 @@
         set
             adoptation_board_title = #{adoptationBoardTitle},
             adoptation_board_content = #{adoptationBoardContent},
-            board_animal_category_id = #{boardAnimalCategoryId}
+            board_animal_category_id = #{boardAnimalCategoryId},
+            update_date = now()
 
         where
             adoptation_board_id = #{adoptationBoardId}

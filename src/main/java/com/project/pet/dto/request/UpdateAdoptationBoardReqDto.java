@@ -8,10 +8,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class EditAdoptationBoardReqDto {
+public class UpdateAdoptationBoardReqDto {
 
+
+    @NotNull //경로 변수 boardId를 저장할 필드 생성
     private int adoptationBoardId;
-
 
     @NotBlank
     private String adoptationBoardTitle;
