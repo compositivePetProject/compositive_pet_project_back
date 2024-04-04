@@ -7,10 +7,22 @@
 <mapper namespace="com.project.pet.repository.AdoptationBoardMapper">
     <resultMap id="AdoptationBoardAnimalCategoryResultMap" type="com.project.pet.entity.AdoptationBoardAnimalCategory">
        <id property="boardAnimalCategoryName" column="board_animal_category_id"/>
-        <result property="boardAnimalCategoryName"/>
+        <result property="boardAnimalCategoryName" column="board_animal_category_name"/>
+        <result property="boardAnimalCategoryNameKor" column="board_animal_category_name_kor"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
     </resultMap>
     <resultMap id="UserResultMap" type="com.project.pet.entity.User">
-
+        <id property="userId" column="user_id"/>
+        <result property="username" column="user_username"/>
+        <result property="password" column="user_password"/>
+        <result property="name" column="user_name"/>
+        <result property="address" column="user_address"/>
+        <result property="telNumber" column="user_address"/>
+        <result property="nickname" column="user_address"/>
+        <result property="email" column="user_address"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
     </resultMap>
     <resultMap id="AdoptationBoardResultMap" type="com.project.pet.entity.AdoptationBoard">
         <id property="adoptationBoardId" column="adoptation_board_id"/>
@@ -19,9 +31,8 @@
         <result property="boardAnimalCategoryId" column="board_animal_category_id"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
-        <association property="adoptationBoardAnimalCategory" resultMap=""/>
-        <association property="user" resultMap=""/>
-
+        <association property="adoptationBoardAnimalCategory" resultMap="AdoptationBoardAnimalCategoryResultMap"/>
+        <association property="user" resultMap="UserResultMap"/>
     </resultMap>
     <insert id="postAdoptationBoard" parameterType="com.project.pet.entity.AdoptationBoard">
         insert into
@@ -32,15 +43,19 @@
             parameterType="com.project.pet.entity.AdoptationBoard"
             resultMap="AdoptationBoardResultMap">
         select
-            adoptation_board_id,
-            user_id,
-            adoptation_board_title,
-            adoptation_board_content,
-            board_animal_category_id,
-            create_date,
-            update_date
+            abt.adoptation_board_id,
+            abt.user_id,
+            ut.user_username,
+            abt.adoptation_board_title,
+            abt.adoptation_board_content,
+            abt.board_animal_category_id,
+            abact.board_animal_category_name_kor,
+            abt.create_date,
+            abt.update_date
         from
-            adoptation_board_tb
+            adoptation_board_tb abt
+            left outer join user_tb ut on (ut.user_id = abt.user_id)
+            left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
 
         where
             adoptation_board_id = #{adoptationBoardId}

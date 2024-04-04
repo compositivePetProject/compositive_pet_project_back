@@ -31,10 +31,12 @@ public class AdoptationBoard {
     public GetAdoptationBoardRespDto toGetAdoptationBoardRespDto () {
         return GetAdoptationBoardRespDto.builder()
                 .adoptationBoardId(adoptationBoardId)
-                .userId(userId)
+                .userId(user.getUserId())
+                .username(user.getUsername())
                 .adoptationBoardTitle(adoptationBoardTitle)
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
+                .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
