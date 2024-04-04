@@ -10,7 +10,21 @@ import java.util.List;
 @Mapper
 public interface AdoptationBoardMapper {
 
+
+    //게시글 작성
     public int postAdoptationBoard(AdoptationBoard adoptationBoard);
 
-    public List<AdoptationBoard> getAdoptationBoardByBoardId(int boardId);
+    //게시글 다건 조회
+    public List<AdoptationBoard> getAdoptationBoards();
+
+    //게시글 단건 조회
+    public AdoptationBoard getAdoptationBoardByBoardId(int boardId);
+
+
+    //게시글 단건 삭제
+    public void deleteAdoptationBoardByBoardId(int boardId);
+
+    public void updateAdoptationBoard(int boardId, AdoptationBoard adoptationBoard);
+
+
 }
