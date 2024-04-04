@@ -1,8 +1,8 @@
 package com.project.pet.controller;
 
 
-import com.project.pet.dto.request.PostAdoptationBoardReqDto;
-import com.project.pet.dto.request.UpdateAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
 import com.project.pet.service.AdoptationBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

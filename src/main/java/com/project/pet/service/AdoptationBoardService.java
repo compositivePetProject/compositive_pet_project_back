@@ -1,8 +1,8 @@
 package com.project.pet.service;
 
-import com.project.pet.dto.request.PostAdoptationBoardReqDto;
-import com.project.pet.dto.request.UpdateAdoptationBoardReqDto;
-import com.project.pet.dto.response.GetAdoptationBoardRespDto;
+import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
 import com.project.pet.entity.AdoptationBoard;
 import com.project.pet.repository.AdoptationBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +37,10 @@ public class AdoptationBoardService {
     //해당 게시판 단건 삭제
     public void deleteAdoptationBoardByBoardId(int boardId) {
         adoptationBoardMapper.deleteAdoptationBoardByBoardId(boardId);
-
+    }
 
     //해당 게시판 수정
-    public void updateAdoptationBoard(UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
+    public void updateAdoptationBoard (UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
             adoptationBoardMapper.updateAdoptationBoard(updateAdoptationBoardReqDto.toEntity());
     }
 
