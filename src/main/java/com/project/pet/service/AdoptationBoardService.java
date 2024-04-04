@@ -19,20 +19,20 @@ public class AdoptationBoardService {
 
 
     //게시판 작성
-    public void postAdoptationBoard (PostAdoptationBoardReqDto postAdoptationBoardReqDto) {
+    public void postAdoptationBoard(PostAdoptationBoardReqDto postAdoptationBoardReqDto) {
         adoptationBoardMapper.postAdoptationBoard(postAdoptationBoardReqDto.toEntity());
     }
 
 
     //게시판 조회(다건)
-    public List<GetAdoptationBoardRespDto> getAdoptationBoards () {
+    public List<GetAdoptationBoardRespDto> getAdoptationBoards() {
         List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoards();
 
         return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 
     //게시판 조회(단건)
-    public GetAdoptationBoardRespDto getAdoptationBoardByBoardId (int boardId) {
+    public GetAdoptationBoardRespDto getAdoptationBoardByBoardId(int boardId) {
 
 
         AdoptationBoard adoptationBoard = adoptationBoardMapper.getAdoptationBoardByBoardId(boardId);
@@ -40,17 +40,17 @@ public class AdoptationBoardService {
         return adoptationBoard.toGetAdoptationBoardRespDto();
     }
 
-    //게시판 삭제
+    //게시판 단건 삭제
     public void deleteAdoptationBoardByBoardId(int boardId) {
         adoptationBoardMapper.deleteAdoptationBoardByBoardId(boardId);
 
     }
 
     //게시판 수정
-    public void updateAdoptationBoard(int boardId, EditAdoptationBoardReqDto updateAdoptationBoardReqDto) {
+    public void updateAdoptationBoard(EditAdoptationBoardReqDto editAdoptationBoardReqDto) {
+        adoptationBoardMapper.updateAdoptationBoard(editAdoptationBoardReqDto.toEntity());
 
     }
 
-
-
 }
+

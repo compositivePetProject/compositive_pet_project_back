@@ -14,9 +14,7 @@ public class PostAdoptationBoardReqDto {
     @NotBlank
     private String adoptationBoardTitle;
 
-    @NotNull
     private int userId;
-
 
 
     @NotBlank

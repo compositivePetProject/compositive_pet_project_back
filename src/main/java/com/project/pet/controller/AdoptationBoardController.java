@@ -3,6 +3,7 @@ package com.project.pet.controller;
 
 import com.project.pet.dto.request.PostAdoptationBoardReqDto;
 import com.project.pet.dto.request.EditAdoptationBoardReqDto;
+import com.project.pet.entity.AdoptationBoard;
 import com.project.pet.service.AdoptationBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +48,17 @@ public class AdoptationBoardController {
 
     //해당 아이디의 게시판 수정
     @PutMapping("/board/{boardId}")
-    public ResponseEntity<?> editAdoptationBoardByBoardId(@PathVariable int boardId, @RequestBody EditAdoptationBoardReqDto editAdoptationBoardReqDto) {
+    public ResponseEntity<?> editAdoptationBoardByBoardId(
+            @PathVariable int boardId,
+            @RequestBody EditAdoptationBoardReqDto editAdoptationBoardReqDto) {
 
-        return ResponseEntity.ok(null);
+        editAdoptationBoardReqDto.setAdoptationBoardId(boardId);
+
+
+
+        adoptationBoardService.updateAdoptationBoard(editAdoptationBoardReqDto);
+
+        return ResponseEntity.ok().body(true);
 
     }
 

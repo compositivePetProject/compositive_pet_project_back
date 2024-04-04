@@ -24,7 +24,9 @@ public interface AdoptationBoardMapper {
     //게시글 단건 삭제
     public void deleteAdoptationBoardByBoardId(int boardId);
 
-    public void updateAdoptationBoard(int boardId, AdoptationBoard adoptationBoard);
+
+    //게시글 수정
+    public int updateAdoptationBoard(AdoptationBoard adoptationBoard);
 
 
 }

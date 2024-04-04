@@ -88,8 +88,17 @@
             adoptation_board_id = #{boardId}
 
     </delete>
-    <update id="updateAdoptationBoard">
+    <update id="updateAdoptationBoard"
+            parameterType="com.project.pet.entity.AdoptationBoard">
+        update
+            adoptation_board_tb
+        set
+            adoptation_board_title = #{adoptationBoardTitle},
+            adoptation_board_content = #{adoptationBoardContent},
+            board_animal_category_id = #{boardAnimalCategoryId}
 
+        where
+            adoptation_board_id = #{adoptationBoardId}
     </update>
 
 
