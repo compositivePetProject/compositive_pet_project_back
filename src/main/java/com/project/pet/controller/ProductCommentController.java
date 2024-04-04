@@ -1,6 +1,7 @@
 package com.project.pet.controller;
 
-import com.project.pet.dto.product.request.ProductCommentRequestDto;
+import com.project.pet.dto.product.request.PostProductCommentRequestDto;
+import com.project.pet.dto.product.request.UpdateProductCommentRequestDto;
 import com.project.pet.service.ProductCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,8 @@ public class ProductCommentController {
     private ProductCommentService productCommentService;
 
     @PostMapping("/comment")
-    public ResponseEntity<?> saveProductComment(@RequestBody ProductCommentRequestDto productCommentRequestDto) {
-        productCommentService.saveProductComment(productCommentRequestDto);
+    public ResponseEntity<?> saveProductComment(@RequestBody PostProductCommentRequestDto postProductCommentRequestDto) {
+        productCommentService.saveProductComment(postProductCommentRequestDto);
         return ResponseEntity.created(null).body(true);
     }
 
@@ -32,8 +33,8 @@ public class ProductCommentController {
     }
 
     @PutMapping("/comment/update/{productCommentId}")
-    public ResponseEntity<?> updateProductComment(@PathVariable int productCommentId, @RequestBody ProductCommentRequestDto productCommentRequestDto){
-        productCommentService.updateProductComment(productCommentId, productCommentRequestDto);
+    public ResponseEntity<?> updateProductComment(@PathVariable int productCommentId, @RequestBody UpdateProductCommentRequestDto updateProductCommentRequestDto){
+        productCommentService.updateProductComment(productCommentId, updateProductCommentRequestDto);
         return ResponseEntity.ok(true);
     }
 

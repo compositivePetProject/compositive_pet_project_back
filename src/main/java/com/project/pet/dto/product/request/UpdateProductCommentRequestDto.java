@@ -4,14 +4,12 @@ import com.project.pet.entity.ProductComment;
 import lombok.Data;
 
 @Data
-public class ProductCommentRequestDto {
+public class UpdateProductCommentRequestDto {
     private String productCommentContent;
 
-    public ProductComment toEntity(int productCommentId,int productId, int userId){
+    public ProductComment toEntity(int productCommentId) {
         return ProductComment.builder()
                 .productCommentId(productCommentId)
-                .productId(productId)
-                .userId(userId)
                 .productCommentContent(productCommentContent)
                 .build();
     }
