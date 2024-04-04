@@ -51,8 +51,6 @@ public class AdoptationBoardController {
             @RequestBody UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
 
         updateAdoptationBoardReqDto.setAdoptationBoardId(boardId);
-
-
         adoptationBoardService.updateAdoptationBoard(updateAdoptationBoardReqDto);
 
         return ResponseEntity.ok().body("해당 게시글 수정 완료");

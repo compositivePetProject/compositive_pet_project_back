@@ -26,7 +26,6 @@ public class UpdateAdoptationBoardReqDto {
 
 
     public AdoptationBoard toEntity() {
-
         return AdoptationBoard.builder()
                 .adoptationBoardId(adoptationBoardId)
                 .adoptationBoardTitle(adoptationBoardTitle)

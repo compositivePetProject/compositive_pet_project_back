@@ -37,12 +37,12 @@ public class AdoptationBoardService {
     //해당 게시판 단건 삭제
     public void deleteAdoptationBoardByBoardId(int boardId) {
         adoptationBoardMapper.deleteAdoptationBoardByBoardId(boardId);
-
+    }
 
     //해당 게시판 수정
     public void updateAdoptationBoard(UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
-            adoptationBoardMapper.updateAdoptationBoard(updateAdoptationBoardReqDto.toEntity());
-    }
+        adoptationBoardMapper.updateAdoptationBoard(updateAdoptationBoardReqDto.toEntity());
+    };
 
 }
 
