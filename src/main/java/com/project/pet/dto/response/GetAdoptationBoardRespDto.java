@@ -10,9 +10,11 @@ import java.time.LocalDateTime;
 public class GetAdoptationBoardRespDto {
     private int adoptationBoardId;
     private int userId;
+    private String username;
     private String adoptationBoardTitle;
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
+    private String boardAnimalCategoryNameKor;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }
