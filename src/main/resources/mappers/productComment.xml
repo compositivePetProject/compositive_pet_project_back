@@ -51,8 +51,6 @@
         update
             product_comment_tb
         set
-            product_id = #{productId},
-            user_id = #{userId},
             product_comment_content = #{productCommentContent},
             update_date = now()
         where
