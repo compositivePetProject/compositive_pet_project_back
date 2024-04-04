@@ -5,6 +5,7 @@ import com.project.pet.dto.auth.request.AuthNicknameCheckRequestDto;
 import com.project.pet.dto.auth.request.AuthSigninRequestDto;
 import com.project.pet.dto.auth.request.AuthSignupRequestDto;
 import com.project.pet.dto.auth.request.AuthUsernameCheckRequestDto;
+import com.project.pet.dto.oauth2.request.OAuth2SignupRequestDto;
 import com.project.pet.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,13 @@ public class AuthController {
     @PostMapping("/sign-in")
     public ResponseEntity<?> signin(@RequestBody AuthSigninRequestDto authSigninRequestDto) {
         return ResponseEntity.created(null).body(authService.signin(authSigninRequestDto));
+    }
+
+    @ValidAspect
+    @PostMapping("/oauth2/sign-up")
+    public ResponseEntity<?> oAuth2Signup(@Valid @RequestBody OAuth2SignupRequestDto oAuth2SignupRequestDto, BindingResult bindingResult) {
+        authService.oAuth2Signup(oAuth2SignupRequestDto);
+        return ResponseEntity.created(null).body(true);
     }
 
     @ValidAspect

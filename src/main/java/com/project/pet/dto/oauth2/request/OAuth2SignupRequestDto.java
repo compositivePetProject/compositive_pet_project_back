@@ -1,5 +1,6 @@
-package com.project.pet.dto.auth.request;
+package com.project.pet.dto.oauth2.request;
 
+import com.project.pet.entity.OAuth2;
 import com.project.pet.entity.User;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class AuthSignupRequestDto {
+public class OAuth2SignupRequestDto {
     @Pattern(regexp = "^[A-Za-z0-9]{4,10}$", message = "영문자, 숫자 5 ~ 10자리 형식이어야 합니다")
     private String username;
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{7,128}$", message = "하나의 영문자, 숫자, 특수문자를 포함한 5 ~ 128자리 형식이어야 합니다")
@@ -26,7 +27,10 @@ public class AuthSignupRequestDto {
     private String email;
     @NotBlank(message = "공백일 수 없습니다.")
     private String profileImageUrl;
-
+    @NotBlank(message = "공백일 수 없습니다.")
+    private String oauth2Name;
+    @NotBlank(message = "공백일 수 없습니다.")
+    private String providerName;
 
     public User toEntity(BCryptPasswordEncoder passwordEncoder) {
         return User.builder()
@@ -38,6 +42,14 @@ public class AuthSignupRequestDto {
                 .nickname(nickname)
                 .email(email)
                 .profileImageUrl(profileImageUrl)
+                .build();
+    }
+
+    public OAuth2 toOAuth2(int userId) {
+        return OAuth2.builder()
+                .oAuth2Name(oauth2Name)
+                .userId(userId)
+                .providerName(providerName)
                 .build();
     }
 }
