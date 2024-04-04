@@ -24,6 +24,4 @@ public interface AdoptationBoardMapper {
 
     //해당 게시글 수정
     public int updateAdoptationBoard(AdoptationBoard adoptationBoard);
-
-
 }

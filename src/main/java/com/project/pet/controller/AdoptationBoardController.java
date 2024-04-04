@@ -44,7 +44,6 @@ public class AdoptationBoardController {
         return ResponseEntity.ok().body("해당 게시글 삭제 완료");
     }
 
-
     //해당 boardId의 게시판 수정
     @PutMapping("/board/{boardId}")
     public ResponseEntity<?> editAdoptationBoardByBoardId(
