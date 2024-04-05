@@ -73,7 +73,6 @@
             adoptation_board_tb abt
             left outer join user_tb ut on (ut.user_id = abt.user_id)
             left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
-
         where
             adoptation_board_id = #{boardId}
 
