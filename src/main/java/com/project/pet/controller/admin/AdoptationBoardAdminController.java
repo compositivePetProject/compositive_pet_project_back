@@ -14,12 +14,22 @@ public class AdoptationBoardAdminController {
     @Autowired
     private AdoptationBoardAdminService adoptationBoardAdminService;
 
+
+    //공지사항 작성
     @PostMapping("/admin")
     public ResponseEntity<?> postAdoptationBoardAdmin(@RequestBody PostAdoptationBoardAdminReqDto postAdoptationBoardAdminReqDto) {
 
         adoptationBoardAdminService.postAdoptationBoardAdmin(postAdoptationBoardAdminReqDto);
 
         return ResponseEntity.created(null).body("공지 작성 완료");
+    }
+
+
+    //공지사항 단건 조회
+    @GetMapping("/admin/{noticeId}")
+    public ResponseEntity<?> getAdoptationBoardAdmin(@PathVariable int noticeId) {
+
+        return ResponseEntity.ok(adoptationBoardAdminService.getAdoptationBoardAdmin(noticeId));
     }
 
 
