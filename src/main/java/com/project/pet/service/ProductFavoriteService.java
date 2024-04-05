@@ -13,6 +13,7 @@ public class ProductFavoriteService {
     private ProductFavoriteMapper productFavoriteMapper;
 
     public ProductFavoriteResponseDto getProductFavoritesCount (int productId) {
-        return productFavoriteMapper.getProductFavoritesCount(productId).toProductFavoriteResponseDto();
+//        return productFavoriteMapper.getProductFavoritesCount(productId).toProductFavoriteResponseDto();
+        return null;
     }
 }
