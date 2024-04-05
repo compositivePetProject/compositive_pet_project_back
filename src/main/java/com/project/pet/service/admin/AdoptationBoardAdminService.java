@@ -43,5 +43,10 @@ public class AdoptationBoardAdminService {
                 .collect(Collectors.toList());
     }
 
+    // 게시판 단건 삭제
+    public void deleteAdoptationBoardAdminByNoticeId(int noticeId) {
+        adoptationBoardAdminMapper.deleteAdoptationBoardAdminByNoticeId(noticeId);
+    }
+
 }
 
