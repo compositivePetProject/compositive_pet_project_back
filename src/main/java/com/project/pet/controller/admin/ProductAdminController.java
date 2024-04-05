@@ -67,8 +67,14 @@ public class ProductAdminController {
     // 관리자 상품 가입고 테이블 삭제(단건)
     @DeleteMapping("admin/incoming/stock/{productIncomingStockId}")
     public ResponseEntity<?> deleteProductIncomingStock(@PathVariable int productIncomingStockId) {
-        System.out.println(productIncomingStockId);
         productAdminService.deleteProductIncomingStock(productIncomingStockId);
+        return ResponseEntity.ok(true);
+    }
+
+    // 관리자 상품 가입고 테이블 삭제(다건)
+    @DeleteMapping("admin/incoming/stocks")
+    public ResponseEntity<?> deleteProductIncomingStocksAdmin(@RequestBody List<Integer> productIncomingStockIds) {
+        productAdminService.deleteProductIncomingStocksAdmin(productIncomingStockIds);
         return ResponseEntity.ok(true);
     }
 }
