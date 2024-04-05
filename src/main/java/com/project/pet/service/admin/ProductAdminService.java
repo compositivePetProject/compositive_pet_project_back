@@ -54,8 +54,14 @@ public class ProductAdminService {
         return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksResponseDto).collect(Collectors.toList());
     }
 
+
     public void deleteProductIncomingStock(int productIncomingStockId) {
         productAdminMapper.deleteProductIncomingStock(productIncomingStockId);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteProductIncomingStocksAdmin(List<Integer> productIncomingStockIds) {
+        productAdminMapper.deleteProductIncomingStocksAdmin(productIncomingStockIds);
     }
 
 }
