@@ -55,8 +55,29 @@
                     left outer join user_tb ut on (ut.user_id = cbat.user_id)
 
                 where
-                    community_board_admin_id = #{adminBoardId}
-
-
+                    community_board_admin_id = #{boardAdminId}
     </select>
+
+    <delete id="deleteCommunityBoardAdminByBoardId"
+                parameterType="integer" >
+
+                delete
+                from
+                    community_board_admin_tb
+
+                where
+                    community_board_admin_id = #{boardAdminId}
+    </delete>
+
+    <update id="putCommunityAdminBoard"
+            parameterType="com.project.pet.entity.CommunityBoardAdmin">
+        update
+            community_board_admin_tb
+        set
+            community_board_admin_title = #{communityBoardAdminTitle},
+            community_board_admin_content = #{communityBoardAdminContent},
+            update_date = now()
+        where
+            community_board_admin_id = #{communityBoardAdminId}
+    </update>
 </mapper>
