@@ -102,7 +102,6 @@
         update
             community_board_tb
         set
-
             community_board_title = #{communityBoardTitle},
             community_board_content = #{communityBoardContent},
             community_board_animal_category_id = #{communityBoardAnimalCategoryId},

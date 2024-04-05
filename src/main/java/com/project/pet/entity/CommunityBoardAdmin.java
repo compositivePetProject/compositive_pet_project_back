@@ -1,7 +1,7 @@
 package com.project.pet.entity;
 
 
-import com.project.pet.dto.communityboard.response.GetCommunityAdminBoardResponseDto;
+import com.project.pet.dto.communityboard.response.GetCommunityBoardAdminResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,10 +24,9 @@ public class CommunityBoardAdmin {
 
     public User user;
 
-    public GetCommunityAdminBoardResponseDto toGetCommunityAdminBoardResponseDto () {
-
-        return  GetCommunityAdminBoardResponseDto.builder()
-                .communityAdminBoardId(communityBoardAdminId)
+    public GetCommunityBoardAdminResponseDto toGetCommunityBoardAdminResponseDto () {
+        return GetCommunityBoardAdminResponseDto.builder()
+                .communityBoardAdminId(communityBoardAdminId)
                 .userId(user.getUserId())
                 .communityBoardAdminTitle(communityBoardAdminTitle)
                 .communityBoardAdminContent(communityBoardAdminContent)

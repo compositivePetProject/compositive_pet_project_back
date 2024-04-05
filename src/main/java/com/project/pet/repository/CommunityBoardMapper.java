@@ -11,10 +11,8 @@ public interface CommunityBoardMapper {
 
     public int postCommunityBoard(CommunityBoard communityBoard);
 
-
     // 게시판 조회 다건(get)
     public List<CommunityBoard> getCommunityBoards();
-
 
     //게시판 조회 단건
     public CommunityBoard getCommunityBoardBoardId(int boardId);
