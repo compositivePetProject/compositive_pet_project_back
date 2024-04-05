@@ -12,8 +12,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCommentResponseDto {
+
     private int productCommentId;
     private int productId;
     private int userId;
     private String productCommentContent;
+
 }

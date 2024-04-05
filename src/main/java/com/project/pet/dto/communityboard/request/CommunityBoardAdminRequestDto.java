@@ -1,6 +1,6 @@
 package com.project.pet.dto.communityboard.request;
 
-import com.project.pet.entity.CommunityBoardAdmin;
+import com.project.pet.entity.communityBoard.CommunityBoardAdmin;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,11 +8,9 @@ import lombok.Data;
 @Builder
 public class CommunityBoardAdminRequestDto {
 
-
     private int userId;
     private String communityBoardAdminTitle;
     private String communityBoardAdminContent;
-
 
     public CommunityBoardAdmin toEntity() {
 
@@ -24,9 +22,5 @@ public class CommunityBoardAdminRequestDto {
 
 
     }
-
-
-
-
 
 }

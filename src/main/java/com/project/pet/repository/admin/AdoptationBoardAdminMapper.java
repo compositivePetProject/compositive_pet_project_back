@@ -1,7 +1,7 @@
 package com.project.pet.repository.admin;
 
 
-import com.project.pet.entity.AdoptationBoardAdmin;
+import com.project.pet.entity.adoptationBoard.AdoptationBoardAdmin;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

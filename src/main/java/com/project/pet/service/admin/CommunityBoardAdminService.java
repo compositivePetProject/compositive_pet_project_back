@@ -2,9 +2,8 @@ package com.project.pet.service.admin;
 
 import com.project.pet.dto.communityboard.request.CommunityBoardAdminRequestDto;
 import com.project.pet.dto.communityboard.request.UpdateCommunityBoardAdminRequestDto;
-import com.project.pet.dto.communityboard.request.UpdateCommunityBoardRequestDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardAdminResponseDto;
-import com.project.pet.entity.CommunityBoardAdmin;
+import com.project.pet.entity.communityBoard.CommunityBoardAdmin;
 import com.project.pet.repository.admin.CommunityBoardAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

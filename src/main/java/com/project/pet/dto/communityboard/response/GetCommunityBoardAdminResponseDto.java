@@ -16,11 +16,4 @@ public class GetCommunityBoardAdminResponseDto {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-
-
-
-
-
-
-
 }

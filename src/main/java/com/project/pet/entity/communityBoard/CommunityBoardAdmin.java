@@ -1,7 +1,8 @@
-package com.project.pet.entity;
+package com.project.pet.entity.communityBoard;
 
 
 import com.project.pet.dto.communityboard.response.GetCommunityBoardAdminResponseDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +36,5 @@ public class CommunityBoardAdmin {
                 .build();
 
     }
-
-
 
 }

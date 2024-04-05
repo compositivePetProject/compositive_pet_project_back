@@ -4,7 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.pet.repository.admin.AdoptationBoardAdminMapper">
-    <resultMap id="AdoptationBoardAdminResultMap" type="com.project.pet.entity.AdoptationBoardAdmin">
+
+    <resultMap id="AdoptationBoardAdminResultMap" type="com.project.pet.entity.adoptationBoard.AdoptationBoardAdmin">
         <id property="adoptationBoardAdminId" column="adoptation_admin_board_id"></id>
         <result property="userId" column="user_id"/>
         <result property="adoptationBoardAdminTitle" column="adoptation_admin_board_title"/>
@@ -13,7 +14,8 @@
         <result property="updateDate" column="update_date"/>
         <association property="user" resultMap="UserResultMap"/>
     </resultMap>
-    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
         <id property="userId" column="user_id"/>
         <result property="username" column="user_username"/>
         <result property="password" column="user_password"/>
@@ -25,13 +27,15 @@
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
+
     <insert id="postAdoptationBoardAdmin"
-            parameterType="com.project.pet.entity.AdoptationBoardAdmin">
+            parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoardAdmin">
         insert into
             adoptation_board_admin_tb
         values
-        (0, #{userId}, #{adoptationBoardAdminTitle}, #{adoptationBoardAdminContent}, now(),now())
+            (0, #{userId}, #{adoptationBoardAdminTitle}, #{adoptationBoardAdminContent}, now(),now())
     </insert>
+
     <select id="getAdoptationBoardAdminByNoticeId"
             parameterType="integer"
             resultMap="AdoptationBoardAdminResultMap">
@@ -50,6 +54,7 @@
         where
             adoptation_admin_board_id = #{noticeId}
     </select>
+
     <select id="getAdoptationBoardAdmins"
             parameterType="integer"
             resultMap="AdoptationBoardAdminResultMap">
@@ -66,6 +71,7 @@
         left outer join
             user_tb ut on (ut.user_id = abat.user_id)
     </select>
+
     <delete id="deleteAdoptationBoardAdminByNoticeId"
             parameterType="integer">
         delete from
@@ -73,4 +79,5 @@
         where
             adoptation_admin_board_id = #{noticeId}
     </delete>
+
 </mapper>

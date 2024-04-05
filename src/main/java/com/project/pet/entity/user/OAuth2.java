@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProductFavorite {
-    private int productFavoriteId;
-    private int productId;
+public class OAuth2 {
+
+    private int oAuth2Id;
     private int userId;
+    private String oAuth2Name;
+    private String providerName;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    private int totalUserIdCount;
 }

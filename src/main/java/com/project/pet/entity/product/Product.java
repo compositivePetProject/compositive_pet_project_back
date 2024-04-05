@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.product;
 
 import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
 import com.project.pet.dto.product.response.ProductFavoriteResponseDto;
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class Product {
+
     private int productId;
     private int userId;
     private String productNameKor;
@@ -57,4 +58,5 @@ public class Product {
                 .updateDate(updateDate)
                 .build();
     }
+
 }

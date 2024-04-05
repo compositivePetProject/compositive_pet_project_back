@@ -1,12 +1,13 @@
 package com.project.pet.dto.product.request;
 
-import com.project.pet.entity.ProductIncomingStock;
+import com.project.pet.entity.product.ProductIncomingStock;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
 public class PutProductIncomingStockAdminRequestDto {
+
     private int productIncomingStockId;
     private int productId;
     private int productSizeCategoryId;
@@ -20,4 +21,5 @@ public class PutProductIncomingStockAdminRequestDto {
                 .productIncomingStockCount(productIncomingStockCount)
                 .build();
     }
+
 }

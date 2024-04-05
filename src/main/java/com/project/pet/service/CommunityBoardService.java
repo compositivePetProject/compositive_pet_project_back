@@ -1,10 +1,9 @@
 package com.project.pet.service;
 
-import com.project.pet.dto.communityboard.request.GetCommunityBoardRequestDto;
 import com.project.pet.dto.communityboard.request.PostCommunityBoardRequestDto;
 import com.project.pet.dto.communityboard.request.UpdateCommunityBoardRequestDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
-import com.project.pet.entity.CommunityBoard;
+import com.project.pet.entity.communityBoard.CommunityBoard;
 import com.project.pet.repository.CommunityBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.product;
 
 import com.project.pet.dto.product.response.ProductCommentResponseDto;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class ProductComment {
+
     private int productCommentId;
     private int productId;
     private int userId;
@@ -28,4 +29,5 @@ public class ProductComment {
                 .productCommentContent(productCommentContent)
                 .build();
     }
+
 }

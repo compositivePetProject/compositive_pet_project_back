@@ -1,6 +1,6 @@
 package com.project.pet.repository.admin;
 
-import com.project.pet.entity.CommunityBoardAdmin;
+import com.project.pet.entity.communityBoard.CommunityBoardAdmin;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

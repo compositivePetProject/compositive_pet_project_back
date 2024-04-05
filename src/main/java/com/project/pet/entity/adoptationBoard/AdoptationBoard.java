@@ -1,7 +1,8 @@
-package com.project.pet.entity;
+package com.project.pet.entity.adoptationBoard;
 
 
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class AdoptationBoard {
+
     private int adoptationBoardId;
     private int userId;
     private String adoptationBoardTitle;
@@ -23,10 +25,8 @@ public class AdoptationBoard {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
-
 
     // Entity -> ResponseDto
     public GetAdoptationBoardRespDto toGetAdoptationBoardRespDto () {

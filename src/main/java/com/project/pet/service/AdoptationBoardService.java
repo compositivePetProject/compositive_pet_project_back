@@ -3,7 +3,7 @@ package com.project.pet.service;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
-import com.project.pet.entity.AdoptationBoard;
+import com.project.pet.entity.adoptationBoard.AdoptationBoard;
 import com.project.pet.repository.AdoptationBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

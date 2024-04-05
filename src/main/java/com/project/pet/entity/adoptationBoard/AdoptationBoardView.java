@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.adoptationBoard;
 
 
 import lombok.AllArgsConstructor;
@@ -14,10 +14,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AdoptationBoardFavorite {
-    private int adoptationFavoriteId;
+public class AdoptationBoardView {
+
+    private int adoptationboardViewId;
     private int adoptationBoardId;
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

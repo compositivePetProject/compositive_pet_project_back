@@ -1,6 +1,6 @@
 package com.project.pet.repository;
 
-import com.project.pet.entity.ProductComment;
+import com.project.pet.entity.product.ProductComment;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,4 +11,5 @@ public interface ProductCommentMapper {
     public List<ProductComment> getAllProductComments();
     public int deleteProductComment(int productCommentId);
     public int updateProductComment(ProductComment productComment);
+
 }

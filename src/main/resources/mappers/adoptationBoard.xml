@@ -4,14 +4,16 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.pet.repository.AdoptationBoardMapper">
-    <resultMap id="AdoptationBoardAnimalCategoryResultMap" type="com.project.pet.entity.AdoptationBoardAnimalCategory">
+
+    <resultMap id="AdoptationBoardAnimalCategoryResultMap" type="com.project.pet.entity.adoptationBoard.AdoptationBoardAnimalCategory">
        <id property="boardAnimalCategoryName" column="board_animal_category_id"/>
         <result property="boardAnimalCategoryName" column="board_animal_category_name"/>
         <result property="boardAnimalCategoryNameKor" column="board_animal_category_name_kor"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
-    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
         <id property="userId" column="user_id"/>
         <result property="username" column="user_username"/>
         <result property="password" column="user_password"/>
@@ -23,7 +25,8 @@
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
-    <resultMap id="AdoptationBoardResultMap" type="com.project.pet.entity.AdoptationBoard">
+
+    <resultMap id="AdoptationBoardResultMap" type="com.project.pet.entity.adoptationBoard.AdoptationBoard">
         <id property="adoptationBoardId" column="adoptation_board_id"/>
         <result property="adoptationBoardTitle" column="adoptation_board_title"/>
         <result property="adoptationBoardContent" column="adoptation_board_content"/>
@@ -33,11 +36,13 @@
         <association property="adoptationBoardAnimalCategory" resultMap="AdoptationBoardAnimalCategoryResultMap"/>
         <association property="user" resultMap="UserResultMap"/>
     </resultMap>
-    <insert id="postAdoptationBoard" parameterType="com.project.pet.entity.AdoptationBoard">
+
+    <insert id="postAdoptationBoard" parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoard">
         insert into
             adoptation_board_tb
         values(0,#{userId},#{adoptationBoardTitle},#{adoptationBoardContent},#{boardAnimalCategoryId},now(),now())
     </insert>
+
     <select id="getAdoptationBoards"
             resultMap="AdoptationBoardResultMap">
         select
@@ -54,8 +59,8 @@
             adoptation_board_tb abt
             left outer join user_tb ut on (ut.user_id = abt.user_id)
             left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
-
     </select>
+
     <select id="getAdoptationBoardByBoardId"
             parameterType="integer"
             resultMap="AdoptationBoardResultMap">
@@ -75,8 +80,8 @@
             left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
         where
             adoptation_board_id = #{boardId}
-
     </select>
+
     <delete id="deleteAdoptationBoardByBoardId"
             parameterType="integer">
         delete
@@ -84,10 +89,10 @@
             adoptation_board_tb
         where
             adoptation_board_id = #{boardId}
-
     </delete>
+
     <update id="updateAdoptationBoard"
-            parameterType="com.project.pet.entity.AdoptationBoard">
+            parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoard">
         update
             adoptation_board_tb
         set
@@ -99,6 +104,5 @@
         where
             adoptation_board_id = #{adoptationBoardId}
     </update>
-
 
 </mapper>

@@ -38,6 +38,4 @@ public class ProductCommentController {
         return ResponseEntity.ok(true);
     }
 
-
-
 }

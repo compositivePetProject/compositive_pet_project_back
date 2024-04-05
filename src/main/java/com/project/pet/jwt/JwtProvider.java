@@ -1,8 +1,8 @@
 package com.project.pet.jwt;
 
 
-import com.project.pet.entity.PrincipalUser;
-import com.project.pet.entity.User;
+import com.project.pet.entity.user.PrincipalUser;
+import com.project.pet.entity.user.User;
 import com.project.pet.repository.UserMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -72,4 +72,5 @@ public class JwtProvider {
         PrincipalUser principalUser = user.toPrincipalUser();
         return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword(), principalUser.getAuthorities()); // 업캐스팅 되어 리턴
     }
+
 }

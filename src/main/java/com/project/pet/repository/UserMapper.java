@@ -1,7 +1,7 @@
 package com.project.pet.repository;
 
-import com.project.pet.entity.OAuth2;
-import com.project.pet.entity.User;
+import com.project.pet.entity.user.OAuth2;
+import com.project.pet.entity.user.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +13,5 @@ public interface UserMapper {
     public int saveUser(User user);
     public int saveRole(@Param("userId") int userId, @Param("roleId") int roleId);
     public int saveOAuth2(OAuth2 oAuth2);
+
 }

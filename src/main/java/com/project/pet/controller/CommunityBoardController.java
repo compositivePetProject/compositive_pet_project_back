@@ -37,21 +37,15 @@ public class CommunityBoardController {
     @DeleteMapping("/board/{boardId}")
     public ResponseEntity<?> deleteCommunityBoardByBoardId(@PathVariable int boardId) {
         communityBoardService.deleteCommunityBoardByBoardId(boardId);
-
         return ResponseEntity.ok().body("게시물 삭제 완료");
     }
 
     // 게시물 단건 수정
     @PutMapping("/board/{boardId}")
-    public ResponseEntity<?> updateCommunityBoardByBoardId(
-            @PathVariable int boardId,
-            @RequestBody UpdateCommunityBoardRequestDto updateCommunityBoardRequestDto) {
-
+    public ResponseEntity<?> updateCommunityBoardByBoardId(@PathVariable int boardId, @RequestBody UpdateCommunityBoardRequestDto updateCommunityBoardRequestDto) {
         updateCommunityBoardRequestDto.setCommunityBoardId(boardId);
         communityBoardService.updateCommunityBoard(updateCommunityBoardRequestDto);
-
         return ResponseEntity.ok().body("게시물이 수정 되었습니다.");
     }
-
 
 }

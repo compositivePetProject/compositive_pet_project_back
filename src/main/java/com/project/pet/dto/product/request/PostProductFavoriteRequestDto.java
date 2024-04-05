@@ -1,10 +1,11 @@
 package com.project.pet.dto.product.request;
 
-import com.project.pet.entity.ProductFavorite;
+import com.project.pet.entity.product.ProductFavorite;
 import lombok.Data;
 
 @Data
 public class PostProductFavoriteRequestDto {
+
     private int productId;
 
     public ProductFavorite toEntity(int userId) {
@@ -13,4 +14,5 @@ public class PostProductFavoriteRequestDto {
                 .userId(userId)
                 .build();
     }
+
 }

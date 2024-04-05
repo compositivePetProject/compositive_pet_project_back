@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.pet.repository.ProductFavoriteMapper">
 
-    <resultMap id="ProductFavoriteResultMap" type="com.project.pet.entity.ProductFavorite">
+    <resultMap id="ProductFavoriteResultMap" type="com.project.pet.entity.product.ProductFavorite">
         <id property="productFavoriteId" column="product_favorite_id" />
         <result property="productId" column="product_id" />
         <result property="userId" column="user_id" />
@@ -13,7 +13,7 @@
         <result property="totalUserIdCount" column="total_user_id_count"/>
     </resultMap>
 
-    <resultMap id="ProductResultMap" type="com.project.pet.entity.Product">
+    <resultMap id="ProductResultMap" type="com.project.pet.entity.product.Product">
         <id property="productId" column="product_id" />
         <result property="userId" column="user_id" />
         <result property="productNameKor" column="product_name_kor" />
@@ -28,7 +28,7 @@
     </resultMap>
 
     <insert id="saveProductFavorite"
-            parameterType="com.project.pet.entity.ProductFavorite"
+            parameterType="com.project.pet.entity.product.ProductFavorite"
     >
         insert into
             product_favorite_tb

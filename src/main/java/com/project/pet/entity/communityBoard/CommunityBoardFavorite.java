@@ -1,4 +1,5 @@
-package com.project.pet.entity;
+package com.project.pet.entity.communityBoard;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,16 +10,14 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class CommunityBoardAnimalCategory {
+@AllArgsConstructor
+public class CommunityBoardFavorite {
 
-    private int communityBoardAnimalCategoryId;
-    private String communityBoardAnimalCategoryName;
-    private String communityBoardAnimalCategoryNameKor;
+    private int communityFavoriteId;
+    private int communityBoardId;
+    private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-
-
 
 }

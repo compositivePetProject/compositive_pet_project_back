@@ -1,7 +1,7 @@
 package com.project.pet.repository;
 
 
-import com.project.pet.entity.AdoptationBoard;
+import com.project.pet.entity.adoptationBoard.AdoptationBoard;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -23,4 +23,5 @@ public interface AdoptationBoardMapper {
 
     //해당 게시글 수정
     public int updateAdoptationBoard(AdoptationBoard adoptationBoard);
+
 }

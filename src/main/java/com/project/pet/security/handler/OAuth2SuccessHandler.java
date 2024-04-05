@@ -1,6 +1,6 @@
 package com.project.pet.security.handler;
 
-import com.project.pet.entity.User;
+import com.project.pet.entity.user.User;
 import com.project.pet.jwt.JwtProvider;
 import com.project.pet.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private JwtProvider jwtProvider;
 
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String oAuth2name = authentication.getName();
@@ -41,4 +40,5 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         String accessToken = jwtProvider.generateToken(user);
         response.sendRedirect("http://" + clientAddress + "/auth/oauth2/sign-in?accessToken=" + accessToken);
     }
+
 }

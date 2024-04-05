@@ -1,5 +1,4 @@
-package com.project.pet.entity;
-
+package com.project.pet.entity.communityBoard;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,12 +11,13 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommunityBoardComment {
 
-    private int communityBoardCommentId;
+public class CommunityBoardView {
+
+    private int communityViewId;
     private int communityBoardId;
     private int userId;
-    private String communityBoardCommentContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

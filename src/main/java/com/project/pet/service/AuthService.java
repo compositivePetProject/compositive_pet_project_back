@@ -3,7 +3,7 @@ package com.project.pet.service;
 import com.project.pet.dto.auth.request.AuthSigninRequestDto;
 import com.project.pet.dto.auth.request.AuthSignupRequestDto;
 import com.project.pet.dto.oauth2.request.OAuth2SignupRequestDto;
-import com.project.pet.entity.User;
+import com.project.pet.entity.user.User;
 import com.project.pet.jwt.JwtProvider;
 import com.project.pet.repository.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
