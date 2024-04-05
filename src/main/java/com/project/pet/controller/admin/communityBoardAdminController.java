@@ -1,7 +1,7 @@
 package com.project.pet.controller.admin;
 
 import com.project.pet.dto.communityboard.request.CommunityBoardAdminRequestDto;
-import com.project.pet.service.CommunityBoardAdminService;
+import com.project.pet.service.admin.CommunityBoardAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +20,8 @@ public class communityBoardAdminController {
         return ResponseEntity.created(null).body(true);
     }
 
-    /*@GetMapping("/admin/{adminBoardId}")
+    @GetMapping("/admin/{adminBoardId}")
     public ResponseEntity<?> getCommunityAdminBoard(@PathVariable int adminBoardId) {
-        return ResponseEntity.ok(communityBoardAdminService.*/
-
-
-}
+        return ResponseEntity.ok(communityBoardAdminService.getCommunityBoardAdminByBoardId(adminBoardId));
+        }
+    }

@@ -1,6 +1,7 @@
 package com.project.pet.entity;
 
 
+import com.project.pet.dto.communityboard.response.GetCommunityAdminBoardResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,21 @@ public class CommunityBoardAdmin {
     private String communityBoardAdminContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public User user;
+
+    public GetCommunityAdminBoardResponseDto toGetCommunityAdminBoardResponseDto () {
+
+        return  GetCommunityAdminBoardResponseDto.builder()
+                .communityAdminBoardId(communityBoardAdminId)
+                .userId(user.getUserId())
+                .communityBoardAdminTitle(communityBoardAdminTitle)
+                .communityBoardAdminContent(communityBoardAdminContent)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+
+    }
 
 
 
