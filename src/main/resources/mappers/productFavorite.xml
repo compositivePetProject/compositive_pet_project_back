@@ -10,7 +10,7 @@
         <result property="userId" column="user_id" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
-        <result property="totalFavoriteCount" column="total_favorite_count"/>
+        <result property="totalUserIdCount" column="total_user_id_count"/>
     </resultMap>
 
     <resultMap id="ProductResultMap" type="com.project.pet.entity.Product">
@@ -27,6 +27,15 @@
         <association property="productFavorite" resultMap="ProductFavoriteResultMap" />
     </resultMap>
 
+    <insert id="saveProductFavorite"
+            parameterType="com.project.pet.entity.ProductFavorite"
+    >
+        insert into
+            product_favorite_tb
+        VALUES
+            (0, #{productId}, #{userId}, now(), now());
+    </insert>
+
     <select id="getProductFavoritesCount"
             parameterType="integer"
             resultMap="ProductResultMap"
@@ -42,14 +51,21 @@
             pt.product_board_content,
             pt.create_date,
             pt.update_date,
-            ppft.product_favorite_id,
-            COUNT(ppft.product_favorite_id) AS total_favorite_count
+            COUNT(pft.user_id) AS total_user_id_count
         FROM
             product_tb pt
-        LEFT OUTER JOIN product_favorite_tb ppft on(ppft.product_id = pt.product_id)
+            LEFT OUTER JOIN product_favorite_tb pft on(pft.product_id = pt.product_id)
         WHERE
             pt.product_id = #{productId}
-        GROUP BY
-            pt.product_id;
     </select>
+
+    <delete id="deleteProductFavorite"
+            parameterType="Integer">
+        delete
+            from
+            product_favorite_tb
+        where
+            user_id = #{userId}
+    </delete>
+
 </mapper>

@@ -16,8 +16,7 @@ public class ProductFavoriteResponseDto {
         private int productCategoryId;
         private int productAnimalCategoryId;
         private String productBoardContent;
-        private int productFavoriteId;
-        private int totalFavoriteCount;
+        private int totalUserIdCount;
         private LocalDateTime createDate;
         private LocalDateTime updateDate;
 }

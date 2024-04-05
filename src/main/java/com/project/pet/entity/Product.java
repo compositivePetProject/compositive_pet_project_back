@@ -52,8 +52,7 @@ public class Product {
                 .productCategoryId(productCategoryId)
                 .productAnimalCategoryId(productAnimalCategoryId)
                 .productBoardContent(productBoardContent)
-                .productFavoriteId(productFavorite.getProductFavoriteId())
-                .totalFavoriteCount(productFavorite.getTotalFavoriteCount())
+                .totalUserIdCount(productFavorite.getTotalUserIdCount())
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
