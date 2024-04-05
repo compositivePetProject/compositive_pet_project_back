@@ -1,6 +1,7 @@
 package com.project.pet.repository.admin;
 
 import com.project.pet.entity.Product;
+import com.project.pet.entity.ProductIncomingStock;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,4 +15,10 @@ public interface ProductAdminMapper {
     public int deleteProductAdmin(int productId);
 
     public int putProductAdmin(Product product);
+
+    public int deleteProductsAdmin(List<Integer> productIds);
+
+    public int postProductIncomingStock(ProductIncomingStock productIncomingStock);
+
+    public List<ProductIncomingStock> getProductIncomingStocks();
 }

@@ -1,11 +1,14 @@
 package com.project.pet.controller.admin;
 
 import com.project.pet.dto.product.request.PostProductAdminRequestDto;
+import com.project.pet.dto.product.request.PostProductIncomingStockRequestDto;
 import com.project.pet.dto.product.request.PutProductAdminRequestDto;
 import com.project.pet.service.admin.ProductAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -41,5 +44,24 @@ public class ProductAdminController {
         return ResponseEntity.created(null).body(true);
     }
 
+    // 관리자 상품 삭제(다건)
+    @DeleteMapping("/admin/products")
+    public ResponseEntity<?> deleteProductsAdmin(@RequestBody List<Integer> productIds) {
+        productAdminService.deleteProductsAdmin(productIds);
+        return ResponseEntity.ok(true);
+    }
+
+    // 관리자 상품 가입고 테이블 등록(단건)
+    @PostMapping("/admin/incoming/stock")
+    public ResponseEntity<?> postProductIncomingStock(@RequestBody PostProductIncomingStockRequestDto postProductIncomingStockRequestDto) {
+        productAdminService.postProductIncomingStock(postProductIncomingStockRequestDto);
+        return ResponseEntity.created(null).body(true);
+    }
+
+    // 관리자 상품 가입고 테이블 조회(다건)
+    @GetMapping("admin/incoming/stocks")
+    public ResponseEntity<?> getProductIncomingStocks() {
+        return ResponseEntity.ok(productAdminService.getProductIncomingStocks());
+    }
 
 }

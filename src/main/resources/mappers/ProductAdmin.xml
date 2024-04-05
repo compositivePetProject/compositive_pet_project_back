@@ -17,6 +17,14 @@
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
     </resultMap>
+    <resultMap id="ProductIncomingStockResultMap" type="com.project.pet.entity.ProductIncomingStock">
+        <id property="productIncomingStockId" column="product_incoming_stock_id" />
+        <result property="productId" column="product_id" />
+        <result property="productSizeCategoryId" column="product_size_category_id" />
+        <result property="productIncomingStockCount" column="product_incoming_stock_count" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
 
     <insert id="postProductAdmin"
         parameterType="com.project.pet.entity.Product"
@@ -50,8 +58,28 @@
         where
             product_id = #{productId}
     </update>
-
-
-
-
+    <delete id="deleteProductsAdmin" parameterType="List">
+        delete
+        from
+            product_tb
+        where
+            product_id in (
+                <foreach collection="productIds" item="productId" separator=",">
+                    #{productId}
+                </foreach>
+            )
+    </delete>
+    <insert id="postProductIncomingStock"
+            parameterType="com.project.pet.entity.ProductIncomingStock"
+            keyProperty="productIncomingStockId"
+            useGeneratedKeys="true"
+    >
+            insert into
+                product_incoming_stock_tb
+            values
+                (0, #{productId}, #{productSizeCategoryId}, #{productIncomingStockCount}, now(), now())
+    </insert>
+    <select id="getProductIncomingStocks" resultMap="ProductIncomingStockResultMap">
+        select * from product_incoming_stock_tb
+    </select>
 </mapper>
