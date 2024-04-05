@@ -11,7 +11,7 @@
         <result property="productNameKor" column="product_name_kor" />
         <result property="productPrice" column="product_price" />
         <result property="productImageUrl" column="product_image_url" />
-        <result property="productCategoryId" column="product_cateogry_id" />
+        <result property="productCategoryId" column="product_category_id" />
         <result property="productAnimalCategoryId" column="product_animal_category_id" />
         <result property="productBoardContent" column="product_board_content" />
         <result property="createDate" column="create_date" />
@@ -51,7 +51,7 @@
             user_id = #{userId},
             product_name_kor = #{productNameKor},
             product_image_url = #{productImageUrl},
-            product_cateogry_id = #{productCategoryId},
+            product_category_id = #{productCategoryId},
             product_animal_category_id = #{productAnimalCategoryId},
             product_board_content = #{productBoardContent},
             update_date = now()
