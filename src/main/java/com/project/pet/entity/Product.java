@@ -1,6 +1,7 @@
 package com.project.pet.entity;
 
 import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
+import com.project.pet.dto.product.response.ProductFavoriteResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +25,7 @@ public class Product {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-
+    private ProductFavorite productFavorite;
 
     public GetProductsAdminResponseDto toGetProductsAdminResponseDto() {
         return GetProductsAdminResponseDto.builder()
@@ -36,6 +37,23 @@ public class Product {
                 .productCategoryId(productCategoryId)
                 .productAnimalCategoryId(productAnimalCategoryId)
                 .productBoardContent(productBoardContent)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public ProductFavoriteResponseDto toProductFavoriteResponseDto() {
+        return ProductFavoriteResponseDto.builder()
+                .productId(productId)
+                .userId(userId)
+                .productNameKor(productNameKor)
+                .productPrice(productPrice)
+                .productImageUrl(productImageUrl)
+                .productCategoryId(productCategoryId)
+                .productAnimalCategoryId(productAnimalCategoryId)
+                .productBoardContent(productBoardContent)
+                .productFavoriteId(productFavorite.getProductFavoriteId())
+                .totalFavoriteCount(productFavorite.getTotalFavoriteCount())
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
