@@ -27,7 +27,6 @@ public class JwtAuthenticationFilter extends GenericFilter {
         List<String> antMatchers = List.of(
                 "/auth",
                 "/community",
-                "/auth", 
                 "/product",
                 "/adoptation"
         );

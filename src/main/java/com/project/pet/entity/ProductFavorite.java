@@ -17,5 +17,6 @@ public class ProductFavorite {
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private int totalFavoriteCount;
+
+    private int totalUserIdCount;
 }
