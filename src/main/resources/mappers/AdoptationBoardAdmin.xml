@@ -4,10 +4,50 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.pet.repository.admin.AdoptationBoardAdminMapper">
+    <resultMap id="AdoptationBoardAdminResultMap" type="com.project.pet.entity.AdoptationBoardAdmin">
+        <id property="adoptationBoardAdminId" column="adoptation_admin_board_id"></id>
+        <result property="userId" column="user_id"/>
+        <result property="adoptationBoardAdminTitle" column="adoptation_admin_board_title"/>
+        <result property="adoptationBoardAdminContent" column="adoptation_admin_board_title"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <association property="user" resultMap="UserResultMap"/>
+    </resultMap>
+    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="user_username"/>
+        <result property="password" column="user_password"/>
+        <result property="name" column="user_name"/>
+        <result property="address" column="user_address"/>
+        <result property="telNumber" column="user_address"/>
+        <result property="nickname" column="user_address"/>
+        <result property="email" column="user_address"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
     <insert id="postAdoptationBoardAdmin"
             parameterType="com.project.pet.entity.AdoptationBoardAdmin">
         insert into
             adoptation_board_admin_tb
-        values(0, #{userId}, #{adoptationBoardAdminTitle}, #{adoptationBoardAdminContent}, now(),now())
+        values
+        (0, #{userId}, #{adoptationBoardAdminTitle}, #{adoptationBoardAdminContent}, now(),now())
     </insert>
+    <select id="getAdoptationBoardAdminByNoticeId"
+            parameterType="integer"
+            resultMap="AdoptationBoardAdminResultMap">
+        select
+            abat.adoptation_admin_board_id,
+            abat.user_id,
+            ut.user_username,
+            abat.adoptation_admin_board_title,
+            abat.adoptation_admin_board_content,
+            abat.create_date,
+            abat.update_date
+        from
+            adoptation_board_admin_tb abat
+        left outer join
+            user_tb ut on (ut.user_id = abat.user_id)
+        where
+            adoptation_admin_board_id = #{noticeId}
+    </select>
 </mapper>
