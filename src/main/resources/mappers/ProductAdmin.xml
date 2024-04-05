@@ -82,4 +82,11 @@
     <select id="getProductIncomingStocks" resultMap="ProductIncomingStockResultMap">
         select * from product_incoming_stock_tb
     </select>
+    <delete id="deleteProductIncomingStock" parameterType="Integer">
+        delete
+        from
+            product_incoming_stock_tb
+        where
+            product_incoming_stock_id = #{productIncomingStockId}
+    </delete>
 </mapper>
