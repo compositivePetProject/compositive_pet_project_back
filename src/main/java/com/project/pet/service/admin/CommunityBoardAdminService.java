@@ -28,6 +28,13 @@ public class CommunityBoardAdminService {
             }
 
 
+            // 관리자 공지사항 게시물 단건 삭제
+            public void deleteCommunityBoardAdminByBoardId (int adminBoardId) {
+                communityBoardAdminMapper.deleteCommunityBoardAdminByBoardId(adminBoardId);
+
+            }
+
+
 
 
 

@@ -56,7 +56,16 @@
 
                 where
                     community_board_admin_id = #{adminBoardId}
-
-
     </select>
+
+    <delete id="deleteCommunityBoardAdminByBoardId"
+                parameterType="integer" >
+            delete
+            from
+                community_board_admin_tb
+            where
+                community_board_admin_id = #{adminBoardId}
+    </delete>
+
+
 </mapper>
