@@ -8,7 +8,7 @@
         <id property="adoptationBoardAdminId" column="adoptation_admin_board_id"></id>
         <result property="userId" column="user_id"/>
         <result property="adoptationBoardAdminTitle" column="adoptation_admin_board_title"/>
-        <result property="adoptationBoardAdminContent" column="adoptation_admin_board_title"/>
+        <result property="adoptationBoardAdminContent" column="adoptation_admin_board_content"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
         <association property="user" resultMap="UserResultMap"/>
@@ -51,7 +51,6 @@
             adoptation_admin_board_id = #{noticeId}
     </select>
     <select id="getAdoptationBoardAdmins"
-            parameterType="integer"
             resultMap="AdoptationBoardAdminResultMap">
         select
             abat.adoptation_admin_board_id,
@@ -73,4 +72,15 @@
         where
             adoptation_admin_board_id = #{noticeId}
     </delete>
+    <update id="updateAdoptationBoardAdminByNoticeId"
+            parameterType="com.project.pet.entity.AdoptationBoardAdmin">
+        update
+            adoptation_board_admin_tb
+        set
+            adoptation_admin_board_title = #{adoptationBoardAdminTitle},
+            adoptation_admin_board_content = #{adoptationBoardAdminContent},
+            update_date = now()
+        where
+            adoptation_admin_board_id = #{adoptationBoardAdminId}
+    </update>
 </mapper>

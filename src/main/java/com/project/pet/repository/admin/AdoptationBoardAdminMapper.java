@@ -20,7 +20,8 @@ public interface AdoptationBoardAdminMapper {
     public List<AdoptationBoardAdmin> getAdoptationBoardAdmins();
 
     //공지사항 단건 삭제
-
     public int deleteAdoptationBoardAdminByNoticeId(int noticeId);
+
+    public void updateAdoptationBoardAdminByNoticeId(AdoptationBoardAdmin adoptationBoardAdmin);
 
 }

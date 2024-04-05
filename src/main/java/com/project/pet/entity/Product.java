@@ -24,6 +24,8 @@ public class Product {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private ProductFavorite productFavorite;
+
 
 
     public GetProductsAdminResponseDto toGetProductsAdminResponseDto() {

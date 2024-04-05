@@ -2,6 +2,7 @@ package com.project.pet.service.admin;
 
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardAdminReqDto;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardAdminReqDto;
 import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardAdminRespDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
@@ -21,31 +22,34 @@ public class AdoptationBoardAdminService {
     @Autowired
     private AdoptationBoardAdminMapper adoptationBoardAdminMapper;
 
-    //게시판 작성
+    //공지사항 작성
     public void postAdoptationBoardAdmin(PostAdoptationBoardAdminReqDto postAdoptationBoardAdminReqDto) {
         adoptationBoardAdminMapper.postAdoptationBoardAdmin(postAdoptationBoardAdminReqDto.toEntity());
     }
 
-    //게시판 단건 조회
+    //공지사항 단건 조회
     public GetAdoptationBoardAdminRespDto getAdoptationBoardAdmin(int noticeId) {
         AdoptationBoardAdmin adoptationBoardAdmin = adoptationBoardAdminMapper.getAdoptationBoardAdminByNoticeId(noticeId);
 
         return adoptationBoardAdmin.toGetAdoptationBoardAdminRespDto();
     }
 
-    //게시판 전체 조회(다건)
+    //공지사항 전체 조회(다건)
     public List<GetAdoptationBoardAdminRespDto> getAdoptationBoardAdmins() {
         List<AdoptationBoardAdmin> adoptationBoardAdmins = adoptationBoardAdminMapper.getAdoptationBoardAdmins();
 
-        return adoptationBoardAdmins
-                .stream()
-                .map(AdoptationBoardAdmin::toGetAdoptationBoardAdminRespDto)
-                .collect(Collectors.toList());
+        return adoptationBoardAdmins.stream().map(AdoptationBoardAdmin::toGetAdoptationBoardAdminRespDto).collect(Collectors.toList());
     }
 
-    // 게시판 단건 삭제
+    //공지사항 단건 삭제
     public void deleteAdoptationBoardAdminByNoticeId(int noticeId) {
         adoptationBoardAdminMapper.deleteAdoptationBoardAdminByNoticeId(noticeId);
+    }
+
+
+    //공지사항 단건 수정
+    public void updateAdoptationBoardAdminByNoticeId(UpdateAdoptationBoardAdminReqDto updateAdoptationBoardAdminReqDto) {
+        adoptationBoardAdminMapper.updateAdoptationBoardAdminByNoticeId(updateAdoptationBoardAdminReqDto.toEntity());
     }
 
 }

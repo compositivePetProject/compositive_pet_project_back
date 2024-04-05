@@ -2,6 +2,7 @@ package com.project.pet.controller.admin;
 
 
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardAdminReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardAdminReqDto;
 import com.project.pet.service.admin.AdoptationBoardAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,11 +41,24 @@ public class AdoptationBoardAdminController {
     }
 
 
+
+    //공지사항 단건 삭제
     @DeleteMapping("/admin/{noticeId}")
     public ResponseEntity<?> deleteAdoptationBoardAdmin(@PathVariable int noticeId) {
         adoptationBoardAdminService.deleteAdoptationBoardAdminByNoticeId(noticeId);
 
-        return ResponseEntity.ok().body("삭제완료");
+        return ResponseEntity.ok().body("공지 삭제 완료");
+    }
+
+    @PutMapping("/admin/{noticeId}")
+    public ResponseEntity<?> updateAdoptationBoardAdmin(@PathVariable int noticeId,
+                                                        @RequestBody UpdateAdoptationBoardAdminReqDto
+                                                                    updateAdoptationBoardAdminReqDto) {
+
+        updateAdoptationBoardAdminReqDto.setAdoptationBoardAdminId(noticeId);
+        adoptationBoardAdminService.updateAdoptationBoardAdminByNoticeId(updateAdoptationBoardAdminReqDto);
+
+        return ResponseEntity.ok().body("공지 수정 완료");
     }
 
 
