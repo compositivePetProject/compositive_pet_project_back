@@ -24,6 +24,8 @@ public class Product {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+
+
     public GetProductsAdminResponseDto toGetProductsAdminResponseDto() {
         return GetProductsAdminResponseDto.builder()
                 .productId(productId)
