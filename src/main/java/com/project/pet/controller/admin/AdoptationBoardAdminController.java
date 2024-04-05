@@ -32,5 +32,12 @@ public class AdoptationBoardAdminController {
         return ResponseEntity.ok(adoptationBoardAdminService.getAdoptationBoardAdmin(noticeId));
     }
 
+    //공지사항 전체 조회(다건)
+    @GetMapping("/admins")
+    public ResponseEntity<?> getAdoptationBoardAdmins() {
+
+        return ResponseEntity.ok(adoptationBoardAdminService.getAdoptationBoardAdmins());
+    }
+
 
 }

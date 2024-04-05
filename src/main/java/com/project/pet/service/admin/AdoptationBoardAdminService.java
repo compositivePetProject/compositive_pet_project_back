@@ -33,6 +33,15 @@ public class AdoptationBoardAdminService {
         return adoptationBoardAdmin.toGetAdoptationBoardAdminRespDto();
     }
 
+    //게시판 전체 조회(다건)
+    public List<GetAdoptationBoardAdminRespDto> getAdoptationBoardAdmins() {
+        List<AdoptationBoardAdmin> adoptationBoardAdmins = adoptationBoardAdminMapper.getAdoptationBoardAdmins();
+
+        return adoptationBoardAdmins
+                .stream()
+                .map(AdoptationBoardAdmin::toGetAdoptationBoardAdminRespDto)
+                .collect(Collectors.toList());
+    }
 
 }
 
