@@ -1,4 +1,4 @@
-package com.project.pet.dto.request;
+package com.project.pet.dto.adoptation.request;
 
 
 import lombok.Data;

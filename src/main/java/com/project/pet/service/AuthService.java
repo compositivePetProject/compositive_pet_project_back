@@ -2,6 +2,7 @@ package com.project.pet.service;
 
 import com.project.pet.dto.auth.request.AuthSigninRequestDto;
 import com.project.pet.dto.auth.request.AuthSignupRequestDto;
+import com.project.pet.dto.oauth2.request.OAuth2SignupRequestDto;
 import com.project.pet.entity.User;
 import com.project.pet.jwt.JwtProvider;
 import com.project.pet.repository.UserMapper;
@@ -32,6 +33,20 @@ public class AuthService {
         if(successCount < 2) {
             throw new RuntimeException("데이터 저장 오류");
         }
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void oAuth2Signup(OAuth2SignupRequestDto oAuth2SignupRequestDto) {
+        int successCount = 0;
+        User user = oAuth2SignupRequestDto.toEntity(passwordEncoder);
+        successCount += userMapper.saveUser(user);
+        successCount += userMapper.saveRole(user.getUserId(), 1);
+        successCount += userMapper.saveOAuth2(oAuth2SignupRequestDto.toOAuth2(user.getUserId()));
+
+        if(successCount < 3) {
+            throw new RuntimeException("데이터 저장 오류");
+        }
+
     }
 
     public String signin(AuthSigninRequestDto authSigninRequestDto) {

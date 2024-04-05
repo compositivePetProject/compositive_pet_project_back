@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.pet.repository.admin.ProductAdminMapper">
+    <resultMap id="ProductResultMap" type="com.project.pet.entity.Product">
+        <id property="productId" column="product_id" />
+        <result property="userId" column="user_id" />
+        <result property="productNameKor" column="product_name_kor" />
+        <result property="productPrice" column="product_price" />
+        <result property="productImageUrl" column="product_image_url" />
+        <result property="productCategoryId" column="product_cateogry_id" />
+        <result property="productAnimalCategoryId" column="product_animal_category_id" />
+        <result property="productBoardContent" column="product_board_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+
+    </resultMap>
+    <insert id="postProductAdmin"
+        parameterType="com.project.pet.entity.Product"
+        keyProperty="productId"
+        useGeneratedKeys="true">
+        insert into
+            product_tb
+        values(0, #{userId}, #{productNameKor}, #{productPrice}, #{productImageUrl}, #{productCategoryId}, #{productAnimalCategoryId}, #{productBoardContent}, now(), now())
+    </insert>
+    <select id="getProductsAdmin" resultMap="ProductResultMap">
+        SELECT * FROM product_tb
+    </select>
+    <delete id="deleteProductAdmin" parameterType="Integer">
+        delete
+        from
+            product_tb
+        where
+            product_id = #{productId}
+    </delete>
+    <update id="putProductAdmin" parameterType="com.project.pet.entity.Product">
+        update
+            product_tb
+        set
+            user_id = #{userId},
+            product_name_kor = #{productNameKor},
+            product_image_url = #{productImageUrl},
+            product_cateogry_id = #{productCategoryId},
+            product_animal_category_id = #{productAnimalCategoryId},
+            product_board_content = #{productBoardContent},
+            update_date = now()
+        where
+            product_id = #{productId}
+    </update>
+</mapper>

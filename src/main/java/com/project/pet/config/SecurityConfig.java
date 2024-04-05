@@ -2,6 +2,8 @@ package com.project.pet.config;
 
 import com.project.pet.security.exception.AuthEntryPoint;
 import com.project.pet.security.filter.JwtAuthenticationFilter;
+import com.project.pet.security.handler.OAuth2SuccessHandler;
+import com.project.pet.service.OAuth2PrincipalUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
     private AuthEntryPoint authEntryPoint;
+    @Autowired
+    private OAuth2PrincipalUserService oAuth2PrincipalUserService;
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -27,15 +33,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors();
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/auth/**", "/adoptation/**", "/community/**")
+                .antMatchers("/auth/**", "/adoptation/**", "/community/**", "/product/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(authEntryPoint);
+                .authenticationEntryPoint(authEntryPoint)
+                .and()
+                .oauth2Login()
+                .successHandler(oAuth2SuccessHandler)
+                .userInfoEndpoint()
+                .userService(oAuth2PrincipalUserService);
     }
 }

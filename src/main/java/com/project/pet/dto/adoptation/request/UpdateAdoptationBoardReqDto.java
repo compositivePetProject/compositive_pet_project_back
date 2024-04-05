@@ -1,23 +1,21 @@
-package com.project.pet.dto.request;
+package com.project.pet.dto.adoptation.request;
 
 
 import com.project.pet.entity.AdoptationBoard;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class PostAdoptationBoardReqDto {
+public class UpdateAdoptationBoardReqDto {
+
+
+    @NotNull //경로 변수 boardId를 저장할 필드 생성
+    private int adoptationBoardId;
 
     @NotBlank
     private String adoptationBoardTitle;
-
-    @NotNull
-    private int userId;
-
-
 
     @NotBlank
     private String adoptationBoardContent;
@@ -30,11 +28,10 @@ public class PostAdoptationBoardReqDto {
     public AdoptationBoard toEntity() {
 
         return AdoptationBoard.builder()
+                .adoptationBoardId(adoptationBoardId)
                 .adoptationBoardTitle(adoptationBoardTitle)
-                .userId(userId)
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .build();
     }
-
 }
