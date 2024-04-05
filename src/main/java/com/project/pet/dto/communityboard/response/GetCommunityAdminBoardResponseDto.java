@@ -1,25 +1,21 @@
-package com.project.pet.entity;
+package com.project.pet.dto.communityboard.response;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class CommunityBoardAdmin {
+public class GetCommunityAdminBoardResponseDto {
 
-    private int communityBoardAdminId;
+    private int communityAdminBoardId;
     private int userId;
     private String communityBoardAdminTitle;
     private String communityBoardAdminContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 
 
 

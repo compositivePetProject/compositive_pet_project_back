@@ -7,7 +7,9 @@ import lombok.Data;
 
 @Builder
 @Data
-public class RegisterCommunityBoardRequestDto {
+
+//
+public class PostCommunityBoardRequestDto {
   private int userId;
   private String communityBoardTitle;
   private String communityBoardContent;

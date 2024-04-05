@@ -10,16 +10,16 @@ public class CommunityBoardAdminRequestDto {
 
 
     private int userId;
-    private String communityBoardTitle;
-    private String communityBoardContent;
+    private String communityBoardAdminTitle;
+    private String communityBoardAdminContent;
 
 
     public CommunityBoardAdmin toEntity() {
 
         return CommunityBoardAdmin.builder()
                 .userId(userId)
-                .communityBoardTitle(communityBoardTitle)
-                .communityBoardContent(communityBoardContent)
+                .communityBoardAdminTitle(communityBoardAdminTitle)
+                .communityBoardAdminContent(communityBoardAdminContent)
                 .build();
 
 
