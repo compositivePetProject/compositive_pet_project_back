@@ -100,4 +100,15 @@
                 </foreach>
             )
     </delete>
+    <update id="putProductIncomingStockAdmin" parameterType="com.project.pet.entity.ProductIncomingStock">
+        update
+            product_incoming_stock_tb
+        set
+            product_id = #{productId},
+            product_size_category_id = #{productSizeCategoryId},
+            product_incoming_stock_count = #{productIncomingStockCount},
+            update_date = now()
+        where
+            product_incoming_stock_id = #{productIncomingStockId}
+    </update>
 </mapper>

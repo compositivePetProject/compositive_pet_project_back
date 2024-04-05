@@ -3,6 +3,7 @@ package com.project.pet.service.admin;
 import com.project.pet.dto.product.request.PostProductAdminRequestDto;
 import com.project.pet.dto.product.request.PostProductIncomingStockRequestDto;
 import com.project.pet.dto.product.request.PutProductAdminRequestDto;
+import com.project.pet.dto.product.request.PutProductIncomingStockAdminRequestDto;
 import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
 import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
 import com.project.pet.entity.Product;
@@ -62,6 +63,12 @@ public class ProductAdminService {
     @Transactional(rollbackFor = Exception.class)
     public void deleteProductIncomingStocksAdmin(List<Integer> productIncomingStockIds) {
         productAdminMapper.deleteProductIncomingStocksAdmin(productIncomingStockIds);
+    }
+
+    public void putProductIncomingStockAdmin(int productIncomingStockId, PutProductIncomingStockAdminRequestDto putProductIncomingStockAdminRequestDto) {
+        putProductIncomingStockAdminRequestDto.setProductIncomingStockId(productIncomingStockId);
+        productAdminMapper.putProductIncomingStockAdmin(putProductIncomingStockAdminRequestDto.toEntity());
+
     }
 
 }

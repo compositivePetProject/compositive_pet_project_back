@@ -3,6 +3,7 @@ package com.project.pet.controller.admin;
 import com.project.pet.dto.product.request.PostProductAdminRequestDto;
 import com.project.pet.dto.product.request.PostProductIncomingStockRequestDto;
 import com.project.pet.dto.product.request.PutProductAdminRequestDto;
+import com.project.pet.dto.product.request.PutProductIncomingStockAdminRequestDto;
 import com.project.pet.service.admin.ProductAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,4 +78,12 @@ public class ProductAdminController {
         productAdminService.deleteProductIncomingStocksAdmin(productIncomingStockIds);
         return ResponseEntity.ok(true);
     }
+
+    // 관리자 상품 가입고 테이블 수정(단건)
+    @PutMapping("admin/incoming/stock/{productIncomingStockId}")
+    public ResponseEntity<?> putProductIncomingStockAdmin(@PathVariable int productIncomingStockId, @RequestBody PutProductIncomingStockAdminRequestDto putProductIncomingStockAdminRequestDto) {
+        productAdminService.putProductIncomingStockAdmin(productIncomingStockId, putProductIncomingStockAdminRequestDto);
+        return ResponseEntity.ok(true);
+    }
+
 }
