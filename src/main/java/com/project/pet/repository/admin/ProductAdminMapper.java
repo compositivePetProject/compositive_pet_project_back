@@ -1,7 +1,7 @@
 package com.project.pet.repository.admin;
 
-import com.project.pet.entity.Product;
-import com.project.pet.entity.ProductIncomingStock;
+import com.project.pet.entity.product.Product;
+import com.project.pet.entity.product.ProductIncomingStock;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

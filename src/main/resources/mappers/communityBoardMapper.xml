@@ -4,7 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.pet.repository.CommunityBoardMapper">
-    <resultMap id="CommunityBoardAnimalCategoryResultMap" type="com.project.pet.entity.CommunityBoardAnimalCategory" >
+
+    <resultMap id="CommunityBoardAnimalCategoryResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardAnimalCategory" >
         <id property="communityBoardAnimalCategoryId" column="community_board_id" />
         <result property="communityBoardAnimalCategoryName" column="community_board_animal_category_name"/>
         <result property="communityBoardAnimalCategoryNameKor" column="community_board_animal_category_name_kor"/>
@@ -12,7 +13,7 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
-    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
         <id property="userId" column="user_id" />
         <result property="username" column="user_username" />
         <result property="password" column="user_password" />
@@ -26,7 +27,7 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
-    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.CommunityBoard" >
+    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
         <id property="communityBoardId" column="community_board_id"/>
         <result property="communityBoardTitle" column="community_board_title" />
         <result property="communityBoardContent" column="community_board_content" />
@@ -38,12 +39,12 @@
     </resultMap>
 
     <insert id="postCommunityBoard"
-            parameterType="com.project.pet.entity.CommunityBoard"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoard"
     >
         insert into
-        community_board_tb
+            community_board_tb
         values
-        (0, #{userId}, #{communityBoardTitle}, #{communityBoardContent}, #{communityBoardAnimalCategoryId}, now(), now())
+            (0, #{userId}, #{communityBoardTitle}, #{communityBoardContent}, #{communityBoardAnimalCategoryId}, now(), now())
     </insert>
 
     <select id="getCommunityBoards"
@@ -83,7 +84,6 @@
                 community_board_tb cbt
                 left outer join user_tb ut on (ut.user_id = cbt.user_id)
                 left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
-
             where
                 community_board_id = #{boardId}
     </select>
@@ -98,7 +98,7 @@
     </delete>
 
     <update id="updateCommunityBoard"
-            parameterType="com.project.pet.entity.CommunityBoard">
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoard">
         update
             community_board_tb
         set
@@ -106,12 +106,9 @@
             community_board_content = #{communityBoardContent},
             community_board_animal_category_id = #{communityBoardAnimalCategoryId},
             update_date = now()
-
         where
             community_board_id = #{communityBoardId}
-
     </update>
-
 
 </mapper>
 

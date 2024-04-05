@@ -1,4 +1,5 @@
-package com.project.pet.entity;
+package com.project.pet.entity.communityBoard;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,15 +8,17 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class OAuth2 {
-    private int oAuth2Id;
+public class CommunityBoardComment {
+
+    private int communityBoardCommentId;
+    private int communityBoardId;
     private int userId;
-    private String oAuth2Name;
-    private String providerName;
+    private String communityBoardCommentContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

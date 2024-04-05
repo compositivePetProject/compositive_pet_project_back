@@ -20,7 +20,6 @@ public class AdoptationBoardController {
     @PostMapping("/board")
     public ResponseEntity<?> postAdoptationBoard(@RequestBody PostAdoptationBoardReqDto postAdoptationBoardReqDto) {
         adoptationBoardService.postAdoptationBoard(postAdoptationBoardReqDto);
-
         return ResponseEntity.created(null).body("게시글 작성 완료");
     }
 
@@ -40,24 +39,16 @@ public class AdoptationBoardController {
     @DeleteMapping("/board/{boardId}")
     public ResponseEntity<?> deleteAdoptationBoardByBoardId(@PathVariable int boardId) {
         adoptationBoardService.deleteAdoptationBoardByBoardId(boardId);
-
         return ResponseEntity.ok().body("해당 게시글 삭제 완료");
     }
 
     //해당 boardId의 게시판 수정
     @PutMapping("/board/{boardId}")
-    public ResponseEntity<?> editAdoptationBoardByBoardId(
-            @PathVariable int boardId,
-            @RequestBody UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
-
+    public ResponseEntity<?> editAdoptationBoardByBoardId(@PathVariable int boardId, @RequestBody UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
         updateAdoptationBoardReqDto.setAdoptationBoardId(boardId);
-
-
         adoptationBoardService.updateAdoptationBoard(updateAdoptationBoardReqDto);
-
         return ResponseEntity.ok().body("해당 게시글 수정 완료");
 
     }
-
 
 }

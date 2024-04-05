@@ -1,11 +1,12 @@
 package com.project.pet.dto.communityboard.request;
 
 
-import com.project.pet.entity.CommunityBoardAdmin;
+import com.project.pet.entity.communityBoard.CommunityBoardAdmin;
 import lombok.Data;
 
 @Data
 public class UpdateCommunityBoardAdminRequestDto {
+
     private int communityBoardAdminId;
     private String communityBoardAdminTitle;
     private String communityBoardAdminContent;
@@ -17,4 +18,5 @@ public class UpdateCommunityBoardAdminRequestDto {
                 .communityBoardAdminContent(communityBoardAdminContent)
                 .build();
     }
+
 }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.Map;
 
 public class ValidException extends RuntimeException {
+
     @Getter
     Map<String, String> errorMap;
 
@@ -12,5 +13,6 @@ public class ValidException extends RuntimeException {
         super("유효성 검사 오류");
         this.errorMap = errorMap;
     }
+
 }
 

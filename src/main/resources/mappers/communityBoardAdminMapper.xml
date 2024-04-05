@@ -5,7 +5,7 @@
 
 <mapper namespace="com.project.pet.repository.admin.CommunityBoardAdminMapper">
 
-    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
         <id property="userId" column="user_id" />
         <result property="username" column="user_username" />
         <result property="password" column="user_password" />
@@ -20,7 +20,7 @@
         <collection property="roleRegisters" javaType="list" />
     </resultMap>
 
-    <resultMap id="CommunityBoardAdminResultMap" type="com.project.pet.entity.CommunityBoardAdmin" >
+    <resultMap id="CommunityBoardAdminResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardAdmin" >
         <id property="communityBoardAdminId" column="community_board_admin_id" />
         <result property="communityBoardAdminTitle" column="community_board_admin_title" />
         <result property="communityBoardAdminContent" column="community_board_admin_content" />
@@ -30,47 +30,42 @@
     </resultMap>
 
     <insert id="postCommunityBoardAdmin"
-            parameterType="com.project.pet.entity.CommunityBoardAdmin"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardAdmin"
     >
         insert into
-        community_board_admin_tb
+            community_board_admin_tb
         values
-        (0, #{userId}, #{communityBoardAdminTitle}, #{communityBoardAdminContent}, now(), now())
+            (0, #{userId}, #{communityBoardAdminTitle}, #{communityBoardAdminContent}, now(), now())
     </insert>
 
     <select id="getCommunityBoardAdminByBoardId"
-                parameterType="integer"
-                resultMap="CommunityBoardAdminResultMap">
-
-                select
-                    cbat.community_board_admin_id,
-                    ut. user_id,
-                    cbat.community_board_admin_title,
-                    cbat.community_board_admin_content,
-                    cbat.create_date,
-                    cbat.update_date
-
-                from
-                    community_board_admin_tb cbat
-                    left outer join user_tb ut on (ut.user_id = cbat.user_id)
-
-                where
-                    community_board_admin_id = #{boardAdminId}
+            parameterType="integer"
+            resultMap="CommunityBoardAdminResultMap">
+        select
+            cbat.community_board_admin_id,
+            ut. user_id,
+            cbat.community_board_admin_title,
+            cbat.community_board_admin_content,
+            cbat.create_date,
+            cbat.update_date
+        from
+            community_board_admin_tb cbat
+            left outer join user_tb ut on (ut.user_id = cbat.user_id)
+        where
+            community_board_admin_id = #{boardAdminId}
     </select>
 
     <delete id="deleteCommunityBoardAdminByBoardId"
-                parameterType="integer" >
-
-                delete
-                from
-                    community_board_admin_tb
-
-                where
-                    community_board_admin_id = #{boardAdminId}
+            parameterType="integer" >
+        delete
+        from
+            community_board_admin_tb
+        where
+            community_board_admin_id = #{boardAdminId}
     </delete>
 
     <update id="putCommunityAdminBoard"
-            parameterType="com.project.pet.entity.CommunityBoardAdmin">
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardAdmin">
         update
             community_board_admin_tb
         set
@@ -80,4 +75,5 @@
         where
             community_board_admin_id = #{communityBoardAdminId}
     </update>
+
 </mapper>

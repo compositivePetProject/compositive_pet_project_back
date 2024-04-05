@@ -1,12 +1,9 @@
 package com.project.pet.controller;
 
 import com.project.pet.dto.product.request.PostProductFavoriteRequestDto;
-import com.project.pet.entity.PrincipalUser;
 import com.project.pet.service.ProductFavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -32,4 +29,5 @@ public class ProductFavoriteController {
         productFavoriteService.deleteProductFavorite();
         return ResponseEntity.ok(true);
     }
+
 }

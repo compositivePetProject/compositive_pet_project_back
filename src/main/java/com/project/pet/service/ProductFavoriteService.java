@@ -2,7 +2,7 @@ package com.project.pet.service;
 
 import com.project.pet.dto.product.request.PostProductFavoriteRequestDto;
 import com.project.pet.dto.product.response.ProductFavoriteResponseDto;
-import com.project.pet.entity.PrincipalUser;
+import com.project.pet.entity.user.PrincipalUser;
 import com.project.pet.repository.ProductFavoriteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

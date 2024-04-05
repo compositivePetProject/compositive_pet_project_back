@@ -57,10 +57,9 @@ public class JwtAuthenticationFilter extends GenericFilter {
                 response.sendError(HttpStatus.UNAUTHORIZED.value());
                 return;
             }
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
         filterChain.doFilter(request, response);
     }
+
 }

@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +12,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class Role {
+
     private int roleId;
     private String roleName;
     private String roleNameKor;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

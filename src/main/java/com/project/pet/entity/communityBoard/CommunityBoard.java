@@ -1,6 +1,7 @@
-package com.project.pet.entity;
+package com.project.pet.entity.communityBoard;
 
 import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommunityBoard {
+
     private int communityBoardId;
     private int userId;
     private String communityBoardTitle;

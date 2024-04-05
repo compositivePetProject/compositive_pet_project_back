@@ -8,5 +8,7 @@ import lombok.Data;
 
 // 게시판 작성 단건(get) 요청
 public class GetCommunityBoardRequestDto {
+
     private int communityBoardId;
+
 }

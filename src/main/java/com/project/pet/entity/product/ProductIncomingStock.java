@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.product;
 
 import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class ProductIncomingStock {
+
     private int productIncomingStockId;
     private int productId;
     private int productSizeCategoryId;
@@ -30,4 +31,5 @@ public class ProductIncomingStock {
                 .updateDate(createDate)
                 .build();
     }
+
 }

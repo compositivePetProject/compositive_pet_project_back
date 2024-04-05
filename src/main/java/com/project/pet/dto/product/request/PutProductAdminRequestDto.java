@@ -1,6 +1,6 @@
 package com.project.pet.dto.product.request;
 
-import com.project.pet.entity.Product;
+import com.project.pet.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PutProductAdminRequestDto {
+
     private int productId;
     private int userId;
     private String productNameKor;
@@ -34,4 +35,5 @@ public class PutProductAdminRequestDto {
                 .productBoardContent(productBoardContent)
                 .build();
     }
+
 }

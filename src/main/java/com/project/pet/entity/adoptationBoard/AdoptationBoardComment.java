@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.adoptationBoard;
 
 
 import lombok.AllArgsConstructor;
@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class AdoptationBoardComment {
+
     private int adoptationBoardCommentId;
     private int adoptationBoardId;
     private int userId;

@@ -1,6 +1,6 @@
 package com.project.pet.dto.auth.request;
 
-import com.project.pet.entity.User;
+import com.project.pet.entity.user.User;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -10,6 +10,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 public class AuthSignupRequestDto {
+
     @Pattern(regexp = "^[A-Za-z0-9]{4,10}$", message = "영문자, 숫자 5 ~ 10자리 형식이어야 합니다")
     private String username;
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{7,128}$", message = "하나의 영문자, 숫자, 특수문자를 포함한 5 ~ 128자리 형식이어야 합니다")
@@ -27,7 +28,6 @@ public class AuthSignupRequestDto {
     @NotBlank(message = "공백일 수 없습니다.")
     private String profileImageUrl;
 
-
     public User toEntity(BCryptPasswordEncoder passwordEncoder) {
         return User.builder()
                 .username(username)
@@ -40,4 +40,5 @@ public class AuthSignupRequestDto {
                 .profileImageUrl(profileImageUrl)
                 .build();
     }
+
 }

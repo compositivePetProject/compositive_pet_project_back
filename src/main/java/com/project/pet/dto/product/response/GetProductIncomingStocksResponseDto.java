@@ -12,10 +12,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class GetProductIncomingStocksResponseDto {
+
     private int productIncomingStockId;
     private int productId;
     private int productSizeCategoryId;
     private int productIncomingStockCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

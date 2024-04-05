@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 public class GetAdoptationBoardAdminRespDto {
+
     private int adoptationBoardAdminId;
     private int userId;
     private String username;
@@ -16,4 +17,5 @@ public class GetAdoptationBoardAdminRespDto {
     private String adoptationBoardAdminContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

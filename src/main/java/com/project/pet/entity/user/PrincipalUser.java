@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.user;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +10,7 @@ import java.util.Collection;
 @Builder
 @Data
 public class PrincipalUser implements UserDetails {
+
     private int userId;
     private String username;
     private String name;
@@ -44,4 +45,5 @@ public class PrincipalUser implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
 }

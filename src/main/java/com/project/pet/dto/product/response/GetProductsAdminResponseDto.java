@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetProductsAdminResponseDto {
+
     private int productId;
     private int userId;
     private String productNameKor;
@@ -22,4 +23,5 @@ public class GetProductsAdminResponseDto {
     private String productBoardContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
 }

@@ -1,7 +1,7 @@
 package com.project.pet.dto.oauth2.request;
 
-import com.project.pet.entity.OAuth2;
-import com.project.pet.entity.User;
+import com.project.pet.entity.user.OAuth2;
+import com.project.pet.entity.user.User;
 import lombok.Data;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -11,6 +11,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 public class OAuth2SignupRequestDto {
+
     @Pattern(regexp = "^[A-Za-z0-9]{4,10}$", message = "영문자, 숫자 5 ~ 10자리 형식이어야 합니다")
     private String username;
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{7,128}$", message = "하나의 영문자, 숫자, 특수문자를 포함한 5 ~ 128자리 형식이어야 합니다")
@@ -52,4 +53,5 @@ public class OAuth2SignupRequestDto {
                 .providerName(providerName)
                 .build();
     }
+
 }

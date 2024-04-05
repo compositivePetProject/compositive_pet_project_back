@@ -1,4 +1,4 @@
-package com.project.pet.entity;
+package com.project.pet.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Data
 public class User {
+
     private int userId;
     private String username;
     private String password;
@@ -48,4 +49,5 @@ public class User {
                 .authorities(getAuthorities())
                 .build();
     }
+
 }

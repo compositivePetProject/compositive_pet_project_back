@@ -1,6 +1,6 @@
 package com.project.pet.dto.product.request;
 
-import com.project.pet.entity.Product;
+import com.project.pet.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class PostProductAdminRequestDto {
+
     private int userId;
     private String productNameKor;
     private int productPrice;
@@ -30,4 +31,5 @@ public class PostProductAdminRequestDto {
                 .productBoardContent(productBoardContent)
                 .build();
     }
+
 }

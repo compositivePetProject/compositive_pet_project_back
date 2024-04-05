@@ -14,7 +14,6 @@ public class CommunityBoardAdminController {
 
     @Autowired CommunityBoardAdminService communityBoardAdminService;
 
-
     // 커뮤니티 게시판 관리자 게시물 추가
     @PostMapping("/admin")
     public ResponseEntity<?> postCommunityBoardAdmin(@RequestBody CommunityBoardAdminRequestDto communityBoardAdminRequestDto) {
@@ -26,7 +25,7 @@ public class CommunityBoardAdminController {
     @GetMapping("/admin/{boardAdminId}")
     public ResponseEntity<?> getCommunityAdminBoard(@PathVariable int boardAdminId) {
             return ResponseEntity.ok(communityBoardAdminService.getCommunityBoardAdminByBoardId(boardAdminId));
-        }
+    }
 
      // 커뮤니티 게시판  관리자 공지사항 게시물 단건 삭제
     @DeleteMapping("/admin/{boardAdminId}")
@@ -42,4 +41,5 @@ public class CommunityBoardAdminController {
         communityBoardAdminService.putCommunityAdminBoard(updateCommunityBoardAdminRequestDto);
         return ResponseEntity.ok("게시물 수정 완료");
     }
+
 }

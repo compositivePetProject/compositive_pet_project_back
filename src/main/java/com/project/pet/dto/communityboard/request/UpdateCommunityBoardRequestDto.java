@@ -1,7 +1,7 @@
 package com.project.pet.dto.communityboard.request;
 
 
-import com.project.pet.entity.CommunityBoard;
+import com.project.pet.entity.communityBoard.CommunityBoard;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,7 +15,6 @@ public class UpdateCommunityBoardRequestDto {
     private int communityBoardAnimalCategoryId;
 
     public CommunityBoard toEntity() {
-
         return CommunityBoard.builder()
                 .communityBoardId(communityBoardId)
                 .communityBoardTitle(communityBoardTitle)

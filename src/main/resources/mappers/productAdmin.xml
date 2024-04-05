@@ -5,7 +5,7 @@
 
 <mapper namespace="com.project.pet.repository.admin.ProductAdminMapper">
 
-    <resultMap id="ProductResultMap" type="com.project.pet.entity.Product">
+    <resultMap id="ProductResultMap" type="com.project.pet.entity.product.Product">
         <id property="productId" column="product_id" />
         <result property="userId" column="user_id" />
         <result property="productNameKor" column="product_name_kor" />
@@ -17,7 +17,8 @@
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
     </resultMap>
-    <resultMap id="ProductIncomingStockResultMap" type="com.project.pet.entity.ProductIncomingStock">
+
+    <resultMap id="ProductIncomingStockResultMap" type="com.project.pet.entity.product.ProductIncomingStock">
         <id property="productIncomingStockId" column="product_incoming_stock_id" />
         <result property="productId" column="product_id" />
         <result property="productSizeCategoryId" column="product_size_category_id" />
@@ -27,16 +28,18 @@
     </resultMap>
 
     <insert id="postProductAdmin"
-        parameterType="com.project.pet.entity.Product"
+        parameterType="com.project.pet.entity.product.Product"
         keyProperty="productId"
         useGeneratedKeys="true">
         insert into
             product_tb
         values(0, #{userId}, #{productNameKor}, #{productPrice}, #{productImageUrl}, #{productCategoryId}, #{productAnimalCategoryId}, #{productBoardContent}, now(), now())
     </insert>
+
     <select id="getProductsAdmin" resultMap="ProductResultMap">
         SELECT * FROM product_tb
     </select>
+
     <delete id="deleteProductAdmin" parameterType="Integer">
         delete
         from
@@ -44,7 +47,8 @@
         where
             product_id = #{productId}
     </delete>
-    <update id="putProductAdmin" parameterType="com.project.pet.entity.Product">
+
+    <update id="putProductAdmin" parameterType="com.project.pet.entity.product.Product">
         update
             product_tb
         set
@@ -58,6 +62,7 @@
         where
             product_id = #{productId}
     </update>
+
     <delete id="deleteProductsAdmin" parameterType="List">
         delete
         from
@@ -69,8 +74,9 @@
                 </foreach>
             )
     </delete>
+
     <insert id="postProductIncomingStock"
-            parameterType="com.project.pet.entity.ProductIncomingStock"
+            parameterType="com.project.pet.entity.product.ProductIncomingStock"
             keyProperty="productIncomingStockId"
             useGeneratedKeys="true"
     >
@@ -79,9 +85,11 @@
             values
                 (0, #{productId}, #{productSizeCategoryId}, #{productIncomingStockCount}, now(), now())
     </insert>
+
     <select id="getProductIncomingStocks" resultMap="ProductIncomingStockResultMap">
         select * from product_incoming_stock_tb
     </select>
+
     <delete id="deleteProductIncomingStock" parameterType="Integer">
         delete
         from
@@ -89,6 +97,7 @@
         where
             product_incoming_stock_id = #{productIncomingStockId}
     </delete>
+
     <delete id="deleteProductIncomingStocksAdmin" parameterType="List">
         delete
         from
@@ -100,7 +109,8 @@
                 </foreach>
             )
     </delete>
-    <update id="putProductIncomingStockAdmin" parameterType="com.project.pet.entity.ProductIncomingStock">
+
+    <update id="putProductIncomingStockAdmin" parameterType="com.project.pet.entity.product.ProductIncomingStock">
         update
             product_incoming_stock_tb
         set
@@ -111,4 +121,5 @@
         where
             product_incoming_stock_id = #{productIncomingStockId}
     </update>
+
 </mapper>

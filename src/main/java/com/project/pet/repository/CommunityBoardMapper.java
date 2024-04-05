@@ -1,13 +1,12 @@
 package com.project.pet.repository;
 
-import com.project.pet.entity.CommunityBoard;
+import com.project.pet.entity.communityBoard.CommunityBoard;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface CommunityBoardMapper {
-
 
     public int postCommunityBoard(CommunityBoard communityBoard);
 
@@ -23,8 +22,7 @@ public interface CommunityBoardMapper {
     // 게시판 단건 수정
     public int updateCommunityBoard(CommunityBoard communityBoard);
 
-
-    }
+}
 
 
 

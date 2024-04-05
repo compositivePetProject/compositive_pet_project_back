@@ -1,7 +1,8 @@
-package com.project.pet.entity;
+package com.project.pet.entity.adoptationBoard;
 
 
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardAdminRespDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class AdoptationBoardAdmin {
+
     private int adoptationBoardAdminId;
     private int userId;
     private String adoptationBoardAdminTitle;
