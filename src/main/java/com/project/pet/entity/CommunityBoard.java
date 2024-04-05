@@ -1,7 +1,6 @@
 package com.project.pet.entity;
 
 import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
-import com.project.pet.dto.response.GetAdoptationBoardRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
