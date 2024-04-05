@@ -1,5 +1,6 @@
 package com.project.pet.dto.communityboard.response;
 
+import com.project.pet.entity.User;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,6 +16,10 @@ public class GetCommunityAdminBoardResponseDto {
     private String communityBoardAdminContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.project.pet.repository;
+package com.project.pet.repository.admin;
 
 import com.project.pet.entity.CommunityBoardAdmin;
 import org.apache.ibatis.annotations.Mapper;
@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CommunityBoardAdminMapper {
 
    public int postCommunityBoardAdmin(CommunityBoardAdmin communityBoardAdmin);
+
+   public CommunityBoardAdmin getCommunityBoardAdminByBoardId(int adminBoardId);
+
 
 
 }

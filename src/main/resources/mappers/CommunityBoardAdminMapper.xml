@@ -3,7 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.pet.repository.CommunityBoardAdminMapper">
+<mapper namespace="com.project.pet.repository.admin.CommunityBoardAdminMapper">
+
+    <resultMap id="UserResultMap" type="com.project.pet.entity.User">
+        <id property="userId" column="user_id" />
+        <result property="username" column="user_username" />
+        <result property="password" column="user_password" />
+        <result property="name" column="user_name" />
+        <result property="address" column="user_address" />
+        <result property="telNumber" column="user_tel_number" />
+        <result property="nickname" column="user_nickname" />
+        <result property="email" column="user_email" />
+        <result property="profileImageUrl" column="user_profile_image_url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <collection property="roleRegisters" javaType="list" />
+    </resultMap>
+
+    <resultMap id="CommunityBoardAdminResultMap" type="com.project.pet.entity.CommunityBoardAdmin" >
+        <id property="communityBoardAdminId" column="community_board_admin_id" />
+        <result property="communityBoardAdminTitle" column="community_board_admin_title" />
+        <result property="communityBoardAdminContent" column="community_board_admin_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <association property="user" resultMap="UserResultMap" />
+    </resultMap>
+
     <insert id="postCommunityBoardAdmin"
             parameterType="com.project.pet.entity.CommunityBoardAdmin"
     >
@@ -12,4 +37,26 @@
         values
         (0, #{userId}, #{communityBoardAdminTitle}, #{communityBoardAdminContent}, now(), now())
     </insert>
+
+    <select id="getCommunityBoardAdminByBoardId"
+                parameterType="integer"
+                resultMap="CommunityBoardAdminResultMap">
+
+                select
+                    cbat.community_board_admin_id,
+                    ut. user_id,
+                    cbat.community_board_admin_title,
+                    cbat.community_board_admin_content,
+                    cbat.create_date,
+                    cbat.update_date
+
+                from
+                    community_board_admin_tb cbat
+                    left outer join user_tb ut on (ut.user_id = cbat.user_id)
+
+                where
+                    community_board_admin_id = #{adminBoardId}
+
+
+    </select>
 </mapper>
