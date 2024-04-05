@@ -50,4 +50,21 @@
         where
             adoptation_admin_board_id = #{noticeId}
     </select>
+    <select id="getAdoptationBoardAdmins"
+            parameterType="integer"
+            resultMap="AdoptationBoardAdminResultMap">
+        select
+            abat.adoptation_admin_board_id,
+            abat.user_id,
+            ut.user_username,
+            abat.adoptation_admin_board_title,
+            abat.adoptation_admin_board_content,
+            abat.create_date,
+            abat.update_date
+        from
+            adoptation_board_admin_tb abat
+        left outer join
+            user_tb ut on (ut.user_id = abat.user_id)
+
+    </select>
 </mapper>
