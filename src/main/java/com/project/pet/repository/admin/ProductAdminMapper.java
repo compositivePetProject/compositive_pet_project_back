@@ -21,4 +21,6 @@ public interface ProductAdminMapper {
     public int postProductIncomingStock(ProductIncomingStock productIncomingStock);
 
     public List<ProductIncomingStock> getProductIncomingStocks();
+
+    public int deleteProductIncomingStock(int productIncomingStockId);
 }

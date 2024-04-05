@@ -54,4 +54,8 @@ public class ProductAdminService {
         return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksResponseDto).collect(Collectors.toList());
     }
 
+    public void deleteProductIncomingStock(int productIncomingStockId) {
+        productAdminMapper.deleteProductIncomingStock(productIncomingStockId);
+    }
+
 }
