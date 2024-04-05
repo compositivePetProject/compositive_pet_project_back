@@ -65,6 +65,12 @@
             adoptation_board_admin_tb abat
         left outer join
             user_tb ut on (ut.user_id = abat.user_id)
-
     </select>
+    <delete id="deleteAdoptationBoardAdminByNoticeId"
+            parameterType="integer">
+        delete from
+            adoptation_board_admin_tb
+        where
+            adoptation_admin_board_id = #{noticeId}
+    </delete>
 </mapper>

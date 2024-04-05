@@ -40,4 +40,12 @@ public class AdoptationBoardAdminController {
     }
 
 
+    @DeleteMapping("/admin/{noticeId}")
+    public ResponseEntity<?> deleteAdoptationBoardAdmin(@PathVariable int noticeId) {
+        adoptationBoardAdminService.deleteAdoptationBoardAdminByNoticeId(noticeId);
+
+        return ResponseEntity.ok().body("삭제완료");
+    }
+
+
 }
