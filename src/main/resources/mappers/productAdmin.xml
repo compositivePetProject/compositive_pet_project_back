@@ -27,6 +27,15 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+    <resultMap id="ProductStockResultMap" type="com.project.pet.entity.product.ProductStock">
+        <id property="productStockId" column="product_stock_id" />
+        <result property="productId" column="product_id"/>
+        <result property="productSizeCategoryId" column="product_size_category_id"/>
+        <result property="productStockCount" column="product_stock_count"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
+
     <insert id="postProductAdmin"
         parameterType="com.project.pet.entity.product.Product"
         keyProperty="productId"
@@ -122,4 +131,51 @@
             product_incoming_stock_id = #{productIncomingStockId}
     </update>
 
+    <insert id="postProductStockAdmin"
+            parameterType="com.project.pet.entity.product.ProductStock"
+            keyProperty="productStockId"
+            useGeneratedKeys="true"
+    >
+        insert into
+            product_stock_tb
+        values
+            (0, #{productId}, #{productSizeCategoryId}, #{productStockCount}, now(), now())
+    </insert>
+
+    <select id="getProductStocksAdmin" resultMap="ProductStockResultMap">
+        select
+            *
+        from
+            product_stock_tb
+    </select>
+
+    <delete id="deleteProductStockAdmin" parameterType="Integer">
+        delete
+        from
+            product_stock_tb
+        where
+            product_stock_id = #{productStockId}
+    </delete>
+
+    <delete id="deleteProductStocksAdmin" parameterType="List">
+        delete
+        from
+            product_stock_tb
+        where
+            product_stock_id in (
+                <foreach collection="productStockIds" item="productStockId" separator=",">
+                    #{productStockId}
+                </foreach>
+            )
+    </delete>
+    <update id="putProductStockAdmin" parameterType="com.project.pet.entity.product.ProductStock">
+        update
+            product_stock_tb
+        set
+            product_id = #{productId},
+            product_size_category_id = #{productSizeCategoryId},
+            product_stock_count = #{productStockCount}
+        where
+            product_stock_id = #{productStockId}
+    </update>
 </mapper>

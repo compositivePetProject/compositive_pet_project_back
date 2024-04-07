@@ -1,9 +1,6 @@
 package com.project.pet.controller.admin;
 
-import com.project.pet.dto.product.request.PostProductAdminRequestDto;
-import com.project.pet.dto.product.request.PostProductIncomingStockRequestDto;
-import com.project.pet.dto.product.request.PutProductAdminRequestDto;
-import com.project.pet.dto.product.request.PutProductIncomingStockAdminRequestDto;
+import com.project.pet.dto.product.request.*;
 import com.project.pet.service.admin.ProductAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +15,7 @@ public class ProductAdminController {
     @Autowired
     ProductAdminService productAdminService;
 
+    // [애완용품 쇼핑몰 상품]
     // 관리자 상품 등록(단건)
     @PostMapping("/admin")
     public ResponseEntity<?> postProductAdmin(@RequestBody PostProductAdminRequestDto postProductAdminRequestDto) {
@@ -52,6 +50,7 @@ public class ProductAdminController {
         return ResponseEntity.ok(true);
     }
 
+    //[애완용품 쇼핑몰 가입고]
     // 관리자 상품 가입고 테이블 등록(단건)
     @PostMapping("/admin/incoming/stock")
     public ResponseEntity<?> postProductIncomingStock(@RequestBody PostProductIncomingStockRequestDto postProductIncomingStockRequestDto) {
@@ -85,5 +84,43 @@ public class ProductAdminController {
         productAdminService.putProductIncomingStockAdmin(productIncomingStockId, putProductIncomingStockAdminRequestDto);
         return ResponseEntity.ok(true);
     }
+
+    // [애완용품 쇼핑몰 재고]
+    // 관리자 상품 재고 테이블 등록(단건)
+    @PostMapping("admin/stock")
+    public ResponseEntity<?> postProductStockAdmin(@RequestBody PostProductStockAdminRequestDto postProductStockAdminRequestDto) {
+        System.out.println(postProductStockAdminRequestDto);
+        productAdminService.postProductStockAdmin(postProductStockAdminRequestDto);
+        return ResponseEntity.created(null).body(true);
+    }
+
+    // 관리자 상품 재고 테이블 조회(다건)
+    @GetMapping("admin/stocks")
+    public ResponseEntity<?> getProductStocksAdmin() {
+        return ResponseEntity.ok(productAdminService.getProductStocksAdmin());
+    }
+
+    // 관리자 상품 재고 테이블 삭제(단건)
+    @DeleteMapping("admin/stock/{productStockId}")
+    public ResponseEntity<?> deleteProductStockAdmin(@PathVariable int productStockId) {
+        productAdminService.deleteProductStockAdmin(productStockId);
+        return ResponseEntity.ok(true);
+    }
+
+    // 관리자 상품 재고 테이블 삭제(다건)
+    @DeleteMapping("admin/stocks")
+    public ResponseEntity<?> deleteProductStocksAdmin(@RequestBody List<Integer> productStockIds) {
+        productAdminService.deleteProductStocksAdmin(productStockIds);
+        return ResponseEntity.ok(true);
+    }
+
+    // 관리자 상품 재고 테이블 수정(단건)
+    @PutMapping("admin/stock/{productStockId}")
+    public ResponseEntity<?> putProductStockAdmin(@PathVariable int productStockId, @RequestBody PutProductStockAdminRequestDto putProductStockAdminRequestDto) {
+        productAdminService.putProductStockAdmin(productStockId, putProductStockAdminRequestDto);
+        return ResponseEntity.ok(true);
+    }
+
+
 
 }
