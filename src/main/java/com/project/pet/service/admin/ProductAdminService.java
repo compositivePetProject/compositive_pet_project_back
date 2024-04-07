@@ -1,13 +1,12 @@
 package com.project.pet.service.admin;
 
-import com.project.pet.dto.product.request.PostProductAdminRequestDto;
-import com.project.pet.dto.product.request.PostProductIncomingStockRequestDto;
-import com.project.pet.dto.product.request.PutProductAdminRequestDto;
-import com.project.pet.dto.product.request.PutProductIncomingStockAdminRequestDto;
+import com.project.pet.dto.product.request.*;
 import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
+import com.project.pet.dto.product.response.GetProductStocksAdminResponseDto;
 import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
 import com.project.pet.entity.product.Product;
 import com.project.pet.entity.product.ProductIncomingStock;
+import com.project.pet.entity.product.ProductStock;
 import com.project.pet.repository.admin.ProductAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,7 +67,29 @@ public class ProductAdminService {
     public void putProductIncomingStockAdmin(int productIncomingStockId, PutProductIncomingStockAdminRequestDto putProductIncomingStockAdminRequestDto) {
         putProductIncomingStockAdminRequestDto.setProductIncomingStockId(productIncomingStockId);
         productAdminMapper.putProductIncomingStockAdmin(putProductIncomingStockAdminRequestDto.toEntity());
+    }
 
+    public void postProductStockAdmin(PostProductStockAdminRequestDto postProductStockAdminRequestDto) {
+        productAdminMapper.postProductStockAdmin(postProductStockAdminRequestDto.toEntity());
+    }
+
+    public List<GetProductStocksAdminResponseDto> getProductStocksAdmin() {
+        List<ProductStock> list = productAdminMapper.getProductStocksAdmin();
+        return list.stream().map(ProductStock::toGetProductStocksResponseDto).collect(Collectors.toList());
+    }
+
+    public void deleteProductStockAdmin(int productStockId) {
+        productAdminMapper.deleteProductStockAdmin(productStockId);
+    };
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteProductStocksAdmin(List<Integer> productStockIds) {
+        productAdminMapper.deleteProductStocksAdmin(productStockIds);
+    }
+
+    public void putProductStockAdmin(int productStockId, PutProductStockAdminRequestDto productStockAdminRequestDto) {
+        productStockAdminRequestDto.setProductStockId(productStockId);
+        productAdminMapper.putProductStockAdmin(productStockAdminRequestDto.toEntity());
     }
 
 }
