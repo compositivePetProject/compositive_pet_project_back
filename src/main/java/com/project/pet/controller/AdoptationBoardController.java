@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/adoptation")
@@ -40,6 +42,21 @@ public class AdoptationBoardController {
     public ResponseEntity<?> deleteAdoptationBoardByBoardId(@PathVariable int boardId) {
         adoptationBoardService.deleteAdoptationBoardByBoardId(boardId);
         return ResponseEntity.ok().body("해당 게시글 삭제 완료");
+    }
+
+    //게시글 다건 삭제
+    @DeleteMapping("/board")
+    public ResponseEntity<?> deleteAdoptationBoards(@RequestParam List<Integer> boardIds) {
+
+        for (int boardId : boardIds) {
+            try{
+                adoptationBoardService.deleteAdoptationBoardByBoardId(boardId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return ResponseEntity.ok().body(true);
     }
 
     //해당 boardId의 게시판 수정

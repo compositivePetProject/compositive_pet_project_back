@@ -32,7 +32,7 @@ public class AdoptationBoardAdminController {
     public ResponseEntity<?> getAdoptationBoardAdmins() {
         return ResponseEntity.ok(adoptationBoardAdminService.getAdoptationBoardAdmins());
     }
-
+    //공지사항 단건 삭제
     @DeleteMapping("/admin/{noticeId}")
     public ResponseEntity<?> deleteAdoptationBoardAdmin(@PathVariable int noticeId) {
         adoptationBoardAdminService.deleteAdoptationBoardAdminByNoticeId(noticeId);
