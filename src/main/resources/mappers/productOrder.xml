@@ -36,4 +36,16 @@
             product_order_id = #{productOrderId}
     </delete>
 
+    <delete id="deleteProductOrders" parameterType="Integer">
+        delete
+        from
+            product_order_tb
+        where
+            product_order_id in (
+                <foreach collection="productOrderIds" item="productOrderId" separator=",">
+                    #{productOrderId}
+                </foreach>
+            )
+    </delete>
+
 </mapper>

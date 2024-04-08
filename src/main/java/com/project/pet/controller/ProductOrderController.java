@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProductOrderController {
 
@@ -29,6 +31,13 @@ public class ProductOrderController {
     @DeleteMapping("/product/order/{productOrderId}")
     public ResponseEntity<?> deleteProductOrder(@PathVariable int productOrderId) {
         productOrderService.deleteProductOrder(productOrderId);
+        return ResponseEntity.ok(true);
+    }
+
+    // 사용자 상품 주분 삭제(다건)
+    @DeleteMapping("/product/orders")
+    public ResponseEntity<?> deleteProductOrders(@RequestBody List<Integer> productOrderIds) {
+        productOrderService.deleteProductOrders(productOrderIds);
         return ResponseEntity.ok(true);
     }
 

@@ -6,6 +6,7 @@ import com.project.pet.entity.product.ProductOrder;
 import com.project.pet.repository.ProductOrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +28,11 @@ public class ProductOrderService {
 
     public void deleteProductOrder(int productOrderId) {
         productOrderMapper.deleteProductOrder(productOrderId);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteProductOrders(List<Integer> productOrderIds) {
+        productOrderMapper.deleteProductOrders(productOrderIds);
     }
 
 }
