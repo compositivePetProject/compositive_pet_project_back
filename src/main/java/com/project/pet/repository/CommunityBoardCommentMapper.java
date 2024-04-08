@@ -1,6 +1,7 @@
 package com.project.pet.repository;
 
-import com.project.pet.entity.CommunityBoardComment;
+
+import com.project.pet.entity.communityBoard.CommunityBoardComment;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
