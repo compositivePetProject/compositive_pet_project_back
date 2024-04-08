@@ -44,6 +44,18 @@ public class AdoptationBoardAdminService {
         adoptationBoardAdminMapper.deleteAdoptationBoardAdminByNoticeId(noticeId);
     }
 
+    //게시판 다건 삭제
+
+    public void deleteAdoptationBoardAdmins(List<Integer> noticeIds) {
+        for(int noticeId : noticeIds) {
+            try {
+                adoptationBoardAdminMapper.deleteAdoptationBoardAdminByNoticeId(noticeId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public void updateAdoptationBoardAdmin (UpdateAdoptationBoardAdminReqDto updateAdoptationBoardAdminReqDto) {
         adoptationBoardAdminMapper.updateAdoptationBoardAdmin(updateAdoptationBoardAdminReqDto.toEntity());
