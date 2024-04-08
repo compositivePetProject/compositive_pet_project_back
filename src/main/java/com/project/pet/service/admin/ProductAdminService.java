@@ -92,4 +92,8 @@ public class ProductAdminService {
         productAdminMapper.putProductStockAdmin(productStockAdminRequestDto.toEntity());
     }
 
+    public void postProductOutgoingStockAdmin(PostProductOutgoingStockAdminRequestDto postProductOutgoingStockAdminRequestDto) {
+        productAdminMapper.postProductOutgoingStockAdmin(postProductOutgoingStockAdminRequestDto.toEntity());
+    }
+
 }

@@ -2,6 +2,7 @@ package com.project.pet.repository.admin;
 
 import com.project.pet.entity.product.Product;
 import com.project.pet.entity.product.ProductIncomingStock;
+import com.project.pet.entity.product.ProductOutgoingStock;
 import com.project.pet.entity.product.ProductStock;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -38,4 +39,6 @@ public interface ProductAdminMapper {
     public int deleteProductStocksAdmin(List<Integer> productStockIds);
 
     public int putProductStockAdmin(ProductStock productStock);
+
+    public int postProductOutgoingStockAdmin(ProductOutgoingStock productOutgoingStock);
 }

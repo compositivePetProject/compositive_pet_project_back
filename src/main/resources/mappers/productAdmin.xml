@@ -178,4 +178,10 @@
         where
             product_stock_id = #{productStockId}
     </update>
+    <insert id="postProductOutgoingStockAdmin" parameterType="com.project.pet.entity.product.ProductOutgoingStock">
+        insert into
+            product_outgoing_stock_tb
+        values
+            (0, #{productId}, #{productSizeCategoryId}, #{productOutgoingStockCount}, now(), now())
+    </insert>
 </mapper>

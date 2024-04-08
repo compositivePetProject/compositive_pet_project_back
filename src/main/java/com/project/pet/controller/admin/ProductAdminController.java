@@ -89,7 +89,6 @@ public class ProductAdminController {
     // 관리자 상품 재고 테이블 등록(단건)
     @PostMapping("admin/stock")
     public ResponseEntity<?> postProductStockAdmin(@RequestBody PostProductStockAdminRequestDto postProductStockAdminRequestDto) {
-        System.out.println(postProductStockAdminRequestDto);
         productAdminService.postProductStockAdmin(postProductStockAdminRequestDto);
         return ResponseEntity.created(null).body(true);
     }
@@ -121,6 +120,13 @@ public class ProductAdminController {
         return ResponseEntity.ok(true);
     }
 
-
+    // [애완용품 쇼핑몰 출고 재고]
+    // 관리자 상품 출고 테이블 등록(단건)
+    @PostMapping("admin/outgoing/stock")
+    public ResponseEntity<?> postProductOutgoingStockAdmin(@RequestBody PostProductOutgoingStockAdminRequestDto postProductOutgoingStockAdminRequestDto) {
+        System.out.println(postProductOutgoingStockAdminRequestDto);
+        productAdminService.postProductOutgoingStockAdmin(postProductOutgoingStockAdminRequestDto);
+        return ResponseEntity.created(null).body(true);
+    }
 
 }
