@@ -10,4 +10,6 @@ public interface ProductOrderMapper {
     public int postProductOrder(ProductOrder productOrder);
 
     public List<ProductOrder> getProductOrders();
+
+    public int deleteProductOrder(int productOrderId);
 }

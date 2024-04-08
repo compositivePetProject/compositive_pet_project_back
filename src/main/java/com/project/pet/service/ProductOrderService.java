@@ -25,4 +25,8 @@ public class ProductOrderService {
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
     }
 
+    public void deleteProductOrder(int productOrderId) {
+        productOrderMapper.deleteProductOrder(productOrderId);
+    }
+
 }

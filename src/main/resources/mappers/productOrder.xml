@@ -28,4 +28,12 @@
             product_order_tb
     </select>
 
+    <delete id="deleteProductOrder" parameterType="Integer">
+        delete
+        from
+            product_order_tb
+        where
+            product_order_id = #{productOrderId}
+    </delete>
+
 </mapper>
