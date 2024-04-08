@@ -4,12 +4,25 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.pet.repository.AdoptationBoardCommentMapper">
     <resultMap id="AdoptationBoardCommentResultMap" type="com.project.pet.entity.adoptationBoard.AdoptationBoardComment">
-        <id property="adoptationBoardCommentId" column="product_comment_id" />
-        <result property="adoptationBoardId" column="product_id" />
+        <id property="adoptationBoardCommentId" column="adoptation_board_comment_id" />
+        <result property="adoptationBoardId" column="adoptation_board_id" />
         <result property="userId" column="user_id" />
-        <result property="adoptationBoardCommentContent" column="product_comment_content" />
+        <result property="adoptationBoardCommentContent" column="adoptation_board_comment_content" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
+        <association property="user" resultMap="UserResultMap"/>
+    </resultMap>
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
+        <id property="userId" column="user_id"/>
+        <result property="username" column="user_username"/>
+        <result property="password" column="user_password"/>
+        <result property="name" column="user_name"/>
+        <result property="address" column="user_address"/>
+        <result property="telNumber" column="user_address"/>
+        <result property="nickname" column="user_address"/>
+        <result property="email" column="user_address"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
     </resultMap>
     <insert id="saveAdoptationBoardComment" parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoardComment">
         insert into
@@ -17,4 +30,20 @@
         values
             (0, #{adoptationBoardId}, #{userId}, #{adoptationBoardCommentContent}, now(), now())
     </insert>
+    <select id="getAdoptationBoardCommentByBoardId" parameterType="integer"
+            resultMap="AdoptationBoardCommentResultMap">
+        select
+            abct.adoptation_board_id,
+            ut.user_username,
+            abct.adoptation_board_comment_content,
+            abct.create_date,
+            abct.update_date
+        from
+            adoptation_board_comment_tb abct
+        left outer join
+            user_tb ut on (ut.user_id = abct.user_id)
+        where
+            adoptation_board_id = #{boardId};
+
+    </select>
 </mapper>

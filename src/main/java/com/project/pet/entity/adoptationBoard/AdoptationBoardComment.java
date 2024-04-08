@@ -1,6 +1,8 @@
 package com.project.pet.entity.adoptationBoard;
 
 
+import com.project.pet.dto.adoptation.response.GetAdoptationBoardCommentRespDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,11 +18,25 @@ import java.time.LocalDateTime;
 @Data
 public class AdoptationBoardComment {
 
-    private int adoptationBoardCommentId;
     private int adoptationBoardId;
+    private int adoptationBoardCommentId;
     private int userId;
     private String adoptationBoardCommentContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private User user;
+
+
+    public GetAdoptationBoardCommentRespDto toGetAdoptationBoardCommentRespDto() {
+        return GetAdoptationBoardCommentRespDto.builder()
+                .adoptationBoardId(adoptationBoardId)
+                .username(user.getUsername())
+                .adoptationBoardCommentContent(adoptationBoardCommentContent)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+
+
+    }
 
 }
