@@ -1,7 +1,6 @@
 package com.project.pet.dto.communityboard.request;
 
-
-import com.project.pet.entity.CommunityBoardComment;
+import com.project.pet.entity.communityBoard.CommunityBoardComment;
 import lombok.Builder;
 import lombok.Data;
 
