@@ -2,6 +2,7 @@ package com.project.pet.service;
 
 
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardCommentReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptionBoardCommentReqDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardCommentRespDto;
 import com.project.pet.entity.adoptationBoard.AdoptationBoardComment;
 import com.project.pet.entity.user.PrincipalUser;
@@ -32,4 +33,14 @@ public class AdoptationBoardCommentService {
         List<AdoptationBoardComment> adoptationBoardComments = adoptationBoardCommentMapper.getAdoptationBoardCommentByBoardId(boardId);
         return adoptationBoardComments.stream().map(AdoptationBoardComment::toGetAdoptationBoardCommentRespDto).collect(Collectors.toList());
     }
+
+    //댓글 단건 삭제
+    public void deleteAdoptationBoardCommentByCommentId(int commentId) {
+        adoptationBoardCommentMapper.deleteAdoptationBoardByCommentId(commentId);
+    }
+
+    public void updateAdoptationBoardCommentByCommentId(UpdateAdoptionBoardCommentReqDto updateAdoptionBoardCommentReqDto) {
+        adoptationBoardCommentMapper.updateAdoptationBoardByCommentId(updateAdoptionBoardCommentReqDto.toEntity());
+    }
+
 }

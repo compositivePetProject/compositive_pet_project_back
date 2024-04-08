@@ -44,6 +44,24 @@
             user_tb ut on (ut.user_id = abct.user_id)
         where
             adoptation_board_id = #{boardId};
-
     </select>
+    <delete id="deleteAdoptationBoardByCommentId"
+    parameterType="integer">
+        delete from
+            adoptation_board_comment_tb
+        where
+            adoptation_board_comment_id = #{commentId}
+
+    </delete>
+
+    <update id="updateAdoptationBoardByCommentId"
+            parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoardComment">
+        update
+            adoptation_board_comment_tb
+        set
+            adoptation_board_comment_content = #{adoptationBoardCommentContent},
+            update_date = now()
+        where
+            adoptation_board_comment_id = #{adoptationBoardCommentId}
+    </update>
 </mapper>
