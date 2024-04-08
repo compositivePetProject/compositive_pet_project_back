@@ -2,10 +2,12 @@ package com.project.pet.service.admin;
 
 import com.project.pet.dto.product.request.*;
 import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
+import com.project.pet.dto.product.response.GetProductOutgoingStocksAdminResponseDto;
 import com.project.pet.dto.product.response.GetProductStocksAdminResponseDto;
 import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
 import com.project.pet.entity.product.Product;
 import com.project.pet.entity.product.ProductIncomingStock;
+import com.project.pet.entity.product.ProductOutgoingStock;
 import com.project.pet.entity.product.ProductStock;
 import com.project.pet.repository.admin.ProductAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,28 @@ public class ProductAdminService {
     public void putProductStockAdmin(int productStockId, PutProductStockAdminRequestDto productStockAdminRequestDto) {
         productStockAdminRequestDto.setProductStockId(productStockId);
         productAdminMapper.putProductStockAdmin(productStockAdminRequestDto.toEntity());
+    }
+
+    public void postProductOutgoingStockAdmin(PostProductOutgoingStockAdminRequestDto postProductOutgoingStockAdminRequestDto) {
+        productAdminMapper.postProductOutgoingStockAdmin(postProductOutgoingStockAdminRequestDto.toEntity());
+    }
+
+    public List<GetProductOutgoingStocksAdminResponseDto> getProductOutgoingStocksAdmin() {
+        List<ProductOutgoingStock> list = productAdminMapper.getProductOutgoingStocksAdmin();
+        return list.stream().map(ProductOutgoingStock::toGetProductOutgoingStocksAdminResponseDto).collect(Collectors.toList());
+    }
+
+    public void deleteProductOutgoingStockAdmin(int productOutgoingStockId) {
+        productAdminMapper.deleteProductOutgoingStockAdmin(productOutgoingStockId);
+    }
+
+    public void deleteProductOutgoingStocksAdmin(List<Integer> productOutgoingStockIds) {
+        productAdminMapper.deleteProductOutgoingStocksAdmin(productOutgoingStockIds);
+    }
+
+    public void putProductOutgoingStockAdmin(int productOutgoingStockId, PutProductOutgoingStockAdminRequestDto putProductOutgoingStockAdminRequestDto) {
+        putProductOutgoingStockAdminRequestDto.setProductOutgoingStockId(productOutgoingStockId);
+        productAdminMapper.putProductOutgoingStockAdmin(putProductOutgoingStockAdminRequestDto.toEntity());
     }
 
 }

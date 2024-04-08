@@ -35,6 +35,15 @@
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
+    
+    <resultMap id="ProductOutgoingStockResultMap" type="com.project.pet.entity.product.ProductOutgoingStock">
+        <id property="productOutgoingStockId" column="product_outgoing_stock_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productSizeCategoryId" column="product_size_category_id"/>
+        <result property="productOutgoingStockCount" column="product_outgoing_stock_count"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
 
     <insert id="postProductAdmin"
         parameterType="com.project.pet.entity.product.Product"
@@ -177,5 +186,46 @@
             product_stock_count = #{productStockCount}
         where
             product_stock_id = #{productStockId}
+    </update>
+    <insert id="postProductOutgoingStockAdmin" parameterType="com.project.pet.entity.product.ProductOutgoingStock">
+        insert into
+            product_outgoing_stock_tb
+        values
+            (0, #{productId}, #{productSizeCategoryId}, #{productOutgoingStockCount}, now(), now())
+    </insert>
+    <select id="getProductOutgoingStocksAdmin" resultMap="ProductOutgoingStockResultMap">
+        select
+            *
+        from
+            product_outgoing_stock_tb
+    </select>
+    <delete id="deleteProductOutgoingStockAdmin" parameterType="Integer">
+        delete
+        from
+            product_outgoing_stock_tb
+        where
+            product_outgoing_stock_id = #{productOutgoingStockId}
+    </delete>
+    <delete id="deleteProductOutgoingStocksAdmin" parameterType="List">
+        delete
+        from
+            product_outgoing_stock_tb
+        where
+            product_outgoing_stock_id in (
+                <foreach collection="productOutgoingStockIds" item="productOutgoingStockId" separator=",">
+                    #{productOutgoingStockId}
+                </foreach>
+            )
+    </delete>
+    <update id="putProductOutgoingStockAdmin" parameterType="com.project.pet.entity.product.ProductOutgoingStock">
+        update
+            product_outgoing_stock_tb
+        set
+            product_id = #{productId},
+            product_size_category_id = #{productSizeCategoryId},
+            product_outgoing_stock_count = #{productOutgoingStockCount},
+            update_date = now()
+        where
+            product_outgoing_stock_id = #{productOutgoingStockId}
     </update>
 </mapper>
