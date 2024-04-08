@@ -206,4 +206,15 @@
         where
             product_outgoing_stock_id = #{productOutgoingStockId}
     </delete>
+    <delete id="deleteProductOutgoingStocksAdmin" parameterType="List">
+        delete
+        from
+            product_outgoing_stock_tb
+        where
+            product_outgoing_stock_id in (
+                <foreach collection="productOutgoingStockIds" item="productOutgoingStockId" separator=",">
+                    #{productOutgoingStockId}
+                </foreach>
+            )
+    </delete>
 </mapper>

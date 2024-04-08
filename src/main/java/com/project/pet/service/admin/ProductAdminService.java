@@ -107,4 +107,8 @@ public class ProductAdminService {
         productAdminMapper.deleteProductOutgoingStockAdmin(productOutgoingStockId);
     }
 
+    public void deleteProductOutgoingStocksAdmin(List<Integer> productOutgoingStockIds) {
+        productAdminMapper.deleteProductOutgoingStocksAdmin(productOutgoingStockIds);
+    }
+
 }

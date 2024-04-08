@@ -141,4 +141,11 @@ public class ProductAdminController {
         return ResponseEntity.ok(true);
     }
 
+    // 관리자 상품 출고 테이블 삭제(다건)
+    @DeleteMapping("admin/outgoing/stocks")
+    public ResponseEntity<?> deleteProductOutgoingStocksAdmin(@RequestBody List<Integer> productOutgoingStockIds){
+        productAdminService.deleteProductOutgoingStocksAdmin(productOutgoingStockIds);
+        return ResponseEntity.ok(true);
+    }
+
 }
