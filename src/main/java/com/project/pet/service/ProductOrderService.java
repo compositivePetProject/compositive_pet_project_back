@@ -1,6 +1,7 @@
 package com.project.pet.service;
 
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
+import com.project.pet.dto.product.request.PutProductOrderRequestDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import com.project.pet.entity.product.ProductOrder;
 import com.project.pet.repository.ProductOrderMapper;
@@ -33,6 +34,11 @@ public class ProductOrderService {
     @Transactional(rollbackFor = Exception.class)
     public void deleteProductOrders(List<Integer> productOrderIds) {
         productOrderMapper.deleteProductOrders(productOrderIds);
+    }
+
+    public void putProductOrder(int productOrderId, PutProductOrderRequestDto putProductOrderRequestDto) {
+        putProductOrderRequestDto.setProductOrderId(productOrderId);
+        productOrderMapper.putProductOrder(putProductOrderRequestDto.toEntity());
     }
 
 }

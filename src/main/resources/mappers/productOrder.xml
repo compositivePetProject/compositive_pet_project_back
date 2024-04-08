@@ -48,4 +48,17 @@
             )
     </delete>
 
+    <update id="putProductOrder" parameterType="com.project.pet.entity.product.ProductOrder">
+        update
+            product_order_tb
+        set
+            product_order_address = #{productOrderAddress},
+            product_order_detail_address = #{productOrderDetailAddress},
+            product_size_category_id = #{productSizeCategoryId},
+            product_order_count = #{productOrderCount},
+            update_date = now()
+        where
+            product_order_id = #{productOrderId}
+    </update>
+
 </mapper>

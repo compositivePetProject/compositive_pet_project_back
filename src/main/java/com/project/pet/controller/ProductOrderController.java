@@ -1,6 +1,7 @@
 package com.project.pet.controller;
 
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
+import com.project.pet.dto.product.request.PutProductOrderRequestDto;
 import com.project.pet.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,13 @@ public class ProductOrderController {
     @DeleteMapping("/product/orders")
     public ResponseEntity<?> deleteProductOrders(@RequestBody List<Integer> productOrderIds) {
         productOrderService.deleteProductOrders(productOrderIds);
+        return ResponseEntity.ok(true);
+    }
+
+    // 사용자 상품 주문 수정(단건)
+    @PutMapping("/product/order/{productOrderId}")
+    public ResponseEntity<?> putProductOrder(@PathVariable int productOrderId, @RequestBody PutProductOrderRequestDto putProductOrderRequestDto) {
+        productOrderService.putProductOrder(productOrderId, putProductOrderRequestDto);
         return ResponseEntity.ok(true);
     }
 

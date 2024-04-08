@@ -14,4 +14,6 @@ public interface ProductOrderMapper {
     public int deleteProductOrder(int productOrderId);
 
     public int deleteProductOrders(List<Integer> productOrderIds);
+
+    public int putProductOrder(ProductOrder productOrder);
 }
