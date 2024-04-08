@@ -19,23 +19,31 @@ public class CommunityBoardCommentService {
     @Autowired
     private CommunityBoardCommentMapper communityBoardCommentMapper;
 
-
     // 커뮤니티 게시판 댓글 추가(post)
     public void postCommunityCommentByBoardId (CommunityBoardCommentRequestDto communityBoardCommentRequestDto) {
         communityBoardCommentMapper.postCommunityBoardComment(communityBoardCommentRequestDto.toEntity());
-
     }
 
     // 커뮤니티 게시판 댓글 다건 조회 (get)
-    public List<GetCommunityBoardCommentResponseDto> getCommunityBoardCommentResponseDtos() {
+    public List<GetCommunityBoardCommentResponseDto> getCommunityBoardCommentsBoardId() {
         List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardComments();
         return  communityBoardComments.stream().map(CommunityBoardComment::toGetCommunityBoardCommentResponseDto).collect(Collectors.toList());
+     }
 
+     //커뮤니티 게시판 댓글 단건 조회 (get)
+     public GetCommunityBoardCommentResponseDto getCommunityBoardCommentBoardId(int CommunityCommentId) {
+         CommunityBoardComment communityBoardComment = communityBoardCommentMapper.getCommunityBoardComment(CommunityCommentId);
+         return communityBoardComment.toGetCommunityBoardCommentResponseDto();
      }
 
      // 커뮤니티 게시판 댓글 단건 삭제 (Delete)
      public void deleteCommunityBoardCommentId(int CommunityCommentId) {
          communityBoardCommentMapper.deleteCommunityBoardComment(CommunityCommentId);
+     }
+
+     // 커뮤니티 게시판 댓글 다건 삭제 (Delete)
+     public void deleteCommunityBoardCommentsId(List<Integer> CommunityCommentIds) {
+        communityBoardCommentMapper.deleteCommunityBoardComments(CommunityCommentIds);
      }
 
      // 커뮤니티 게시판 댓글 단건 수정 (put)

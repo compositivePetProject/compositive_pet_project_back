@@ -97,6 +97,20 @@
                 community_board_id = #{boardId}
     </delete>
 
+    <delete id="deleteCommunityBoards"
+           parameterType="list">
+        delete
+        from
+            community_board_tb
+
+        where
+            community_board_id in (
+                <foreach collection="boardIds" item="boardId" separator=",">
+                    #{boardId}
+                </foreach>
+            )
+    </delete>
+
     <update id="updateCommunityBoard"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoard">
         update

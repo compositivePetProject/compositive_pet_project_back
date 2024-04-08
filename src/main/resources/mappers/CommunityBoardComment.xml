@@ -38,6 +38,24 @@
 
     </select>
 
+    <select id="getCommunityBoardComment"
+            parameterType="integer"
+            resultMap="CommunityBoardCommentResultMap"
+    >
+        select
+            community_board_comment_id,
+            community_board_id,
+            user_id,
+            community_board_comment_content,
+            create_date,
+            update_date
+        from
+            community_board_comment_tb
+
+        where
+        community_board_comment_id = #{communityBoardCommentId}
+    </select>
+
     <delete id="deleteCommunityBoardComment"
                 parameterType="integer">
         delete
@@ -47,19 +65,30 @@
             community_board_comment_id = #{communityBoardId}
     </delete>
 
+    <delete id="deleteCommunityBoardComments"
+                parameterType="list">
+        delete
+        from
+            community_board_comment_tb
+
+        where
+            community_board_comment_id in (
+                <foreach collection="CommunityCommentIds" item="CommunityCommentId" separator=",">
+                    #{CommunityCommentId}
+                </foreach>
+            )
+    </delete>
+
     <update id="updateCommunityBoardComment"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
     >
         update
             community_board_comment_tb
-
         set
             community_board_comment_content = #{communityBoardCommentContent},
             update_date = now()
-
         where
             community_board_comment_id =#{communityBoardCommentId}
-
     </update>
 
 </mapper>
