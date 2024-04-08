@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.pet.repository.AdoptationBoardCommentMapper">
+    <resultMap id="AdoptationBoardCommentResultMap" type="com.project.pet.entity.adoptationBoard.AdoptationBoardComment">
+        <id property="adoptationBoardCommentId" column="product_comment_id" />
+        <result property="adoptationBoardId" column="product_id" />
+        <result property="userId" column="user_id" />
+        <result property="adoptationBoardCommentContent" column="product_comment_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+    <insert id="saveAdoptationBoardComment" parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoardComment">
+        insert into
+            adoptation_board_comment_tb
+        values
+            (0, #{adoptationBoardId}, #{userId}, #{adoptationBoardCommentContent}, now(), now())
+    </insert>
+</mapper>

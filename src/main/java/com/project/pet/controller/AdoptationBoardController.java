@@ -46,15 +46,9 @@ public class AdoptationBoardController {
 
     //게시글 다건 삭제
     @DeleteMapping("/board")
-    public ResponseEntity<?> deleteAdoptationBoards(@RequestParam List<Integer> boardIds) {
+    public ResponseEntity<?> deleteAdoptationBoards(@RequestParam("boardIds") List<Integer> boardIds) {
 
-        for (int boardId : boardIds) {
-            try{
-                adoptationBoardService.deleteAdoptationBoardByBoardId(boardId);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        adoptationBoardService.deleteAdoptationBoards(boardIds);
 
         return ResponseEntity.ok().body(true);
     }

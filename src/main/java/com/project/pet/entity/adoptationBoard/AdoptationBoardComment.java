@@ -19,7 +19,7 @@ public class AdoptationBoardComment {
     private int adoptationBoardCommentId;
     private int adoptationBoardId;
     private int userId;
-    private String adoptationBoardContent;
+    private String adoptationBoardCommentContent;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 

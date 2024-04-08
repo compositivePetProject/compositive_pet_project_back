@@ -44,7 +44,7 @@ public class AdoptationBoardAdminService {
         adoptationBoardAdminMapper.deleteAdoptationBoardAdminByNoticeId(noticeId);
     }
 
-    //게시판 다건 삭제
+    //공지사항 다건 삭제
 
     public void deleteAdoptationBoardAdmins(List<Integer> noticeIds) {
         for(int noticeId : noticeIds) {
@@ -56,7 +56,7 @@ public class AdoptationBoardAdminService {
         }
     }
 
-
+    //공지사항 단건 수정
     public void updateAdoptationBoardAdmin (UpdateAdoptationBoardAdminReqDto updateAdoptationBoardAdminReqDto) {
         adoptationBoardAdminMapper.updateAdoptationBoardAdmin(updateAdoptationBoardAdminReqDto.toEntity());
     }
