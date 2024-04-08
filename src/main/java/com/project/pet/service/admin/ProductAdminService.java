@@ -103,4 +103,8 @@ public class ProductAdminService {
         return list.stream().map(ProductOutgoingStock::toGetProductOutgoingStocksAdminResponseDto).collect(Collectors.toList());
     }
 
+    public void deleteProductOutgoingStockAdmin(int productOutgoingStockId) {
+        productAdminMapper.deleteProductOutgoingStockAdmin(productOutgoingStockId);
+    }
+
 }

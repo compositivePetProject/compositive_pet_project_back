@@ -199,4 +199,11 @@
         from
             product_outgoing_stock_tb
     </select>
+    <delete id="deleteProductOutgoingStockAdmin" parameterType="Integer">
+        delete
+        from
+            product_outgoing_stock_tb
+        where
+            product_outgoing_stock_id = #{productOutgoingStockId}
+    </delete>
 </mapper>
