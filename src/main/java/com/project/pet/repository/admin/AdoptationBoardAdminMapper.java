@@ -23,4 +23,6 @@ public interface AdoptationBoardAdminMapper {
 
     public int deleteAdoptationBoardAdminByNoticeId(int noticeId);
 
+    public void updateAdoptationBoardAdmin(AdoptationBoardAdmin adoptationBoardAdmin);
+
 }

@@ -1,6 +1,7 @@
 package com.project.pet.service.admin;
 
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardAdminReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardAdminReqDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardAdminRespDto;
 import com.project.pet.entity.adoptationBoard.AdoptationBoardAdmin;
 import com.project.pet.repository.admin.AdoptationBoardAdminMapper;
@@ -42,6 +43,14 @@ public class AdoptationBoardAdminService {
     public void deleteAdoptationBoardAdminByNoticeId(int noticeId) {
         adoptationBoardAdminMapper.deleteAdoptationBoardAdminByNoticeId(noticeId);
     }
+
+
+    public void updateAdoptationBoardAdmin (UpdateAdoptationBoardAdminReqDto updateAdoptationBoardAdminReqDto) {
+        adoptationBoardAdminMapper.updateAdoptationBoardAdmin(updateAdoptationBoardAdminReqDto.toEntity());
+    }
+
+
+
 
 }
 
