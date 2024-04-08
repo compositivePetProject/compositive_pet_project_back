@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.pet.repository.CommunityBoardCommentMapper">
-    <resultMap id="CommunityBoardCommentResultMap" type="com.project.pet.entity.CommunityBoardComment">
+    <resultMap id="CommunityBoardCommentResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardComment">
         <id property="communityBoardCommentId" column="community_board_comment_id" />
         <result property="communityBoardId" column="community_board_id" />
         <result property="userId" column="user_id" />
@@ -14,7 +14,7 @@
     </resultMap>
 
     <insert id="postCommunityBoardComment"
-            parameterType="com.project.pet.entity.CommunityBoardComment"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
     >
         insert into
             community_board_comment_tb
@@ -48,7 +48,7 @@
     </delete>
 
     <update id="updateCommunityBoardComment"
-            parameterType="com.project.pet.entity.CommunityBoardComment"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
     >
         update
             community_board_comment_tb
