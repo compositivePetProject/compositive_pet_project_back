@@ -35,6 +35,15 @@
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
+    
+    <resultMap id="ProductOutgoingStockResultMap" type="com.project.pet.entity.product.ProductOutgoingStock">
+        <id property="productOutgoingStockId" column="product_outgoing_stock_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="productSizeCategoryId" column="product_size_category_id"/>
+        <result property="productOutgoingStockCount" column="product_outgoing_stock_count"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+    </resultMap>
 
     <insert id="postProductAdmin"
         parameterType="com.project.pet.entity.product.Product"
@@ -184,4 +193,10 @@
         values
             (0, #{productId}, #{productSizeCategoryId}, #{productOutgoingStockCount}, now(), now())
     </insert>
+    <select id="getProductOutgoingStocksAdmin" resultMap="ProductOutgoingStockResultMap">
+        select
+            *
+        from
+            product_outgoing_stock_tb
+    </select>
 </mapper>

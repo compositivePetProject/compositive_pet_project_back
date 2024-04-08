@@ -41,4 +41,6 @@ public interface ProductAdminMapper {
     public int putProductStockAdmin(ProductStock productStock);
 
     public int postProductOutgoingStockAdmin(ProductOutgoingStock productOutgoingStock);
+
+    public List<ProductOutgoingStock> getProductOutgoingStocksAdmin();
 }

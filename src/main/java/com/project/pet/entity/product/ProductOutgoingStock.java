@@ -1,5 +1,6 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductOutgoingStocksAdminResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +19,15 @@ public class ProductOutgoingStock {
     private int productOutgoingStockCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public GetProductOutgoingStocksAdminResponseDto toGetProductOutgoingStocksAdminResponseDto() {
+        return GetProductOutgoingStocksAdminResponseDto.builder()
+                .productOutgoingStockId(productOutgoingStockId)
+                .productId(productId)
+                .productSizeCategoryId(productSizeCategoryId)
+                .productOutgoingStockCount(productOutgoingStockCount)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
 }

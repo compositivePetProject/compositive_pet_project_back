@@ -124,9 +124,14 @@ public class ProductAdminController {
     // 관리자 상품 출고 테이블 등록(단건)
     @PostMapping("admin/outgoing/stock")
     public ResponseEntity<?> postProductOutgoingStockAdmin(@RequestBody PostProductOutgoingStockAdminRequestDto postProductOutgoingStockAdminRequestDto) {
-        System.out.println(postProductOutgoingStockAdminRequestDto);
         productAdminService.postProductOutgoingStockAdmin(postProductOutgoingStockAdminRequestDto);
         return ResponseEntity.created(null).body(true);
+    }
+
+    // 관리자 상품 출고 테이블 조회(다건)
+    @GetMapping("admin/outgoing/stocks")
+    public ResponseEntity<?> getProductOutgoingStocksAdmin() {
+        return ResponseEntity.ok(productAdminService.getProductOutgoingStocksAdmin());
     }
 
 }
