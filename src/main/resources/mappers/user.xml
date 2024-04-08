@@ -146,4 +146,37 @@
             ot.oauth2_name = #{oAuth2name}
     </select>
 
+    <update id="editPassword"
+         parameterType="com.project.pet.entity.user.User">
+        update
+            user_tb
+        set
+            user_password = #{password},
+            update_date = now()
+        where
+            user_id =  #{userId}
+    </update>
+
+    <update id="editNickname"
+            parameterType="com.project.pet.entity.user.User">
+        update
+            user_tb
+        set
+            user_nickname = #{nickname},
+            update_date = now()
+        where
+            user_id =  #{userId}
+    </update>
+
+    <update id="updateProfileImageUrl"
+            parameterType="com.project.pet.entity.user.User">
+        update
+            user_tb
+        set
+            user_profile_image_url = #{profileImageUrl},
+            update_date = now()
+        where
+            user_id =  #{userId}
+    </update>
+
 </mapper>
