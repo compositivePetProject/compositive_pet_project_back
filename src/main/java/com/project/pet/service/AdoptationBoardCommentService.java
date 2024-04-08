@@ -39,6 +39,15 @@ public class AdoptationBoardCommentService {
         adoptationBoardCommentMapper.deleteAdoptationBoardByCommentId(commentId);
     }
 
+
+    //댓글 다건 삭제
+    public void deleteAdoptationBoardComments(List<Integer> comments) {
+        for(int commentId : comments) {
+            adoptationBoardCommentMapper.deleteAdoptationBoardByCommentId(commentId);
+        }
+    }
+
+    //댓글 단건 수정
     public void updateAdoptationBoardCommentByCommentId(UpdateAdoptionBoardCommentReqDto updateAdoptionBoardCommentReqDto) {
         adoptationBoardCommentMapper.updateAdoptationBoardByCommentId(updateAdoptionBoardCommentReqDto.toEntity());
     }

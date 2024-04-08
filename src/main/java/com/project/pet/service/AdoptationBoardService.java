@@ -41,6 +41,7 @@ public class AdoptationBoardService {
 
     //게시판 다건 삭제
     public void deleteAdoptationBoards (List<Integer> boardIds) {
+        System.out.println(boardIds);
         try {
             for (int boardId : boardIds) {
                 deleteAdoptationBoardByBoardId(boardId);

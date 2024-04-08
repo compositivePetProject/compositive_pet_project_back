@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/adoptation")
 public class AdoptationBoardCommentController {
@@ -24,11 +26,17 @@ public class AdoptationBoardCommentController {
         return ResponseEntity.created(null).body("댓글 작성 완료");
     }
 
-    //게시판 댓글 상세 페이지 다건 조회
+    //게시판 댓글 다건 조회
     @GetMapping("/comments/{boardId}")
     public ResponseEntity<?> getAdoptationBoardComment(@PathVariable int boardId) {
 
         return ResponseEntity.ok(adoptationBoardCommentService.getAdoptationBoardCommentByBoardId(boardId));
+    }
+
+    //게시판 댓글 단건 조회
+    @GetMapping("/comment/{commentId}")
+    public ResponseEntity<?> getAdoptationVBoardCommentByCommentId(@PathVariable int commentId) {
+        return ResponseEntity.ok(null);
     }
 
 
@@ -38,6 +46,13 @@ public class AdoptationBoardCommentController {
     public ResponseEntity<?> DeleteAdoptationBoardCommentByCommentId(@PathVariable int commentId){
             adoptationBoardCommentService.deleteAdoptationBoardCommentByCommentId(commentId);
             return ResponseEntity.ok().body("삭제 완료");
+    }
+
+    //게시판 댓글 다건 삭제
+    @DeleteMapping("/comment")
+    public ResponseEntity<?> DeleteAdoptationBoardComments(@RequestParam("commentsId") List<Integer> comments) {
+        adoptationBoardCommentService.deleteAdoptationBoardComments(comments);
+        return ResponseEntity.ok("삭제 완료");
     }
 
     //게시판 댓글 단건 수정
