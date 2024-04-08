@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class GetProductOrdersResponseDto {
     private int productOrderId;
     private int userId;
+    private int productId;
     private String productOrderAddress;
     private String productDetailOrderAddress;
     private int productSizeCategoryId;

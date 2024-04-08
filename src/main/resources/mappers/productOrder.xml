@@ -6,19 +6,19 @@
     <resultMap id="ProductOrderResultMap" type="com.project.pet.entity.product.ProductOrder">
         <id property="productOrderId" column="product_order_id" />
         <result property="userId" column="user_id" />
+        <result property="productId" column="product_id" />
         <result property="productOrderAddress" column="product_order_address" />
         <result property="productOrderDetailAddress" column="product_order_detail_address" />
         <result property="productSizeCategoryId" column="product_size_category_id" />
         <result property="productOrderCount" column="product_order_count" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
-
     </resultMap>
 
     <insert id="postProductOrder" parameterType="com.project.pet.entity.product.ProductOrder">
         insert into
             product_order_tb
-        values(0, #{userId}, #{productOrderAddress}, #{productOrderDetailAddress}, #{productSizeCategoryId}, #{productOrderCount}, now(), now())
+        values(0, #{userId}, #{productId}, #{productOrderAddress}, #{productOrderDetailAddress}, #{productSizeCategoryId}, #{productOrderCount}, now(), now())
     </insert>
 
     <select id="getProductOrders" resultMap="ProductOrderResultMap">
