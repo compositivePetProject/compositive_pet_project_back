@@ -217,4 +217,15 @@
                 </foreach>
             )
     </delete>
+    <update id="putProductOutgoingStockAdmin" parameterType="com.project.pet.entity.product.ProductOutgoingStock">
+        update
+            product_outgoing_stock_tb
+        set
+            product_id = #{productId},
+            product_size_category_id = #{productSizeCategoryId},
+            product_outgoing_stock_count = #{productOutgoingStockCount},
+            update_date = now()
+        where
+            product_outgoing_stock_id = #{productOutgoingStockId}
+    </update>
 </mapper>

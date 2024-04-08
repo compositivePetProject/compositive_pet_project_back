@@ -111,4 +111,9 @@ public class ProductAdminService {
         productAdminMapper.deleteProductOutgoingStocksAdmin(productOutgoingStockIds);
     }
 
+    public void putProductOutgoingStockAdmin(int productOutgoingStockId, PutProductOutgoingStockAdminRequestDto putProductOutgoingStockAdminRequestDto) {
+        putProductOutgoingStockAdminRequestDto.setProductOutgoingStockId(productOutgoingStockId);
+        productAdminMapper.putProductOutgoingStockAdmin(putProductOutgoingStockAdminRequestDto.toEntity());
+    }
+
 }

@@ -47,4 +47,6 @@ public interface ProductAdminMapper {
     public int deleteProductOutgoingStockAdmin(int productOutgoingStockId);
 
     public int deleteProductOutgoingStocksAdmin(List<Integer> productOutgoingStockIds);
+
+    public int putProductOutgoingStockAdmin(ProductOutgoingStock productOutgoingStock);
 }

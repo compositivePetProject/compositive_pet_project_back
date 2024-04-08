@@ -148,4 +148,11 @@ public class ProductAdminController {
         return ResponseEntity.ok(true);
     }
 
+    // 관리자 상품 출고 테이블 수정(단건)
+    @PutMapping("admin/outgoing/stock/{productOutgoingStockId}")
+    public ResponseEntity<?> putProductOutgoingStockAdmin(@PathVariable int productOutgoingStockId, @RequestBody PutProductOutgoingStockAdminRequestDto putProductOutgoingStockAdminRequestDto) {
+        productAdminService.putProductOutgoingStockAdmin(productOutgoingStockId, putProductOutgoingStockAdminRequestDto);
+        return ResponseEntity.ok(true);
+    }
+
 }
