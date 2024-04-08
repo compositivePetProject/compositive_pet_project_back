@@ -1,5 +1,6 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,17 @@ public class ProductOrder {
     private int productOrderCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public GetProductOrdersResponseDto toGetProductOrdersResponseDto() {
+        return GetProductOrdersResponseDto.builder()
+                .productOrderId(productOrderId)
+                .userId(userId)
+                .productOrderAddress(productOrderAddress)
+                .productDetailOrderAddress(productOrderDetailAddress)
+                .productSizeCategoryId(productSizeCategoryId)
+                .productOrderCount(productOrderCount)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
 }
