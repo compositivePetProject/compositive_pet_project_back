@@ -14,5 +14,10 @@ public class AdoptationBoardFavoriteService {
             adoptationBoardFavoriteMapper.saveAdoptationBoardFavorite(postAdoptationBoardFavoriteReqDto.toEntity());
     }
 
+    public void deleteAdoptationBoardFavorite(int boardId, int userId) {
+        adoptationBoardFavoriteMapper.deleteAdoptationBoardFavorite(boardId, userId);
+
+    }
+
 
 }

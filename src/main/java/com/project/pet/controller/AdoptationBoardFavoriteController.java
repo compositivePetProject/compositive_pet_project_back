@@ -15,6 +15,12 @@ public class AdoptationBoardFavoriteController {
     private AdoptationBoardFavoriteService adoptationBoardFavoriteService;
 
 
+    @DeleteMapping("/favorite/{boardId}/{userId}")
+    public ResponseEntity<?> deleteAdoptationBoardFavorite( @PathVariable int boardId, @PathVariable int userId) {
+        adoptationBoardFavoriteService.deleteAdoptationBoardFavorite(boardId, userId);
+        return ResponseEntity.ok("좋아요 취소 완료");
+    }
+
     @PostMapping("/favorite")
     public ResponseEntity<?> saveAdoptationBoardFavorite(@RequestBody PostAdoptationBoardFavoriteReqDto postAdoptationBoardFavoriteReqDto) {
         adoptationBoardFavoriteService.saveAdoptationBoardFavorite(postAdoptationBoardFavoriteReqDto);
