@@ -39,10 +39,23 @@ public class AdoptationBoardService {
         adoptationBoardMapper.deleteAdoptationBoardByBoardId(boardId);
     }
 
+    //게시판 다건 삭제
+    public void deleteAdoptationBoards (List<Integer> boardIds) {
+        System.out.println(boardIds);
+        try {
+            for (int boardId : boardIds) {
+                deleteAdoptationBoardByBoardId(boardId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //해당 게시판 수정
     public void updateAdoptationBoard (UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
             adoptationBoardMapper.updateAdoptationBoard(updateAdoptationBoardReqDto.toEntity());
     }
 
 }
+
 

@@ -2,10 +2,13 @@ package com.project.pet.controller.admin;
 
 
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardAdminReqDto;
+import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardAdminReqDto;
 import com.project.pet.service.admin.AdoptationBoardAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/adoptation")
@@ -32,11 +35,32 @@ public class AdoptationBoardAdminController {
     public ResponseEntity<?> getAdoptationBoardAdmins() {
         return ResponseEntity.ok(adoptationBoardAdminService.getAdoptationBoardAdmins());
     }
-
+    //공지사항 단건 삭제
     @DeleteMapping("/admin/{noticeId}")
     public ResponseEntity<?> deleteAdoptationBoardAdmin(@PathVariable int noticeId) {
         adoptationBoardAdminService.deleteAdoptationBoardAdminByNoticeId(noticeId);
+
+
         return ResponseEntity.ok().body("삭제완료");
+    }
+
+
+    //공지사항 다건 삭제
+    @DeleteMapping("/admin")
+    public ResponseEntity<?> deleteAdoptationBoardAdmin(@RequestParam("noticeIds") List<Integer> noticeIds) {
+         adoptationBoardAdminService.deleteAdoptationBoardAdmins(noticeIds);
+        return ResponseEntity.ok().body(true);
+    }
+
+
+    //공지사항 단건 수정
+    @PutMapping("/admin/{noticeId}")
+    public ResponseEntity<?> updateAdoptationBoardAdmin(@PathVariable int noticeId,
+                                                        @RequestBody UpdateAdoptationBoardAdminReqDto
+                                                                updateAdoptationBoardAdminReqDto) {
+        updateAdoptationBoardAdminReqDto.setAdoptationBoardAdminId(noticeId);
+        adoptationBoardAdminService.updateAdoptationBoardAdmin(updateAdoptationBoardAdminReqDto);
+        return ResponseEntity.ok().body("수정완료");
     }
 
 }

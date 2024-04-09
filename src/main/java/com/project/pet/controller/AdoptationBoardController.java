@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/adoptation")
@@ -29,20 +31,29 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards());
     }
 
-    //boardId로 게시판 조회(단건)
+    //boardId로 해당 게시판 조회(단건)
     @GetMapping("/board/{boardId}")
     public ResponseEntity<?> getAdoptationBoard(@PathVariable int boardId) {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardByBoardId(boardId));
     }
 
-    //해당 boardId의 게시글 삭제(단건)
+    //boardId로 해당 게시글 삭제(단건)
     @DeleteMapping("/board/{boardId}")
     public ResponseEntity<?> deleteAdoptationBoardByBoardId(@PathVariable int boardId) {
         adoptationBoardService.deleteAdoptationBoardByBoardId(boardId);
         return ResponseEntity.ok().body("해당 게시글 삭제 완료");
     }
 
-    //해당 boardId의 게시판 수정
+    //선택된 게시판 다건 삭제
+    @DeleteMapping("/board")
+    public ResponseEntity<?> deleteAdoptationBoards(@RequestParam("boardIds") List<Integer> boardIds) {
+
+        adoptationBoardService.deleteAdoptationBoards(boardIds);
+
+        return ResponseEntity.ok().body(true);
+    }
+
+    // boardId로 해당 게시판 수정(단건)
     @PutMapping("/board/{boardId}")
     public ResponseEntity<?> editAdoptationBoardByBoardId(@PathVariable int boardId, @RequestBody UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
         updateAdoptationBoardReqDto.setAdoptationBoardId(boardId);
@@ -51,4 +62,7 @@ public class AdoptationBoardController {
 
     }
 
+
+
 }
+
