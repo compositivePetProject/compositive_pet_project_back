@@ -25,12 +25,17 @@ public class CommunityBoardFavoriteController {
     @GetMapping("/favorites")
     public ResponseEntity<?> getCommunityBoardFavorites () {
         return ResponseEntity.ok(communityBoardFavoriteService.getCommunityBoardFavoritesByBoardId());
-
     }
 
-    @DeleteMapping("/delete/favorite/{CommunityCommentId}")
-        public ResponseEntity<?> deleteCommunityBoardFavorites (@PathVariable int CommunityCommentId) {
-            communityBoardFavoriteService.deleteCommunityBoardFavoriteByBoardId(CommunityCommentId);
+    @GetMapping("/favorite/{CommunityFavoriteId}")
+    public ResponseEntity<?> getCommunityBoardFavorite (@PathVariable int CommunityFavoriteId ) {
+
+        return ResponseEntity.ok(communityBoardFavoriteService.getCommunityBoardFavoriteByBoardId(CommunityFavoriteId));
+    }
+
+    @DeleteMapping("/delete/favorite/{CommunityFavoriteId}")
+        public ResponseEntity<?> deleteCommunityBoardFavorites (@PathVariable int CommunityFavoriteId) {
+            communityBoardFavoriteService.deleteCommunityBoardFavoriteByBoardId(CommunityFavoriteId);
             return ResponseEntity.ok(true);
 
     }

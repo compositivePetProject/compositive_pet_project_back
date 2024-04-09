@@ -12,5 +12,7 @@ public interface CommunityBoardFavoriteMapper {
 
     public List <CommunityBoardFavorite> getCommunityBoardFavorites();
 
-    public int deleteCommunityBoardFavorite(int CommunityCommentId);
+   public CommunityBoardFavorite getCommunityBoardFavorite(int CommunityFavoriteId);
+
+    public int deleteCommunityBoardFavorite(int CommunityFavoriteId);
 }

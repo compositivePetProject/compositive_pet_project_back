@@ -30,15 +30,19 @@ public class CommunityBoardFavoriteService {
         communityBoardFavoriteMapper.postCommunityBoardFavorite(communityBoardFavoriteRequestDto.toEntity(getPrincipalUser().getUserId()));
     }
 
-    // 좋아요 한 게시물 조회(Get)
+    // 좋아요 한 게시물 다건 조회 (Get)
     public List <GetCommunityBoardFavoriteResponseDto> getCommunityBoardFavoritesByBoardId() {
-        List <CommunityBoardFavorite> communityBoardFavorites =communityBoardFavoriteMapper.getCommunityBoardFavorites();
+        List <CommunityBoardFavorite> communityBoardFavorites = communityBoardFavoriteMapper.getCommunityBoardFavorites();
         return communityBoardFavorites.stream().map(CommunityBoardFavorite::toGetCommunityBoardFavoriteResponseDto).collect(Collectors.toList());
     }
 
+    public GetCommunityBoardFavoriteResponseDto getCommunityBoardFavoriteByBoardId(int CommunityFavoriteId ) {
+        CommunityBoardFavorite communityBoardFavorite = communityBoardFavoriteMapper.getCommunityBoardFavorite(CommunityFavoriteId);
+        return communityBoardFavorite.toGetCommunityBoardFavoriteResponseDto();
+    }
     // 게시물 좋아요 취소(Delete)
-    public void deleteCommunityBoardFavoriteByBoardId(int CommunityCommentId) {
-        communityBoardFavoriteMapper.deleteCommunityBoardFavorite(CommunityCommentId);
+    public void deleteCommunityBoardFavoriteByBoardId(int CommunityFavoriteId) {
+        communityBoardFavoriteMapper.deleteCommunityBoardFavorite(CommunityFavoriteId);
     }
 
 }

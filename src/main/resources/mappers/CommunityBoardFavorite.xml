@@ -4,7 +4,15 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.pet.repository.CommunityBoardFavoriteMapper">
+<resultMap id="CommunityBoardFavoriteResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardFavorite">
+    <id property="communityFavoriteId" column="community_favorite_id" />
+    <result property="communityBoardId" column="community_board_id" />
+    <result property="userId" column="user_id" />
+    <result property="createDate" column="create_date" />
+    <result property="updateDate" column="update_date" />
 
+
+</resultMap>
 
     <insert id="postCommunityBoardFavorite"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoardFavorite"
@@ -15,8 +23,45 @@
             (0, #{communityBoardId}, #{userId}, now(), now());
     </insert>
 
+    <select id="getCommunityBoardFavorites"
+            resultMap="CommunityBoardFavoriteResultMap"
+    >
+        select
+            community_favorite_id,
+            community_board_id,
+            user_id,
+            create_date,
+            update_date
+        from
+            community_board_favorite_tb
+        where
+            community_favorite_id = #{communityFavoriteId}
+    </select>
 
+    <select id="getCommunityBoardFavorite"
+            parameterType="integer"
+            resultMap="CommunityBoardFavoriteResultMap"
+     >
+        select
+            community_favorite_id,
+            community_board_id,
+            user_id,
+            create_date,
+            update_date
+        from
+            community_board_favorite_tb
+        where
+            community_favorite_id = #{communityFavoriteId}
+    </select>
 
+    <delete id="deleteCommunityBoardFavorite"
+                parameterType="integer">
+        delete
+        from
+            community_board_favorite_tb
+        where
+            community_favorite_id = #{communityFavoriteId}
+    </delete>
 </mapper>
 
 
