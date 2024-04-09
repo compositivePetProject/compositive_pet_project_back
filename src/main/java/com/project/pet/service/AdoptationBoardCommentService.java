@@ -34,6 +34,11 @@ public class AdoptationBoardCommentService {
         return adoptationBoardComments.stream().map(AdoptationBoardComment::toGetAdoptationBoardCommentRespDto).collect(Collectors.toList());
     }
 
+    public GetAdoptationBoardCommentRespDto getAdoptationBoardCommentByCommentId(int commentId) {
+        AdoptationBoardComment adoptationBoardComment = adoptationBoardCommentMapper.getAdoptationBoardCommentByCommentId(commentId);
+        return adoptationBoardComment.toGetAdoptationBoardCommentRespDto();
+    }
+
     //댓글 단건 삭제
     public void deleteAdoptationBoardCommentByCommentId(int commentId) {
         adoptationBoardCommentMapper.deleteAdoptationBoardByCommentId(commentId);

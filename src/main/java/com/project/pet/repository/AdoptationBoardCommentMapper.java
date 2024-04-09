@@ -16,6 +16,8 @@ public interface AdoptationBoardCommentMapper {
 
     public List<AdoptationBoardComment> getAdoptationBoardCommentByBoardId(int boardId);
 
+    public AdoptationBoardComment getAdoptationBoardCommentByCommentId(int commentId);
+
     public void deleteAdoptationBoardByCommentId(int commentId);
 
     public void updateAdoptationBoardByCommentId(AdoptationBoardComment adoptationBoardComment);

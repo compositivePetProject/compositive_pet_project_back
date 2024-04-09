@@ -26,17 +26,17 @@ public class AdoptationBoardCommentController {
         return ResponseEntity.created(null).body("댓글 작성 완료");
     }
 
-    //게시판 댓글 다건 조회
+    //boardId로 해당 게시판 댓글 다건 조회
     @GetMapping("/comments/{boardId}")
     public ResponseEntity<?> getAdoptationBoardComment(@PathVariable int boardId) {
 
         return ResponseEntity.ok(adoptationBoardCommentService.getAdoptationBoardCommentByBoardId(boardId));
     }
 
-    //게시판 댓글 단건 조회
+    //commentId로 해당 게시판 댓글 단건 조회
     @GetMapping("/comment/{commentId}")
     public ResponseEntity<?> getAdoptationVBoardCommentByCommentId(@PathVariable int commentId) {
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(adoptationBoardCommentService.getAdoptationBoardCommentByCommentId(commentId));
     }
 
 

@@ -45,6 +45,21 @@
         where
             adoptation_board_id = #{boardId};
     </select>
+    <select id="getAdoptationBoardCommentByCommentId" parameterType="integer"
+            resultMap="AdoptationBoardCommentResultMap">
+        select
+            abct.adoptation_board_id,
+            ut.user_username,
+            abct.adoptation_board_comment_content,
+            abct.create_date,
+            abct.update_date
+        from
+            adoptation_board_comment_tb abct
+            left outer join
+            user_tb ut on (ut.user_id = abct.user_id)
+        where
+            adoptation_board_comment_id = #{commentId};
+    </select>
     <delete id="deleteAdoptationBoardByCommentId"
     parameterType="integer">
         delete from
