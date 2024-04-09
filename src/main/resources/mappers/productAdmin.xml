@@ -16,6 +16,9 @@
         <result property="productBoardContent" column="product_board_content" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
+        <association property="productCategory" resultMap="ProductCategoryResultMap"/>
+        <association property="productAnimalCategory" resultMap="ProductAnimalCategoryResultMap"/>
+        <association property="user" resultMap="UserResultMap"/>
     </resultMap>
 
     <resultMap id="ProductIncomingStockResultMap" type="com.project.pet.entity.product.ProductIncomingStock">
@@ -35,7 +38,7 @@
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
-    
+
     <resultMap id="ProductOutgoingStockResultMap" type="com.project.pet.entity.product.ProductOutgoingStock">
         <id property="productOutgoingStockId" column="product_outgoing_stock_id"/>
         <result property="productId" column="product_id"/>
@@ -43,6 +46,32 @@
         <result property="productOutgoingStockCount" column="product_outgoing_stock_count"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
+    </resultMap>
+
+    <resultMap id="ProductCategoryResultMap" type="com.project.pet.entity.product.ProductCategory">
+        <id property="productCategoryId" column="product_category_id" />
+        <result property="productCategoryName" column="product_category_name" />
+        <result property="productCategoryNameKor" column="product_category_name_kor" />
+    </resultMap>
+
+    <resultMap id="ProductAnimalCategoryResultMap" type="com.project.pet.entity.product.ProductAnimalCategory">
+        <id property="productAnimalCategoryId" column="product_animal_category_id" />
+        <result property="productAnimalCategoryName" column="product_animal_category_name" />
+        <result property="productAnimalCategoryNameKor" column="product_animal_category_name_kor" />
+    </resultMap>
+
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
+        <id property="userId" column="user_id" />
+        <result property="username" column="user_username" />
+        <result property="password" column="user_password" />
+        <result property="name" column="user_name" />
+        <result property="address" column="user_address" />
+        <result property="telNumber" column="user_tel_number" />
+        <result property="nickname" column="user_nickname" />
+        <result property="email" column="user_email" />
+        <result property="profileImageUrl" column="user_profile_image_url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
     </resultMap>
 
     <insert id="postProductAdmin"
@@ -54,8 +83,52 @@
         values(0, #{userId}, #{productNameKor}, #{productPrice}, #{productImageUrl}, #{productCategoryId}, #{productAnimalCategoryId}, #{productBoardContent}, now(), now())
     </insert>
 
+    <select id="getProductAdmin" parameterType="Integer" resultMap="ProductResultMap">
+        select
+            pt.product_id,
+            pt.product_name_kor,
+            pt.product_price,
+            pt.product_image_url,
+            pt.product_category_id,
+            pct.product_category_name_kor,
+            pt.product_animal_category_id,
+            pact.product_animal_category_name_kor,
+            pt.product_board_content,
+            pt.user_id,
+            ut.user_name,
+            ut.user_nickname,
+            pt.create_date,
+            pt.update_date
+        from
+            product_tb pt
+            left outer join user_tb ut on(ut.user_id = pt.user_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_animal_category_id)
+            left outer join product_animal_category_tb pact on(pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pt.product_id = #{productId}
+    </select>
+
     <select id="getProductsAdmin" resultMap="ProductResultMap">
-        SELECT * FROM product_tb
+        select
+            pt.product_id,
+            pt.product_name_kor,
+            pt.product_price,
+            pt.product_image_url,
+            pt.product_category_id,
+            pct.product_category_name_kor,
+            pt.product_animal_category_id,
+            pact.product_animal_category_name_kor,
+            pt.product_board_content,
+            pt.user_id,
+            ut.user_name,
+            ut.user_nickname,
+            pt.create_date,
+            pt.update_date
+        from
+            product_tb pt
+            left outer join user_tb ut on(ut.user_id = pt.user_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_animal_category_id)
+            left outer join product_animal_category_tb pact on(pact.product_animal_category_id = pt.product_animal_category_id)
     </select>
 
     <delete id="deleteProductAdmin" parameterType="Integer">
@@ -72,6 +145,7 @@
         set
             user_id = #{userId},
             product_name_kor = #{productNameKor},
+            product_price = #{productPrice},
             product_image_url = #{productImageUrl},
             product_category_id = #{productCategoryId},
             product_animal_category_id = #{productAnimalCategoryId},

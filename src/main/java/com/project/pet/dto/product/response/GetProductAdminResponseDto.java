@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Builder
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetProductsAdminResponseDto {
+@Data
+public class GetProductAdminResponseDto {
     private int productId;
     private String productNameKor;
     private int productPrice;

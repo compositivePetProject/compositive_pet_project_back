@@ -1,10 +1,7 @@
 package com.project.pet.service.admin;
 
 import com.project.pet.dto.product.request.*;
-import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
-import com.project.pet.dto.product.response.GetProductOutgoingStocksAdminResponseDto;
-import com.project.pet.dto.product.response.GetProductStocksAdminResponseDto;
-import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
+import com.project.pet.dto.product.response.*;
 import com.project.pet.entity.product.Product;
 import com.project.pet.entity.product.ProductIncomingStock;
 import com.project.pet.entity.product.ProductOutgoingStock;
@@ -30,9 +27,13 @@ public class ProductAdminService {
         productAdminMapper.postProductStockAdmin(ProductStock.builder().productId(productId).build());
     }
 
+    public GetProductAdminResponseDto getProductAdmin(int productId) {
+        Product product = productAdminMapper.getProductAdmin(productId);
+        return product.toGetProductAdminResponseDto();
+    }
+
     public List<GetProductsAdminResponseDto> getProductsAdmin() {
-        List<Product> list = null;
-        list = productAdminMapper.getProductsAdmin();
+        List<Product> list = productAdminMapper.getProductsAdmin();
         return list.stream().map(Product::toGetProductsAdminResponseDto).collect(Collectors.toList());
     }
 
@@ -42,7 +43,7 @@ public class ProductAdminService {
 
     public void putProductAdmin(int productId, PutProductAdminRequestDto putProductAdminRequestDto) {
         putProductAdminRequestDto.setProductId(productId);
-        int success = productAdminMapper.putProductAdmin(putProductAdminRequestDto.toEntity());
+        productAdminMapper.putProductAdmin(putProductAdminRequestDto.toEntity());
     }
 
     @Transactional(rollbackFor = Exception.class)

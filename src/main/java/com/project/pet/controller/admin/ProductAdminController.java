@@ -23,6 +23,12 @@ public class ProductAdminController {
         return ResponseEntity.created(null).body(true);
     }
 
+    // 관리자 상품 조회(단건)
+    @GetMapping("/admin/product/{productId}")
+    public ResponseEntity<?> getProductAdmin(@PathVariable int productId) {
+        return ResponseEntity.ok(productAdminService.getProductAdmin(productId));
+    }
+
     // 관리자 상품 조회(다건)
     @GetMapping("/admin/products")
     public ResponseEntity<?> getProductsAdmin() {

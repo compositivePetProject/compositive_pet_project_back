@@ -12,6 +12,8 @@ import java.util.List;
 public interface ProductAdminMapper {
     public int postProductAdmin(Product product);
 
+    public Product getProductAdmin(int productId);
+
     public List<Product> getProductsAdmin();
 
     public int deleteProductAdmin(int productId);
