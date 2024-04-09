@@ -1,11 +1,11 @@
 package com.project.pet.dto.product.request;
 
 import com.project.pet.entity.product.ProductComment;
+import com.project.pet.entity.product.ProductOrder;
 import lombok.Data;
 
 @Data
 public class PostProductCommentRequestDto {
-
     private int productId;
     private String productCommentContent;
 
@@ -16,5 +16,4 @@ public class PostProductCommentRequestDto {
                 .productCommentContent(productCommentContent)
                 .build();
     }
-
 }

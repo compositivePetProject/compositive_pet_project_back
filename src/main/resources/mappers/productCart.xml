@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.pet.repository.ProductCartMapper">
+
+    <resultMap id="ProductCartResultMap" type="com.project.pet.entity.product.ProductCart">
+        <id property="productCartId" column="product_cart_id" />
+        <result property="userId" column="user_id" />
+        <result property="productId" column="product_id" />
+        <result property="productSizeCategoryId" column="product_size_category_id" />
+        <result property="productCartCount" column="product_cart_count" />
+    </resultMap>
+
+    <insert id="saveProductCart"
+            parameterType="com.project.pet.entity.product.ProductCart"
+    >
+        insert into
+            product_cart_tb
+        values
+            (0, #{userId}, #{productId}, #{productSizeCategoryId}, #{productCartCount})
+    </insert>
+
+    <select id="getProductsCart"
+            parameterType="integer"
+            resultMap="ProductCartResultMap"
+    >
+        select
+            product_cart_id,
+            user_id,
+            product_id,
+            product_size_category_id,
+            product_cart_count
+        from
+            product_cart_tb
+        where
+            user_id = #{userId}
+    </select>
+
+    <delete id="deleteProductCarts"
+            parameterType="list"
+    >
+        delete
+        from
+            product_cart_tb
+        where
+            product_cart_id in (
+        <foreach collection="productCartIds" item="productCartId" separator=",">
+            #{productCartId}
+        </foreach>
+        )
+    </delete>
+    
+    <update id="updateProductCart"
+            parameterType="com.project.pet.entity.product.ProductCart"
+    >
+        update
+            product_cart_tb
+        set
+            user_id = #{userId},
+            product_id = #{productId},
+            product_size_category_id = #{productSizeCategoryId},
+            product_cart_count = #{productCartCount}
+        where
+            product_cart_id = #{productCartId}
+
+    </update>
+</mapper>

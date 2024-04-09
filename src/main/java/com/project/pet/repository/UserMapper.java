@@ -13,5 +13,8 @@ public interface UserMapper {
     public int saveUser(User user);
     public int saveRole(@Param("userId") int userId, @Param("roleId") int roleId);
     public int saveOAuth2(OAuth2 oAuth2);
+    public int editPassword(User user);
+    public int editNickname(User user);
+    public int updateProfileImageUrl(User user);
 
 }

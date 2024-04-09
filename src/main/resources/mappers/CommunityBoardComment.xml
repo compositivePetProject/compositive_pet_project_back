@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.pet.repository.CommunityBoardCommentMapper">
+    <resultMap id="CommunityBoardCommentResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardComment">
+        <id property="communityBoardCommentId" column="community_board_comment_id" />
+        <result property="communityBoardId" column="community_board_id" />
+        <result property="userId" column="user_id" />
+        <result property="communityBoardCommentContent" column="community_board_comment_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <insert id="postCommunityBoardComment"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
+    >
+        insert into
+            community_board_comment_tb
+        values
+            (0, #{communityBoardId}, #{userId}, #{communityBoardCommentContent}, now(), now());
+
+    </insert>
+
+    <select id="getCommunityBoardComments"
+            resultMap="CommunityBoardCommentResultMap"
+    >
+        select
+            community_board_comment_id,
+            community_board_id,
+            user_id,
+            community_board_comment_content,
+            create_date,
+            update_date
+        from
+            community_board_comment_tb
+
+    </select>
+
+    <select id="getCommunityBoardComment"
+            parameterType="integer"
+            resultMap="CommunityBoardCommentResultMap"
+    >
+        select
+            community_board_comment_id,
+            community_board_id,
+            user_id,
+            community_board_comment_content,
+            create_date,
+            update_date
+        from
+            community_board_comment_tb
+
+        where
+        community_board_comment_id = #{communityBoardCommentId}
+    </select>
+
+    <delete id="deleteCommunityBoardComment"
+                parameterType="integer">
+        delete
+        from
+            community_board_comment_tb
+        where
+            community_board_comment_id = #{communityBoardId}
+    </delete>
+
+    <delete id="deleteCommunityBoardComments"
+                parameterType="list">
+        delete
+        from
+            community_board_comment_tb
+
+        where
+            community_board_comment_id in (
+                <foreach collection="CommunityCommentIds" item="CommunityCommentId" separator=",">
+                    #{CommunityCommentId}
+                </foreach>
+            )
+    </delete>
+
+    <update id="updateCommunityBoardComment"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
+    >
+        update
+            community_board_comment_tb
+        set
+            community_board_comment_content = #{communityBoardCommentContent},
+            update_date = now()
+        where
+            community_board_comment_id =#{communityBoardCommentId}
+    </update>
+
+</mapper>

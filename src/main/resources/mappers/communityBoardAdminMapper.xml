@@ -55,6 +55,20 @@
             community_board_admin_id = #{boardAdminId}
     </select>
 
+    <select id="getCommunityBoardsAdmin"
+            resultMap="CommunityBoardAdminResultMap">
+        select
+            cbat.community_board_admin_id,
+            ut.user_id,
+            cbat.community_board_admin_title,
+            cbat.community_board_admin_content,
+            cbat.create_date,
+            cbat.update_date
+        from
+            community_board_admin_tb cbat
+            left outer join user_tb ut on (ut.user_id = cbat.user_id)
+    </select>
+
     <delete id="deleteCommunityBoardAdminByBoardId"
             parameterType="integer" >
         delete
@@ -62,6 +76,20 @@
             community_board_admin_tb
         where
             community_board_admin_id = #{boardAdminId}
+    </delete>
+
+    <delete id="deleteCommunityAdminBoards"
+            parameterType="list" >
+        delete
+        from
+            community_board_admin_tb
+        where
+            community_board_admin_id in (
+            <foreach collection="boardAdminIds" item="boardAdminId" separator=",">
+                #{boardAdminId}
+            </foreach>
+        )
+
     </delete>
 
     <update id="putCommunityAdminBoard"

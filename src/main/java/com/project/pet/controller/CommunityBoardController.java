@@ -7,40 +7,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/community")
 @RestController
 public class CommunityBoardController {
 
     @Autowired
-    CommunityBoardService communityBoardService;
+    private CommunityBoardService communityBoardService;
 
-    //게시판 작성 단건(post) 클래스명 변경  RegistercommunityBoardController >> CommunityBoardController
+    //커뮤니티 게시판 작성(Post)
     @PostMapping("/board")
     public ResponseEntity<?> postCommunityBoard(@RequestBody PostCommunityBoardRequestDto postCommunityBoardRequestDto) {
         communityBoardService.PostCommunityBoardRequestDto(postCommunityBoardRequestDto);
         return ResponseEntity.created(null).body(true);
     }
 
-    // 게시판 조회 다건(get)
+    // 커뮤니티 게시판 조회 다건(get)
     @GetMapping("/getboards")
     public ResponseEntity<?> getCommunityBoards() {
         return ResponseEntity.ok(communityBoardService.getCommunityBoards());
     }
 
-    // 해당 communityBoardId의 게시판 조회 단건
+    // 커뮤니티 게시판 해당 communityBoardId의 게시판 조회 단건
     @GetMapping("/getboard/{boardId}")
     public ResponseEntity<?> getCommunityBoard(@PathVariable int boardId) {
         return ResponseEntity.ok(communityBoardService.getCommunityBoardByBoardId(boardId));
     }
 
-    // 게시물 단건 삭제
+    // 게시물 단건 해당 communityBoardId의 게시판 삭제 단건
     @DeleteMapping("/board/{boardId}")
     public ResponseEntity<?> deleteCommunityBoardByBoardId(@PathVariable int boardId) {
         communityBoardService.deleteCommunityBoardByBoardId(boardId);
         return ResponseEntity.ok().body("게시물 삭제 완료");
     }
 
-    // 게시물 단건 수정
+    // 커뮤니티 게시판 다건 삭제 (Delete)
+    @DeleteMapping("/delete/boards")
+    public ResponseEntity<?> deleteCommunityBoards(@RequestBody List<Integer> boardIds ) {
+        communityBoardService.deleteCommunityBoardsByBoardId(boardIds);
+        return ResponseEntity.ok(true);
+    }
+
+
+    // 커뮤니티 게시판 해당 communityBoardId의 단건 수정 (Put)
     @PutMapping("/board/{boardId}")
     public ResponseEntity<?> updateCommunityBoardByBoardId(@PathVariable int boardId, @RequestBody UpdateCommunityBoardRequestDto updateCommunityBoardRequestDto) {
         updateCommunityBoardRequestDto.setCommunityBoardId(boardId);
