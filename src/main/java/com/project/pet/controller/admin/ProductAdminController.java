@@ -17,10 +17,16 @@ public class ProductAdminController {
 
     // [애완용품 쇼핑몰 상품]
     // 관리자 상품 등록(단건)
-    @PostMapping("/admin")
+    @PostMapping("/admin/product")
     public ResponseEntity<?> postProductAdmin(@RequestBody PostProductAdminRequestDto postProductAdminRequestDto) {
         productAdminService.postProductAdmin(postProductAdminRequestDto);
         return ResponseEntity.created(null).body(true);
+    }
+
+    // 관리자 상품 조회(단건)
+    @GetMapping("/admin/product/{productId}")
+    public ResponseEntity<?> getProductAdmin(@PathVariable int productId) {
+        return ResponseEntity.ok(productAdminService.getProductAdmin(productId));
     }
 
     // 관리자 상품 조회(다건)
@@ -64,6 +70,12 @@ public class ProductAdminController {
         return ResponseEntity.ok(productAdminService.getProductIncomingStocks());
     }
 
+    // 관리자 상품 가입고 테이블 조회(단건)
+    @GetMapping("admin/incoming/stock/{productIncomingStockId}")
+    public ResponseEntity<?> getProductIncomingStock(@PathVariable int productIncomingStockId) {
+        return ResponseEntity.ok(productAdminService.getProductIncomingStock(productIncomingStockId));
+    }
+
     // 관리자 상품 가입고 테이블 삭제(단건)
     @DeleteMapping("admin/incoming/stock/{productIncomingStockId}")
     public ResponseEntity<?> deleteProductIncomingStock(@PathVariable int productIncomingStockId) {
@@ -97,6 +109,12 @@ public class ProductAdminController {
     @GetMapping("admin/stocks")
     public ResponseEntity<?> getProductStocksAdmin() {
         return ResponseEntity.ok(productAdminService.getProductStocksAdmin());
+    }
+
+    // 관리자 상품 재고 테이블 조회(단건)
+    @GetMapping("admin/stock/{productStockId}")
+    public ResponseEntity<?> getProductStockAdmin(@PathVariable int productStockId) {
+        return ResponseEntity.ok(productAdminService.getProductStockAdmin(productStockId));
     }
 
     // 관리자 상품 재고 테이블 삭제(단건)
@@ -154,5 +172,8 @@ public class ProductAdminController {
         productAdminService.putProductOutgoingStockAdmin(productOutgoingStockId, putProductOutgoingStockAdminRequestDto);
         return ResponseEntity.ok(true);
     }
+
+    // [사용자 애완용품 주문 현황]
+    // 관리자 애완용품 주문 현황 조회(다건)
 
 }

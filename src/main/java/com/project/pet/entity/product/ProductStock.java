@@ -1,5 +1,6 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductStockAdminResponseDto;
 import com.project.pet.dto.product.response.GetProductStocksAdminResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,11 +21,33 @@ public class ProductStock {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private Product product;
+    private ProductSizeCategory productSizeCategory;
+
     public GetProductStocksAdminResponseDto toGetProductStocksResponseDto() {
         return GetProductStocksAdminResponseDto.builder()
                 .productStockId(productStockId)
                 .productId(productId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
+                .productStockCount(productStockCount)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductStockAdminResponseDto toGetProductStockAdminResponseDto() {
+        return GetProductStockAdminResponseDto.builder()
+                .productStockId(productStockId)
+                .productId(productId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryNameKor(product.getProductNameKor())
+                .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productStockCount(productStockCount)
                 .createDate(createDate)
                 .updateDate(updateDate)

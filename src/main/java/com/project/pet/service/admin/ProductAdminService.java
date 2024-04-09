@@ -1,10 +1,7 @@
 package com.project.pet.service.admin;
 
 import com.project.pet.dto.product.request.*;
-import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
-import com.project.pet.dto.product.response.GetProductOutgoingStocksAdminResponseDto;
-import com.project.pet.dto.product.response.GetProductStocksAdminResponseDto;
-import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
+import com.project.pet.dto.product.response.*;
 import com.project.pet.entity.product.Product;
 import com.project.pet.entity.product.ProductIncomingStock;
 import com.project.pet.entity.product.ProductOutgoingStock;
@@ -24,12 +21,19 @@ public class ProductAdminService {
     ProductAdminMapper productAdminMapper;
 
     public void postProductAdmin(PostProductAdminRequestDto postProductAdminRequestDto) {
-        int success = productAdminMapper.postProductAdmin(postProductAdminRequestDto.toEntity());
+        Product product = postProductAdminRequestDto.toEntity();
+        productAdminMapper.postProductAdmin(product);
+        int productId = product.getProductId();
+        productAdminMapper.postProductStockAdmin(ProductStock.builder().productId(productId).build());
+    }
+
+    public GetProductAdminResponseDto getProductAdmin(int productId) {
+        Product product = productAdminMapper.getProductAdmin(productId);
+        return product.toGetProductAdminResponseDto();
     }
 
     public List<GetProductsAdminResponseDto> getProductsAdmin() {
-        List<Product> list = null;
-        list = productAdminMapper.getProductsAdmin();
+        List<Product> list = productAdminMapper.getProductsAdmin();
         return list.stream().map(Product::toGetProductsAdminResponseDto).collect(Collectors.toList());
     }
 
@@ -39,7 +43,7 @@ public class ProductAdminService {
 
     public void putProductAdmin(int productId, PutProductAdminRequestDto putProductAdminRequestDto) {
         putProductAdminRequestDto.setProductId(productId);
-        int success = productAdminMapper.putProductAdmin(putProductAdminRequestDto.toEntity());
+        productAdminMapper.putProductAdmin(putProductAdminRequestDto.toEntity());
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -54,6 +58,11 @@ public class ProductAdminService {
     public List<GetProductIncomingStocksResponseDto> getProductIncomingStocks() {
         List<ProductIncomingStock> list = productAdminMapper.getProductIncomingStocks();
         return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksResponseDto).collect(Collectors.toList());
+    }
+
+    public GetProductIncomingStockResponseDto getProductIncomingStock(int productIncomingStockId) {
+        ProductIncomingStock productIncomingStock = productAdminMapper.getProductIncomingStock(productIncomingStockId);
+        return productIncomingStock.toGetProductIncomingStockResponseDto();
     }
 
 
@@ -78,6 +87,11 @@ public class ProductAdminService {
     public List<GetProductStocksAdminResponseDto> getProductStocksAdmin() {
         List<ProductStock> list = productAdminMapper.getProductStocksAdmin();
         return list.stream().map(ProductStock::toGetProductStocksResponseDto).collect(Collectors.toList());
+    }
+
+    public GetProductStockAdminResponseDto getProductStockAdmin(int productStockId) {
+        ProductStock productStock = productAdminMapper.getProductStockAdmin(productStockId);
+        return productStock.toGetProductStockAdminResponseDto();
     }
 
     public void deleteProductStockAdmin(int productStockId) {

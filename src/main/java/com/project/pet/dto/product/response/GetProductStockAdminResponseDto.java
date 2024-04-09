@@ -11,18 +11,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GetProductOrdersResponseDto {
-    private int productOrderId;
+public class GetProductStockAdminResponseDto {
+    private int productStockId;
     private int productId;
     private String productNameKor;
     private int productSizeCategoryId;
     private String productSizeCategoryName;
     private String productSizeCategoryNameKor;
-    private int productOrderCount;
-    private int userId;
-    private String username;
-    private String productOrderAddress;
-    private String productDetailOrderAddress;
+    private int productStockCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }

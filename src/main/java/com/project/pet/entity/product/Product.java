@@ -1,7 +1,7 @@
 package com.project.pet.entity.product;
 
-import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
-import com.project.pet.dto.product.response.ProductFavoriteResponseDto;
+import com.project.pet.dto.product.response.*;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,17 +27,24 @@ public class Product {
     private LocalDateTime updateDate;
 
     private ProductFavorite productFavorite;
+    private ProductCategory productCategory;
+    private ProductAnimalCategory productAnimalCategory;
+    private User user;
 
     public GetProductsAdminResponseDto toGetProductsAdminResponseDto() {
         return GetProductsAdminResponseDto.builder()
                 .productId(productId)
-                .userId(userId)
                 .productNameKor(productNameKor)
                 .productPrice(productPrice)
                 .productImageUrl(productImageUrl)
                 .productCategoryId(productCategoryId)
+                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
                 .productAnimalCategoryId(productAnimalCategoryId)
+                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
                 .productBoardContent(productBoardContent)
+                .userId(userId)
+                .userName(user.getName())
+                .userNickname(user.getNickname())
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
@@ -54,6 +61,53 @@ public class Product {
                 .productAnimalCategoryId(productAnimalCategoryId)
                 .productBoardContent(productBoardContent)
                 .totalUserIdCount(productFavorite.getTotalUserIdCount())
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductResponseDto toGetProductResponseDto() {
+        return GetProductResponseDto.builder()
+                .productId(productId)
+                .productNameKor(productNameKor)
+                .productPrice(productPrice)
+                .productImageUrl(productImageUrl)
+                .productCategoryId(productCategoryId)
+                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
+                .productAnimalCategoryId(productCategoryId)
+                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
+                .productBoardContent(productBoardContent)
+                .build();
+    }
+
+    public GetProductsResponseDto toGetProductsResponseDto() {
+        return GetProductsResponseDto.builder()
+                .productId(productId)
+                .productNameKor(productNameKor)
+                .productPrice(productPrice)
+                .productImageUrl(productImageUrl)
+                .productCategoryId(productCategoryId)
+                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
+                .productAnimalCategoryId(productCategoryId)
+                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
+                .productBoardContent(productBoardContent)
+                .build();
+    }
+
+    public GetProductAdminResponseDto toGetProductAdminResponseDto() {
+        return GetProductAdminResponseDto.builder()
+                .productId(productId)
+                .productNameKor(productNameKor)
+                .productPrice(productPrice)
+                .productImageUrl(productImageUrl)
+                .productCategoryId(productCategoryId)
+                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
+                .productAnimalCategoryId(productAnimalCategoryId)
+                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
+                .productBoardContent(productBoardContent)
+                .userId(userId)
+                .userName(user.getName())
+                .userNickname(user.getNickname())
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();

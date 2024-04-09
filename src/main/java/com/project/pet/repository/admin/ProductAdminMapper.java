@@ -12,6 +12,8 @@ import java.util.List;
 public interface ProductAdminMapper {
     public int postProductAdmin(Product product);
 
+    public Product getProductAdmin(int productId);
+
     public List<Product> getProductsAdmin();
 
     public int deleteProductAdmin(int productId);
@@ -24,6 +26,8 @@ public interface ProductAdminMapper {
 
     public List<ProductIncomingStock> getProductIncomingStocks();
 
+    public ProductIncomingStock getProductIncomingStock(int productIncomingStockId);
+
     public int deleteProductIncomingStock(int productIncomingStockId);
 
     public int deleteProductIncomingStocksAdmin(List<Integer> productIncomingStockIds);
@@ -33,6 +37,8 @@ public interface ProductAdminMapper {
     public int postProductStockAdmin(ProductStock productStock);
 
     public List<ProductStock> getProductStocksAdmin();
+
+    public ProductStock getProductStockAdmin(int productStockId);
 
     public int deleteProductStockAdmin(int productStockId);
 

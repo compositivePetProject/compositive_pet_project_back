@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class PutProductAdminRequestDto {
 
     private int productId;
@@ -20,8 +18,6 @@ public class PutProductAdminRequestDto {
     private int productCategoryId;
     private int productAnimalCategoryId;
     private String productBoardContent;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
     public Product toEntity() {
         return Product.builder()

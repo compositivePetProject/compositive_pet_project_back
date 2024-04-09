@@ -15,7 +15,10 @@ public class GetProductIncomingStocksResponseDto {
 
     private int productIncomingStockId;
     private int productId;
+    private String productNameKor;
     private int productSizeCategoryId;
+    private String productSizeCategoryName;
+    private String productSizeCategoryNameKor;
     private int productIncomingStockCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;

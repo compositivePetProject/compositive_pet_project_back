@@ -4,25 +4,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GetProductOrdersResponseDto {
-    private int productOrderId;
+public class GetProductAdminResponseDto {
     private int productId;
     private String productNameKor;
-    private int productSizeCategoryId;
-    private String productSizeCategoryName;
-    private String productSizeCategoryNameKor;
-    private int productOrderCount;
+    private int productPrice;
+    private String productImageUrl;
+    private int productCategoryId;
+    private String productCategoryNameKor;
+    private int productAnimalCategoryId;
+    private String productAnimalCategoryNameKor;
+    private String productBoardContent;
     private int userId;
-    private String username;
-    private String productOrderAddress;
-    private String productDetailOrderAddress;
+    private String userName;
+    private String userNickname;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }

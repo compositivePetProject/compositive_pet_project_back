@@ -1,6 +1,8 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 public class ProductOrder {
     private int productOrderId;
     private int userId;
+    private int productId;
     private String productOrderAddress;
     private String productOrderDetailAddress;
     private int productSizeCategoryId;
@@ -22,14 +25,41 @@ public class ProductOrder {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private User user;
+    private Product product;
+    private ProductSizeCategory productSizeCategory;
+
     public GetProductOrdersResponseDto toGetProductOrdersResponseDto() {
         return GetProductOrdersResponseDto.builder()
                 .productOrderId(productOrderId)
+                .productId(productId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
+                .productOrderCount(productOrderCount)
                 .userId(userId)
+                .username(user.getName())
                 .productOrderAddress(productOrderAddress)
                 .productDetailOrderAddress(productOrderDetailAddress)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductOrderResponseDto toGetProductOrderResponseDto() {
+        return GetProductOrderResponseDto.builder()
+                .productOrderId(productOrderId)
+                .productId(productId)
+                .productNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productOrderCount(productOrderCount)
+                .userId(userId)
+                .username(user.getName())
+                .productOrderAddress(productOrderAddress)
+                .productDetailOrderAddress(productOrderDetailAddress)
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();

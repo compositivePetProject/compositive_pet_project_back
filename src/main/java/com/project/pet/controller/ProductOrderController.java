@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
 import com.project.pet.service.ProductOrderService;
@@ -24,18 +25,24 @@ public class ProductOrderController {
 
     // 사용자 상품 주문 조회(다건)
     @GetMapping("/product/orders")
-    public ResponseEntity<?> getProductOrders() {
-        return ResponseEntity.ok(productOrderService.getProductOrders());
+    public ResponseEntity<?> getProductOrders(@RequestBody GetProductOrdersRequestDto getProductOrdersRequestDto) {
+        return ResponseEntity.ok(productOrderService.getProductOrders(getProductOrdersRequestDto));
     }
 
-    // 사용자 상품 주문 삭제(단건)
+    // 사용자 상품 주문 조회(단건)
+    @GetMapping("/product/order/{productOrderId}")
+    public ResponseEntity<?> getProductOrder(@PathVariable int productOrderId) {
+        return ResponseEntity.ok(productOrderService.getProductOrder(productOrderId));
+    }
+
+    // 사용자 상품 주문 삭제(단건) - 주문 취소
     @DeleteMapping("/product/order/{productOrderId}")
     public ResponseEntity<?> deleteProductOrder(@PathVariable int productOrderId) {
         productOrderService.deleteProductOrder(productOrderId);
         return ResponseEntity.ok(true);
     }
 
-    // 사용자 상품 주분 삭제(다건)
+    // 사용자 상품 주문 삭제(다건) - 주문 취소
     @DeleteMapping("/product/orders")
     public ResponseEntity<?> deleteProductOrders(@RequestBody List<Integer> productOrderIds) {
         productOrderService.deleteProductOrders(productOrderIds);
