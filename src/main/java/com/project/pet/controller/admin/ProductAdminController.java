@@ -105,6 +105,12 @@ public class ProductAdminController {
         return ResponseEntity.ok(productAdminService.getProductStocksAdmin());
     }
 
+    // 관리자 상품 재고 테이블 조회(단건)
+    @GetMapping("admin/stock/{productStockId}")
+    public ResponseEntity<?> getProductStockAdmin(@PathVariable int productStockId) {
+        return ResponseEntity.ok(productAdminService.getProductStockAdmin(productStockId));
+    }
+
     // 관리자 상품 재고 테이블 삭제(단건)
     @DeleteMapping("admin/stock/{productStockId}")
     public ResponseEntity<?> deleteProductStockAdmin(@PathVariable int productStockId) {

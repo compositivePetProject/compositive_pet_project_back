@@ -84,6 +84,11 @@ public class ProductAdminService {
         return list.stream().map(ProductStock::toGetProductStocksResponseDto).collect(Collectors.toList());
     }
 
+    public GetProductStockAdminResponseDto getProductStockAdmin(int productStockId) {
+        ProductStock productStock = productAdminMapper.getProductStockAdmin(productStockId);
+        return productStock.toGetProductStockAdminResponseDto();
+    }
+
     public void deleteProductStockAdmin(int productStockId) {
         productAdminMapper.deleteProductStockAdmin(productStockId);
     };

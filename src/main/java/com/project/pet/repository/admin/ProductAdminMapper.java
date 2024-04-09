@@ -36,6 +36,8 @@ public interface ProductAdminMapper {
 
     public List<ProductStock> getProductStocksAdmin();
 
+    public ProductStock getProductStockAdmin(int productStockId);
+
     public int deleteProductStockAdmin(int productStockId);
 
     public int deleteProductStocksAdmin(List<Integer> productStockIds);
