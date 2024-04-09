@@ -7,12 +7,12 @@ import lombok.Data;
 @Data
 public class CommunityBoardCommentRequestDto {
 
-    private int userId;
+
     private int communityBoardId;
     private String communityBoardCommentContent;
 
 
-    public CommunityBoardComment toEntity() {
+    public CommunityBoardComment toEntity(int userId) {
 
         return  CommunityBoardComment.builder()
                 .communityBoardId(communityBoardId)

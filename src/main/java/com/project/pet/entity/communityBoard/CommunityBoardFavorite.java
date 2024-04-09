@@ -1,6 +1,7 @@
 package com.project.pet.entity.communityBoard;
 
 
+import com.project.pet.dto.communityboard.response.GetCommunityBoardFavoriteResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,14 @@ public class CommunityBoardFavorite {
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto() {
+
+        return  GetCommunityBoardFavoriteResponseDto.builder()
+                .communityBoardFavoriteId(communityFavoriteId)
+                .communityBoardId(communityBoardId)
+                .userId(userId)
+                .build();
+    }
 
 }

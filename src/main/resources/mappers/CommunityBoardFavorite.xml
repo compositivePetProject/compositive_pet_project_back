@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.pet.repository.CommunityBoardFavoriteMapper">
+
+
+    <insert id="postCommunityBoardFavorite"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardFavorite"
+    >
+        insert into
+            community_board_favorite_tb
+        values
+            (0, #{communityBoardId}, #{userId}, now(), now());
+    </insert>
+
+
+
+</mapper>
+
+
