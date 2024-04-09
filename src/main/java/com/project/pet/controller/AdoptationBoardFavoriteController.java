@@ -26,4 +26,6 @@ public class AdoptationBoardFavoriteController {
         adoptationBoardFavoriteService.saveAdoptationBoardFavorite(postAdoptationBoardFavoriteReqDto);
         return ResponseEntity.created(null).body(true);
     }
+
+
 }
