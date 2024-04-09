@@ -28,6 +28,8 @@
         <result property="productIncomingStockCount" column="product_incoming_stock_count" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
+        <association property="product" resultMap="ProductResultMap" />
+        <association property="productSizeCategory" resultMap="ProductSizeCategoryResultMap" />
     </resultMap>
 
     <resultMap id="ProductStockResultMap" type="com.project.pet.entity.product.ProductStock">
@@ -187,7 +189,39 @@
     </insert>
 
     <select id="getProductIncomingStocks" resultMap="ProductIncomingStockResultMap">
-        select * from product_incoming_stock_tb
+        select
+            pist.product_incoming_stock_id,
+            pist.product_id,
+            pt.product_name_kor,
+            pist.product_size_category_id,
+            psct.product_size_category_name,
+            psct.product_size_category_name_kor,
+            pist.product_incoming_stock_count,
+            pist.create_date,
+            pist.update_date
+        from
+            product_incoming_stock_tb pist
+            left outer join product_tb pt on(pt.product_id = pist.product_id)
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = pist.product_size_category_id)
+    </select>
+
+    <select id="getProductIncomingStock" parameterType="Integer" resultMap="ProductIncomingStockResultMap">
+        select
+            pist.product_incoming_stock_id,
+            pist.product_id,
+            pt.product_name_kor,
+            pist.product_size_category_id,
+            psct.product_size_category_name,
+            psct.product_size_category_name_kor,
+            pist.product_incoming_stock_count,
+            pist.create_date,
+            pist.update_date
+        from
+            product_incoming_stock_tb pist
+            left outer join product_tb pt on(pt.product_id = pist.product_id)
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = pist.product_size_category_id)
+        where
+            product_incoming_stock_id = #{productIncomingStockId}
     </select>
 
     <delete id="deleteProductIncomingStock" parameterType="Integer">

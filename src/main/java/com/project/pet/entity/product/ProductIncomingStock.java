@@ -1,5 +1,6 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductIncomingStockResponseDto;
 import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,14 +22,34 @@ public class ProductIncomingStock {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private Product product;
+    private ProductSizeCategory productSizeCategory;
+
     public GetProductIncomingStocksResponseDto toGetProductIncomingStocksResponseDto() {
         return GetProductIncomingStocksResponseDto.builder()
                 .productIncomingStockId(productIncomingStockId)
                 .productId(productId)
+                .productNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productIncomingStockCount(productIncomingStockCount)
                 .createDate(createDate)
-                .updateDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductIncomingStockResponseDto toGetProductIncomingStockResponseDto() {
+        return GetProductIncomingStockResponseDto.builder()
+                .productIncomingStockId(productIncomingStockId)
+                .productId(productId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
+                .productIncomingStockCount(productIncomingStockCount)
+                .createDate(createDate)
+                .updateDate(updateDate)
                 .build();
     }
 

@@ -60,6 +60,11 @@ public class ProductAdminService {
         return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksResponseDto).collect(Collectors.toList());
     }
 
+    public GetProductIncomingStockResponseDto getProductIncomingStock(int productIncomingStockId) {
+        ProductIncomingStock productIncomingStock = productAdminMapper.getProductIncomingStock(productIncomingStockId);
+        return productIncomingStock.toGetProductIncomingStockResponseDto();
+    }
+
 
     public void deleteProductIncomingStock(int productIncomingStockId) {
         productAdminMapper.deleteProductIncomingStock(productIncomingStockId);

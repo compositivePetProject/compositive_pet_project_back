@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GetProductIncomingStocksResponseDto {
-
+public class GetProductIncomingStockResponseDto {
     private int productIncomingStockId;
     private int productId;
     private String productNameKor;
@@ -22,5 +21,4 @@ public class GetProductIncomingStocksResponseDto {
     private int productIncomingStockCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-
 }
