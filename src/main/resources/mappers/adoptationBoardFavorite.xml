@@ -24,8 +24,7 @@
         from
             adoptation_board_favorite_tb
         where
-        adoptation_board_id = #{boardId}
-        and user_id = #{userId}
+            user_id = #{userId}
     </delete>
 
 </mapper>
