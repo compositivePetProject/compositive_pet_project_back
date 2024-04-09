@@ -20,14 +20,8 @@ public class CommunityBoardFavorite {
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private int totalUserIdCount;
 
-    public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto() {
 
-        return  GetCommunityBoardFavoriteResponseDto.builder()
-                .communityBoardFavoriteId(communityFavoriteId)
-                .communityBoardId(communityBoardId)
-                .userId(userId)
-                .build();
-    }
 
 }

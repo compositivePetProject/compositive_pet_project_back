@@ -2,6 +2,7 @@ package com.project.pet.service;
 
 import com.project.pet.dto.communityboard.request.CommunityBoardFavoriteRequestDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardFavoriteResponseDto;
+import com.project.pet.entity.communityBoard.CommunityBoard;
 import com.project.pet.entity.communityBoard.CommunityBoardFavorite;
 import com.project.pet.entity.user.PrincipalUser;
 import com.project.pet.repository.CommunityBoardFavoriteMapper;
@@ -25,24 +26,19 @@ public class CommunityBoardFavoriteService {
         return principalUser;
     }
 
-    // 게시물 좋아요 등록(Post)
+    // 게시물
+    public GetCommunityBoardFavoriteResponseDto getCommunityBoardFavoritesCountByBoardId(int CommunityFavoriteId) {
+        return communityBoardFavoriteMapper.getCommunityBoardFavoritesCount(CommunityFavoriteId).toGetCommunityBoardFavoriteResponseDto();
+    }
+
+    // 게시물 좋아요 증가 등록(Post)
     public void postCommunityBoardFavoriteByBoardId (CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
         communityBoardFavoriteMapper.postCommunityBoardFavorite(communityBoardFavoriteRequestDto.toEntity(getPrincipalUser().getUserId()));
     }
 
-    // 좋아요 한 게시물 다건 조회 (Get)
-    public List <GetCommunityBoardFavoriteResponseDto> getCommunityBoardFavoritesByBoardId() {
-        List <CommunityBoardFavorite> communityBoardFavorites = communityBoardFavoriteMapper.getCommunityBoardFavorites();
-        return communityBoardFavorites.stream().map(CommunityBoardFavorite::toGetCommunityBoardFavoriteResponseDto).collect(Collectors.toList());
-    }
-
-    public GetCommunityBoardFavoriteResponseDto getCommunityBoardFavoriteByBoardId(int CommunityFavoriteId ) {
-        CommunityBoardFavorite communityBoardFavorite = communityBoardFavoriteMapper.getCommunityBoardFavorite(CommunityFavoriteId);
-        return communityBoardFavorite.toGetCommunityBoardFavoriteResponseDto();
-    }
-    // 게시물 좋아요 취소(Delete)
-    public void deleteCommunityBoardFavoriteByBoardId(int CommunityFavoriteId) {
-        communityBoardFavoriteMapper.deleteCommunityBoardFavorite(CommunityFavoriteId);
+    // 게시물 좋아요 감소 (Delete)
+    public void deleteCommunityBoardFavoriteByBoardId(int CommunityBoardFavoriteId) {
+        communityBoardFavoriteMapper.deleteCommunityBoardFavorite(CommunityBoardFavoriteId);
     }
 
 }

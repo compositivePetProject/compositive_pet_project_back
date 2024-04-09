@@ -1,5 +1,6 @@
 package com.project.pet.entity.communityBoard;
 
+import com.project.pet.dto.communityboard.response.GetCommunityBoardFavoriteResponseDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
 import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
@@ -23,15 +24,16 @@ public class CommunityBoard {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    public User user;
+    private CommunityBoardFavorite communityBoardFavorite;
+
     public CommunityBoardAnimalCategory communityBoardAnimalCategory;
 
- public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
+
+    public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
 
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
-             .userId(user.getUserId())
-             .username(user.getUsername())
+             .userId(userId)
              .communityBoardTitle(communityBoardTitle)
              .communityBoardContent(communityBoardContent)
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
@@ -40,6 +42,19 @@ public class CommunityBoard {
              .createDate(createDate)
              .updateDate(updateDate)
              .build();
+    }
+
+    public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto() {
+        return GetCommunityBoardFavoriteResponseDto.builder()
+                .communityBoardId(communityBoardId)
+                .userId(userId)
+                .communityBoardTitle(communityBoardTitle)
+                .communityBoardContent(communityBoardContent)
+                .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
+                .totalUserIdCount(communityBoardFavorite.getTotalUserIdCount())
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
     }
 
 }

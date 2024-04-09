@@ -13,6 +13,7 @@ public class ProductFavoriteController {
     @Autowired
     private ProductFavoriteService productFavoriteService;
 
+
     @GetMapping("/favorites/count/{productId}")
     public ResponseEntity<?> getProductFavoritesCount (@PathVariable int productId) {
         return ResponseEntity.ok(productFavoriteService.getProductFavoritesCount(productId));
