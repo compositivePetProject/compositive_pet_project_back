@@ -1,6 +1,8 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductResponseDto;
 import com.project.pet.dto.product.response.GetProductsAdminResponseDto;
+import com.project.pet.dto.product.response.GetProductsResponseDto;
 import com.project.pet.dto.product.response.ProductFavoriteResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +29,8 @@ public class Product {
     private LocalDateTime updateDate;
 
     private ProductFavorite productFavorite;
+    private ProductCategory productCategory;
+    private ProductAnimalCategory productAnimalCategory;
 
     public GetProductsAdminResponseDto toGetProductsAdminResponseDto() {
         return GetProductsAdminResponseDto.builder()
@@ -56,6 +60,34 @@ public class Product {
                 .totalUserIdCount(productFavorite.getTotalUserIdCount())
                 .createDate(createDate)
                 .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductResponseDto toGetProductResponseDto() {
+        return GetProductResponseDto.builder()
+                .productId(productId)
+                .productNameKor(productNameKor)
+                .productPrice(productPrice)
+                .productImageUrl(productImageUrl)
+                .productCategoryId(productCategoryId)
+                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
+                .productAnimalCategoryId(productCategoryId)
+                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
+                .productBoardContent(productBoardContent)
+                .build();
+    }
+
+    public GetProductsResponseDto toGetProductsResponseDto() {
+        return GetProductsResponseDto.builder()
+                .productId(productId)
+                .productNameKor(productNameKor)
+                .productPrice(productPrice)
+                .productImageUrl(productImageUrl)
+                .productCategoryId(productCategoryId)
+                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
+                .productAnimalCategoryId(productCategoryId)
+                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
+                .productBoardContent(productBoardContent)
                 .build();
     }
 

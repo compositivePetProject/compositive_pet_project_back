@@ -1,6 +1,7 @@
 package com.project.pet.dto.product.request;
 
 import com.project.pet.entity.product.ProductOrder;
+import com.project.pet.entity.product.ProductOrderDetail;
 import lombok.Data;
 
 import java.time.LocalDateTime;

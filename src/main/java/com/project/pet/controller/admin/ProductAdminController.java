@@ -17,7 +17,7 @@ public class ProductAdminController {
 
     // [애완용품 쇼핑몰 상품]
     // 관리자 상품 등록(단건)
-    @PostMapping("/admin")
+    @PostMapping("/admin/product")
     public ResponseEntity<?> postProductAdmin(@RequestBody PostProductAdminRequestDto postProductAdminRequestDto) {
         productAdminService.postProductAdmin(postProductAdminRequestDto);
         return ResponseEntity.created(null).body(true);
@@ -154,5 +154,8 @@ public class ProductAdminController {
         productAdminService.putProductOutgoingStockAdmin(productOutgoingStockId, putProductOutgoingStockAdminRequestDto);
         return ResponseEntity.ok(true);
     }
+
+    // [사용자 애완용품 주문 현황]
+    // 관리자 애완용품 주문 현황 조회(다건)
 
 }

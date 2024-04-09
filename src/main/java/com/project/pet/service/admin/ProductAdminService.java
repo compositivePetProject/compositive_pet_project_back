@@ -24,7 +24,10 @@ public class ProductAdminService {
     ProductAdminMapper productAdminMapper;
 
     public void postProductAdmin(PostProductAdminRequestDto postProductAdminRequestDto) {
-        int success = productAdminMapper.postProductAdmin(postProductAdminRequestDto.toEntity());
+        Product product = postProductAdminRequestDto.toEntity();
+        productAdminMapper.postProductAdmin(product);
+        int productId = product.getProductId();
+        productAdminMapper.postProductStockAdmin(ProductStock.builder().productId(productId).build());
     }
 
     public List<GetProductsAdminResponseDto> getProductsAdmin() {

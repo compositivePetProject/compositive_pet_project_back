@@ -15,7 +15,7 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
-    <insert id="postProductOrder" parameterType="com.project.pet.entity.product.ProductOrder">
+    <insert id="postProductOrder" parameterType="com.project.pet.entity.product.ProductOrder" useGeneratedKeys="true" keyProperty="productOrderId">
         insert into
             product_order_tb
         values(0, #{userId}, #{productId}, #{productOrderAddress}, #{productOrderDetailAddress}, #{productSizeCategoryId}, #{productOrderCount}, now(), now())

@@ -142,13 +142,14 @@
 
     <insert id="postProductStockAdmin"
             parameterType="com.project.pet.entity.product.ProductStock"
-            keyProperty="productStockId"
-            useGeneratedKeys="true"
     >
         insert into
             product_stock_tb
         values
-            (0, #{productId}, #{productSizeCategoryId}, #{productStockCount}, now(), now())
+            (0, #{productId}, 1, 0, now(), now()),
+            (0, #{productId}, 2, 0, now(), now()),
+            (0, #{productId}, 3, 0, now(), now()),
+            (0, #{productId}, 4, 0, now(), now())
     </insert>
 
     <select id="getProductStocksAdmin" resultMap="ProductStockResultMap">

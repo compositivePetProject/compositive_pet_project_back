@@ -17,8 +17,6 @@ public class PostProductAdminRequestDto {
     private int productCategoryId;
     private int productAnimalCategoryId;
     private String productBoardContent;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
     public Product toEntity() {
         return Product.builder()
