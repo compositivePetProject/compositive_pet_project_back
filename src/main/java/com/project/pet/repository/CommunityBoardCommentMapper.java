@@ -15,13 +15,13 @@ public interface CommunityBoardCommentMapper {
     public List <CommunityBoardComment> getCommunityBoardComments();
 
     // 커뮤니티 게시판 단건 조회(Get)
-    public CommunityBoardComment getCommunityBoardComment(int CommunityCommentId);
+    public CommunityBoardComment getCommunityBoardComment(int CommunityBoardCommentId);
 
     // 커뮤니티 게시판 단건 삭제(Delete)
-    public int deleteCommunityBoardComment(int CommunityCommentId);
+    public int deleteCommunityBoardComment(int CommunityBoardCommentId);
 
     // 커뮤니티 게시판 다건 삭제(Delete)
-    public int deleteCommunityBoardComments(List<Integer> CommunityCommentIds);
+    public int deleteCommunityBoardComments(List<Integer> CommunityBoardCommentIds);
 
     // 커뮤니티 게시판 단건 수정(Put)
     public int updateCommunityBoardComment(CommunityBoardComment communityBoardComment);

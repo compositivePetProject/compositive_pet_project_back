@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.pet.repository.CommunityBoardFavoriteMapper">
+
+<resultMap id="CommunityBoardFavoriteResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardFavorite">
+    <id property="communityFavoriteId" column="community_favorite_id" />
+    <result property="communityBoardId" column="community_board_id" />
+    <result property="userId" column="user_id" />
+    <result property="createDate" column="create_date" />
+    <result property="updateDate" column="update_date" />
+    <result property="totalUserIdCount" column="total_user_id_count"/>
+</resultMap>
+
+    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
+        <id property="communityBoardId" column="community_board_id"/>
+        <result property="userId" column="user_id" />
+        <result property="communityBoardTitle" column="community_board_title" />
+        <result property="communityBoardContent" column="community_board_content" />
+        <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <association property="communityBoardFavorite" resultMap="CommunityBoardFavoriteResultMap"/>
+
+    </resultMap>
+
+    <insert id="postCommunityBoardFavorite"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardFavorite"
+    >
+        insert into
+            community_board_favorite_tb
+        values
+            (0, #{communityBoardId}, #{userId}, now(), now());
+    </insert>
+
+
+    <select id="getCommunityBoardFavoritesCount"
+            parameterType="integer"
+            resultMap="CommunityBoardResultMap"
+     >
+        select
+            cbt.community_board_id,
+            cbt.user_id,
+            cbt.community_board_title,
+            cbt.community_board_content,
+            cbt.community_board_animal_category_id,
+            cbt.create_date,
+            cbt.update_date,
+            COUNT(cbft.user_id) AS total_user_id_count
+        from
+            community_board_tb cbt
+            LEFT OUTER JOIN community_board_favorite_tb cbft on(cbft.community_board_id = cbt.community_board_id)
+        where
+            cbt.community_board_id = #{communityBoardId}
+    </select>
+
+    <delete id="deleteCommunityBoardFavorite"
+                parameterType="integer">
+        delete
+        from
+            community_board_favorite_tb
+        where
+            community_favorite_id = #{communityFavoriteId}
+    </delete>
+</mapper>
+
+

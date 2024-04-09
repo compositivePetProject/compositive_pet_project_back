@@ -13,7 +13,7 @@ import java.util.List;
 public class ProductAdminController {
 
     @Autowired
-    ProductAdminService productAdminService;
+    private ProductAdminService productAdminService;
 
     // [애완용품 쇼핑몰 상품]
     // 관리자 상품 등록(단건)

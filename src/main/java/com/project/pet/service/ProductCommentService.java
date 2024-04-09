@@ -19,6 +19,12 @@ public class ProductCommentService {
     @Autowired
     private ProductCommentMapper productCommentMapper;
 
+    private PrincipalUser getPrincipalUser () {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
+        return principalUser;
+    }
+
     public void saveProductComment(PostProductCommentRequestDto postProductCommentRequestDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();

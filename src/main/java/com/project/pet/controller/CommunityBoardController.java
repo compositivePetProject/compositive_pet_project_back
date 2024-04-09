@@ -16,7 +16,7 @@ public class CommunityBoardController {
     @Autowired
     private CommunityBoardService communityBoardService;
 
-    //커뮤니티 게시판 작성(Post)
+    //커뮤니티 게시판 작성(Post) - 게시물 작성페이지에서 사용
     @PostMapping("/board")
     public ResponseEntity<?> postCommunityBoard(@RequestBody PostCommunityBoardRequestDto postCommunityBoardRequestDto) {
         communityBoardService.PostCommunityBoardRequestDto(postCommunityBoardRequestDto);

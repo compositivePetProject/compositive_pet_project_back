@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class CommunityBoardAdminController {
 
-    @Autowired CommunityBoardAdminService communityBoardAdminService;
+    private @Autowired CommunityBoardAdminService communityBoardAdminService;
 
     // 커뮤니티 게시판 관리자 게시물 추가
     @PostMapping("/admin")
