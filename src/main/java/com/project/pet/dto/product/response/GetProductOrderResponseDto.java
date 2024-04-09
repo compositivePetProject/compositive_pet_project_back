@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class GetProductOrdersResponseDto {
+public class GetProductOrderResponseDto {
     private int productOrderId;
     private int productId;
     private String productNameKor;

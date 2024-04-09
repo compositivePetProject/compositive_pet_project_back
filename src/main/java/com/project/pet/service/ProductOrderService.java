@@ -1,8 +1,11 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
+import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
+import com.project.pet.dto.product.response.GetProductResponseDto;
 import com.project.pet.entity.product.ProductOrder;
 import com.project.pet.entity.product.ProductOrderDetail;
 import com.project.pet.repository.ProductOrderDetailMapper;
@@ -38,18 +41,25 @@ public class ProductOrderService {
         );
     }
 
-    public List<GetProductOrdersResponseDto> getProductOrders() {
-        List<ProductOrder> list = productOrderMapper.getProductOrders();
+    public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
+        int userId = getProductOrdersRequestDto.getUserId();
+        List<ProductOrder> list = productOrderMapper.getProductOrders(userId);
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
+    }
+
+    public GetProductOrderResponseDto getProductOrder(int productOrderId) {
+        return productOrderMapper.getProductOrder(productOrderId).toGetProductOrderResponseDto();
     }
 
     public void deleteProductOrder(int productOrderId) {
         productOrderMapper.deleteProductOrder(productOrderId);
+        productOrderDetailMapper.deleteProductOrder(productOrderId);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void deleteProductOrders(List<Integer> productOrderIds) {
         productOrderMapper.deleteProductOrders(productOrderIds);
+        productOrderDetailMapper.deleteProductOrders(productOrderIds);
     }
 
     public void putProductOrder(int productOrderId, PutProductOrderRequestDto putProductOrderRequestDto) {

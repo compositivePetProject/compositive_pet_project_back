@@ -8,12 +8,13 @@ import java.time.LocalDateTime;
 
 @Data
 public class PostProductOrderRequestDto {
+
     private int userId;
     private int productId;
-    private String productOrderAddress;
-    private String productOrderDetailAddress;
     private int productSizeCategoryId;
     private int productOrderCount;
+    private String productOrderAddress;
+    private String productOrderDetailAddress;
 
     public ProductOrder toEntity() {
         return ProductOrder.builder()
@@ -25,4 +26,5 @@ public class PostProductOrderRequestDto {
                 .productOrderCount(productOrderCount)
                 .build();
     }
+
 }

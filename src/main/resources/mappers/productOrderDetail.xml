@@ -9,4 +9,24 @@
         values(0, #{productOrderId}, #{productId}, now(), now())
     </insert>
 
+    <update id="deleteProductOrder" parameterType="Integer">
+        delete
+        from
+            product_order_detail_tb
+        where
+            product_order_id = #{productOrderId}
+    </update>
+
+    <delete id="deleteProductOrders" parameterType="Integer">
+        delete
+        from
+            product_order_detail_tb
+        where
+            product_order_id in (
+                <foreach collection="productOrderIds" item="productOrderId" separator=",">
+                    #{productOrderId}
+                </foreach>
+            )
+    </delete>
+
 </mapper>

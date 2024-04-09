@@ -9,7 +9,9 @@ import java.util.List;
 public interface ProductOrderMapper {
     public int postProductOrder(ProductOrder productOrder);
 
-    public List<ProductOrder> getProductOrders();
+    public List<ProductOrder> getProductOrders(int userId);
+
+    public ProductOrder getProductOrder(int productOrderId);
 
     public int deleteProductOrder(int productOrderId);
 
