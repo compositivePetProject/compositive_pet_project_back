@@ -3,6 +3,7 @@ package com.project.pet.service;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
+import com.project.pet.dto.adoptation.response.GetLikedAdoptationBoardByUserIdRespDto;
 import com.project.pet.entity.adoptationBoard.AdoptationBoard;
 import com.project.pet.repository.AdoptationBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class AdoptationBoardService {
     public List<GetAdoptationBoardRespDto> getAdoptationBoards() {
         List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoards();
         return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
+    }
+
+    public List<GetLikedAdoptationBoardByUserIdRespDto> getLikedAdoptationBoards(int userId) {
+        List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getLikedAdoptationBoardByUserId(userId);
+        return adoptationBoards.stream().map(AdoptationBoard::toGetLikedAdoptationBoardByUserIdRespDto).collect(Collectors.toList());
     }
 
     //id를 사용하여 해당 게시판 조회(단건)

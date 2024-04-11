@@ -37,6 +37,12 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardByBoardId(boardId));
     }
 
+    //좋아요를 한 게시물 조회 기능 추가
+    @GetMapping("/board/favorite/{userId}")
+    public ResponseEntity<?> getLikedAdoptationBoard(@PathVariable int userId) {
+        return ResponseEntity.ok(adoptationBoardService.getLikedAdoptationBoards(userId));
+    }
+
     //boardId로 해당 게시글 삭제(단건)
     @DeleteMapping("/board/{boardId}")
     public ResponseEntity<?> deleteAdoptationBoardByBoardId(@PathVariable int boardId) {
