@@ -15,6 +15,8 @@ public interface AdoptationBoardMapper {
     //전체 게시글 조회
     public List<AdoptationBoard> getAdoptationBoards();
 
+    public List<AdoptationBoard> getAdoptationBoardsDog();
+
     //해당 유저id가 좋아요를 누른 게시글 리스트 조회
     public List<AdoptationBoard> getLikedAdoptationBoardByUserId(int userId);
 
