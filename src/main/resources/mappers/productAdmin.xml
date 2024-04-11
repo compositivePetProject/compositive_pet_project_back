@@ -43,13 +43,33 @@
         <association property="product" resultMap="ProductResultMap" />
     </resultMap>
 
+    <resultMap id="ProductOrderResultMap" type="com.project.pet.entity.product.ProductOrder">
+        <id property="productOrderId" column="product_order_id" />
+        <result property="userId" column="user_id" />
+        <result property="productId" column="product_id" />
+        <result property="productOrderAddress" column="product_order_address" />
+        <result property="productOrderDetailAddress" column="product_order_detail_address" />
+        <result property="productSizeCategoryId" column="product_size_category_id" />
+        <result property="productOrderCount" column="product_order_count" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <association property="product" resultMap="ProductResultMap" />
+        <association property="productSizeCategory" resultMap="ProductSizeCategoryResultMap" />
+        <association property="user" resultMap="UserResultMap" />
+    </resultMap>
+
+
     <resultMap id="ProductOutgoingStockResultMap" type="com.project.pet.entity.product.ProductOutgoingStock">
         <id property="productOutgoingStockId" column="product_outgoing_stock_id"/>
+        <result property="productOrderId" column="product_order_id"/>
         <result property="productId" column="product_id"/>
         <result property="productSizeCategoryId" column="product_size_category_id"/>
         <result property="productOutgoingStockCount" column="product_outgoing_stock_count"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
+        <association property="product" resultMap="ProductResultMap" />
+        <association property="productOrder" resultMap="ProductOrderResultMap" />
+        <association property="productSizeCategory" resultMap="ProductSizeCategoryResultMap" />
     </resultMap>
 
     <resultMap id="ProductCategoryResultMap" type="com.project.pet.entity.product.ProductCategory">
@@ -342,9 +362,21 @@
     </insert>
     <select id="getProductOutgoingStocksAdmin" resultMap="ProductOutgoingStockResultMap">
         select
-            *
+            post.product_outgoing_stock_id,
+            post.product_order_id,
+            post.product_id,
+            pt.product_name_kor,
+            post.product_size_category_id,
+            psct.product_size_category_name,
+            psct.product_size_category_name_kor,
+            post.product_outgoing_stock_count,
+            post.create_date,
+            post.update_date
         from
-            product_outgoing_stock_tb
+            product_outgoing_stock_tb post
+            left outer join product_order_tb pot on(pot.product_order_id = post.product_order_id)
+            left outer join product_tb pt on(pt.product_id = post.product_id)
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = post.product_size_category_id);
     </select>
     <delete id="deleteProductOutgoingStockAdmin" parameterType="Integer">
         delete

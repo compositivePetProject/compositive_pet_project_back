@@ -21,11 +21,19 @@ public class ProductOutgoingStock {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private ProductOrder productOrder;
+    private Product product;
+    private ProductSizeCategory productSizeCategory;
+
     public GetProductOutgoingStocksAdminResponseDto toGetProductOutgoingStocksAdminResponseDto() {
         return GetProductOutgoingStocksAdminResponseDto.builder()
                 .productOutgoingStockId(productOutgoingStockId)
+                .productOrderId(productOrderId)
                 .productId(productId)
+                .productNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productOutgoingStockCount(productOutgoingStockCount)
                 .createDate(createDate)
                 .updateDate(updateDate)
