@@ -31,11 +31,20 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards());
     }
 
+
+    //// categoryId가 1인 전체 게시판 조회(다건)
+    @GetMapping("/board/dog")
+    public ResponseEntity<?> getAdoptationBoardsDog() {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardsDog());
+    }
+
     //boardId로 해당 게시판 조회(단건)
     @GetMapping("/board/{boardId}")
     public ResponseEntity<?> getAdoptationBoard(@PathVariable int boardId) {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardByBoardId(boardId));
     }
+
+
 
     //좋아요를 한 게시물 조회 기능 추가
     @GetMapping("/board/favorite/{userId}")

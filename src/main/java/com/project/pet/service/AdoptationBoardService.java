@@ -29,9 +29,15 @@ public class AdoptationBoardService {
         return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 
+    //해당 userId로 좋아요 한 게시물 조회
     public List<GetLikedAdoptationBoardByUserIdRespDto> getLikedAdoptationBoards(int userId) {
         List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getLikedAdoptationBoardByUserId(userId);
         return adoptationBoards.stream().map(AdoptationBoard::toGetLikedAdoptationBoardByUserIdRespDto).collect(Collectors.toList());
+    }
+
+    public List<GetAdoptationBoardRespDto> getAdoptationBoardsDog() {
+        List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardsDog();
+        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 
     //id를 사용하여 해당 게시판 조회(단건)
