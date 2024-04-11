@@ -49,5 +49,4 @@ public class AccountController {
         accountService.updateProfileImageUrl(accountEditProfileImageUrlRequestDto);
         return ResponseEntity.ok(true);
     }
-
 }
