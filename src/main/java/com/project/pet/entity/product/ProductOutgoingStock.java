@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Data
 public class ProductOutgoingStock {
     private int productOutgoingStockId;
+    private int productOrderId;
     private int productId;
     private int productSizeCategoryId;
     private int productOutgoingStockCount;

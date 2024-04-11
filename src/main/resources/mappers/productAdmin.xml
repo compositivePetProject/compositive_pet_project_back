@@ -338,7 +338,7 @@
         insert into
             product_outgoing_stock_tb
         values
-            (0, #{productId}, #{productSizeCategoryId}, #{productOutgoingStockCount}, now(), now())
+            (0, #{productOrderId}, #{productId}, #{productSizeCategoryId}, #{productOutgoingStockCount}, now(), now())
     </insert>
     <select id="getProductOutgoingStocksAdmin" resultMap="ProductOutgoingStockResultMap">
         select
@@ -351,16 +351,16 @@
         from
             product_outgoing_stock_tb
         where
-            product_outgoing_stock_id = #{productOutgoingStockId}
+            product_order_id = #{productOrderId}
     </delete>
     <delete id="deleteProductOutgoingStocksAdmin" parameterType="List">
         delete
         from
             product_outgoing_stock_tb
         where
-            product_outgoing_stock_id in (
-                <foreach collection="productOutgoingStockIds" item="productOutgoingStockId" separator=",">
-                    #{productOutgoingStockId}
+            product_order_id in (
+                <foreach collection="productOrderIds" item="productOrderId" separator=",">
+                    #{productOrderId}
                 </foreach>
             )
     </delete>
@@ -368,11 +368,10 @@
         update
             product_outgoing_stock_tb
         set
-            product_id = #{productId},
             product_size_category_id = #{productSizeCategoryId},
             product_outgoing_stock_count = #{productOutgoingStockCount},
             update_date = now()
         where
-            product_outgoing_stock_id = #{productOutgoingStockId}
+            product_order_id = #{productOrderId}
     </update>
 </mapper>

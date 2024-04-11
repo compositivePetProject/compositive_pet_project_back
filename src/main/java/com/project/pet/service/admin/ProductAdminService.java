@@ -2,10 +2,8 @@ package com.project.pet.service.admin;
 
 import com.project.pet.dto.product.request.*;
 import com.project.pet.dto.product.response.*;
-import com.project.pet.entity.product.Product;
-import com.project.pet.entity.product.ProductIncomingStock;
-import com.project.pet.entity.product.ProductOutgoingStock;
-import com.project.pet.entity.product.ProductStock;
+import com.project.pet.entity.product.*;
+import com.project.pet.repository.ProductOrderDetailMapper;
 import com.project.pet.repository.admin.ProductAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +17,9 @@ public class ProductAdminService {
 
     @Autowired
     ProductAdminMapper productAdminMapper;
+
+    @Autowired
+    ProductOrderDetailMapper productOrderDetailMapper;
 
     public void postProductAdmin(PostProductAdminRequestDto postProductAdminRequestDto) {
         Product product = postProductAdminRequestDto.toEntity();
@@ -128,6 +129,11 @@ public class ProductAdminService {
     public void putProductOutgoingStockAdmin(int productOutgoingStockId, PutProductOutgoingStockAdminRequestDto putProductOutgoingStockAdminRequestDto) {
         putProductOutgoingStockAdminRequestDto.setProductOutgoingStockId(productOutgoingStockId);
         productAdminMapper.putProductOutgoingStockAdmin(putProductOutgoingStockAdminRequestDto.toEntity());
+    }
+
+    public List<GetProductOrderDetailsAdminResponseDto> getProductOrderDetailsAdmin() {
+        List<ProductOrderDetail> list = productOrderDetailMapper.getProductOrderDetailsAdmin();
+        return list.stream().map(ProductOrderDetail::toGetProductOrderDetailsAdminResponseDto).collect(Collectors.toList());
     }
 
 }
