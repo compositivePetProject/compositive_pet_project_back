@@ -65,7 +65,7 @@ public class ValidAop {
                 }
             }
             if(userMapper.findUserByNickname(authNicknameCheckRequestDto.getNewNickname()) != null){
-                ObjectError objectError = new FieldError("nickname", "nickname", "이미 존재하는 닉네임입니다.");
+                ObjectError objectError = new FieldError("newNickname", "newNickname", "이미 존재하는 닉네임입니다.");
                 bindingResult.addError(objectError);
             }
         }

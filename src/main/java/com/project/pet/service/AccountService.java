@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
@@ -45,29 +46,17 @@ public class AccountService {
         userMapper.editPassword(user);
     }
 
-    public void editNickname(AccountEditNicknameRequestDto accountEditNicknameRequestDto) {
+    @Transactional(rollbackFor = Exception.class)
+    public void editNicknameAndProfileImageUrl(AccountEditNicknameRequestDto accountEditNicknameRequestDto) {
         User user = getCurrentUser();
 
-        if(!accountEditNicknameRequestDto.getOldNickname().equals(user.getNickname())) {
-            throw new ValidException(Map.of("oldNickname", "입력한 닉네임은 현재의 닉네임과 일치하지 않습니다. 이전 닉네임을 다시 확인해주세요."));
-        }
-
         if(userMapper.findUserByNickname(accountEditNicknameRequestDto.getNewNickname()) != null) {
-            throw new ValidException(Map.of("newNickname", "입력한 닉네임은 이미 다른 사용자에 의해 사용 중입니다. 다른 닉네임을 입력해주세요."));
+            throw new ValidException(Map.of("newNickname", "입력한 닉네임은 이미 다른 사용자에 의해 사용 중입니다. \n 다른 닉네임을 입력해주세요."));
         }
 
         user.setNickname(accountEditNicknameRequestDto.getNewNickname());
+        user.setProfileImageUrl(accountEditNicknameRequestDto.getNewProfileImageUrl());
         userMapper.editNickname(user);
-    }
-
-    public void updateProfileImageUrl(AccountEditProfileImageUrlRequestDto accountEditProfileImageUrlRequestDto) {
-        User user = getCurrentUser();
-
-        if(!accountEditProfileImageUrlRequestDto.getOldProfileImageUrl().equals(user.getProfileImageUrl())) {
-            throw new ValidException(Map.of("oldProfileImageUrl", "입력한 이전 프로필 이미지와 현재의 프로필 이미지는 일치합니다. 다른 이미지를 입력해주세요."));
-        }
-
-        user.setProfileImageUrl(accountEditProfileImageUrlRequestDto.getNewProfileImageUrl());
         userMapper.updateProfileImageUrl(user);
     }
 }

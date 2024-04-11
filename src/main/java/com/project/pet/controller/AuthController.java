@@ -50,7 +50,7 @@ public class AuthController {
     @ValidAspect
     @PostMapping("/nickname-check")
     public ResponseEntity<?> nicknameCheck(@Valid @RequestBody AuthNicknameCheckRequestDto authNicknameCheckRequestDto, BindingResult bindingResult) {
-        return ResponseEntity.created(null).body(Map.of("nickname","사용할 수 있는 닉네임입니다."));
+        return ResponseEntity.created(null).body(Map.of("newNickname","사용할 수 있는 닉네임입니다."));
     }
 
 }

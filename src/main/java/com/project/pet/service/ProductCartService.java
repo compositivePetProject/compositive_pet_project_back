@@ -33,7 +33,6 @@ public class ProductCartService {
 
     public List<GetProductCartResponseDto> getProductsCart () {
         List<ProductCart> productCarts = productCartMapper.getProductsCart(getPrincipalUser().getUserId());
-
         return productCarts.stream().map(ProductCart::toGetProductCartResponseDto).collect(Collectors.toList());
     }
 

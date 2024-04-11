@@ -25,15 +25,15 @@ public class CommunityBoard {
     private LocalDateTime updateDate;
 
     private CommunityBoardFavorite communityBoardFavorite;
-
-    public CommunityBoardAnimalCategory communityBoardAnimalCategory;
+    private User user;
+    private CommunityBoardAnimalCategory communityBoardAnimalCategory;
 
 
     public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
-
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
              .userId(userId)
+             .username(user.getUsername())
              .communityBoardTitle(communityBoardTitle)
              .communityBoardContent(communityBoardContent)
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
