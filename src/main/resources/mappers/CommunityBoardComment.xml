@@ -11,9 +11,24 @@
         <result property="communityBoardCommentContent" column="community_board_comment_content" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
+        <association property="user" resultMap="UserResultMap" />
     </resultMap>
 
-    <insert id="postCommunityBoardComment"
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
+        <id property="userId" column="user_id" />
+        <result property="username" column="user_username" />
+        <result property="password" column="user_password" />
+        <result property="name" column="user_name" />
+        <result property="address" column="user_address" />
+        <result property="telNumber" column="user_tel_number" />
+        <result property="nickname" column="user_nickname" />
+        <result property="email" column="user_email" />
+        <result property="profileImageUrl" column="user_profile_image_url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <insert id="saveCommunityBoardComment"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
     >
         insert into
@@ -24,17 +39,21 @@
     </insert>
 
     <select id="getCommunityBoardComments"
+            parameterType="integer"
             resultMap="CommunityBoardCommentResultMap"
     >
         select
-            community_board_comment_id,
-            community_board_id,
-            user_id,
-            community_board_comment_content,
-            create_date,
-            update_date
+            cbct.community_board_comment_id,
+            ut.user_username,
+            cbct.community_board_comment_content,
+            cbct.create_date,
+            cbct.update_date
         from
-            community_board_comment_tb
+            community_board_comment_tb cbct
+        left outer join
+            user_tb ut on (ut.user_id = cbct.user_id)
+        where
+            community_board_id = #{boardId};
 
     </select>
 
@@ -43,17 +62,17 @@
             resultMap="CommunityBoardCommentResultMap"
     >
         select
-            community_board_comment_id,
-            community_board_id,
-            user_id,
-            community_board_comment_content,
-            create_date,
-            update_date
+            cbct.community_board_id,
+            ut.user_username,
+            cbct.community_board_comment_content,
+            cbct.create_date,
+            cbct.update_date
         from
-            community_board_comment_tb
-
+            community_board_comment_tb cbct
+        left outer join
+            user_tb ut on (ut.user_id = cbct.user_id)
         where
-        community_board_comment_id = #{communityBoardCommentId}
+            community_board_comment_id = #{commentId};
     </select>
 
     <delete id="deleteCommunityBoardComment"
@@ -62,7 +81,7 @@
         from
             community_board_comment_tb
         where
-            community_board_comment_id = #{communityBoardId}
+            community_board_comment_id = #{commentId};
     </delete>
 
     <delete id="deleteCommunityBoardComments"
@@ -73,8 +92,8 @@
 
         where
             community_board_comment_id in (
-                <foreach collection="CommunityCommentIds" item="CommunityCommentId" separator=",">
-                    #{CommunityCommentId}
+                <foreach collection="commentIds" item="commentId" separator=",">
+                    #{commentId}
                 </foreach>
             )
     </delete>

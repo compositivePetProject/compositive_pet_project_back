@@ -29,14 +29,23 @@
 
     <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
         <id property="communityBoardId" column="community_board_id"/>
+        <result property="userId" column="user_id" />
         <result property="communityBoardTitle" column="community_board_title" />
         <result property="communityBoardContent" column="community_board_content" />
         <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
         <association property="communityBoardAnimalCategory" resultMap="CommunityBoardAnimalCategoryResultMap" />
-        <association property="userId" resultMap="UserResultMap" />
-        <association property="communityBoardFavorite" resultMap="CommunityBoardResultMap" />
+        <association property="user" resultMap="UserResultMap" />
+        <association property="communityBoardFavorite" resultMap="CommunityBoardFavoriteResultMap" />
+    </resultMap>
+
+    <resultMap id="CommunityBoardFavoriteResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardFavorite">
+        <id property="communityFavoriteId" column="community_favorite_id" />
+        <result property="communityBoardId" column="community_board_id" />
+        <result property="userId" column="user_id" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
     </resultMap>
 
     <insert id="postCommunityBoard"
@@ -48,11 +57,11 @@
             (0, #{userId}, #{communityBoardTitle}, #{communityBoardContent}, #{communityBoardAnimalCategoryId}, now(), now())
     </insert>
 
-    <select id="getCommunityBoards"
+    <select id="GetCommunityBoards"
             resultMap="CommunityBoardResultMap">
         select
             cbt.community_board_id,
-            ut.user_id,
+            cbt.user_id,
             ut.user_username,
             cbt.community_board_title,
             cbt.community_board_content,
@@ -72,7 +81,7 @@
             resultMap="CommunityBoardResultMap">
             select
                 cbt.community_board_id,
-                ut.user_id,
+                cbt.user_id,
                 ut.user_username,
                 cbt.community_board_title,
                 cbt.community_board_content,
@@ -87,6 +96,53 @@
                 left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
             where
                 community_board_id = #{boardId}
+    </select>
+
+    <select id="getFavoriteCommunityBoardsByUserId"
+            parameterType="integer"
+            resultMap="CommunityBoardResultMap">
+        select
+            cbt.community_board_id,
+            cbt.user_id,
+            ut.user_username,
+            cbt.community_board_title,
+            cbt.community_board_content,
+            cbt.community_board_animal_category_id,
+            cbact.community_board_animal_category_name,
+            cbact.community_board_animal_category_name_kor,
+            cbt.create_date,
+            cbt.update_date
+        from
+            community_board_tb cbt
+            inner join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
+            left outer join user_tb ut on (ut.user_id = cbt.user_id)
+            left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+        where
+            cbft.user_id = #{userId};
+
+    </select>
+
+    <select id="getCommunityBoardsDog"
+            resultMap="CommunityBoardResultMap">
+        select
+            cbt.community_board_id,
+            cbt.user_id,
+            ut.user_username,
+            cbt.community_board_title,
+            cbt.community_board_content,
+            cbt.community_board_animal_category_id,
+            cbact.community_board_animal_category_name,
+            cbact.community_board_animal_category_name_kor,
+            cbt.create_date,
+            cbt.update_date
+        from
+            community_board_tb cbt
+            left outer join user_tb ut on (ut.user_id = cbt.user_id)
+            left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+
+            where
+                cbt.community_board_animal_category_id = 1;
+
     </select>
 
     <delete id="deleteCommunityBoardByBoardId"

@@ -35,8 +35,20 @@ public class CommunityBoardController {
         return ResponseEntity.ok(communityBoardService.getCommunityBoardByBoardId(boardId));
     }
 
+    // 게시물에 좋아요를 한 userid조회
+    @GetMapping("/favorite/board/{userId}")
+    public ResponseEntity<?> getFavoriteCommunityBoardByUserId(@PathVariable int userId) {
+        return ResponseEntity.ok(communityBoardService.getFavoriteCommunityBoards(userId));
+    }
+
+    //강아지 게시판 다건 조회
+    @GetMapping("/board/dog")
+    public ResponseEntity<?> getCommunityBoardDog() {
+        return  ResponseEntity.ok(communityBoardService.getCommunityBoardsDog());
+    }
+
     // 게시물 단건 해당 communityBoardId의 게시판 삭제 단건
-    @DeleteMapping("/board/{boardId}")
+    @DeleteMapping("/delete/board/{boardId}")
     public ResponseEntity<?> deleteCommunityBoardByBoardId(@PathVariable int boardId) {
         communityBoardService.deleteCommunityBoardByBoardId(boardId);
         return ResponseEntity.ok().body("게시물 삭제 완료");
@@ -51,7 +63,7 @@ public class CommunityBoardController {
 
 
     // 커뮤니티 게시판 해당 communityBoardId의 단건 수정 (Put)
-    @PutMapping("/board/{boardId}")
+    @PutMapping("/update/board/{boardId}")
     public ResponseEntity<?> updateCommunityBoardByBoardId(@PathVariable int boardId, @RequestBody UpdateCommunityBoardRequestDto updateCommunityBoardRequestDto) {
         updateCommunityBoardRequestDto.setCommunityBoardId(boardId);
         communityBoardService.updateCommunityBoard(updateCommunityBoardRequestDto);

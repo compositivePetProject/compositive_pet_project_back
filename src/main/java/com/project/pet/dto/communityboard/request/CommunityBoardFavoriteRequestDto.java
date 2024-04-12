@@ -8,8 +8,9 @@ import lombok.Data;
 public class CommunityBoardFavoriteRequestDto {
 
     private int communityBoardId;
+    private int userId;
 
-    public CommunityBoardFavorite toEntity(int userId) {
+    public CommunityBoardFavorite toEntity() {
 
         return CommunityBoardFavorite.builder()
                 .userId(userId)

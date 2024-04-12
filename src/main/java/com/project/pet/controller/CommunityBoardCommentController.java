@@ -20,43 +20,43 @@ public class CommunityBoardCommentController {
 
     // 커뮤니티 게시판 댓글 작성(단건) - 상세페이지 게시물에서 사용(Post)
     @PostMapping("/comment")
-    public ResponseEntity<?> postCommunityBoardComment(@RequestBody CommunityBoardCommentRequestDto communityBoardCommentRequestDto) {
-        communityBoardCommentService.postCommunityCommentByBoardId(communityBoardCommentRequestDto);
+    public ResponseEntity<?> saveCommunityBoardComment(@RequestBody CommunityBoardCommentRequestDto communityBoardCommentRequestDto) {
+        communityBoardCommentService.saveCommunityComments(communityBoardCommentRequestDto);
         return  ResponseEntity.ok().body(true);
 
     }
 
-    // 커뮤니티 게시판 댓글 조회(다건) - 상세페이지 게시물에서 사용 & 마이페이지 내가 작성한 댓글에서 사용 (Get/다건)
-    @GetMapping("/comments")
-    public  ResponseEntity<?> getCommunityBoardComments() {
-        return  ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentsBoardId());
+    // 커뮤니티 게시판 댓글 조회(단건) - boardId를 통해 게시판에 단 댓글을 조회.
+    @GetMapping("/comments/{boardId}")
+    public  ResponseEntity<?> getCommunityBoardComments(@PathVariable int boardId) {
+        return  ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentsBoardId(boardId));
     }
 
-    // 커뮤니티 게시판 댓글 조회(단건) - 상세페이지 게시물에서 사용
-    @GetMapping("/comment/{CommunityCommentId}")
-    public ResponseEntity<?> getCommunityBoardComment(@PathVariable int CommunityBoardCommentId) {
-        return ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentBoardId(CommunityBoardCommentId));
+    // 커뮤니티 게시판 댓글 조회(다건) - 상세페이지 게시물에서 사용 & 마이페이지 내가 작성한 댓글에서 사용 (Get/다건)//
+    @GetMapping("/comment/{commentId}")
+    public ResponseEntity<?> getCommunityBoardComment(@PathVariable int commentId) {
+        return ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentByCommentId(commentId));
     }
 
     // 커뮤니티 게시판 댓글 단건 삭제(Delete) - 상세페이지 게시물에서 사용
-    @DeleteMapping("/delete/comment/{CommunityCommentId}")
-    public ResponseEntity<?> deleteCommunityBoardComment(@PathVariable int CommunityBoardCommentId) {
-        communityBoardCommentService.deleteCommunityBoardCommentId(CommunityBoardCommentId);
+    @DeleteMapping("/delete/comment/{commentId}")
+    public ResponseEntity<?> deleteCommunityBoardComment(@PathVariable int commentId) {
+        communityBoardCommentService.deleteCommunityBoardCommentId(commentId);
         return  ResponseEntity.ok(true);
     }
 
     // 커뮤니티 게시판 댓글 다건 삭제(Delete) -  마이페이지 내가 작성한 댓글에서 사용
     @DeleteMapping("/delete/comments")
-    public ResponseEntity<?> deleteCommunityBoardComments(@RequestBody List<Integer> CommunityBoardCommentId) {
-        communityBoardCommentService.deleteCommunityBoardCommentsId(CommunityBoardCommentId);
+    public ResponseEntity<?> deleteCommunityBoardComments(@RequestBody List<Integer> commentIds) {
+        communityBoardCommentService.deleteCommunityBoardCommentsId(commentIds);
         return ResponseEntity.ok(true);
 
     }
 
     // 커뮤니티 게시판 댓글 단건 수정(Put) -
-    @PutMapping("/update/comment/{CommunityCommentId}")
-    public ResponseEntity<?> updateCommunityBoardComment(@PathVariable int CommunityBoardCommentId, @RequestBody UpdateCommunityBoardCommentRequestDto updateCommunityBoardCommentRequestDto) {
-        updateCommunityBoardCommentRequestDto.setCommunityBoardCommentId(CommunityBoardCommentId);
+    @PutMapping("/update/comment/{commentId}")
+    public ResponseEntity<?> updateCommunityBoardComment(@PathVariable int commentId, @RequestBody UpdateCommunityBoardCommentRequestDto updateCommunityBoardCommentRequestDto) {
+        updateCommunityBoardCommentRequestDto.setCommunityBoardCommentId(commentId);
         communityBoardCommentService.updateCommunityBoardCommentId(updateCommunityBoardCommentRequestDto);
         return ResponseEntity.ok().body(true);
     }

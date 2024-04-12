@@ -20,25 +20,15 @@ public class CommunityBoardFavoriteService {
     @Autowired
     private CommunityBoardFavoriteMapper communityBoardFavoriteMapper;
 
-    private PrincipalUser getPrincipalUser () {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-        return principalUser;
-    }
-
-    // 게시물
-    public GetCommunityBoardFavoriteResponseDto getCommunityBoardFavoritesCountByBoardId(int CommunityFavoriteId) {
-        return communityBoardFavoriteMapper.getCommunityBoardFavoritesCount(CommunityFavoriteId).toGetCommunityBoardFavoriteResponseDto();
-    }
 
     // 게시물 좋아요 증가 등록(Post)
-    public void postCommunityBoardFavoriteByBoardId (CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
-        communityBoardFavoriteMapper.postCommunityBoardFavorite(communityBoardFavoriteRequestDto.toEntity(getPrincipalUser().getUserId()));
+    public void saveCommunityBoardFavoriteByBoardId (CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
+        communityBoardFavoriteMapper.saveCommunityBoardFavorite(communityBoardFavoriteRequestDto.toEntity());
     }
 
     // 게시물 좋아요 감소 (Delete)
-    public void deleteCommunityBoardFavoriteByBoardId(int CommunityBoardFavoriteId) {
-        communityBoardFavoriteMapper.deleteCommunityBoardFavorite(CommunityBoardFavoriteId);
+    public void deleteCommunityBoardFavoriteByBoardId(int userId) {
+        communityBoardFavoriteMapper.deleteCommunityBoardFavorite(userId);
     }
 
 }

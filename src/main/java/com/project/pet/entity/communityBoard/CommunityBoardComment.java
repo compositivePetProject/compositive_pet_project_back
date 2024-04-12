@@ -2,6 +2,7 @@ package com.project.pet.entity.communityBoard;
 
 
 import com.project.pet.dto.communityboard.response.GetCommunityBoardCommentResponseDto;
+import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,12 +22,15 @@ public class CommunityBoardComment {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private User user;
+
     public GetCommunityBoardCommentResponseDto toGetCommunityBoardCommentResponseDto() {
         return  GetCommunityBoardCommentResponseDto.builder()
-                .communityBoardCommentId(communityBoardCommentId)
                 .communityBoardId(communityBoardId)
-                .userId(userId)
+                .userName(user.getUsername())
                 .communityBoardCommentContent(communityBoardCommentContent)
+                .createDate(createDate)
+                .updateDate(updateDate)
                 .build();
     }
 

@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper
 public interface CommunityBoardFavoriteMapper {
 
-    public int postCommunityBoardFavorite(CommunityBoardFavorite communityBoardFavorite);
-    public CommunityBoard getCommunityBoardFavoritesCount(int CommunityFavoriteId);
-    public int deleteCommunityBoardFavorite(int boardId);
+    public int saveCommunityBoardFavorite(CommunityBoardFavorite communityBoardFavorite);
+    public int deleteCommunityBoardFavorite(int userId);
 }

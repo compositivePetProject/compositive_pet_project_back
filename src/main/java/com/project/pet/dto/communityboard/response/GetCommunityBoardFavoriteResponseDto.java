@@ -13,14 +13,14 @@ public class GetCommunityBoardFavoriteResponseDto {
 
     private int communityBoardId;
     private int userId;
+    private String userName;
     private String communityBoardTitle;
     private String communityBoardContent;
     private int communityBoardAnimalCategoryId;
-    private int totalUserIdCount;
+    private String communityBoardAnimalCategoryName;
+    private String communityBoardAnimalCategoryNameKor;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-
-
 
 
 

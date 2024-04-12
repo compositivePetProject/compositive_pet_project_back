@@ -9,10 +9,11 @@ public class CommunityBoardCommentRequestDto {
 
 
     private int communityBoardId;
+    private int userId;
     private String communityBoardCommentContent;
 
 
-    public CommunityBoardComment toEntity(int userId) {
+    public CommunityBoardComment toEntity() {
 
         return  CommunityBoardComment.builder()
                 .communityBoardId(communityBoardId)
