@@ -2,6 +2,7 @@ package com.project.pet.entity.adoptationBoard;
 
 
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
+import com.project.pet.dto.adoptation.response.GetLikedAdoptationBoardByUserIdRespDto;
 import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +28,7 @@ public class AdoptationBoard {
 
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
+    public AdoptationBoardFavorite adoptationBoardFavorite;
 
     // Entity -> ResponseDto
     public GetAdoptationBoardRespDto toGetAdoptationBoardRespDto () {
@@ -42,5 +44,22 @@ public class AdoptationBoard {
                 .updateDate(updateDate)
                 .build();
     }
+
+    public GetLikedAdoptationBoardByUserIdRespDto toGetLikedAdoptationBoardByUserIdRespDto () {
+        return GetLikedAdoptationBoardByUserIdRespDto.builder()
+                .adoptationBoardId(adoptationBoardId)
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .adoptationBoardTitle(adoptationBoardTitle)
+                .adoptationBoardContent(adoptationBoardContent)
+                .boardAnimalCategoryId(boardAnimalCategoryId)
+                .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+
+
 
 }

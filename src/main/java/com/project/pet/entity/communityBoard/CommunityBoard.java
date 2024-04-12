@@ -29,8 +29,8 @@ public class CommunityBoard {
     private  CommunityBoardAnimalCategory communityBoardAnimalCategory;
 
 
-    public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
 
+    public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
              .userId(user.getUserId())

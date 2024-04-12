@@ -32,10 +32,11 @@ public class JwtProvider {
         key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.userMapper = userMapper;
     }
-
+    
+    // 임시로 토근 만료시간 24일로 지정 -> 변경 예정
     public String generateToken(User user) {
         Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
-        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
+        Date expireDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24 * 24));
 
         String accessToken = Jwts.builder()
                 .claim("userId", user.getUserId())
@@ -70,7 +71,7 @@ public class JwtProvider {
             return null;
         }
         PrincipalUser principalUser = user.toPrincipalUser();
-        return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword(), principalUser.getAuthorities()); // 업캐스팅 되어 리턴
+        return new UsernamePasswordAuthenticationToken(principalUser, principalUser.getPassword(), principalUser.getAuthorities());
     }
 
 }

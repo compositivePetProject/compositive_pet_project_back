@@ -170,13 +170,14 @@
 
     <update id="updateProfileImageUrl"
             parameterType="com.project.pet.entity.user.User">
-        update
-            user_tb
-        set
-            user_profile_image_url = #{profileImageUrl},
+        update user_tb
+        <trim prefix="set" suffixOverrides=",">
+            <if test="profileImageUrl != null and profileImageUrl != ''">
+                user_profile_image_url = #{profileImageUrl},
+            </if>
             update_date = now()
-        where
-            user_id =  #{userId}
+        </trim>
+        where user_id = #{userId}
     </update>
 
 </mapper>

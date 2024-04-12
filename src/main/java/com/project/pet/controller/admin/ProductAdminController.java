@@ -175,5 +175,8 @@ public class ProductAdminController {
 
     // [사용자 애완용품 주문 현황]
     // 관리자 애완용품 주문 현황 조회(다건)
-
+    @GetMapping("admin/order/detail")
+    public ResponseEntity<?> getProductOrderDetailsAdmin() {
+        return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdmin());
+    }
 }

@@ -8,18 +8,22 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class GetProductOutgoingStocksAdminResponseDto {
-    private int productOutgoingStockId;
+public class GetProductOrderDetailsAdminResponseDto {
+    private int productOrderDetailId;
     private int productOrderId;
     private int productId;
     private String productNameKor;
     private int productSizeCategoryId;
     private String productSizeCategoryName;
     private String productSizeCategoryNameKor;
-    private int productOutgoingStockCount;
+    private int productOrderCount;
+    private int userId;
+    private String userName;
+    private String productOrderAddress;
+    private String productOrderDetailAddress;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }
