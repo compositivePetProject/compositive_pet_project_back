@@ -20,37 +20,32 @@ public class CommunityBoardCommentService {
     @Autowired
     private CommunityBoardCommentMapper communityBoardCommentMapper;
 
-    private PrincipalUser getPrincipalUser () {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-        return principalUser;
-    }
-
     // 커뮤니티 게시판 댓글 추가(post)
-    public void postCommunityCommentByBoardId (CommunityBoardCommentRequestDto communityBoardCommentRequestDto) {
-        communityBoardCommentMapper.postCommunityBoardComment(communityBoardCommentRequestDto.toEntity(getPrincipalUser().getUserId()));
+    public void saveCommunityComments (CommunityBoardCommentRequestDto communityBoardCommentRequestDto) {
+
+        communityBoardCommentMapper.saveCommunityBoardComment(communityBoardCommentRequestDto.toEntity());
     }
 
     // 커뮤니티 게시판 댓글 다건 조회 (get)
-    public List<GetCommunityBoardCommentResponseDto> getCommunityBoardCommentsBoardId() {
-        List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardComments();
+    public List<GetCommunityBoardCommentResponseDto> getCommunityBoardCommentsBoardId(int boardId) {
+        List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardComments(boardId);
         return  communityBoardComments.stream().map(CommunityBoardComment::toGetCommunityBoardCommentResponseDto).collect(Collectors.toList());
      }
 
-     //커뮤니티 게시판 댓글 단건 조회 (get)
-     public GetCommunityBoardCommentResponseDto getCommunityBoardCommentBoardId(int CommunityBoardCommentId) {
-         CommunityBoardComment communityBoardComment = communityBoardCommentMapper.getCommunityBoardComment(CommunityBoardCommentId);
+    // 커뮤니티 게시판 댓글 조회(단건) - boardId를 통해 게시판에 단 댓글을 조회.
+     public GetCommunityBoardCommentResponseDto getCommunityBoardCommentByCommentId(int commentId) {
+         CommunityBoardComment communityBoardComment = communityBoardCommentMapper.getCommunityBoardComment(commentId);
          return communityBoardComment.toGetCommunityBoardCommentResponseDto();
      }
 
      // 커뮤니티 게시판 댓글 단건 삭제 (Delete)
-     public void deleteCommunityBoardCommentId(int CommunityBoardCommentId) {
-         communityBoardCommentMapper.deleteCommunityBoardComment(CommunityBoardCommentId);
+     public void deleteCommunityBoardCommentId(int commentId) {
+         communityBoardCommentMapper.deleteCommunityBoardComment(commentId);
      }
 
      // 커뮤니티 게시판 댓글 다건 삭제 (Delete)
-     public void deleteCommunityBoardCommentsId(List<Integer> CommunityBoardCommentIds) {
-        communityBoardCommentMapper.deleteCommunityBoardComments(CommunityBoardCommentIds);
+     public void deleteCommunityBoardCommentsId(List<Integer> commentIds) {
+        communityBoardCommentMapper.deleteCommunityBoardComments(commentIds);
      }
 
      // 커뮤니티 게시판 댓글 단건 수정 (put)

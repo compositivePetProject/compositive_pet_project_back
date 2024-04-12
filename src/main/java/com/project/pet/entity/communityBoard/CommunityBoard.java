@@ -26,18 +26,19 @@ public class CommunityBoard {
 
     private CommunityBoardFavorite communityBoardFavorite;
     private User user;
-    private CommunityBoardAnimalCategory communityBoardAnimalCategory;
+    private  CommunityBoardAnimalCategory communityBoardAnimalCategory;
+
 
 
     public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
-             .userId(userId)
-             .username(user.getUsername())
+             .userId(user.getUserId())
+             .userName(user.getUsername())
              .communityBoardTitle(communityBoardTitle)
              .communityBoardContent(communityBoardContent)
-             .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
              .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
+             .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
              .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
              .createDate(createDate)
              .updateDate(updateDate)
@@ -47,11 +48,13 @@ public class CommunityBoard {
     public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto() {
         return GetCommunityBoardFavoriteResponseDto.builder()
                 .communityBoardId(communityBoardId)
-                .userId(userId)
+                .userId(user.getUserId())
+                .userName(user.getUsername())
                 .communityBoardTitle(communityBoardTitle)
                 .communityBoardContent(communityBoardContent)
                 .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
-                .totalUserIdCount(communityBoardFavorite.getTotalUserIdCount())
+                .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
+                .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();

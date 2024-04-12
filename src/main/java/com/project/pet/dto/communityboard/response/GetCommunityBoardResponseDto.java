@@ -18,7 +18,7 @@ public class GetCommunityBoardResponseDto {
 
     private int communityBoardId;
     private int userId;
-    private String username;
+    private String userName;
     private String communityBoardTitle;
     private String communityBoardContent;
     private int communityBoardAnimalCategoryId;

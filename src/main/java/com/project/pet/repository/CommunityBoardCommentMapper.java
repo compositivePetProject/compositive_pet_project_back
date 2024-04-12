@@ -9,19 +9,19 @@ import java.util.List;
 public interface CommunityBoardCommentMapper {
 
     // 커뮤니티 게시판 추가(Post)
-    public int  postCommunityBoardComment(CommunityBoardComment communityBoardComment);
+    public int  saveCommunityBoardComment(CommunityBoardComment communityBoardComment);
 
     // 커뮤니티 게시판 다건 조회(Get)
-    public List <CommunityBoardComment> getCommunityBoardComments();
+    public List <CommunityBoardComment> getCommunityBoardComments(int boardId);
 
     // 커뮤니티 게시판 단건 조회(Get)
-    public CommunityBoardComment getCommunityBoardComment(int CommunityBoardCommentId);
+    public CommunityBoardComment getCommunityBoardComment(int commentId);
 
     // 커뮤니티 게시판 단건 삭제(Delete)
-    public int deleteCommunityBoardComment(int CommunityBoardCommentId);
+    public int deleteCommunityBoardComment(int commentId);
 
     // 커뮤니티 게시판 다건 삭제(Delete)
-    public int deleteCommunityBoardComments(List<Integer> CommunityBoardCommentIds);
+    public int deleteCommunityBoardComments(List<Integer> commentIds);
 
     // 커뮤니티 게시판 단건 수정(Put)
     public int updateCommunityBoardComment(CommunityBoardComment communityBoardComment);
