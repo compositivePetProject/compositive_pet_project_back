@@ -5,15 +5,6 @@
 
 <mapper namespace="com.project.pet.repository.CommunityBoardMapper">
 
-    <resultMap id="CommunityBoardFavoriteResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardFavorite">
-        <id property="communityFavoriteId" column="community_favorite_id" />
-        <result property="communityBoardId" column="community_board_id" />
-        <result property="userId" column="user_id" />
-        <result property="createDate" column="create_date" />
-        <result property="updateDate" column="update_date" />
-        <result property="totalUserIdCount" column="total_user_id_count"/>
-    </resultMap>
-
     <resultMap id="CommunityBoardAnimalCategoryResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardAnimalCategory" >
         <id property="communityBoardAnimalCategoryId" column="community_board_id" />
         <result property="communityBoardAnimalCategoryName" column="community_board_animal_category_name"/>

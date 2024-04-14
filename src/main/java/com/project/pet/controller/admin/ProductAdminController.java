@@ -19,6 +19,7 @@ public class ProductAdminController {
     // 관리자 상품 등록(단건)
     @PostMapping("/admin/product")
     public ResponseEntity<?> postProductAdmin(@RequestBody PostProductAdminRequestDto postProductAdminRequestDto) {
+        System.out.println(postProductAdminRequestDto);
         productAdminService.postProductAdmin(postProductAdminRequestDto);
         return ResponseEntity.created(null).body(true);
     }
