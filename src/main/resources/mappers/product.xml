@@ -31,7 +31,7 @@
         <result property="productAnimalCategoryNameKor" column="product_animal_category_name_kor" />
     </resultMap>
 
-    <select id="getProduct" parameterType="Integer" resultMap="ProductResultMap">
+    <select id="getProduct" resultMap="ProductResultMap">
         select
             pt.product_id,
             pt.product_name_kor,
