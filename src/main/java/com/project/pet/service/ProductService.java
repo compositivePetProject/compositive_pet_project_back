@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.product.request.GetProductRequestDto;
 import com.project.pet.dto.product.response.GetProductResponseDto;
 import com.project.pet.dto.product.response.GetProductsResponseDto;
 import com.project.pet.entity.product.Product;
@@ -15,8 +16,9 @@ public class ProductService {
 
     @Autowired
     ProductMapper productMapper;
-    public GetProductResponseDto getProduct(int productId) {
-        Product product = productMapper.getProduct(productId);
+    public GetProductResponseDto getProduct(GetProductRequestDto getProductRequestDto) {
+        Product product = productMapper.getProduct(getProductRequestDto.getProductId());
+
         return product.toGetProductResponseDto();
     }
 
