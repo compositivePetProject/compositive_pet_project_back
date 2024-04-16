@@ -1,5 +1,7 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.product.request.DeleteProductFavoriteRequestDto;
+import com.project.pet.dto.product.request.GetProductRequestDto;
 import com.project.pet.dto.product.request.PostProductFavoriteRequestDto;
 import com.project.pet.service.ProductFavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,9 @@ public class ProductFavoriteController {
     private ProductFavoriteService productFavoriteService;
 
 
-    @GetMapping("/favorites/count/{productId}")
-    public ResponseEntity<?> getProductFavoritesCount (@PathVariable int productId) {
-        return ResponseEntity.ok(productFavoriteService.getProductFavoritesCount(productId));
+    @GetMapping("/favorites/count")
+    public ResponseEntity<?> getProductFavoritesCount (GetProductRequestDto getProductRequestDto) {
+        return ResponseEntity.ok(productFavoriteService.getProductFavoritesCount(getProductRequestDto));
     }
 
     @PostMapping("/favorite")
@@ -26,8 +28,8 @@ public class ProductFavoriteController {
     }
 
     @DeleteMapping("/favorite/delete")
-    public ResponseEntity<?> deleteProductFavorite () {
-        productFavoriteService.deleteProductFavorite();
+    public ResponseEntity<?> deleteProductFavorite (@RequestBody DeleteProductFavoriteRequestDto deleteProductFavoriteRequestDto) {
+        productFavoriteService.deleteProductFavorite(deleteProductFavoriteRequestDto);
         return ResponseEntity.ok(true);
     }
 

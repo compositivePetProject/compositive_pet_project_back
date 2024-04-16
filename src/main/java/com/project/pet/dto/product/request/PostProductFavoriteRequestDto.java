@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 public class PostProductFavoriteRequestDto {
-
     private int productId;
+    private int userId;
 
-    public ProductFavorite toEntity(int userId) {
+    public ProductFavorite toEntity( ) {
         return ProductFavorite.builder()
                 .productId(productId)
                 .userId(userId)

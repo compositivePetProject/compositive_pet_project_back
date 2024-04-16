@@ -1,5 +1,7 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.product.request.DeleteProductFavoriteRequestDto;
+import com.project.pet.dto.product.request.GetProductRequestDto;
 import com.project.pet.dto.product.request.PostProductFavoriteRequestDto;
 import com.project.pet.dto.product.response.ProductFavoriteResponseDto;
 import com.project.pet.entity.user.PrincipalUser;
@@ -15,19 +17,15 @@ public class ProductFavoriteService {
     @Autowired
     private ProductFavoriteMapper productFavoriteMapper;
 
-    public ProductFavoriteResponseDto getProductFavoritesCount (int productId) {
-        return productFavoriteMapper.getProductFavoritesCount(productId).toProductFavoriteResponseDto();
+    public ProductFavoriteResponseDto getProductFavoritesCount (GetProductRequestDto getProductRequestDto) {
+        return productFavoriteMapper.getProductFavoritesCount(getProductRequestDto.getProductId()).toProductFavoriteResponseDto();
     }
 
     public void saveProductFavorite(PostProductFavoriteRequestDto postProductFavoriteRequestDto) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-        productFavoriteMapper.saveProductFavorite(postProductFavoriteRequestDto.toEntity(principalUser.getUserId()));
+        productFavoriteMapper.saveProductFavorite(postProductFavoriteRequestDto.toEntity());
     }
 
-    public void deleteProductFavorite() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
-        productFavoriteMapper.deleteProductFavorite(principalUser.getUserId());
+    public void deleteProductFavorite(DeleteProductFavoriteRequestDto deleteProductFavoriteRequestDto) {
+        productFavoriteMapper.deleteProductFavorite(deleteProductFavoriteRequestDto.getUserId());
     }
 }
