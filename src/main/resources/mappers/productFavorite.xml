@@ -68,4 +68,16 @@
             user_id = #{userId}
     </delete>
 
+    <select id="existsByUserIdAndProductId"
+            parameterType="com.project.pet.entity.product.ProductFavorite"
+            resultType="boolean">
+        SELECT EXISTS(
+            SELECT 1
+                FROM product_favorite_tb
+            WHERE
+                user_id = #{userId}
+                AND product_id = #{productId}
+        )
+    </select>
+
 </mapper>

@@ -4,7 +4,7 @@ import com.project.pet.entity.product.ProductFavorite;
 import lombok.Data;
 
 @Data
-public class PostProductFavoriteRequestDto {
+public class GetProductFavoriteRequestDto {
     private int productId;
     private int userId;
 

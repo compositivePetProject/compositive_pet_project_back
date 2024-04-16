@@ -9,5 +9,6 @@ public interface ProductFavoriteMapper {
     public Product getProductFavoritesCount(int productId);
     public int saveProductFavorite(ProductFavorite productFavorite);
     public int deleteProductFavorite(int userId);
+    public boolean existsByUserIdAndProductId(ProductFavorite productFavorite);
 
 }
