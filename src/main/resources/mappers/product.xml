@@ -67,4 +67,27 @@
             left outer join product_animal_category_tb pact on(pact.product_animal_category_id = pt.product_animal_category_id)
     </select>
 
+    <select id="findProducts" resultMap="ProductResultMap">
+        select
+            pt.product_id,
+            pt.product_name_kor,
+            pt.product_price,
+            pt.product_image_url,
+            pt.product_category_id,
+            pct.product_category_name_kor,
+            pt.product_animal_category_id,
+            pact.product_animal_category_name_kor,
+            pt.product_board_content
+        from
+            product_tb pt
+                left outer join product_category_tb pct on(pct.product_category_id = pt.product_animal_category_id)
+                left outer join product_animal_category_tb pact on(pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+        1 = 1
+        <if test="productCategoryId != 0">
+            and pt.product_category_id = #{productCategoryId}
+        </if>
+        limit #{startIndex}, #{count}
+    </select>
+
 </mapper>
