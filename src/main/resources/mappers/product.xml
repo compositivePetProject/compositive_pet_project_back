@@ -90,4 +90,18 @@
         limit #{startIndex}, #{count}
     </select>
 
+    <select id="getProductCount" resultType="integer">
+        select
+            count(*)
+        from
+        product_tb pt
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_animal_category_id)
+            left outer join product_animal_category_tb pact on(pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+        1 = 1
+        <if test="productCategoryId != 0">
+            and pt.product_category_id = #{productCategoryId}
+        </if>
+    </select>
+
 </mapper>

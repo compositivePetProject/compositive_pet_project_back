@@ -2,6 +2,7 @@ package com.project.pet.service;
 
 import com.project.pet.dto.product.request.GetProductRequestDto;
 import com.project.pet.dto.product.request.GetProductSearchProductRequestDto;
+import com.project.pet.dto.product.response.GetProductCountResponseDto;
 import com.project.pet.dto.product.response.GetProductResponseDto;
 import com.project.pet.dto.product.response.GetProductsResponseDto;
 import com.project.pet.entity.product.Product;
@@ -37,6 +38,16 @@ public class ProductService {
                 getProductSearchProductRequestDto.getProductCategoryId());
 
         return productList.stream().map(Product::toGetProductsResponseDto).collect(Collectors.toList());
+    }
+
+    public GetProductCountResponseDto getProductCount(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
+        int productCount = productMapper.getProductCount(getProductSearchProductRequestDto.getProductCategoryId());
+        int maxPageNumber = (int) Math.ceil(((double) productCount) / getProductSearchProductRequestDto.getCount());
+
+        return GetProductCountResponseDto.builder()
+                .totalCount(productCount)
+                .maxPageNumber(maxPageNumber)
+                .build();
     }
 
 }

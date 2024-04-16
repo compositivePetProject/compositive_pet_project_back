@@ -2,6 +2,7 @@ package com.project.pet.controller;
 
 import com.project.pet.dto.product.request.GetProductRequestDto;
 import com.project.pet.dto.product.request.GetProductSearchProductRequestDto;
+import com.project.pet.dto.product.response.GetProductCountResponseDto;
 import com.project.pet.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +29,10 @@ public class ProductController {
     @GetMapping("/page")
     public ResponseEntity<?> getProducts(GetProductSearchProductRequestDto getProductSearchProductRequestDto){
         return ResponseEntity.ok(productService.productPage(getProductSearchProductRequestDto));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<?> getProductCount(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
+        return ResponseEntity.ok(productService.getProductCount(getProductSearchProductRequestDto));
     }
 }
