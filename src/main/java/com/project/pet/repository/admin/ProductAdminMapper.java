@@ -5,6 +5,7 @@ import com.project.pet.entity.product.ProductIncomingStock;
 import com.project.pet.entity.product.ProductOutgoingStock;
 import com.project.pet.entity.product.ProductStock;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,6 +24,13 @@ public interface ProductAdminMapper {
     public int deleteProductsAdmin(List<Integer> productIds);
 
     public int postProductIncomingStock(ProductIncomingStock productIncomingStock);
+
+    public List<ProductIncomingStock> getProductIncomingStocksTest(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count,
+            @Param("selectedValue") int selectedValue,
+            @Param("searchText") String searchText
+    );
 
     public List<ProductIncomingStock> getProductIncomingStocks();
 

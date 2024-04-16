@@ -56,6 +56,17 @@ public class ProductAdminService {
         productAdminMapper.postProductIncomingStock(postProductIncomingStockRequestDto.toEntity());
     }
 
+    public List<GetProductIncomingStocksTestResponseDto> getProductIncomingStocksTest(GetProductIncomingStocksTestRequestDto getProductIncomingStocksTestRequestDto) {
+        int startIndex = (getProductIncomingStocksTestRequestDto.getPage() - 1) * getProductIncomingStocksTestRequestDto.getCount();
+        List<ProductIncomingStock> list = productAdminMapper.getProductIncomingStocksTest(
+                startIndex,
+                getProductIncomingStocksTestRequestDto.getCount(),
+                getProductIncomingStocksTestRequestDto.getSelectedValue(),
+                getProductIncomingStocksTestRequestDto.getSearchText()
+        );
+        return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksTestResponseDto).collect(Collectors.toList());
+    }
+
     public List<GetProductIncomingStocksResponseDto> getProductIncomingStocks() {
         List<ProductIncomingStock> list = productAdminMapper.getProductIncomingStocks();
         return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksResponseDto).collect(Collectors.toList());

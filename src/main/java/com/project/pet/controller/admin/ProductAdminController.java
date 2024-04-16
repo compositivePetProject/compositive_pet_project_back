@@ -65,6 +65,11 @@ public class ProductAdminController {
         return ResponseEntity.created(null).body(true);
     }
 
+    @GetMapping("admin/incoming/stocks/test")
+    public ResponseEntity<?> getProductIncomingStocksTest(GetProductIncomingStocksTestRequestDto getProductIncomingStocksTestRequestDto) {
+        return ResponseEntity.ok(productAdminService.getProductIncomingStocksTest(getProductIncomingStocksTestRequestDto));
+    }
+
     // 관리자 상품 가입고 테이블 조회(다건)
     @GetMapping("admin/incoming/stocks")
     public ResponseEntity<?> getProductIncomingStocks() {

@@ -2,6 +2,7 @@ package com.project.pet.entity.product;
 
 import com.project.pet.dto.product.response.GetProductIncomingStockResponseDto;
 import com.project.pet.dto.product.response.GetProductIncomingStocksResponseDto;
+import com.project.pet.dto.product.response.GetProductIncomingStocksTestResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -50,6 +51,18 @@ public class ProductIncomingStock {
                 .productIncomingStockCount(productIncomingStockCount)
                 .createDate(createDate)
                 .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductIncomingStocksTestResponseDto toGetProductIncomingStocksTestResponseDto() {
+        return GetProductIncomingStocksTestResponseDto.builder()
+                .productIncomingStockId(productIncomingStockId)
+                .productId(productId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
+                .productIncomingStockCount(productIncomingStockCount)
                 .build();
     }
 
