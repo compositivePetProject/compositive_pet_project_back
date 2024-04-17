@@ -28,7 +28,10 @@ public class ProductCartService {
     }
 
     public void saveProductCart(PostProductCartRequestDto postProductCartRequestDto) {
-        productCartMapper.saveProductCart(postProductCartRequestDto.toEntity(getPrincipalUser().getUserId()));
+        if(postProductCartRequestDto.getProductSizeCategoryId() == 0) {
+            throw new NullPointerException("데이터 오류");
+        }
+        productCartMapper.saveProductCart(postProductCartRequestDto.toEntity());
     }
 
     public List<GetProductCartResponseDto> getProductsCart () {

@@ -1,13 +1,16 @@
 package com.project.pet.controller;
 
+import com.project.pet.aop.annotation.ValidAspect;
 import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
 import com.project.pet.service.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,8 +20,9 @@ public class ProductOrderController {
     ProductOrderService productOrderService;
 
     // 사용자 상품 주문 등록(단건)
+    @ValidAspect
     @PostMapping("/product/order")
-    public ResponseEntity<?> postProductOrder(@RequestBody PostProductOrderRequestDto postProductOrderRequestDto) {
+    public ResponseEntity<?> postProductOrder(@Valid @RequestBody PostProductOrderRequestDto postProductOrderRequestDto, BindingResult bindingResult) {
         productOrderService.postProductOrder(postProductOrderRequestDto);
         return ResponseEntity.created(null).body(true);
     }

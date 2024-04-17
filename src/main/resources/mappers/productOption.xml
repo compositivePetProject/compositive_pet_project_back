@@ -14,6 +14,12 @@
         <result property="productAnimalCategoryName" column="product_animal_category_name"/>
         <result property="productAnimalCategoryNameKor" column="product_animal_category_name_kor"/>
     </resultMap>
+    <resultMap id="ProductSizeResultMap" type="com.project.pet.entity.product.ProductSizeCategory">
+        <id property="productSizeCategoryId" column="product_size_category_id"/>
+        <result property="productSizeCategoryName" column="product_size_category_name"/>
+        <result property="productSizeCategoryNameKor" column="product_size_category_name_kor"/>
+    </resultMap>
+
 
     <select id="getAllProductTypes" resultMap="ProductTypeResultMap">
         select
@@ -31,5 +37,14 @@
             product_animal_category_name_kor
         from
             product_animal_category_tb
+    </select>
+
+    <select id="getAllSize" resultMap="ProductSizeResultMap">
+        select
+            product_size_category_id,
+            product_size_category_name,
+            product_size_category_name_kor
+        from
+            product_size_category_tb
     </select>
 </mapper>

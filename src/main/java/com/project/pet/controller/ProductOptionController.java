@@ -22,4 +22,9 @@ public class ProductOptionController {
     public ResponseEntity<?> getCategories() {
         return ResponseEntity.ok(productOptionService.getAllCategories());
     }
+
+    @GetMapping("/size")
+    public ResponseEntity<?> getSize() {
+        return ResponseEntity.ok(productOptionService.getAllSize());
+    }
 }
