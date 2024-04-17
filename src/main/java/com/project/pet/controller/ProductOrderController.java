@@ -29,7 +29,7 @@ public class ProductOrderController {
 
     // 사용자 상품 주문 조회(다건)
     @GetMapping("/product/orders")
-    public ResponseEntity<?> getProductOrders(@RequestBody GetProductOrdersRequestDto getProductOrdersRequestDto) {
+    public ResponseEntity<?> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
         return ResponseEntity.ok(productOrderService.getProductOrders(getProductOrdersRequestDto));
     }
 

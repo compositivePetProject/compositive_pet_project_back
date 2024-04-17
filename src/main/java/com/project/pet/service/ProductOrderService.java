@@ -61,8 +61,7 @@ public class ProductOrderService {
     }
 
     public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
-        int userId = getProductOrdersRequestDto.getUserId();
-        List<ProductOrder> list = productOrderMapper.getProductOrders(userId);
+        List<ProductOrder> list = productOrderMapper.getProductOrders(getProductOrdersRequestDto.getUserId());
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
     }
 
