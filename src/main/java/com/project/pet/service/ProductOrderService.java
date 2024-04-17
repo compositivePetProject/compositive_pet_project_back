@@ -32,14 +32,15 @@ public class ProductOrderService {
 
     public void postProductOrder(PostProductOrderRequestDto postProductOrderRequestDto) {
         ProductOrder productOrder = postProductOrderRequestDto.toEntity();
-
+        if(postProductOrderRequestDto.getProductSizeCategoryId() == 0) {
+            throw new NullPointerException("데이터 오류");
+        }
         productOrderMapper.postProductOrder(productOrder);
 
         int productOrderId = productOrder.getProductOrderId();
         int productId = productOrder.getProductId();
         int productSizeCategoryId = productOrder.getProductSizeCategoryId();
         int productOrderCount = productOrder.getProductOrderCount();
-
 
 
         productOrderDetailMapper.postProductOrderDetail(
