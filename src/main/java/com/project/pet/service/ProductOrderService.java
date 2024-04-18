@@ -3,6 +3,7 @@ package com.project.pet.service;
 import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
+import com.project.pet.dto.product.response.DeleteProductOrderRequestDto;
 import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import com.project.pet.entity.product.ProductOrder;
@@ -61,6 +62,7 @@ public class ProductOrderService {
     }
 
     public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
+
         List<ProductOrder> list = productOrderMapper.getProductOrders(getProductOrdersRequestDto.getUserId());
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
     }
@@ -69,7 +71,8 @@ public class ProductOrderService {
         return productOrderMapper.getProductOrder(productOrderId).toGetProductOrderResponseDto();
     }
 
-    public void deleteProductOrder(int productOrderId) {
+    public void deleteProductOrder(DeleteProductOrderRequestDto deleteProductOrderRequestDto) {
+        int productOrderId = deleteProductOrderRequestDto.getProductOrderId();
         productOrderMapper.deleteProductOrder(productOrderId);
         productOrderDetailMapper.deleteProductOrder(productOrderId);
         productAdminMapper.deleteProductOutgoingStockAdmin(productOrderId);
@@ -82,7 +85,12 @@ public class ProductOrderService {
         productAdminMapper.deleteProductOutgoingStocksAdmin(productOrderIds);
     }
 
-    public void putProductOrder(int productOrderId, PutProductOrderRequestDto putProductOrderRequestDto) {
+
+    public void putProductOrder(PutProductOrderRequestDto putProductOrderRequestDto) {
+        int productOrderId = putProductOrderRequestDto.getProductOrderId();
+        if(putProductOrderRequestDto.getProductSizeCategoryId() == 0) {
+            throw new NullPointerException("데이터 오류");
+        }
         putProductOrderRequestDto.setProductOrderId(productOrderId);
         productOrderMapper.putProductOrder(putProductOrderRequestDto.toEntity());
         productAdminMapper.putProductOutgoingStockAdmin(ProductOutgoingStock

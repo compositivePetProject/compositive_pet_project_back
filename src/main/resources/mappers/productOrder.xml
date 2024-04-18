@@ -61,7 +61,9 @@
         select
             pot.product_order_id,
             pot.product_id,
+            pt.product_price,
             pt.product_name_kor,
+            pt.product_image_url,
             pot.product_size_category_id,
             psct.product_size_category_name,
             psct.product_size_category_name_kor,
