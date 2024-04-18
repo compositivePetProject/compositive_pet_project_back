@@ -1,7 +1,9 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.adoptation.request.GetAdoptationBoardCountReqDto;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.response.GetAdoptationBoardCountRespDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
 import com.project.pet.dto.adoptation.response.GetLikedAdoptationBoardByUserIdRespDto;
 import com.project.pet.entity.adoptationBoard.AdoptationBoard;
@@ -18,9 +20,26 @@ public class AdoptationBoardService {
     @Autowired
     private AdoptationBoardMapper adoptationBoardMapper;
 
+
+
+
+
+
+
     //게시판 작성
     public void postAdoptationBoard(PostAdoptationBoardReqDto postAdoptationBoardReqDto) {
+
         adoptationBoardMapper.postAdoptationBoard(postAdoptationBoardReqDto.toEntity());
+
+    }
+
+    public GetAdoptationBoardCountRespDto getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCount();
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardCountReqDto.getCount()));
+        return GetAdoptationBoardCountRespDto.builder()
+                .maxPageNumber(maxPageNumber)
+                .totalCount(adoptionBoardCount)
+                .build();
     }
 
     //전체 게시판 조회(다건)
@@ -37,6 +56,11 @@ public class AdoptationBoardService {
 
     public List<GetAdoptationBoardRespDto> getAdoptationBoardsDog() {
         List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardsDog();
+        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
+    }
+
+    public List<GetAdoptationBoardRespDto> getAdoptationBoardsCat() {
+        List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardsCat();
         return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 

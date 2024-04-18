@@ -25,6 +25,7 @@ public class AdoptationBoard {
     private int boardAnimalCategoryId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private int totalCount;
 
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;

@@ -12,9 +12,11 @@ public class PostAdoptationBoardReqDto {
 
     @NotBlank
     private String adoptationBoardTitle;
+    @NotBlank
     private int userId;
     @NotBlank
     private String adoptationBoardContent;
+
     @NotNull
     private int boardAnimalCategoryId;
 

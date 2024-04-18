@@ -1,8 +1,10 @@
 package com.project.pet.controller;
 
 
+import com.project.pet.dto.adoptation.request.GetAdoptationBoardCountReqDto;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
 import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.response.GetAdoptationBoardCountRespDto;
 import com.project.pet.service.AdoptationBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +33,26 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards());
     }
 
+    // 전체 게시판 페이지네이션 조회
+    @GetMapping("/board/count")
+    public ResponseEntity<?> getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardCount(getAdoptationBoardCountReqDto));
+    }
+
 
     //// categoryId가 1인 전체 게시판 조회(다건)
     @GetMapping("/board/dog")
     public ResponseEntity<?> getAdoptationBoardsDog() {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardsDog());
     }
+
+    //// categoryId가 2인 전체 게시판 조회(다건)
+    @GetMapping("/board/cat")
+    public ResponseEntity<?> getAdoptationBoardsCat() {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardsCat());
+    }
+
+
 
     //boardId로 해당 게시판 조회(단건)
     @GetMapping("/board/{boardId}")
