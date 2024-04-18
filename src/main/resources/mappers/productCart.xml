@@ -4,12 +4,26 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.pet.repository.ProductCartMapper">
 
+
+    <resultMap id="ProductOrderResultMap" type="com.project.pet.entity.product.ProductOrder">
+        <id property="productOrderId" column="product_order_id" />
+        <result property="userId" column="user_id" />
+        <result property="productId" column="product_id" />
+        <result property="productOrderAddress" column="product_order_address" />
+        <result property="productOrderDetailAddress" column="product_order_detail_address" />
+        <result property="productSizeCategoryId" column="product_size_category_id" />
+        <result property="productOrderCount" column="product_order_count" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
     <resultMap id="ProductCartResultMap" type="com.project.pet.entity.product.ProductCart">
         <id property="productCartId" column="product_cart_id" />
         <result property="userId" column="user_id" />
         <result property="productId" column="product_id" />
         <result property="productSizeCategoryId" column="product_size_category_id" />
         <result property="productCartCount" column="product_cart_count" />
+        <association property="productOrder" resultMap="ProductOrderResultMap" />
     </resultMap>
 
     <insert id="saveProductCart"
@@ -26,15 +40,20 @@
             resultMap="ProductCartResultMap"
     >
         select
-            product_cart_id,
-            user_id,
-            product_id,
-            product_size_category_id,
-            product_cart_count
+            pct.product_cart_id,
+            pct.user_id,
+            pct.product_id,
+            pct.product_size_category_id,
+            pct.product_cart_count,
+            pot.product_order_id,
+            pot.product_order_address,
+            pot.product_order_detail_address,
+            pot.product_order_count
         from
-            product_cart_tb
+            product_cart_tb pct
+            left outer join product_order_tb pot on(pot.user_id = pct.user_id)
         where
-            user_id = #{userId}
+            pct.user_id = #{userId}
     </select>
 
     <delete id="deleteProductCarts"
