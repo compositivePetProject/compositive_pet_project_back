@@ -32,8 +32,14 @@ public class ProductAdminController {
 
     // 관리자 상품 조회(다건)
     @GetMapping("/admin/products")
-    public ResponseEntity<?> getProductsAdmin() {
-        return ResponseEntity.ok(productAdminService.getProductsAdmin());
+    public ResponseEntity<?> getProductsAdmin(GetProductsAdminRequestDto getProductsAdminRequestDto) {
+        return ResponseEntity.ok(productAdminService.getProductsAdmin(getProductsAdminRequestDto));
+    }
+
+    // 관리자 상품 페이지네이션 조회(다건)
+    @GetMapping("/admin/products/count")
+    public ResponseEntity<?> getProductsAdminCount(GetProductsAdminCountRequestDto getProductsAdminCountRequestDto) {
+        return ResponseEntity.ok(productAdminService.getProductsAdminCount(getProductsAdminCountRequestDto));
     }
 
     // 관리자 상품 삭제(단건)

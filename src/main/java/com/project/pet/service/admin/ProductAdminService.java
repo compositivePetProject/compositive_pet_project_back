@@ -33,9 +33,31 @@ public class ProductAdminService {
         return product.toGetProductAdminResponseDto();
     }
 
-    public List<GetProductsAdminResponseDto> getProductsAdmin() {
-        List<Product> list = productAdminMapper.getProductsAdmin();
+    public List<GetProductsAdminResponseDto> getProductsAdmin(GetProductsAdminRequestDto getProductsAdminRequestDto) {
+        int startIndex = (getProductsAdminRequestDto.getPage() - 1) * getProductsAdminRequestDto.getCount();
+        List<Product> list = productAdminMapper.getProductsAdmin(
+                startIndex,
+                getProductsAdminRequestDto.getCount(),
+                getProductsAdminRequestDto.getProductCategoryId(),
+                getProductsAdminRequestDto.getProductAnimalCategoryId(),
+                getProductsAdminRequestDto.getProductNameKor()
+        );
         return list.stream().map(Product::toGetProductsAdminResponseDto).collect(Collectors.toList());
+    }
+
+    public GetProductsAdminCountResponseDto getProductsAdminCount(GetProductsAdminCountRequestDto getProductsAdminCountRequestDto) {
+        int productCount = productAdminMapper.getProductsAdminCount(
+                getProductsAdminCountRequestDto.getProductCategoryId(),
+                getProductsAdminCountRequestDto.getProductAnimalCategoryId(),
+                getProductsAdminCountRequestDto.getProductNameKor()
+        );
+
+        int maxPageNumber = (int) Math.ceil(((double) productCount) / getProductsAdminCountRequestDto.getCount());
+
+        return GetProductsAdminCountResponseDto.builder()
+                .totalCount(productCount)
+                .maxPageNumber(maxPageNumber)
+                .build();
     }
 
     public void deleteProductAdmin(int productId) {

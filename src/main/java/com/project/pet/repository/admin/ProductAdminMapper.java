@@ -15,7 +15,19 @@ public interface ProductAdminMapper {
 
     public Product getProductAdmin(int productId);
 
-    public List<Product> getProductsAdmin();
+    public List<Product> getProductsAdmin(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count,
+            @Param("productCategoryId") int productCategoryId,
+            @Param("productAnimalCategoryId") int productAnimalCategoryId,
+            @Param("productNameKor") String productNameKor
+    );
+
+    public int getProductsAdminCount(
+            @Param("productCategoryId") int productCategoryId,
+            @Param("productAnimalCategoryId") int productAnimalCategoryId,
+            @Param("productNameKor") String productNameKor
+    );
 
     public int deleteProductAdmin(int productId);
 
