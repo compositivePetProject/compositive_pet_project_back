@@ -164,8 +164,19 @@ public class ProductAdminService {
         productAdminMapper.putProductOutgoingStockAdmin(putProductOutgoingStockAdminRequestDto.toEntity());
     }
 
-    public List<GetProductOrderDetailsAdminResponseDto> getProductOrderDetailsAdmin() {
-        List<ProductOrderDetail> list = productOrderDetailMapper.getProductOrderDetailsAdmin();
+    public List<GetProductOrderDetailsAdminResponseDto> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
+
+        int startIndex = (getProductOrderDetailsAdminRequestDto.getPage() - 1) * getProductOrderDetailsAdminRequestDto.getCount();
+        System.out.println(getProductOrderDetailsAdminRequestDto);
+        System.out.println(startIndex);
+        List<ProductOrderDetail> list = productOrderDetailMapper.getProductOrderDetailsAdmin(
+                startIndex,
+                getProductOrderDetailsAdminRequestDto.getCount(),
+                getProductOrderDetailsAdminRequestDto.getProductCategoryId(),
+                getProductOrderDetailsAdminRequestDto.getProductAnimalCategoryId(),
+                getProductOrderDetailsAdminRequestDto.getProductSizeCategoryId(),
+                getProductOrderDetailsAdminRequestDto.getProductNameKor()
+        );
         return list.stream().map(ProductOrderDetail::toGetProductOrderDetailsAdminResponseDto).collect(Collectors.toList());
     }
 

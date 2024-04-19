@@ -13,17 +13,12 @@ import java.time.LocalDateTime;
 @Data
 public class GetProductOrderDetailsAdminResponseDto {
     private int productOrderDetailId;
-    private int productOrderId;
-    private int productId;
     private String productNameKor;
-    private int productSizeCategoryId;
-    private String productSizeCategoryName;
     private String productSizeCategoryNameKor;
     private int productOrderCount;
-    private int userId;
-    private String userName;
+    private String name;
     private String productOrderAddress;
     private String productOrderDetailAddress;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String productCategoryNameKor;
+    private String productAnimalCategoryNameKor;
 }

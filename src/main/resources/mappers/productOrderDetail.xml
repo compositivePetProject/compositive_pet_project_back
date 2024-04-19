@@ -61,9 +61,22 @@
         <association property="product" resultMap="ProductResultMap" />
         <association property="productSizeCategory" resultMap="ProductSizeCategoryResultMap" />
         <association property="user" resultMap="UserResultMap" />
+        <association property="productAnimalCategory" resultMap="ProductAnimalCategoryResultMap"/>
+        <association property="productCategory" resultMap="ProductCategoryResultMap"/>
+        <collection property="product" ofType="com.project.pet.entity.product.Product" resultMap="ProductResultMap"/>
     </resultMap>
 
+    <resultMap id="ProductAnimalCategoryResultMap" type="com.project.pet.entity.product.ProductAnimalCategory">
+        <id property="productAnimalCategoryId" column="product_animal_category_id" />
+        <result property="productAnimalCategoryName" column="product_animal_category_name" />
+        <result property="productAnimalCategoryNameKor" column="product_animal_category_name_kor" />
+    </resultMap>
 
+    <resultMap id="ProductCategoryResultMap" type="com.project.pet.entity.product.ProductCategory">
+        <id property="productCategoryId" column="product_category_id" />
+        <result property="productCategoryName" column="product_category_name" />
+        <result property="productCategoryNameKor" column="product_category_name_kor" />
+    </resultMap>
 
     <insert id="postProductOrderDetail" parameterType="com.project.pet.entity.product.ProductOrderDetail">
         insert into
@@ -94,25 +107,37 @@
     <select id="getProductOrderDetailsAdmin" resultMap="ProductOrderDetailResultMap">
         select
             podt.product_order_detail_id,
-            podt.product_order_id,
-            podt.product_id,
             pt.product_name_kor,
-            pot.product_size_category_id,
-            psci.product_size_category_name,
-            psci.product_size_category_name_kor,
+            psct.product_size_category_name_kor,
             pot.product_order_count,
-            pot.user_id,
             ut.user_name,
             pot.product_order_address,
             pot.product_order_detail_address,
-            podt.create_date,
-            podt.update_date
+            pct.product_category_name_kor,
+            pact.product_animal_category_name_kor
         from
-            product_order_detail_tb podt
+        product_order_detail_tb podt
             left outer join product_order_tb pot on(pot.product_order_id = podt.product_order_id)
             left outer join product_tb pt on(pt.product_id = podt.product_id)
-            left outer join product_size_category_tb psci on(psci.product_size_category_id = pot.product_size_category_id)
-            left outer join user_tb ut on(ut.user_id = pot.user_id);
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = pot.product_size_category_id)
+            left outer join user_tb ut on(ut.user_id = pot.user_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on(pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            1 = 1
+            <if test="productCategoryId != 0">
+                and pt.product_category_id = #{productCategoryId}
+            </if>
+            <if test="productAnimalCategoryId != 0">
+                and pt.product_animal_category_id = #{productAnimalCategoryId}
+            </if>
+            <if test="productSizeCategoryId != 0">
+                and pot.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
+        limit #{startIndex}, #{count}
     </select>
 
 </mapper>

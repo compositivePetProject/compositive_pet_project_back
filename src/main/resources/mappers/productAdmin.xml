@@ -168,7 +168,7 @@
                 and pt.product_animal_category_id = #{productAnimalCategoryId}
             </if>
             <if test="productNameKor != '' and productNameKor != null" >
-                and pt.product_name_kor like concat('%', #{productNameKor})
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
             </if>
         limit #{startIndex}, #{count}
     </select>
@@ -190,7 +190,7 @@
                 and pt.product_animal_category_id = #{productAnimalCategoryId}
             </if>
             <if test="productNameKor != '' and productNameKor != null" >
-                and pt.product_name_kor like concat('%', #{productNameKor})
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
             </if>
     </select>
 
