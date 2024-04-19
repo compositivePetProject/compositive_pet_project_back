@@ -18,6 +18,8 @@ public class ProductCart {
     private int productCartCount;
 
     private ProductOrder productOrder;
+    private Product product;
+
     public GetProductCartResponseDto toGetProductCartResponseDto() {
         return GetProductCartResponseDto.builder()
                 .productCartId(productCartId)
@@ -29,6 +31,8 @@ public class ProductCart {
                 .productOrderAddress(productOrder.getProductOrderAddress())
                 .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
                 .productOrderCount(productOrder.getProductOrderCount())
+                .productPrice(product.getProductPrice())
+                .productImageUrl(product.getProductImageUrl())
                 .build();
     }
 }
