@@ -64,6 +64,7 @@ public class ProductOrder {
                 .productId(productId)
                 .productNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
+                .productImageUrl(product.getProductImageUrl())
                 .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
                 .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productOrderCount(productOrderCount)

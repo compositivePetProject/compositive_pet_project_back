@@ -1,15 +1,16 @@
 package com.project.pet.dto.product.request;
 
 import com.project.pet.entity.product.ProductComment;
-import com.project.pet.entity.product.ProductOrder;
 import lombok.Data;
 
 @Data
-public class PostProductCommentRequestDto {
+public class PostProductCommentsRequestDto {
     private int productId;
+    private int userId;
     private String productCommentContent;
+    public int productCommentRatingValue;
 
-    public ProductComment toEntity(int userId) {
+    public ProductComment toEntity() {
         return ProductComment.builder()
                 .productId(productId)
                 .userId(userId)

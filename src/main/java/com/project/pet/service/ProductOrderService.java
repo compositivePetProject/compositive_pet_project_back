@@ -1,5 +1,6 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.product.request.GetProductOrderRequestDto;
 import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
@@ -61,14 +62,41 @@ public class ProductOrderService {
         );
     }
 
-    public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
+    public void productOrderCarts(List<PostProductOrderRequestDto>  productOrderRequestDtoList) {
+        List<ProductOrder> orders  = productOrderRequestDtoList.stream().map(PostProductOrderRequestDto::toEntity).collect(Collectors.toList());
+        productOrderMapper.productOrderCarts(orders);
 
+        for (ProductOrder productOrder : orders) {
+            int productOrderId = productOrder.getProductOrderId();
+            int productId = productOrder.getProductId();
+            int productSizeCategoryId = productOrder.getProductSizeCategoryId();
+            int productOrderCount = productOrder.getProductOrderCount();
+
+            productOrderDetailMapper.postProductOrderDetail(
+                    ProductOrderDetail.builder()
+                            .productOrderId(productOrderId)
+                            .productId(productId)
+                            .build()
+            );
+
+            productAdminMapper.postProductOutgoingStockAdmin(
+                    ProductOutgoingStock.builder()
+                            .productOrderId(productOrderId)
+                            .productId(productId)
+                            .productSizeCategoryId(productSizeCategoryId)
+                            .productOutgoingStockCount(productOrderCount)
+                            .build()
+            );
+        }
+    }
+
+    public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
         List<ProductOrder> list = productOrderMapper.getProductOrders(getProductOrdersRequestDto.getUserId());
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
     }
 
-    public GetProductOrderResponseDto getProductOrder(int productOrderId) {
-        return productOrderMapper.getProductOrder(productOrderId).toGetProductOrderResponseDto();
+    public GetProductOrderResponseDto getProductOrder(GetProductOrderRequestDto getProductOrderRequestDto) {
+        return productOrderMapper.getProductOrder(getProductOrderRequestDto.getProductOrderId()).toGetProductOrderResponseDto();
     }
 
     public void deleteProductOrder(DeleteProductOrderRequestDto deleteProductOrderRequestDto) {
