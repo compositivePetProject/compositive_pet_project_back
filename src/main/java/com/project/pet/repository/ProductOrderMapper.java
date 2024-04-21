@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface ProductOrderMapper {
     public int postProductOrder(ProductOrder productOrder);
-
+    public int productOrderCarts(List<ProductOrder> productOrders);
     public List<ProductOrder> getProductOrders(int userId);
 
     public ProductOrder getProductOrder(int productOrderId);
