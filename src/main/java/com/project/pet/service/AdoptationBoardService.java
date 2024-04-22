@@ -32,6 +32,7 @@ public class AdoptationBoardService {
 
     }
 
+    // 전체 분양 게시판 수 조회
     public GetAdoptationBoardCountRespDto getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
         int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCount();
         int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardCountReqDto.getCount()));
@@ -42,6 +43,7 @@ public class AdoptationBoardService {
     }
 
 
+    // 강아지 분양 게시판 수 조회
     public GetAdoptationBoardDogCountRespDto getAdoptationBoardDogCount(GetAdoptationBoardDogCountReqDto getAdoptationBoardDogCountReqDto) {
         int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardDogCount();
         int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardDogCountReqDto.getCount()));
