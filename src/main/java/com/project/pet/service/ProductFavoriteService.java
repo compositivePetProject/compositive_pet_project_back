@@ -30,6 +30,6 @@ public class ProductFavoriteService {
     }
 
     public void deleteProductFavorite(DeleteProductFavoriteRequestDto deleteProductFavoriteRequestDto) {
-        productFavoriteMapper.deleteProductFavorite(deleteProductFavoriteRequestDto.getUserId());
+        productFavoriteMapper.deleteProductFavorite(deleteProductFavoriteRequestDto.getUserId(), deleteProductFavoriteRequestDto.getProductId());
     }
 }

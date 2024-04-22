@@ -9,4 +9,5 @@ public class GetProductSearchProductRequestDto {
     private int productCategoryId;
     private int productId;
     private String searchText;
+    private String orderBy;
 }

@@ -66,6 +66,7 @@
             product_favorite_tb
         where
             user_id = #{userId}
+            and product_id = #{productId}
     </delete>
 
     <select id="existsByUserIdAndProductId"
