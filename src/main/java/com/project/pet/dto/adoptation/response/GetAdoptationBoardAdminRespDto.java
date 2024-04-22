@@ -4,6 +4,7 @@ package com.project.pet.dto.adoptation.response;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -15,7 +16,7 @@ public class GetAdoptationBoardAdminRespDto {
     private String username;
     private String adoptationBoardAdminTitle;
     private String adoptationBoardAdminContent;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private LocalDate createDate;
+    private LocalDate updateDate;
 
 }

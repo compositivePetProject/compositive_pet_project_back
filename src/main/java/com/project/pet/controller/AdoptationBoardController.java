@@ -1,9 +1,7 @@
 package com.project.pet.controller;
 
 
-import com.project.pet.dto.adoptation.request.GetAdoptationBoardCountReqDto;
-import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
-import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
+import com.project.pet.dto.adoptation.request.*;
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardCountRespDto;
 import com.project.pet.service.AdoptationBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +31,24 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards());
     }
 
+
+    //내가 작성한 게시판 조회
+    @GetMapping("/board/user")
+    public ResponseEntity<?> getAdoptationBoardsByUserId(@RequestParam int userId) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardByUserId(userId));
+    }
+
+
     // 전체 게시판 페이지네이션 조회
     @GetMapping("/board/count")
     public ResponseEntity<?> getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardCount(getAdoptationBoardCountReqDto));
+    }
+
+    // 전체 게시판 페이지네이션 조회
+    @GetMapping("/board/dogCount")
+    public ResponseEntity<?> getAdoptationBoardDogCount(GetAdoptationBoardDogCountReqDto getAdoptationBoardDogCountReqDto) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardDogCount(getAdoptationBoardDogCountReqDto));
     }
 
 

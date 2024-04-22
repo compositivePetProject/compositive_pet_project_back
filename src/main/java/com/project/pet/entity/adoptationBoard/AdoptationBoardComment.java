@@ -22,8 +22,8 @@ public class AdoptationBoardComment {
     private int adoptationBoardCommentId;
     private int userId;
     private String adoptationBoardCommentContent;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private LocalDate createDate;
+    private LocalDate updateDate;
     private User user;
 
 

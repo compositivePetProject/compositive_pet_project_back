@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -23,8 +24,8 @@ public class AdoptationBoard {
     private String adoptationBoardTitle;
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private LocalDate createDate;
+    private LocalDate updateDate;
     private int totalCount;
 
     public User user;
