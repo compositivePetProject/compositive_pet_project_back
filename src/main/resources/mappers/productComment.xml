@@ -92,6 +92,38 @@
             pct.product_id = #{productId};
     </select>
 
+    <select id="findProductComments"
+            resultMap="ProductCommentResultMap"
+    >
+        select
+            pct.product_comment_id,
+            pct.product_id,
+            pct.user_id,
+            pct.product_comment_content,
+            pcr.product_comment_rating_id,
+            pcr.product_comment_rating_value,
+            pt.product_name_kor,
+            pt.product_image_url,
+            pct.create_date,
+            pct.update_date
+        from
+            product_comment_tb pct
+            left outer join product_comment_rating_tb pcr on pcr.product_comment_id = pct.product_comment_id
+            left outer join product_tb pt on pt.product_id = pct.product_id
+        where
+            pct.product_id = #{productId}
+            limit #{startIndex}, #{count}
+    </select>
+
+    <select id="getAllProductCommentCount" resultType="integer">
+        select
+            count(*)
+        from
+            product_comment_tb pct
+        where
+            pct.product_id = #{productId}
+    </select>
+
     <delete id="deleteProductComment"
             parameterType="Integer">
         delete

@@ -41,4 +41,14 @@ public class ProductCommentController {
         return ResponseEntity.ok(true);
     }
 
+    @GetMapping("/comments/page")
+    public ResponseEntity<?> getProductPage(GetProductSearchProductRequestDto getProductSearchProductRequestDto){
+        return ResponseEntity.ok(productCommentService.getProductCountPage(getProductSearchProductRequestDto));
+    }
+
+    @GetMapping("/comments/count")
+    public ResponseEntity<?> getProductCount(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
+        return ResponseEntity.ok(productCommentService.getProductCount(getProductSearchProductRequestDto));
+    }
+
 }
