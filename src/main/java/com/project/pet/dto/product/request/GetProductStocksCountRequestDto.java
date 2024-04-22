@@ -3,7 +3,6 @@ package com.project.pet.dto.product.request;
 import lombok.Data;
 
 @Data
-public class GetProductOrderDetailsAdminRequestDto {
-    private int page;
+public class GetProductStocksCountRequestDto {
     private int count;
 }

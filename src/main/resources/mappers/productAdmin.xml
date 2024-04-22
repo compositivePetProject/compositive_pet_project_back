@@ -296,14 +296,37 @@
             pt.product_name_kor,
             pist.product_size_category_id,
             psct.product_size_category_name,
-            psct.product_size_category_name_kor,
-            pist.product_incoming_stock_count,
-            pist.create_date,
-            pist.update_date
+            pist.product_incoming_stock_count
         from
             product_incoming_stock_tb pist
             left outer join product_tb pt on(pt.product_id = pist.product_id)
             left outer join product_size_category_tb psct on(psct.product_size_category_id = pist.product_size_category_id)
+        where
+            1 = 1
+            <if test="productSizeCategoryId != 0">
+                and psct.product_size_category_Id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
+        limit #{startIndex}, #{count}
+    </select>
+
+    <select id="getProductIncomingCount" resultType="Integer">
+        select
+            count(*)
+        from
+            product_incoming_stock_tb pist
+            left outer join product_tb pt on(pt.product_id = pist.product_id)
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = pist.product_size_category_id)
+        where
+            1 = 1
+            <if test="productSizeCategoryId != 0">
+                and psct.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
     </select>
 
     <select id="getProductIncomingStock" parameterType="Integer" resultMap="ProductIncomingStockResultMap">
@@ -372,14 +395,19 @@
     <select id="getProductStocksAdmin" resultMap="ProductStockResultMap">
         select
             pst.product_stock_id,
-            pst.product_id,
             pt.product_name_kor,
-            pst.product_size_category_id,
             psct.product_size_category_name,
-            psct.product_size_category_name_kor,
-            pst.product_stock_count,
-            pst.create_date,
-            pst.update_date
+            pst.product_stock_count
+        from
+            product_stock_tb pst
+            left outer join product_tb pt on(pt.product_id = pst.product_id)
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = pst.product_size_category_id)
+        limit #{startIndex}, #{count}
+    </select>
+
+    <select id="getProductStocksCount" resultType="Integer">
+        select
+            count(*)
         from
             product_stock_tb pst
             left outer join product_tb pt on(pt.product_id = pst.product_id)
@@ -444,20 +472,25 @@
     <select id="getProductOutgoingStocksAdmin" resultMap="ProductOutgoingStockResultMap">
         select
             post.product_outgoing_stock_id,
-            post.product_order_id,
-            post.product_id,
             pt.product_name_kor,
-            post.product_size_category_id,
             psct.product_size_category_name,
-            psct.product_size_category_name_kor,
             post.product_outgoing_stock_count,
-            post.create_date,
             post.update_date
         from
             product_outgoing_stock_tb post
             left outer join product_order_tb pot on(pot.product_order_id = post.product_order_id)
             left outer join product_tb pt on(pt.product_id = post.product_id)
-            left outer join product_size_category_tb psct on(psct.product_size_category_id = post.product_size_category_id);
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = post.product_size_category_id)
+        limit #{startIndex}, #{count}
+    </select>
+    <select id="getProductOutgoingCountAdmin" resultType="Integer">
+        select
+            count(*)
+        from
+            product_outgoing_stock_tb post
+            left outer join product_order_tb pot on(pot.product_order_id = post.product_order_id)
+            left outer join product_tb pt on(pt.product_id = post.product_id)
+            left outer join product_size_category_tb psct on(psct.product_size_category_id = post.product_size_category_id)
     </select>
     <delete id="deleteProductOutgoingStockAdmin" parameterType="Integer">
         delete

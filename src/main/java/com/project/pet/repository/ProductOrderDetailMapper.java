@@ -16,10 +16,6 @@ public interface ProductOrderDetailMapper {
 
     public List<ProductOrderDetail> getProductOrderDetailsAdmin(
             @Param("startIndex") int startIndex,
-            @Param("count") int count,
-            @Param("productCategoryId") int productCategoryId,
-            @Param("productAnimalCategoryId") int productAnimalCategoryId,
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
+            @Param("count") int count
     );
 }

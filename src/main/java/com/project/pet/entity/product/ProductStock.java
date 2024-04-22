@@ -27,15 +27,9 @@ public class ProductStock {
     public GetProductStocksAdminResponseDto toGetProductStocksResponseDto() {
         return GetProductStocksAdminResponseDto.builder()
                 .productStockId(productStockId)
-                .productId(productId)
                 .productNameKor(product.getProductNameKor())
-                .productSizeCategoryNameKor(product.getProductNameKor())
-                .productSizeCategoryId(productSizeCategoryId)
                 .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
-                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productStockCount(productStockCount)
-                .createDate(createDate)
-                .updateDate(updateDate)
                 .build();
     }
 

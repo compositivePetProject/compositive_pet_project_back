@@ -14,11 +14,9 @@ import java.time.LocalDateTime;
 public class GetProductOrderDetailsAdminResponseDto {
     private int productOrderDetailId;
     private String productNameKor;
-    private String productSizeCategoryNameKor;
+    private String productSizeCategoryName;
     private int productOrderCount;
     private String name;
     private String productOrderAddress;
     private String productOrderDetailAddress;
-    private String productCategoryNameKor;
-    private String productAnimalCategoryNameKor;
 }

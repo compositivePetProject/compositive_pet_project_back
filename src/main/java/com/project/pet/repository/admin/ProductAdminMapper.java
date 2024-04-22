@@ -44,7 +44,17 @@ public interface ProductAdminMapper {
             @Param("searchText") String searchText
     );
 
-    public List<ProductIncomingStock> getProductIncomingStocks();
+    public List<ProductIncomingStock> getProductIncomingStocks(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count,
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productNameKor") String productNameKor
+    );
+
+    public int getProductIncomingCount(
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productNameKor") String productNameKor
+    );
 
     public ProductIncomingStock getProductIncomingStock(int productIncomingStockId);
 
@@ -56,7 +66,12 @@ public interface ProductAdminMapper {
 
     public int postProductStockAdmin(ProductStock productStock);
 
-    public List<ProductStock> getProductStocksAdmin();
+    public List<ProductStock> getProductStocksAdmin(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count
+    );
+
+    public int getProductStocksCount();
 
     public ProductStock getProductStockAdmin(int productStockId);
 
@@ -68,7 +83,12 @@ public interface ProductAdminMapper {
 
     public int postProductOutgoingStockAdmin(ProductOutgoingStock productOutgoingStock);
 
-    public List<ProductOutgoingStock> getProductOutgoingStocksAdmin();
+    public List<ProductOutgoingStock> getProductOutgoingStocksAdmin(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count
+    );
+
+    public int getProductOutgoingCountAdmin();
 
     public int deleteProductOutgoingStockAdmin(int productOrderId);
 

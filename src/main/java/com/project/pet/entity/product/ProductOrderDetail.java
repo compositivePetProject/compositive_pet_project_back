@@ -29,13 +29,11 @@ public class ProductOrderDetail {
         return GetProductOrderDetailsAdminResponseDto.builder()
                 .productOrderDetailId(productOrderDetailId)
                 .productNameKor(product.getProductNameKor())
-                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
                 .productOrderCount(productOrder.getProductOrderCount())
                 .name(user.getName())
                 .productOrderAddress(productOrder.getProductOrderAddress())
                 .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
-                .productCategoryNameKor(productCategory.getProductCategoryNameKor())
-                .productAnimalCategoryNameKor(productAnimalCategory.getProductAnimalCategoryNameKor())
                 .build();
     }
 }

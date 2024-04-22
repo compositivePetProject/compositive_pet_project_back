@@ -33,10 +33,7 @@ public class ProductIncomingStock {
                 .productNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
                 .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
-                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productIncomingStockCount(productIncomingStockCount)
-                .createDate(createDate)
-                .updateDate(updateDate)
                 .build();
     }
 
