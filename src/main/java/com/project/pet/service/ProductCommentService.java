@@ -1,7 +1,9 @@
 package com.project.pet.service;
 
 import com.project.pet.dto.product.request.*;
+import com.project.pet.dto.product.response.GetProductCountResponseDto;
 import com.project.pet.dto.product.response.ProductCommentResponseDto;
+import com.project.pet.entity.product.Product;
 import com.project.pet.entity.product.ProductCommentRating;
 import com.project.pet.entity.user.PrincipalUser;
 import com.project.pet.entity.product.ProductComment;
@@ -22,6 +24,7 @@ public class ProductCommentService {
     private ProductCommentMapper productCommentMapper;
     @Autowired
     private ProductCommentRatingMapper productCommentRatingMapper;
+
     private PrincipalUser getPrincipalUser () {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         PrincipalUser principalUser = (PrincipalUser) authentication.getPrincipal();
@@ -53,6 +56,28 @@ public class ProductCommentService {
     public List<ProductCommentResponseDto> getAllProductComments(GetProductCommentsRequestDto getProductCommentRequestDto) {
         List<ProductComment> productComments = productCommentMapper.getAllProductCommentsByProductId(getProductCommentRequestDto.getProductId());
         return productComments.stream().map(ProductComment::toProductCommentResponseDto).collect(Collectors.toList());
+    }
+
+    public List<ProductCommentResponseDto>  getProductCountPage(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
+        int startIndex = (getProductSearchProductRequestDto.getPage() - 1) * getProductSearchProductRequestDto.getCount();
+
+        List<ProductComment>  productCommentList = productCommentMapper.findProductComments(
+                startIndex,
+                getProductSearchProductRequestDto.getCount(),
+                getProductSearchProductRequestDto.getProductId()
+        );
+
+        return productCommentList.stream().map(ProductComment::toProductCommentResponseDto).collect(Collectors.toList());
+    }
+
+    public GetProductCountResponseDto getProductCount(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
+        int reviewCount = productCommentMapper.getAllProductCommentCount(getProductSearchProductRequestDto.getProductId());
+        int maxPageNumber = (int) Math.ceil(((double) reviewCount) / getProductSearchProductRequestDto.getCount());
+
+        return GetProductCountResponseDto.builder()
+                .totalCount(reviewCount)
+                .maxPageNumber(maxPageNumber)
+                .build();
     }
 
     public void deleteProductComment(DeleteProductCommentRequestDto deleteProductCommentRequestDto) {

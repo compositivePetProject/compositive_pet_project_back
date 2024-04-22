@@ -11,9 +11,15 @@ public interface ProductMapper {
     public Product getProduct(@Param("productId") int productId);
 
     public List<Product> getProducts();
+
     public List<Product> findProducts(
             @Param("startIndex") int startIndex,
             @Param("count") int count,
-            @Param("productCategoryId") int productCategoryId);
-    public int getProductCount(@Param("productCategoryId") int productCategoryId);
+            @Param("productCategoryId") int productCategoryId,
+            @Param("searchText") String searchText);
+
+
+    public int getProductCount(
+            @Param("productCategoryId") int productCategoryId,
+            @Param("searchText") String searchText);
 }
