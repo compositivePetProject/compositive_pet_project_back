@@ -36,7 +36,8 @@ public class ProductService {
                 startIndex,
                 getProductSearchProductRequestDto.getCount(),
                 getProductSearchProductRequestDto.getProductCategoryId(),
-                getProductSearchProductRequestDto.getSearchText());
+                getProductSearchProductRequestDto.getSearchText(),
+                getProductSearchProductRequestDto.getOrderBy());
 
         return productList.stream().map(Product::toGetProductsResponseDto).collect(Collectors.toList());
     }

@@ -16,7 +16,8 @@ public interface ProductMapper {
             @Param("startIndex") int startIndex,
             @Param("count") int count,
             @Param("productCategoryId") int productCategoryId,
-            @Param("searchText") String searchText);
+            @Param("searchText") String searchText,
+            @Param("orderBy") String orderBy);
 
 
     public int getProductCount(
