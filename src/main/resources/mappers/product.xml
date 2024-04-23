@@ -69,22 +69,22 @@
 
     <select id="findProducts" resultMap="ProductResultMap">
         SELECT
-        pt.product_id,
-        pt.user_id,
-        pt.product_name_kor,
-        pt.product_price,
-        pt.product_image_url,
-        pt.product_category_id,
-        pt.product_animal_category_id,
-        pt.product_board_content,
-        pt.create_date,
-        pt.update_date,
-        COUNT(pft.product_id) AS total_user_id_count
+            pt.product_id,
+            pt.user_id,
+            pt.product_name_kor,
+            pt.product_price,
+            pt.product_image_url,
+            pt.product_category_id,
+            pt.product_animal_category_id,
+            pt.product_board_content,
+            pt.create_date,
+            pt.update_date,
+            COUNT(pft.product_id) AS total_user_id_count
         FROM
-        product_tb pt
-        LEFT OUTER JOIN product_category_tb pct ON (pct.product_category_id = pt.product_animal_category_id)
-        LEFT OUTER JOIN product_animal_category_tb pact ON (pact.product_animal_category_id = pt.product_animal_category_id)
-        LEFT OUTER JOIN product_favorite_tb pft ON (pft.product_id = pt.product_id)
+            product_tb pt
+            LEFT OUTER JOIN product_category_tb pct ON (pct.product_category_id = pt.product_animal_category_id)
+            LEFT OUTER JOIN product_animal_category_tb pact ON (pact.product_animal_category_id = pt.product_animal_category_id)
+            LEFT OUTER JOIN product_favorite_tb pft ON (pft.product_id = pt.product_id)
         WHERE
         1 = 1
         <if test="productCategoryId != 0">
@@ -94,16 +94,16 @@
             AND pt.product_name_kor LIKE CONCAT('%', #{searchText}, '%')
         </if>
         GROUP BY
-        pt.product_id,
-        pt.user_id,
-        pt.product_name_kor,
-        pt.product_price,
-        pt.product_image_url,
-        pt.product_category_id,
-        pt.product_animal_category_id,
-        pt.product_board_content,
-        pt.create_date,
-        pt.update_date
+            pt.product_id,
+            pt.user_id,
+            pt.product_name_kor,
+            pt.product_price,
+            pt.product_image_url,
+            pt.product_category_id,
+            pt.product_animal_category_id,
+            pt.product_board_content,
+            pt.create_date,
+            pt.update_date
         ORDER BY
         <choose>
             <when test="orderBy == 'desc'">
