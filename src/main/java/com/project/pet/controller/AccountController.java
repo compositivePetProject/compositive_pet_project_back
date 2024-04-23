@@ -36,6 +36,7 @@ public class AccountController {
         return ResponseEntity.ok(true);
     }
 
+
     @ValidAspect
     @PutMapping("/edit/nickname/profileImg")
     public ResponseEntity<?> editNicknameAndProfileImageUrl (@Valid @RequestBody AccountEditNicknameRequestDto accountEditNicknameRequestDto, BindingResult bindingResult) {
