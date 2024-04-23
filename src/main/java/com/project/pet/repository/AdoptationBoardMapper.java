@@ -22,6 +22,8 @@ public interface AdoptationBoardMapper {
 
     public int getAdoptationBoardDogCount();
 
+    public int getAdoptationBoardUserCount(int userId);
+
 
     //개 카테고리인 게시글 목록 조회
     public List<AdoptationBoard> getAdoptationBoardsDog();

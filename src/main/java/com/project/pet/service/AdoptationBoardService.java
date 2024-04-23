@@ -1,10 +1,7 @@
 package com.project.pet.service;
 
 import com.project.pet.dto.adoptation.request.*;
-import com.project.pet.dto.adoptation.response.GetAdoptationBoardCountRespDto;
-import com.project.pet.dto.adoptation.response.GetAdoptationBoardDogCountRespDto;
-import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
-import com.project.pet.dto.adoptation.response.GetLikedAdoptationBoardByUserIdRespDto;
+import com.project.pet.dto.adoptation.response.*;
 import com.project.pet.entity.adoptationBoard.AdoptationBoard;
 import com.project.pet.repository.AdoptationBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +47,16 @@ public class AdoptationBoardService {
         return GetAdoptationBoardDogCountRespDto.builder()
                 .maxPageNumberDog(maxPageNumber)
                 .totalCountDog(adoptionBoardCount)
+                .build();
+    }
+
+    //마이페이지 게시판 수 조회
+    public GetAdoptationBoardUserCountRespDto getAdoptationBoardUserCount(GetAdoptationBoardUserCountReqDto getAdoptationBoardUserCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardUserCount(getAdoptationBoardUserCountReqDto.getUserId());
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardUserCountReqDto.getCount()));
+        return GetAdoptationBoardUserCountRespDto.builder()
+                .maxPageNumber(maxPageNumber)
+                .totalCount(adoptionBoardCount)
                 .build();
     }
 

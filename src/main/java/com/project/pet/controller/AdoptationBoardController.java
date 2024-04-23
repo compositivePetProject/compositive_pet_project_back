@@ -51,6 +51,12 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardDogCount(getAdoptationBoardDogCountReqDto));
     }
 
+    //마이페이지 게시판 페이지네이션
+    @GetMapping("/board/userCount")
+    public ResponseEntity<?> getAdoptationBoardUserCount(GetAdoptationBoardUserCountReqDto getAdoptationBoardUserCountReqDto) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardUserCount(getAdoptationBoardUserCountReqDto));
+    }
+
 
     //// categoryId가 1인 전체 게시판 조회(다건)
     @GetMapping("/board/dog")
