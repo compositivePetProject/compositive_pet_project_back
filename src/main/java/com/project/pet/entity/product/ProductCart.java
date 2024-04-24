@@ -31,6 +31,7 @@ public class ProductCart {
                 .productOrderAddress(productOrder.getProductOrderAddress())
                 .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
                 .productOrderCount(productOrder.getProductOrderCount())
+                .productNameKor(product.getProductNameKor())
                 .productPrice(product.getProductPrice())
                 .productImageUrl(product.getProductImageUrl())
                 .build();
