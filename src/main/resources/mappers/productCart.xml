@@ -62,6 +62,7 @@
             pot.product_order_address,
             pot.product_order_detail_address,
             pot.product_order_count,
+            pt.product_name_kor,
             pt.product_price,
             pt.product_image_url
         from

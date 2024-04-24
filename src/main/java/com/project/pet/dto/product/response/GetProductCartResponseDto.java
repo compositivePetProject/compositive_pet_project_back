@@ -15,6 +15,7 @@ public class GetProductCartResponseDto {
     private String productOrderAddress;
     private String productOrderDetailAddress;
     private int productOrderCount;
+    private String productNameKor;
     private int productPrice;
     private String productImageUrl;
 }
