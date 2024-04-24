@@ -68,7 +68,9 @@ public interface ProductAdminMapper {
 
     public List<ProductStock> getProductStocksAdmin(
             @Param("startIndex") int startIndex,
-            @Param("count") int count
+            @Param("count") int count,
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productNameKor") String productNameKor
     );
 
     public int getProductStocksCount();

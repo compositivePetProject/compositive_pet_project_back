@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 @Data
 public class GetProductStocksAdminResponseDto {
     private int productStockId;
+    private int productId;
     private String productNameKor;
+    private int productSizeCategoryId;
     private String productSizeCategoryName;
     private int productStockCount;
 }

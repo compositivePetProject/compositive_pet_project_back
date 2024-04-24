@@ -27,6 +27,8 @@ public class ProductStock {
     public GetProductStocksAdminResponseDto toGetProductStocksResponseDto() {
         return GetProductStocksAdminResponseDto.builder()
                 .productStockId(productStockId)
+                .productId(productId)
+                .productSizeCategoryId(productSizeCategoryId)
                 .productNameKor(product.getProductNameKor())
                 .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
                 .productStockCount(productStockCount)

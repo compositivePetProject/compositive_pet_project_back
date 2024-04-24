@@ -142,7 +142,9 @@ public class ProductAdminService {
         int startIndex = (getProductStocksAdminRequestDto.getPage() - 1) * getProductStocksAdminRequestDto.getCount();
         List<ProductStock> list = productAdminMapper.getProductStocksAdmin(
                 startIndex,
-                getProductStocksAdminRequestDto.getCount()
+                getProductStocksAdminRequestDto.getCount(),
+                getProductStocksAdminRequestDto.getProductSizeCategoryId(),
+                getProductStocksAdminRequestDto.getProductNameKor()
         );
         return list.stream().map(ProductStock::toGetProductStocksResponseDto).collect(Collectors.toList());
     }

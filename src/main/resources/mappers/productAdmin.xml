@@ -395,13 +395,23 @@
     <select id="getProductStocksAdmin" resultMap="ProductStockResultMap">
         select
             pst.product_stock_id,
+            pst.product_id,
             pt.product_name_kor,
+            pst.product_size_category_id,
             psct.product_size_category_name,
             pst.product_stock_count
         from
             product_stock_tb pst
             left outer join product_tb pt on(pt.product_id = pst.product_id)
             left outer join product_size_category_tb psct on(psct.product_size_category_id = pst.product_size_category_id)
+        where
+            1 = 1
+            <if test="productSizeCategoryId != 0">
+                and pst.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
         limit #{startIndex}, #{count}
     </select>
 
