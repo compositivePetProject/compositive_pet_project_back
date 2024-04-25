@@ -103,9 +103,8 @@ public class AdoptationBoardController {
     }
 
     // boardId로 해당 게시판 수정(단건)
-    @PutMapping("/board/{boardId}")
-    public ResponseEntity<?> editAdoptationBoardByBoardId(@PathVariable int boardId, @RequestBody UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
-        updateAdoptationBoardReqDto.setAdoptationBoardId(boardId);
+    @PutMapping("/board")
+    public ResponseEntity<?> editAdoptationBoardByBoardId(@RequestBody UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
         adoptationBoardService.updateAdoptationBoard(updateAdoptationBoardReqDto);
         return ResponseEntity.ok().body("해당 게시글 수정 완료");
 
