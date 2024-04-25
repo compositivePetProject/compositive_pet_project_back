@@ -95,7 +95,7 @@ public class AdoptationBoardController {
 
     //선택된 게시판 다건 삭제
     @DeleteMapping("/board")
-    public ResponseEntity<?> deleteAdoptationBoards(@RequestParam("boardIds") List<Integer> boardIds) {
+    public ResponseEntity<?> deleteAdoptationBoards(@RequestParam List<Integer> boardIds) {
 
         adoptationBoardService.deleteAdoptationBoards(boardIds);
 

@@ -1,11 +1,15 @@
 package com.project.pet.controller;
 
 
+import com.project.pet.dto.adoptation.request.DeleteAdoptationBoardLikeReqDto;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardFavoriteReqDto;
 import com.project.pet.service.AdoptationBoardFavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/adoptation")
@@ -15,10 +19,14 @@ public class AdoptationBoardFavoriteController {
     private AdoptationBoardFavoriteService adoptationBoardFavoriteService;
 
     //해당 userId로 좋아요 취소
-    @DeleteMapping("/favorite/{userId}")
-    public ResponseEntity<?> deleteAdoptationBoardFavorite(@PathVariable int userId) {
-        adoptationBoardFavoriteService.deleteAdoptationBoardFavorite(userId);
-        return ResponseEntity.ok("좋아요 취소 완료");
+    @DeleteMapping("/favorite")
+    public ResponseEntity<?> deleteAdoptationBoardFavorite(@RequestParam int adoptationBoardId, @RequestParam int userId) {
+        Map<String, Integer> params = new HashMap<>();
+        params.put("adoptationBoardId", adoptationBoardId);
+        params.put("userId", userId);
+        System.out.println(params);
+        adoptationBoardFavoriteService.deleteAdoptationBoardFavorite(params);
+        return ResponseEntity.ok(params.get(adoptationBoardId));
     }
 
 
@@ -29,6 +37,10 @@ public class AdoptationBoardFavoriteController {
         return ResponseEntity.created(null).body(true);
     }
 
+    @GetMapping("/favorite/board")
+    public ResponseEntity<?> getAdoptationBoardFavoriteByBoardId (@RequestParam int boardId) {
+        return ResponseEntity.ok(adoptationBoardFavoriteService.getAdoptationBoardFavorite(boardId));
+    }
 
 
 
