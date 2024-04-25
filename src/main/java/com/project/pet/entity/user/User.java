@@ -20,6 +20,7 @@ public class User {
     private String password;
     private String name;
     private String address;
+    private String detailAddress;
     private String telNumber;
     private String nickname;
     private String email;
@@ -36,13 +37,26 @@ public class User {
                 .collect(Collectors.toList());
     }
 
+    public String addHyphenToTelNumber(String telNumber) {
+        if (telNumber.length() == 9 || telNumber.length() == 10) {
+            return telNumber.replaceFirst("(\\d{3})(\\d{3,4})(\\d+)", "$1-$2-$3");
+        }
+        else if (telNumber.length() == 11) {
+            return telNumber.replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
+        }
+        else {
+            return telNumber;
+        }
+    }
+
     public PrincipalUser toPrincipalUser() {
         return PrincipalUser.builder()
                 .userId(userId)
                 .username(username)
                 .name(name)
                 .address(address)
-                .telNumber(telNumber)
+                .detailAddress(detailAddress)
+                .telNumber(addHyphenToTelNumber(telNumber))
                 .nickname(nickname)
                 .email(email)
                 .profileImageUrl(profileImageUrl)
