@@ -1,5 +1,6 @@
 package com.project.pet.entity.product;
 
+import com.project.pet.dto.product.response.GetProductOrderDetailsAdminResponseDto;
 import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import com.project.pet.entity.user.User;
@@ -62,6 +63,19 @@ public class ProductOrder {
                 .productDetailOrderAddress(productOrderDetailAddress)
                 .createDate(createDate)
                 .updateDate(updateDate)
+                .build();
+    }
+
+    public GetProductOrderDetailsAdminResponseDto toGetProductOrderDetailsAdminResponseDto() {
+        return GetProductOrderDetailsAdminResponseDto.builder()
+                .productOrderId(productOrderId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryId(productSizeCategoryId)
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+                .productOrderCount(productOrderCount)
+                .name(user.getName())
+                .productOrderAddress(productOrderAddress)
+                .productOrderDetailAddress(productOrderDetailAddress)
                 .build();
     }
 }

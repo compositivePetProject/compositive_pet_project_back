@@ -12,8 +12,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class GetProductOrderDetailsAdminResponseDto {
-    private int productOrderDetailId;
+    private int productOrderId;
     private String productNameKor;
+    private int productSizeCategoryId;
     private String productSizeCategoryName;
     private int productOrderCount;
     private String name;

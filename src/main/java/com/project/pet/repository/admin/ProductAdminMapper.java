@@ -73,7 +73,10 @@ public interface ProductAdminMapper {
             @Param("productNameKor") String productNameKor
     );
 
-    public int getProductStocksCount();
+    public int getProductStocksCount(
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productNameKor") String productNameKor
+    );
 
     public ProductStock getProductStockAdmin(int productStockId);
 
@@ -87,10 +90,15 @@ public interface ProductAdminMapper {
 
     public List<ProductOutgoingStock> getProductOutgoingStocksAdmin(
             @Param("startIndex") int startIndex,
-            @Param("count") int count
+            @Param("count") int count,
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productNameKor") String productNameKor
     );
 
-    public int getProductOutgoingCountAdmin();
+    public int getProductOutgoingCountAdmin(
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productNameKor") String productNameKor
+    );
 
     public int deleteProductOutgoingStockAdmin(int productOrderId);
 

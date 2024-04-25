@@ -304,7 +304,7 @@
         where
             1 = 1
             <if test="productSizeCategoryId != 0">
-                and psct.product_size_category_Id = #{productSizeCategoryId}
+                and pist.product_size_category_Id = #{productSizeCategoryId}
             </if>
             <if test="productNameKor != '' and productNameKor != null">
                 and pt.product_name_kor like concat('%', #{productNameKor}, '%')
@@ -322,7 +322,7 @@
         where
             1 = 1
             <if test="productSizeCategoryId != 0">
-                and psct.product_size_category_id = #{productSizeCategoryId}
+                and pist.product_size_category_id = #{productSizeCategoryId}
             </if>
             <if test="productNameKor != '' and productNameKor != null">
                 and pt.product_name_kor like concat('%', #{productNameKor}, '%')
@@ -422,6 +422,14 @@
             product_stock_tb pst
             left outer join product_tb pt on(pt.product_id = pst.product_id)
             left outer join product_size_category_tb psct on(psct.product_size_category_id = pst.product_size_category_id)
+        where
+        1 = 1
+            <if test="productSizeCategoryId != 0">
+                and pst.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
     </select>
 
     <select id="getProductStockAdmin" parameterType="Integer" resultMap="ProductStockResultMap">
@@ -491,6 +499,14 @@
             left outer join product_order_tb pot on(pot.product_order_id = post.product_order_id)
             left outer join product_tb pt on(pt.product_id = post.product_id)
             left outer join product_size_category_tb psct on(psct.product_size_category_id = post.product_size_category_id)
+        where
+            1 = 1
+            <if test="productSizeCategoryId != 0">
+                and post.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
         limit #{startIndex}, #{count}
     </select>
     <select id="getProductOutgoingCountAdmin" resultType="Integer">
@@ -501,6 +517,14 @@
             left outer join product_order_tb pot on(pot.product_order_id = post.product_order_id)
             left outer join product_tb pt on(pt.product_id = post.product_id)
             left outer join product_size_category_tb psct on(psct.product_size_category_id = post.product_size_category_id)
+        where
+        1 = 1
+            <if test="productSizeCategoryId != 0">
+                and post.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
     </select>
     <delete id="deleteProductOutgoingStockAdmin" parameterType="Integer">
         delete

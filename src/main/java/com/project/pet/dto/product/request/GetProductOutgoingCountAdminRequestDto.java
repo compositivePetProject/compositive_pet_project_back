@@ -5,4 +5,6 @@ import lombok.Data;
 @Data
 public class GetProductOutgoingCountAdminRequestDto {
     private int count;
+    private int productSizeCategoryId;
+    private String productNameKor;
 }

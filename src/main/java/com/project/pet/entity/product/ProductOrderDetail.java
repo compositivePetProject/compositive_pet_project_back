@@ -25,15 +25,15 @@ public class ProductOrderDetail {
     private ProductAnimalCategory productAnimalCategory;
     private ProductCategory productCategory;
 
-    public GetProductOrderDetailsAdminResponseDto toGetProductOrderDetailsAdminResponseDto() {
-        return GetProductOrderDetailsAdminResponseDto.builder()
-                .productOrderDetailId(productOrderDetailId)
-                .productNameKor(product.getProductNameKor())
-                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
-                .productOrderCount(productOrder.getProductOrderCount())
-                .name(user.getName())
-                .productOrderAddress(productOrder.getProductOrderAddress())
-                .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
-                .build();
-    }
+//    public GetProductOrderDetailsAdminResponseDto toGetProductOrderDetailsAdminResponseDto() {
+//        return GetProductOrderDetailsAdminResponseDto.builder()
+//                .productOrderDetailId(productOrderDetailId)
+////                .productNameKor(product.getProductNameKor())
+////                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+////                .productOrderCount(productOrder.getProductOrderCount())
+////                .name(user.getName())
+////                .productOrderAddress(productOrder.getProductOrderAddress())
+////                .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
+//                .build();
+//    }
 }

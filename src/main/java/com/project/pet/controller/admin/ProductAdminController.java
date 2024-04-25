@@ -206,12 +206,20 @@ public class ProductAdminController {
 
     // [사용자 애완용품 주문 현황]
     // 관리자 애완용품 주문 현황 조회(다건)
+//    @GetMapping("/admin/order/detail")
+//    public ResponseEntity<?> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
+//        System.out.println(getProductOrderDetailsAdminRequestDto);
+//        return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdmin(getProductOrderDetailsAdminRequestDto));
+//    }
+
     @GetMapping("/admin/order/detail")
     public ResponseEntity<?> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
         return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdmin(getProductOrderDetailsAdminRequestDto));
     }
 
     // 관리자 애완용품 주문 현황 페이지네이션 조회(다건)
-//    @GetMapping("/admin/order/count")
-//    public ResponseEntity<?> getProductOrderDetailsAdminCount()
+    @GetMapping("/admin/order/count")
+    public ResponseEntity<?> getProductOrderDetailsAdminCount(GetProductOrderDetailsAdminCountRequestDto getProductOrderDetailsAdminCountRequestDto) {
+        return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdminCount(getProductOrderDetailsAdminCountRequestDto));
+    }
 }
