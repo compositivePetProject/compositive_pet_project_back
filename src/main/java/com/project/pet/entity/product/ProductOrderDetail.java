@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class ProductOrderDetail {
     private int productOrderDetailId;
@@ -24,23 +22,18 @@ public class ProductOrderDetail {
     private Product product;
     private ProductSizeCategory productSizeCategory;
     private User user;
+    private ProductAnimalCategory productAnimalCategory;
+    private ProductCategory productCategory;
 
-    public GetProductOrderDetailsAdminResponseDto toGetProductOrderDetailsAdminResponseDto() {
-        return GetProductOrderDetailsAdminResponseDto.builder()
-                .productOrderDetailId(productOrderDetailId)
-                .productOrderId(productOrderId)
-                .productId(productId)
-                .productNameKor(product.getProductNameKor())
-                .productSizeCategoryId(productOrder.getProductSizeCategoryId())
-                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
-                .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
-                .productOrderCount(productOrder.getProductOrderCount())
-                .userId(productOrder.getUserId())
-                .userName(user.getName())
-                .productOrderAddress(productOrder.getProductOrderAddress())
-                .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
-                .createDate(createDate)
-                .updateDate(updateDate)
-                .build();
-    }
+//    public GetProductOrderDetailsAdminResponseDto toGetProductOrderDetailsAdminResponseDto() {
+//        return GetProductOrderDetailsAdminResponseDto.builder()
+//                .productOrderDetailId(productOrderDetailId)
+////                .productNameKor(product.getProductNameKor())
+////                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
+////                .productOrderCount(productOrder.getProductOrderCount())
+////                .name(user.getName())
+////                .productOrderAddress(productOrder.getProductOrderAddress())
+////                .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
+//                .build();
+//    }
 }
