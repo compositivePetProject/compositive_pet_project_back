@@ -26,7 +26,7 @@ public class AdoptationBoardFavoriteController {
         params.put("userId", userId);
         System.out.println(params);
         adoptationBoardFavoriteService.deleteAdoptationBoardFavorite(params);
-        return ResponseEntity.ok(params.get(adoptationBoardId));
+        return ResponseEntity.ok(null);
     }
 
 
