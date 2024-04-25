@@ -35,13 +35,17 @@ public class ProductService {
         List<Product>  productList = productMapper.findProducts(
                 startIndex,
                 getProductSearchProductRequestDto.getCount(),
-                getProductSearchProductRequestDto.getProductCategoryId());
+                getProductSearchProductRequestDto.getProductCategoryId(),
+                getProductSearchProductRequestDto.getSearchText(),
+                getProductSearchProductRequestDto.getOrderBy());
 
         return productList.stream().map(Product::toGetProductsResponseDto).collect(Collectors.toList());
     }
 
     public GetProductCountResponseDto getProductCount(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
-        int productCount = productMapper.getProductCount(getProductSearchProductRequestDto.getProductCategoryId());
+        int productCount = productMapper.getProductCount(
+                getProductSearchProductRequestDto.getProductCategoryId(),
+                getProductSearchProductRequestDto.getSearchText());
         int maxPageNumber = (int) Math.ceil(((double) productCount) / getProductSearchProductRequestDto.getCount());
 
         return GetProductCountResponseDto.builder()
@@ -49,5 +53,4 @@ public class ProductService {
                 .maxPageNumber(maxPageNumber)
                 .build();
     }
-
 }

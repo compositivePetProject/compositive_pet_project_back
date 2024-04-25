@@ -8,7 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Builder
 @NoArgsConstructor
@@ -29,11 +31,20 @@ public class ProductOrder {
     private Product product;
     private ProductSizeCategory productSizeCategory;
 
+
+
     public GetProductOrdersResponseDto toGetProductOrdersResponseDto() {
+        LocalDate date = createDate.toLocalDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = date.format(formatter);
+
+
         return GetProductOrdersResponseDto.builder()
                 .productOrderId(productOrderId)
                 .productId(productId)
                 .productNameKor(product.getProductNameKor())
+                .productPrice(product.getProductPrice())
+                .productImageUrl(product.getProductImageUrl())
                 .productSizeCategoryId(productSizeCategoryId)
                 .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
                 .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
@@ -42,7 +53,7 @@ public class ProductOrder {
                 .username(user.getName())
                 .productOrderAddress(productOrderAddress)
                 .productDetailOrderAddress(productOrderDetailAddress)
-                .createDate(createDate)
+                .createDate(formattedDate)
                 .updateDate(updateDate)
                 .build();
     }
@@ -53,6 +64,7 @@ public class ProductOrder {
                 .productId(productId)
                 .productNameKor(product.getProductNameKor())
                 .productSizeCategoryId(productSizeCategoryId)
+                .productImageUrl(product.getProductImageUrl())
                 .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
                 .productSizeCategoryNameKor(productSizeCategory.getProductSizeCategoryNameKor())
                 .productOrderCount(productOrderCount)

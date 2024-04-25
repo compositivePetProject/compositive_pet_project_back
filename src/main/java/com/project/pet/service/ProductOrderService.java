@@ -1,8 +1,10 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.product.request.GetProductOrderRequestDto;
 import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
+import com.project.pet.dto.product.response.DeleteProductOrderRequestDto;
 import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import com.project.pet.entity.product.ProductOrder;
@@ -60,16 +62,45 @@ public class ProductOrderService {
         );
     }
 
+    public void productOrderCarts(List<PostProductOrderRequestDto>  productOrderRequestDtoList) {
+        List<ProductOrder> orders  = productOrderRequestDtoList.stream().map(PostProductOrderRequestDto::toEntity).collect(Collectors.toList());
+        productOrderMapper.productOrderCarts(orders);
+
+        for (ProductOrder productOrder : orders) {
+            int productOrderId = productOrder.getProductOrderId();
+            int productId = productOrder.getProductId();
+            int productSizeCategoryId = productOrder.getProductSizeCategoryId();
+            int productOrderCount = productOrder.getProductOrderCount();
+
+            productOrderDetailMapper.postProductOrderDetail(
+                    ProductOrderDetail.builder()
+                            .productOrderId(productOrderId)
+                            .productId(productId)
+                            .build()
+            );
+
+            productAdminMapper.postProductOutgoingStockAdmin(
+                    ProductOutgoingStock.builder()
+                            .productOrderId(productOrderId)
+                            .productId(productId)
+                            .productSizeCategoryId(productSizeCategoryId)
+                            .productOutgoingStockCount(productOrderCount)
+                            .build()
+            );
+        }
+    }
+
     public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
         List<ProductOrder> list = productOrderMapper.getProductOrders(getProductOrdersRequestDto.getUserId());
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
     }
 
-    public GetProductOrderResponseDto getProductOrder(int productOrderId) {
-        return productOrderMapper.getProductOrder(productOrderId).toGetProductOrderResponseDto();
+    public GetProductOrderResponseDto getProductOrder(GetProductOrderRequestDto getProductOrderRequestDto) {
+        return productOrderMapper.getProductOrder(getProductOrderRequestDto.getProductOrderId()).toGetProductOrderResponseDto();
     }
 
-    public void deleteProductOrder(int productOrderId) {
+    public void deleteProductOrder(DeleteProductOrderRequestDto deleteProductOrderRequestDto) {
+        int productOrderId = deleteProductOrderRequestDto.getProductOrderId();
         productOrderMapper.deleteProductOrder(productOrderId);
         productOrderDetailMapper.deleteProductOrder(productOrderId);
         productAdminMapper.deleteProductOutgoingStockAdmin(productOrderId);
@@ -82,7 +113,12 @@ public class ProductOrderService {
         productAdminMapper.deleteProductOutgoingStocksAdmin(productOrderIds);
     }
 
-    public void putProductOrder(int productOrderId, PutProductOrderRequestDto putProductOrderRequestDto) {
+
+    public void putProductOrder(PutProductOrderRequestDto putProductOrderRequestDto) {
+        int productOrderId = putProductOrderRequestDto.getProductOrderId();
+        if(putProductOrderRequestDto.getProductSizeCategoryId() == 0) {
+            throw new NullPointerException("데이터 오류");
+        }
         putProductOrderRequestDto.setProductOrderId(productOrderId);
         productOrderMapper.putProductOrder(putProductOrderRequestDto.toEntity());
         productAdminMapper.putProductOutgoingStockAdmin(ProductOutgoingStock

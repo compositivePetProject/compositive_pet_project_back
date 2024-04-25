@@ -57,11 +57,35 @@
         values(0, #{userId}, #{productId}, #{productOrderAddress}, #{productOrderDetailAddress}, #{productSizeCategoryId}, #{productOrderCount}, now(), now())
     </insert>
 
+    <insert id="productOrderCarts"
+            parameterType="list"
+            useGeneratedKeys="true"
+            keyProperty="productOrderId"
+    >
+        insert into
+            product_order_tb
+        values
+        <foreach collection="list" item="productOrder" separator=",">
+            (   0,
+                #{productOrder.userId},
+                #{productOrder.productId},
+                #{productOrder.productOrderAddress},
+                #{productOrder.productOrderDetailAddress},
+                #{productOrder.productSizeCategoryId},
+                #{productOrder.productOrderCount},
+                now(),
+                now()
+            )
+        </foreach>
+    </insert>
+
     <select id="getProductOrders" parameterType="Integer" resultMap="ProductOrderResultMap">
         select
             pot.product_order_id,
             pot.product_id,
+            pt.product_price,
             pt.product_name_kor,
+            pt.product_image_url,
             pot.product_size_category_id,
             psct.product_size_category_name,
             psct.product_size_category_name_kor,
@@ -86,6 +110,7 @@
         pot.product_order_id,
         pot.product_id,
         pt.product_name_kor,
+        pt.product_image_url,
         pot.product_size_category_id,
         psct.product_size_category_name,
         psct.product_size_category_name_kor,

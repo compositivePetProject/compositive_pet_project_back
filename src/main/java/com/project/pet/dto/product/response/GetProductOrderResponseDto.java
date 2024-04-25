@@ -23,6 +23,7 @@ public class GetProductOrderResponseDto {
     private String username;
     private String productOrderAddress;
     private String productDetailOrderAddress;
+    private String productImageUrl;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }

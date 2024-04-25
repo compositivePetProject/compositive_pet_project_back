@@ -3,7 +3,6 @@ package com.project.pet.dto.product.request;
 import lombok.Data;
 
 @Data
-public class DeleteProductFavoriteRequestDto {
+public class GetProductCommentRequestDto {
     private int userId;
-    private int productId;
 }

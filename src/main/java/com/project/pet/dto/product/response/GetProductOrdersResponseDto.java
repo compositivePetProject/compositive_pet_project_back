@@ -15,6 +15,8 @@ public class GetProductOrdersResponseDto {
     private int productOrderId;
     private int productId;
     private String productNameKor;
+    private int productPrice;
+    private String productImageUrl;
     private int productSizeCategoryId;
     private String productSizeCategoryName;
     private String productSizeCategoryNameKor;
@@ -23,6 +25,6 @@ public class GetProductOrdersResponseDto {
     private String username;
     private String productOrderAddress;
     private String productDetailOrderAddress;
-    private LocalDateTime createDate;
+    private String createDate;
     private LocalDateTime updateDate;
 }

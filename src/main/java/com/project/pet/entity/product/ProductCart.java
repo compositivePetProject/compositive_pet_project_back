@@ -1,13 +1,10 @@
 package com.project.pet.entity.product;
 
 import com.project.pet.dto.product.response.GetProductCartResponseDto;
-import com.project.pet.dto.product.response.ProductCommentResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Builder
 @NoArgsConstructor
@@ -20,6 +17,8 @@ public class ProductCart {
     private int productSizeCategoryId;
     private int productCartCount;
 
+    private ProductOrder productOrder;
+    private Product product;
 
     public GetProductCartResponseDto toGetProductCartResponseDto() {
         return GetProductCartResponseDto.builder()
@@ -28,6 +27,13 @@ public class ProductCart {
                 .productId(productId)
                 .productSizeCategoryId(productSizeCategoryId)
                 .productCartCount(productCartCount)
+                .productOrderId(productOrder.getProductOrderId())
+                .productOrderAddress(productOrder.getProductOrderAddress())
+                .productOrderDetailAddress(productOrder.getProductOrderDetailAddress())
+                .productOrderCount(productOrder.getProductOrderCount())
+                .productNameKor(product.getProductNameKor())
+                .productPrice(product.getProductPrice())
+                .productImageUrl(product.getProductImageUrl())
                 .build();
     }
 }

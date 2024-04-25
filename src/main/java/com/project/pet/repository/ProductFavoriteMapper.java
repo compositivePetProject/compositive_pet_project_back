@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ProductFavoriteMapper {
     public Product getProductFavoritesCount(int productId);
     public int saveProductFavorite(ProductFavorite productFavorite);
-    public int deleteProductFavorite(int userId);
+    public int deleteProductFavorite(int userId, int productId);
     public boolean existsByUserIdAndProductId(ProductFavorite productFavorite);
 
 }
