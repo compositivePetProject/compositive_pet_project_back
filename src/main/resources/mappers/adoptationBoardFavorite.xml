@@ -32,10 +32,10 @@
     </delete>
 
     <select id="getAdoptationBoardFavorite"
-            resultMap="AdoptationBoardFavoriteResultMap"
+            resultType="integer"
         >
         select
-            *
+            count(*)
         from
             adoptation_board_favorite_tb
         where

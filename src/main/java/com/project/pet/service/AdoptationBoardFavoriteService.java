@@ -1,6 +1,7 @@
 package com.project.pet.service;
 
 import com.project.pet.dto.adoptation.request.DeleteAdoptationBoardLikeReqDto;
+import com.project.pet.dto.adoptation.request.GetAdoptationFavoriteReqDto;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardFavoriteReqDto;
 import com.project.pet.dto.adoptation.response.GetAdoptationFavoriteRespDto;
 import com.project.pet.entity.adoptationBoard.AdoptationBoardFavorite;
@@ -21,9 +22,9 @@ public class AdoptationBoardFavoriteService {
             adoptationBoardFavoriteMapper.saveAdoptationBoardFavorite(postAdoptationBoardFavoriteReqDto.toEntity());
     }
 
-    public List<GetAdoptationFavoriteRespDto> getAdoptationBoardFavorite(int boardId) {
-        List<AdoptationBoardFavorite> adoptationBoardFavorites = adoptationBoardFavoriteMapper.getAdoptationBoardFavorite(boardId);
-        return adoptationBoardFavorites.stream().map(AdoptationBoardFavorite::toGetAdoptationFavoriteRespDto).collect(Collectors.toList());
+    public int getAdoptationBoardFavorite(int boardId) {
+        int adoptationBoardFavorites = adoptationBoardFavoriteMapper.getAdoptationBoardFavorite(boardId);
+        return adoptationBoardFavorites;
     }
 
     public void deleteAdoptationBoardFavorite(Map<String, Integer> params) {

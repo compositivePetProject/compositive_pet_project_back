@@ -2,6 +2,7 @@ package com.project.pet.controller;
 
 
 import com.project.pet.dto.adoptation.request.DeleteAdoptationBoardLikeReqDto;
+import com.project.pet.dto.adoptation.request.GetAdoptationFavoriteReqDto;
 import com.project.pet.dto.adoptation.request.PostAdoptationBoardFavoriteReqDto;
 import com.project.pet.service.AdoptationBoardFavoriteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,8 @@ public class AdoptationBoardFavoriteController {
     }
 
     @GetMapping("/favorite/board")
-    public ResponseEntity<?> getAdoptationBoardFavoriteByBoardId (@RequestParam int boardId) {
+    public ResponseEntity<?> getAdoptationBoardFavoriteByBoardId (@RequestParam("adoptationBoardId") int boardId) {
+        System.out.println(adoptationBoardFavoriteService.getAdoptationBoardFavorite(boardId));
         return ResponseEntity.ok(adoptationBoardFavoriteService.getAdoptationBoardFavorite(boardId));
     }
 
