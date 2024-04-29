@@ -15,6 +15,7 @@ public class PrincipalUser implements UserDetails {
     private String username;
     private String name;
     private String address;
+    private String detailAddress;
     private String telNumber;
     private String nickname;
     private String email;

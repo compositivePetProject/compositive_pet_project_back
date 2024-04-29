@@ -5,17 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GetProductStocksAdminResponseDto {
-    private int productStockId;
+public class GetProductIncomingStocksTestResponseDto {
+    private int productIncomingStockId;
     private int productId;
     private String productNameKor;
     private int productSizeCategoryId;
     private String productSizeCategoryName;
-    private int productStockCount;
+    private String productSizeCategoryNameKor;
+    private int productIncomingStockCount;
 }

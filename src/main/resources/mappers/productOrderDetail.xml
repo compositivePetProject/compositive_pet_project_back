@@ -36,6 +36,18 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+    <resultMap id="ProductAnimalCategoryResultMap" type="com.project.pet.entity.product.ProductAnimalCategory">
+        <id property="productAnimalCategoryId" column="product_animal_category_id" />
+        <result property="productAnimalCategoryName" column="product_animal_category_name" />
+        <result property="productAnimalCategoryNameKor" column="product_animal_category_name_kor" />
+    </resultMap>
+
+    <resultMap id="ProductCategoryResultMap" type="com.project.pet.entity.product.ProductCategory">
+        <id property="productCategoryId" column="product_category_id" />
+        <result property="productCategoryName" column="product_category_name" />
+        <result property="productCategoryNameKor" column="product_category_name_kor" />
+    </resultMap>
+
     <resultMap id="ProductOrderResultMap" type="com.project.pet.entity.product.ProductOrder">
         <id property="productOrderId" column="product_order_id" />
         <result property="userId" column="user_id" />
@@ -47,23 +59,10 @@
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
         <association property="product" resultMap="ProductResultMap" />
-        <association property="productSizeCategory" resultMap="ProductSizeCategoryResultMap" />
         <association property="user" resultMap="UserResultMap" />
-    </resultMap>
-
-    <resultMap id="ProductOrderDetailResultMap" type="com.project.pet.entity.product.ProductOrderDetail">
-        <id property="productOrderDetailId" column="product_order_detail_id" />
-        <result property="productOrderId" column="product_order_id" />
-        <result property="productId" column="product_id" />
-        <result property="createDate" column="create_date" />
-        <result property="updateDate" column="update_date" />
-        <association property="productOrder" resultMap="ProductOrderResultMap" />
-        <association property="product" resultMap="ProductResultMap" />
         <association property="productSizeCategory" resultMap="ProductSizeCategoryResultMap" />
-        <association property="user" resultMap="UserResultMap" />
     </resultMap>
-
-
+    
 
     <insert id="postProductOrderDetail" parameterType="com.project.pet.entity.product.ProductOrderDetail">
         insert into
@@ -91,28 +90,64 @@
             )
     </delete>
 
-    <select id="getProductOrderDetailsAdmin" resultMap="ProductOrderDetailResultMap">
+<!--    <select id="getProductOrderDetailsAdmin" resultMap="ProductOrderDetailResultMap">-->
+<!--        select-->
+<!--            podt.product_order_detail_id-->
+<!--&lt;!&ndash;            pt.product_name_kor,&ndash;&gt;-->
+<!--&lt;!&ndash;            psct.product_size_category_id,&ndash;&gt;-->
+<!--&lt;!&ndash;            psct.product_size_category_name_kor,&ndash;&gt;-->
+<!--&lt;!&ndash;            pot.product_order_count,&ndash;&gt;-->
+<!--&lt;!&ndash;            ut.user_name,&ndash;&gt;-->
+<!--&lt;!&ndash;            pot.product_order_address,&ndash;&gt;-->
+<!--&lt;!&ndash;            pot.product_order_detail_address&ndash;&gt;-->
+<!--        from-->
+<!--            product_order_detail_tb podt-->
+<!--&lt;!&ndash;            left outer join product_order_tb pot on(pot.product_order_id = podt.product_order_id)&ndash;&gt;-->
+<!--&lt;!&ndash;            left outer join product_tb pt on(pt.product_id = podt.product_id)&ndash;&gt;-->
+<!--&lt;!&ndash;            left outer join product_size_category_tb psct on(psct.product_size_category_id = pot.product_size_category_id)&ndash;&gt;-->
+<!--&lt;!&ndash;            left outer join user_tb ut on(ut.user_id = pot.user_id)&ndash;&gt;-->
+<!--        limit #{startIndex}, #{count}-->
+<!--    </select>-->
+
+    <select id="getProductOrderDetailsAdmin" resultMap="ProductOrderResultMap">
         select
-            podt.product_order_detail_id,
-            podt.product_order_id,
-            podt.product_id,
+            pot.product_order_id,
             pt.product_name_kor,
             pot.product_size_category_id,
-            psci.product_size_category_name,
-            psci.product_size_category_name_kor,
+            psct.product_size_category_name,
             pot.product_order_count,
-            pot.user_id,
             ut.user_name,
             pot.product_order_address,
-            pot.product_order_detail_address,
-            podt.create_date,
-            podt.update_date
-        from
-            product_order_detail_tb podt
-            left outer join product_order_tb pot on(pot.product_order_id = podt.product_order_id)
-            left outer join product_tb pt on(pt.product_id = podt.product_id)
-            left outer join product_size_category_tb psci on(psci.product_size_category_id = pot.product_size_category_id)
-            left outer join user_tb ut on(ut.user_id = pot.user_id);
+            pot.product_order_detail_address
+        from product_order_tb pot
+            left outer join product_tb pt on (pt.product_id = pot.product_id)
+            left outer join product_size_category_tb psct on (psct.product_size_category_id = pot.product_size_category_id)
+            left outer join user_tb ut on (ut.user_id = pot.user_id)
+        where
+            1 = 1
+            <if test="productSizeCategoryId != 0">
+                and pot.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
+        limit #{startIndex}, #{count}
     </select>
 
+    <select id="getProductOrderDetailsAdminCount" resultType="Integer">
+        select
+            count(*)
+        from product_order_tb pot
+            left outer join product_tb pt on (pt.product_id = pot.product_id)
+            left outer join product_size_category_tb psct on (psct.product_size_category_id = pot.product_size_category_id)
+            left outer join user_tb ut on (ut.user_id = pot.user_id)
+        where
+            1 = 1
+            <if test="productSizeCategoryId != 0">
+                and pot.product_size_category_id = #{productSizeCategoryId}
+            </if>
+            <if test="productNameKor != '' and productNameKor != null">
+                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
+            </if>
+    </select>
 </mapper>
