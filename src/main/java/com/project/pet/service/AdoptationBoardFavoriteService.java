@@ -27,6 +27,7 @@ public class AdoptationBoardFavoriteService {
         return adoptationBoardFavorites;
     }
 
+
     public void deleteAdoptationBoardFavorite(Map<String, Integer> params) {
         adoptationBoardFavoriteMapper.deleteAdoptationBoardFavorite(params);
     }
