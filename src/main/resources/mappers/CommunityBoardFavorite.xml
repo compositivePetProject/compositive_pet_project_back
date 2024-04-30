@@ -22,7 +22,7 @@
             community_board_favorite_tb
         where
         user_id = #{userId}
-        
+
     </delete>
 </mapper>
 

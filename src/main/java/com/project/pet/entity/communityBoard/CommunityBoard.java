@@ -23,6 +23,7 @@ public class CommunityBoard {
     private int communityBoardAnimalCategoryId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private int totalCount;
 
     private CommunityBoardFavorite communityBoardFavorite;
     private User user;

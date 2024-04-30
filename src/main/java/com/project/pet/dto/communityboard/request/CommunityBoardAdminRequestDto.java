@@ -15,6 +15,7 @@ public class CommunityBoardAdminRequestDto {
     public CommunityBoardAdmin toEntity() {
 
         return CommunityBoardAdmin.builder()
+
                 .userId(userId)
                 .communityBoardAdminTitle(communityBoardAdminTitle)
                 .communityBoardAdminContent(communityBoardAdminContent)

@@ -1,6 +1,7 @@
 package com.project.pet.service.admin;
 
 import com.project.pet.dto.communityboard.request.CommunityBoardAdminRequestDto;
+import com.project.pet.dto.communityboard.request.GetCommunityBoardAdminRequestDto;
 import com.project.pet.dto.communityboard.request.UpdateCommunityBoardAdminRequestDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardAdminResponseDto;
 import com.project.pet.entity.communityBoard.CommunityBoardAdmin;
@@ -23,8 +24,8 @@ public class CommunityBoardAdminService {
     }
 
     // 관리자 공지사항 게시물 해당BoardId로 단건 조회(Get)
-    public GetCommunityBoardAdminResponseDto getCommunityBoardAdminByBoardId(int boardAdminId)  {
-        CommunityBoardAdmin communityBoardAdmin = communityBoardAdminMapper.getCommunityBoardAdminByBoardId(boardAdminId);
+    public GetCommunityBoardAdminResponseDto getCommunityBoardAdminByBoardId(GetCommunityBoardAdminRequestDto getCommunityBoardAdminRequestDto)  {
+        CommunityBoardAdmin communityBoardAdmin = communityBoardAdminMapper.getCommunityBoardAdminByBoardId(getCommunityBoardAdminRequestDto.getCommunityBoardAdminId());
         return communityBoardAdmin.toGetCommunityBoardAdminResponseDto();
     }
 
@@ -35,8 +36,8 @@ public class CommunityBoardAdminService {
     }
 
     // 관리자 공지사항 게시물 해당BoardId로 단건 삭제(Delete)
-    public void deleteCommunityBoardAdminByBoardId (int boardAdminId) {
-        communityBoardAdminMapper.deleteCommunityBoardAdminByBoardId(boardAdminId);
+    public void deleteCommunityBoardAdminByBoardId (int communityBoardAdminId) {
+        communityBoardAdminMapper.deleteCommunityBoardAdminByBoardId(communityBoardAdminId);
     }
 
     // 관리자 공지사항 게시물 다건 삭제(Delete)

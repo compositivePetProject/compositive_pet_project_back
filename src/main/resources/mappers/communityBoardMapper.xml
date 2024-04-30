@@ -27,6 +27,7 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+
     <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
         <id property="communityBoardId" column="community_board_id"/>
         <result property="userId" column="user_id" />
@@ -95,8 +96,50 @@
                 left outer join user_tb ut on (ut.user_id = cbt.user_id)
                 left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
             where
-                community_board_id = #{boardId}
+                community_board_id = #{communityBoardId}
     </select>
+
+    <select id="getBoardPageCount"
+            resultType="integer" >
+
+        select
+            count(*)
+        from
+        community_board_tb cbt
+        left outer join user_tb ut on (ut.user_id = cbt.user_id)
+        left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+    </select>
+
+    <select id="getDogBoardPageCount"
+            resultType="integer" >
+
+        select
+            count(*)
+        from
+        community_board_tb cbt
+        left outer join user_tb ut on (ut.user_id = cbt.user_id)
+        left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+
+        where
+        cbt.community_board_animal_category_id = 1;
+    </select>
+
+    <select id="getCatBoardPageCount"
+            resultType="integer" >
+
+        select
+            count(*)
+        from
+        community_board_tb cbt
+        left outer join user_tb ut on (ut.user_id = cbt.user_id)
+        left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+
+        where
+        cbt.community_board_animal_category_id = 2;
+
+    </select>
+
+
 
     <select id="getFavoriteCommunityBoardsByUserId"
             parameterType="integer"
@@ -140,10 +183,34 @@
             left outer join user_tb ut on (ut.user_id = cbt.user_id)
             left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
 
-            where
-                cbt.community_board_animal_category_id = 1;
-
+        where
+            cbt.community_board_animal_category_id = 1;
     </select>
+
+    <select id="getCommunityBoardCat"
+            resultMap="CommunityBoardResultMap">
+
+        select
+            cbt.community_board_id,
+            cbt.user_id,
+            ut.user_username,
+            cbt.community_board_title,
+            cbt.community_board_content,
+            cbt.community_board_animal_category_id,
+            cbact.community_board_animal_category_name,
+            cbact.community_board_animal_category_name_kor,
+            cbt.create_date,
+            cbt.update_date
+
+        from
+            community_board_tb cbt
+            left outer join user_tb ut on (ut.user_id = cbt.user_id)
+            left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+
+        where
+            cbt.community_board_animal_category_id = 2;
+    </select>
+
 
     <delete id="deleteCommunityBoardByBoardId"
                 parameterType="integer">
@@ -151,7 +218,7 @@
             from
                 community_board_tb
             where
-                community_board_id = #{boardId}
+                community_board_id = #{communityBoardId}
     </delete>
 
     <delete id="deleteCommunityBoards"

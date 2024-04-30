@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 
-// 게시판 작성 단건(get) 요청
+// 단건 조회 요청.
 public class GetCommunityBoardRequestDto {
 
     private int communityBoardId;

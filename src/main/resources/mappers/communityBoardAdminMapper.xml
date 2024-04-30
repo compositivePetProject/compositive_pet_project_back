@@ -52,7 +52,7 @@
             community_board_admin_tb cbat
             left outer join user_tb ut on (ut.user_id = cbat.user_id)
         where
-            community_board_admin_id = #{boardAdminId}
+            community_board_admin_id = #{communityBoardAdminId}
     </select>
 
     <select id="getCommunityBoardsAdmin"
@@ -86,7 +86,7 @@
         where
             community_board_admin_id in (
             <foreach collection="boardAdminIds" item="boardAdminId" separator=",">
-                #{boardAdminId}
+                #{communityBoardAdminId}
             </foreach>
         )
 
