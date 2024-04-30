@@ -18,8 +18,9 @@ public class OAuth2SignupRequestDto {
     private String password;
     @Pattern(regexp = "^[가-힣]{1,}$", message = "한글문자 형식이어야 합니다")
     private String name;
-    @Pattern(regexp = "^(?=.*[가-힣])[가-힣A-Za-z0-9~\\-\\. ]+(읍|면|동|가|리|길|로)\\s[0-9\\-]+$", message = "도로명 or 지번 주소 형태가 아닙니다.")
+    @Pattern(regexp = "^(?=.*[가-힣])[가-힣A-Za-z0-9~\\-\\. ]+(읍|면|동|가|리|길|로)+$", message = "도로명 or 지번 주소 형태가 아닙니다.")
     private String address;
+    private String detailAddress;
     @Pattern(regexp = "^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})+$",  message = "ex) 010-1234-5678 형식이어야 합니다")
     private String telNumber;
     @Pattern(regexp = "^(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}$", message = "2자 이상 16자 이하, 영어 또는 숫자 또는 한글 형식이어야 합니다.")
@@ -39,6 +40,7 @@ public class OAuth2SignupRequestDto {
                 .password(passwordEncoder.encode(password))
                 .name(name)
                 .address(address)
+                .detailAddress(detailAddress)
                 .telNumber(telNumber)
                 .nickname(nickname)
                 .email(email)

@@ -14,19 +14,23 @@ import java.time.LocalDateTime;
 @Data
 public class ProductOutgoingStock {
     private int productOutgoingStockId;
+    private int productOrderId;
     private int productId;
     private int productSizeCategoryId;
     private int productOutgoingStockCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
+    private ProductOrder productOrder;
+    private Product product;
+    private ProductSizeCategory productSizeCategory;
+
     public GetProductOutgoingStocksAdminResponseDto toGetProductOutgoingStocksAdminResponseDto() {
         return GetProductOutgoingStocksAdminResponseDto.builder()
                 .productOutgoingStockId(productOutgoingStockId)
-                .productId(productId)
-                .productSizeCategoryId(productSizeCategoryId)
+                .productNameKor(product.getProductNameKor())
+                .productSizeCategoryName(productSizeCategory.getProductSizeCategoryName())
                 .productOutgoingStockCount(productOutgoingStockCount)
-                .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
     }

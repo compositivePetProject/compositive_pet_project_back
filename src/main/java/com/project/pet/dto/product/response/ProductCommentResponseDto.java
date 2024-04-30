@@ -9,13 +9,15 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductCommentResponseDto {
-
     private int productCommentId;
     private int productId;
     private int userId;
+    private String productNameKor;
+    private String productImageUrl;
     private String productCommentContent;
-
+    public int productCommentRatingId;
+    public int productCommentRatingValue;
+    private String createDate;
+    private String updateDate;
 }

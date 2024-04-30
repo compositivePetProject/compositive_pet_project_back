@@ -36,18 +36,11 @@ public class AccountController {
         return ResponseEntity.ok(true);
     }
 
-    @ValidAspect
-    @PutMapping("/edit/nickname")
-    public ResponseEntity<?> editNickname (@Valid @RequestBody AccountEditNicknameRequestDto accountEditNicknameRequestDto, BindingResult bindingResult) {
-        accountService.editNickname(accountEditNicknameRequestDto);
-        return ResponseEntity.ok(true);
-    }
 
     @ValidAspect
-    @PutMapping("/edit/profileimageurl")
-    public ResponseEntity<?> editProfileImageUrl(@Valid @RequestBody AccountEditProfileImageUrlRequestDto accountEditProfileImageUrlRequestDto, BindingResult bindingResult) {
-        accountService.updateProfileImageUrl(accountEditProfileImageUrlRequestDto);
+    @PutMapping("/edit/nickname/profileImg")
+    public ResponseEntity<?> editNicknameAndProfileImageUrl (@Valid @RequestBody AccountEditNicknameRequestDto accountEditNicknameRequestDto, BindingResult bindingResult) {
+        accountService.editNicknameAndProfileImageUrl(accountEditNicknameRequestDto);
         return ResponseEntity.ok(true);
     }
-
 }

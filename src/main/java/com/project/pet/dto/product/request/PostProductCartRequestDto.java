@@ -7,17 +7,17 @@ import lombok.Data;
 
 @Data
 public class PostProductCartRequestDto {
+    private int userId;
     private int productId;
     private int productSizeCategoryId;
     private int productCartCount;
 
-    public ProductCart toEntity(int userId) {
+    public ProductCart toEntity() {
         return ProductCart.builder()
-                .productId(productId)
                 .userId(userId)
+                .productId(productId)
                 .productSizeCategoryId(productSizeCategoryId)
                 .productCartCount(productCartCount)
                 .build();
     }
-
 }

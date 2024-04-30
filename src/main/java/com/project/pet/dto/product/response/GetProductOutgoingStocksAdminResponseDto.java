@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
 @Data
 public class GetProductOutgoingStocksAdminResponseDto {
     private int productOutgoingStockId;
-    private int productId;
-    private int productSizeCategoryId;
+    private String productNameKor;
+    private String productSizeCategoryName;
     private int productOutgoingStockCount;
-    private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }

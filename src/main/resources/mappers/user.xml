@@ -23,6 +23,7 @@
         <result property="password" column="user_password" />
         <result property="name" column="user_name" />
         <result property="address" column="user_address" />
+        <result property="detailAddress" column="user_detail_address" />
         <result property="telNumber" column="user_tel_number" />
         <result property="nickname" column="user_nickname" />
         <result property="email" column="user_email" />
@@ -40,7 +41,7 @@
         insert into
             user_tb
         values
-            (0, #{username}, #{password}, #{name}, #{address}, #{telNumber}, #{nickname}, #{email}, #{profileImageUrl}, now(), now())
+                (0, #{username}, #{password}, #{name}, #{address}, #{detailAddress}, #{telNumber}, #{nickname}, #{email}, #{profileImageUrl}, now(), now())
     </insert>
 
     <insert id="saveRole">
@@ -69,6 +70,7 @@
             ut.user_password,
             ut.user_name,
             ut.user_address,
+            ut.user_detail_address,
             ut.user_tel_number,
             ut.user_nickname,
             ut.user_email,
@@ -97,6 +99,7 @@
             ut.user_password,
             ut.user_name,
             ut.user_address,
+            ut.user_detail_address,
             ut.user_tel_number,
             ut.user_nickname,
             ut.user_email,
@@ -124,6 +127,7 @@
             ut.user_password,
             ut.user_name,
             ut.user_address,
+            ut.user_detail_address,
             ut.user_tel_number,
             ut.user_nickname,
             ut.user_email,
@@ -170,13 +174,14 @@
 
     <update id="updateProfileImageUrl"
             parameterType="com.project.pet.entity.user.User">
-        update
-            user_tb
-        set
-            user_profile_image_url = #{profileImageUrl},
+        update user_tb
+        <trim prefix="set" suffixOverrides=",">
+            <if test="profileImageUrl != null and profileImageUrl != ''">
+                user_profile_image_url = #{profileImageUrl},
+            </if>
             update_date = now()
-        where
-            user_id =  #{userId}
+        </trim>
+        where user_id = #{userId}
     </update>
 
 </mapper>

@@ -1,15 +1,18 @@
 package com.project.pet.service;
 
+import com.project.pet.dto.product.request.GetProductOrderRequestDto;
 import com.project.pet.dto.product.request.GetProductOrdersRequestDto;
 import com.project.pet.dto.product.request.PostProductOrderRequestDto;
 import com.project.pet.dto.product.request.PutProductOrderRequestDto;
+import com.project.pet.dto.product.response.DeleteProductOrderRequestDto;
 import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
-import com.project.pet.dto.product.response.GetProductResponseDto;
 import com.project.pet.entity.product.ProductOrder;
 import com.project.pet.entity.product.ProductOrderDetail;
+import com.project.pet.entity.product.ProductOutgoingStock;
 import com.project.pet.repository.ProductOrderDetailMapper;
 import com.project.pet.repository.ProductOrderMapper;
+import com.project.pet.repository.admin.ProductAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +28,22 @@ public class ProductOrderService {
     @Autowired
     ProductOrderDetailMapper productOrderDetailMapper;
 
+    @Autowired
+    ProductAdminMapper productAdminMapper;
+
+
     public void postProductOrder(PostProductOrderRequestDto postProductOrderRequestDto) {
         ProductOrder productOrder = postProductOrderRequestDto.toEntity();
-
+        if(postProductOrderRequestDto.getProductSizeCategoryId() == 0) {
+            throw new NullPointerException("데이터 오류");
+        }
         productOrderMapper.postProductOrder(productOrder);
 
         int productOrderId = productOrder.getProductOrderId();
         int productId = productOrder.getProductId();
+        int productSizeCategoryId = productOrder.getProductSizeCategoryId();
+        int productOrderCount = productOrder.getProductOrderCount();
+
 
         productOrderDetailMapper.postProductOrderDetail(
                 ProductOrderDetail.builder()
@@ -39,32 +51,82 @@ public class ProductOrderService {
                 .productId(productId)
                 .build()
         );
+
+        productAdminMapper.postProductOutgoingStockAdmin(
+                ProductOutgoingStock.builder()
+                        .productOrderId(productOrderId)
+                        .productId(productId)
+                        .productSizeCategoryId(productSizeCategoryId)
+                        .productOutgoingStockCount(productOrderCount)
+                        .build()
+        );
+    }
+
+    public void productOrderCarts(List<PostProductOrderRequestDto>  productOrderRequestDtoList) {
+        List<ProductOrder> orders  = productOrderRequestDtoList.stream().map(PostProductOrderRequestDto::toEntity).collect(Collectors.toList());
+        productOrderMapper.productOrderCarts(orders);
+
+        for (ProductOrder productOrder : orders) {
+            int productOrderId = productOrder.getProductOrderId();
+            int productId = productOrder.getProductId();
+            int productSizeCategoryId = productOrder.getProductSizeCategoryId();
+            int productOrderCount = productOrder.getProductOrderCount();
+
+            productOrderDetailMapper.postProductOrderDetail(
+                    ProductOrderDetail.builder()
+                            .productOrderId(productOrderId)
+                            .productId(productId)
+                            .build()
+            );
+
+            productAdminMapper.postProductOutgoingStockAdmin(
+                    ProductOutgoingStock.builder()
+                            .productOrderId(productOrderId)
+                            .productId(productId)
+                            .productSizeCategoryId(productSizeCategoryId)
+                            .productOutgoingStockCount(productOrderCount)
+                            .build()
+            );
+        }
     }
 
     public List<GetProductOrdersResponseDto> getProductOrders(GetProductOrdersRequestDto getProductOrdersRequestDto) {
-        int userId = getProductOrdersRequestDto.getUserId();
-        List<ProductOrder> list = productOrderMapper.getProductOrders(userId);
+        List<ProductOrder> list = productOrderMapper.getProductOrders(getProductOrdersRequestDto.getUserId());
         return list.stream().map(ProductOrder::toGetProductOrdersResponseDto).collect(Collectors.toList());
     }
 
-    public GetProductOrderResponseDto getProductOrder(int productOrderId) {
-        return productOrderMapper.getProductOrder(productOrderId).toGetProductOrderResponseDto();
+    public GetProductOrderResponseDto getProductOrder(GetProductOrderRequestDto getProductOrderRequestDto) {
+        return productOrderMapper.getProductOrder(getProductOrderRequestDto.getProductOrderId()).toGetProductOrderResponseDto();
     }
 
-    public void deleteProductOrder(int productOrderId) {
+    public void deleteProductOrder(DeleteProductOrderRequestDto deleteProductOrderRequestDto) {
+        int productOrderId = deleteProductOrderRequestDto.getProductOrderId();
         productOrderMapper.deleteProductOrder(productOrderId);
         productOrderDetailMapper.deleteProductOrder(productOrderId);
+        productAdminMapper.deleteProductOutgoingStockAdmin(productOrderId);
     }
 
     @Transactional(rollbackFor = Exception.class)
     public void deleteProductOrders(List<Integer> productOrderIds) {
         productOrderMapper.deleteProductOrders(productOrderIds);
         productOrderDetailMapper.deleteProductOrders(productOrderIds);
+        productAdminMapper.deleteProductOutgoingStocksAdmin(productOrderIds);
     }
 
-    public void putProductOrder(int productOrderId, PutProductOrderRequestDto putProductOrderRequestDto) {
+
+    public void putProductOrder(PutProductOrderRequestDto putProductOrderRequestDto) {
+        int productOrderId = putProductOrderRequestDto.getProductOrderId();
+        if(putProductOrderRequestDto.getProductSizeCategoryId() == 0) {
+            throw new NullPointerException("데이터 오류");
+        }
         putProductOrderRequestDto.setProductOrderId(productOrderId);
         productOrderMapper.putProductOrder(putProductOrderRequestDto.toEntity());
+        productAdminMapper.putProductOutgoingStockAdmin(ProductOutgoingStock
+                .builder()
+                .productOrderId(productOrderId)
+                .productSizeCategoryId(putProductOrderRequestDto.getProductSizeCategoryId())
+                .productOutgoingStockCount(putProductOrderRequestDto.getProductOrderCount())
+                .build());
     }
 
 }

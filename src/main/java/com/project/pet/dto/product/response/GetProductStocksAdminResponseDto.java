@@ -17,8 +17,5 @@ public class GetProductStocksAdminResponseDto {
     private String productNameKor;
     private int productSizeCategoryId;
     private String productSizeCategoryName;
-    private String productSizeCategoryNameKor;
     private int productStockCount;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 }

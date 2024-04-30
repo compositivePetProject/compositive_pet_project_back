@@ -27,6 +27,9 @@ public class AuthService {
     public void signup (AuthSignupRequestDto authSignupRequestDto) {
         int successCount = 0;
         User user = authSignupRequestDto.toEntity(passwordEncoder);
+        String telNumber = user.getTelNumber().replace("-", "");
+        user.setTelNumber(telNumber);
+
         successCount += userMapper.saveUser(user);
         successCount += userMapper.saveRole(user.getUserId(), 1);
 
@@ -39,6 +42,9 @@ public class AuthService {
     public void oAuth2Signup(OAuth2SignupRequestDto oAuth2SignupRequestDto) {
         int successCount = 0;
         User user = oAuth2SignupRequestDto.toEntity(passwordEncoder);
+        String telNumber = user.getTelNumber().replace("-", "");
+        user.setTelNumber(telNumber);
+
         successCount += userMapper.saveUser(user);
         successCount += userMapper.saveRole(user.getUserId(), 1);
         successCount += userMapper.saveOAuth2(oAuth2SignupRequestDto.toOAuth2(user.getUserId()));
@@ -59,6 +65,4 @@ public class AuthService {
         }
         return jwtProvider.generateToken(user);
     }
-
-
 }

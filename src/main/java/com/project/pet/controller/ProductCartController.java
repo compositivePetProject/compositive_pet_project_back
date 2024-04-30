@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.product.request.GetProductCartRequestDto;
 import com.project.pet.dto.product.request.PostProductCartRequestDto;
 import com.project.pet.dto.product.request.UpdateProductCartRequestDto;
 import com.project.pet.service.ProductCartService;
@@ -22,8 +23,8 @@ public class ProductCartController {
         return ResponseEntity.created(null).body(true);
     }
     @GetMapping("/carts")
-    public ResponseEntity<?> getProductCart() {
-        return ResponseEntity.ok(productCartService.getProductsCart());
+    public ResponseEntity<?> getProductCart(GetProductCartRequestDto getProductCartRequestDto) {
+        return ResponseEntity.ok(productCartService.getProductsCart(getProductCartRequestDto));
     }
 
     @DeleteMapping("/delete/carts")
