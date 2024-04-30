@@ -27,9 +27,10 @@ public class AuthService {
     public void signup (AuthSignupRequestDto authSignupRequestDto) {
         int successCount = 0;
         User user = authSignupRequestDto.toEntity(passwordEncoder);
+
         String telNumber = user.getTelNumber().replace("-", "");
         user.setTelNumber(telNumber);
-
+        System.out.println(user);
         successCount += userMapper.saveUser(user);
         successCount += userMapper.saveRole(user.getUserId(), 1);
 
