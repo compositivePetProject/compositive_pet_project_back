@@ -145,6 +145,7 @@
             pt.product_price,
             pt.product_image_url,
             pt.product_category_id,
+            pt.product_animal_category_id,
             pact.product_animal_category_name_kor,
             pct.product_category_name_kor,
             pt.product_board_content,
