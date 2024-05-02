@@ -43,7 +43,7 @@
             resultMap="CommunityBoardAdminResultMap">
         select
             cbat.community_board_admin_id,
-            ut. user_id,
+            ut.user_id,
             cbat.community_board_admin_title,
             cbat.community_board_admin_content,
             cbat.create_date,

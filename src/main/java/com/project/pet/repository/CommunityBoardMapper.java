@@ -25,11 +25,15 @@ public interface CommunityBoardMapper {
 
     public List<CommunityBoard> getCommunityBoardCat();
 
+    public List<CommunityBoard> getMyBoardByUserId(int userId);
+
     public int getBoardPageCount();
 
     public int getDogBoardPageCount();
 
     public int getCatBoardPageCount();
+
+    public int getMyBoardPageCount();
 
 
     // 게시판 해당BoardId로 단건 삭제(Delete)

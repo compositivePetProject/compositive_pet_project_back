@@ -37,17 +37,23 @@ public class CommunityBoardController {
         return ResponseEntity.ok(communityBoardService.getCommunityBoardByBoardId(getCommunityBoardRequestDto));
     }
 
-//    @GetMapping("/board/MyList")
-//    public ResponseEntity<?> getBoardByUserId (@RequestParam int userId) {
-//        return ResponseEntity.ok(communityBoardService.getBoardListByUserId(userId));
-//    }
+    @GetMapping("/board/mylist/{userId}")
+    public ResponseEntity<?> getMyWriteBoardByUserId(@PathVariable int userId) {
+        return ResponseEntity.ok(communityBoardService.getMyWriteBoardByUserId(userId));
+    }
 
+    @GetMapping("/board/count/mypage")
+    public  ResponseEntity <?> getMyBoardPageCount(GetCommunityBoardMyPageCountReqDto getCommunityBoardMyPageCountReqDto) {
+        return  ResponseEntity.ok(communityBoardService.getMyBoardPageCount(getCommunityBoardMyPageCountReqDto));
+    }
 
     // 커뮤니티 게시판 페이지 전체 페이지네이션 (Get)
     @GetMapping("/board/count/page")
     public ResponseEntity<?> getBoardPageCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
+        System.out.println(getCommunityBoardPageCountReqDto);
         return  ResponseEntity.ok(communityBoardService.getBoardPageCount(getCommunityBoardPageCountReqDto));
     }
+
 
     // 커뮤니티 게시판 강아지 게시판 페이지 전체 페이지네이션 (Get)
     @GetMapping("/board/dog/count/page")
@@ -61,7 +67,7 @@ public class CommunityBoardController {
         return  ResponseEntity.ok(communityBoardService.getCatBoardPageCount(getCommunityBoardCatCountReqDto));
     }
 
-    // 게시물에 좋아요를 한 userid조회
+    // 내가 좋아요한 게시글.
     @GetMapping("/favorite/board/{userId}")
     public ResponseEntity<?> getFavoriteCommunityBoardByUserId(@PathVariable int userId) {
         return ResponseEntity.ok(communityBoardService.getFavoriteCommunityBoards(userId));

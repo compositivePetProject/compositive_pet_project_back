@@ -33,16 +33,22 @@ public class CommunityBoardService {
         return communityBoard.toGetCommunityBoardResponseDto();
     }
 
+    public List<GetCommunityBoardResponseDto> getMyWriteBoardByUserId(int userId)  {
+        List <CommunityBoard> communityBoards = communityBoardMapper.getMyBoardByUserId(userId);
+        return communityBoards.stream().map(CommunityBoard::toGetCommunityBoardResponseDto).collect(Collectors.toList());
+    }
+
 
     public GetCommunityBoardPageCountResponseDto getBoardPageCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
-        int communityBoardCount = communityBoardMapper.getBoardPageCount();
-        int pageMaxNumbers  = (int) Math.ceil(((double) communityBoardCount / getCommunityBoardPageCountReqDto.getCount()));
+        int boardCount = communityBoardMapper.getBoardPageCount();
+        int maxPageNumber = (int) Math.ceil(((double) boardCount / getCommunityBoardPageCountReqDto.getCount()));
 
-        return  GetCommunityBoardPageCountResponseDto .builder()
-                .pageMaxNumbers(pageMaxNumbers)
-                .totalCount(communityBoardCount)
+        return GetCommunityBoardPageCountResponseDto.builder()
+                .pageMaxNumbers(maxPageNumber)
+                .totalCount(boardCount)
                 .build();
     }
+
 
     public GetCommunityBoardDogCountResDto getDogBoardPageCount(GetCommunityBoardDogCountReqDto getCommunityBoardDogCountReqDto) {
         int dogBoardCount = communityBoardMapper.getDogBoardPageCount();
@@ -64,10 +70,20 @@ public class CommunityBoardService {
                 .build();
     }
 
+    public  GetCommunityBoardMyPageCountResDto getMyBoardPageCount(GetCommunityBoardMyPageCountReqDto getCommunityBoardMyPageCountReqDto) {
+        int myPageBoardCount = communityBoardMapper.getMyBoardPageCount();
+        int myPageMaxNumber = (int) Math.ceil(((double) myPageBoardCount / getCommunityBoardMyPageCountReqDto.getCount()));
 
-    public List<GetCommunityBoardFavoriteResponseDto> getFavoriteCommunityBoards(int userId) {
+        return GetCommunityBoardMyPageCountResDto.builder()
+                .myPageMaxNumber(myPageMaxNumber)
+                .totalCount(myPageBoardCount)
+                .build();
+    }
+
+
+    public List<GetCommunityBoardLikedByUserIdResDto> getFavoriteCommunityBoards(int userId) {
         List <CommunityBoard> communityBoards = communityBoardMapper.getFavoriteCommunityBoardsByUserId(userId);
-        return communityBoards.stream().map(CommunityBoard::toGetCommunityBoardFavoriteResponseDto).collect(Collectors.toList());
+        return communityBoards.stream().map(CommunityBoard::toGetCommunityBoardLikedByUserIdResDto).collect(Collectors.toList());
     }
 
     public List<GetCommunityBoardResponseDto> getCommunityBoardsDog() {

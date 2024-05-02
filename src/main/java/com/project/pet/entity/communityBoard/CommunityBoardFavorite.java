@@ -19,6 +19,7 @@ public class CommunityBoardFavorite {
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private int totalUserIdCount;
 
 
 

@@ -19,9 +19,9 @@ public class GetCommunityBoardFavoriteResponseDto {
     private int communityBoardAnimalCategoryId;
     private String communityBoardAnimalCategoryName;
     private String communityBoardAnimalCategoryNameKor;
+    private int totalUserIdCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-
 
 
 }

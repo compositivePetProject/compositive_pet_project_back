@@ -47,7 +47,6 @@ public class CommunityBoardAdminService {
 
     // 관리자 공지사항 게시물 해당BoardId로 단건 수정(Put).
     public void putCommunityAdminBoard (UpdateCommunityBoardAdminRequestDto updateCommunityBoardAdminRequestDto) {
-        System.out.println(updateCommunityBoardAdminRequestDto.toEntity());
         communityBoardAdminMapper.putCommunityAdminBoard(updateCommunityBoardAdminRequestDto.toEntity());
 
     }

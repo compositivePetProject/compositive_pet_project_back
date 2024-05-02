@@ -13,14 +13,77 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
+        <id property="communityBoardId" column="community_board_id"/>
+        <result property="userId" column="user_id" />
+        <result property="communityBoardTitle" column="community_board_title" />
+        <result property="communityBoardContent" column="community_board_content" />
+        <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
+        <id property="userId" column="user_id" />
+        <result property="username" column="user_username" />
+        <result property="password" column="user_password" />
+        <result property="name" column="user_name" />
+        <result property="address" column="user_address" />
+        <result property="telNumber" column="user_tel_number" />
+        <result property="nickname" column="user_nickname" />
+        <result property="email" column="user_email" />
+        <result property="profileImageUrl" column="user_profile_image_url" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+
+
+
     <insert id="saveCommunityBoardFavorite"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoardFavorite"
     >
         insert into
             community_board_favorite_tb
         values
-            (0, #{communityBoardId}, #{userId}, now(), now());
+            (0, #{communityBoardId}, #{userId}, now(), now())
     </insert>
+
+    <select id="existsByUserIdAndBoardId"
+            parameterType="com.project.pet.entity.communityBoard.CommunityBoardFavorite"
+            resultType="boolean">
+        select exists (
+        select 1
+            from community_board_favorite_tb
+        where
+            user_id = #{userId}
+            and community_board_id = #{communityBoardId}
+        )
+
+    </select>
+
+    <select id="getBoardFavoritesCount"
+            parameterType="integer"
+            resultMap="CommunityBoardFavoriteResultMap">
+
+        select
+            cbt.community_board_id,
+            cbt.user_id,
+            cbt.community_board_title,
+            cbt.community_board_content,
+            cbt.community_board_animal_category_id,
+            cbt.create_date,
+            cbt.update_date,
+            COUNT(cbft.user_id) AS total_user_id_count
+        from
+            community_board_tb cbt
+            left outer join community_board_favorite_tb cbft on(cbft.community_board_id = cbt.community_board_id)
+        where
+            cbt.community_board_id = #{communityBoardId}
+
+
+
+    </select>
 
     <delete id="deleteCommunityBoardFavorite"
                 parameterType="integer">

@@ -52,9 +52,8 @@ public class CommunityBoardAdminController {
     }
 
     // 커뮤니티 게시판 관리자 공지사항 게시물 단건 수정.
-    @PutMapping("/update/admin/{communityBoardAdminId}")
-    public ResponseEntity<?> putCommunityAdminBoard(@PathVariable int communityBoardAdminId, @RequestBody UpdateCommunityBoardAdminRequestDto updateCommunityBoardAdminRequestDto) {
-        updateCommunityBoardAdminRequestDto.setCommunityBoardAdminId(communityBoardAdminId);
+    @PutMapping("/update/admin")
+    public ResponseEntity<?> putCommunityAdminBoard(@RequestBody UpdateCommunityBoardAdminRequestDto updateCommunityBoardAdminRequestDto) {
         communityBoardAdminService.putCommunityAdminBoard(updateCommunityBoardAdminRequestDto);
         return ResponseEntity.ok("게시물 수정 완료");
     }
