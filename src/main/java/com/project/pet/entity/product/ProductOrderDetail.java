@@ -1,11 +1,8 @@
 package com.project.pet.entity.product;
 
-import com.project.pet.dto.product.response.GetProductOrderDetailsAdminResponseDto;
 import com.project.pet.entity.user.User;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 

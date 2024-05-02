@@ -1,5 +1,8 @@
 package com.project.pet.controller.admin;
 
+import com.project.pet.dto.admin.incomingProduct.request.PutProductIncomingStockAdminRequestDto;
+import com.project.pet.dto.admin.outgoingProduct.request.GetProductOutgoingCountAdminRequestDto;
+import com.project.pet.dto.admin.outgoingProduct.request.GetProductOutgoingStocksAdminRequestDto;
 import com.project.pet.dto.product.request.*;
 import com.project.pet.service.admin.ProductAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,30 +66,10 @@ public class ProductAdminController {
     }
 
     //[애완용품 쇼핑몰 가입고]
-    // 관리자 상품 가입고 테이블 등록(단건)
-    @PostMapping("/admin/incoming/stock")
-    public ResponseEntity<?> postProductIncomingStock(@RequestBody PostProductIncomingStockRequestDto postProductIncomingStockRequestDto) {
-        productAdminService.postProductIncomingStock(postProductIncomingStockRequestDto);
-        return ResponseEntity.created(null).body(true);
-    }
-
     @GetMapping("admin/incoming/stocks/test")
     public ResponseEntity<?> getProductIncomingStocksTest(GetProductIncomingStocksTestRequestDto getProductIncomingStocksTestRequestDto) {
         return ResponseEntity.ok(productAdminService.getProductIncomingStocksTest(getProductIncomingStocksTestRequestDto));
     }
-
-    // 관리자 상품 가입고 테이블 조회(다건)
-    @GetMapping("admin/incoming/stocks")
-    public ResponseEntity<?> getProductIncomingStocks(GetProductIncomingStocksRequestDto getProductIncomingStocksRequestDto) {
-        return ResponseEntity.ok(productAdminService.getProductIncomingStocks(getProductIncomingStocksRequestDto));
-    }
-
-    // 관리자 상품 가입고 페이지네이션 조회(다건)
-    @GetMapping("admin/incoming/stocks/count")
-    public ResponseEntity<?> getProductIncomingCount(GetProductIncomingCountRequestDto getProductIncomingCountRequestDto) {
-        return ResponseEntity.ok(productAdminService.getProductIncomingCount(getProductIncomingCountRequestDto));
-    }
-
 
     // 관리자 상품 가입고 테이블 조회(단건)
     @GetMapping("admin/incoming/stock/{productIncomingStockId}")
@@ -98,13 +81,6 @@ public class ProductAdminController {
     @DeleteMapping("admin/incoming/stock/{productIncomingStockId}")
     public ResponseEntity<?> deleteProductIncomingStock(@PathVariable int productIncomingStockId) {
         productAdminService.deleteProductIncomingStock(productIncomingStockId);
-        return ResponseEntity.ok(true);
-    }
-
-    // 관리자 상품 가입고 테이블 삭제(다건)
-    @DeleteMapping("admin/incoming/stocks")
-    public ResponseEntity<?> deleteProductIncomingStocksAdmin(@RequestBody List<Integer> productIncomingStockIds) {
-        productAdminService.deleteProductIncomingStocksAdmin(productIncomingStockIds);
         return ResponseEntity.ok(true);
     }
 
@@ -121,18 +97,6 @@ public class ProductAdminController {
     public ResponseEntity<?> postProductStockAdmin(@RequestBody PostProductStockAdminRequestDto postProductStockAdminRequestDto) {
         productAdminService.postProductStockAdmin(postProductStockAdminRequestDto);
         return ResponseEntity.created(null).body(true);
-    }
-
-    // 관리자 상품 재고 테이블 조회(다건)
-    @GetMapping("admin/stocks")
-    public ResponseEntity<?> getProductStocksAdmin(GetProductStocksAdminRequestDto getProductStocksAdminRequestDto) {
-        return ResponseEntity.ok(productAdminService.getProductStocksAdmin(getProductStocksAdminRequestDto));
-    }
-
-    // 관리자 상품 재고 페이지네이션 조회
-    @GetMapping("admin/stocks/count")
-    public ResponseEntity<?> getProductStocksCount(GetProductStocksCountRequestDto getProductStocksCountRequestDto) {
-        return ResponseEntity.ok(productAdminService.getProductStocksCount(getProductStocksCountRequestDto));
     }
 
     // 관리자 상품 재고 테이블 조회(단건)
@@ -152,13 +116,6 @@ public class ProductAdminController {
     @DeleteMapping("admin/stocks")
     public ResponseEntity<?> deleteProductStocksAdmin(@RequestBody List<Integer> productStockIds) {
         productAdminService.deleteProductStocksAdmin(productStockIds);
-        return ResponseEntity.ok(true);
-    }
-
-    // 관리자 상품 재고 테이블 수정(단건)
-    @PutMapping("admin/stock/{productStockId}")
-    public ResponseEntity<?> putProductStockAdmin(@PathVariable int productStockId, @RequestBody PutProductStockAdminRequestDto putProductStockAdminRequestDto) {
-        productAdminService.putProductStockAdmin(productStockId, putProductStockAdminRequestDto);
         return ResponseEntity.ok(true);
     }
 
@@ -201,24 +158,5 @@ public class ProductAdminController {
     public ResponseEntity<?> putProductOutgoingStockAdmin(@PathVariable int productOutgoingStockId, @RequestBody PutProductOutgoingStockAdminRequestDto putProductOutgoingStockAdminRequestDto) {
         productAdminService.putProductOutgoingStockAdmin(productOutgoingStockId, putProductOutgoingStockAdminRequestDto);
         return ResponseEntity.ok(true);
-    }
-
-    // [사용자 애완용품 주문 현황]
-    // 관리자 애완용품 주문 현황 조회(다건)
-//    @GetMapping("/admin/order/detail")
-//    public ResponseEntity<?> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
-//        System.out.println(getProductOrderDetailsAdminRequestDto);
-//        return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdmin(getProductOrderDetailsAdminRequestDto));
-//    }
-
-    @GetMapping("/admin/order/detail")
-    public ResponseEntity<?> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
-        return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdmin(getProductOrderDetailsAdminRequestDto));
-    }
-
-    // 관리자 애완용품 주문 현황 페이지네이션 조회(다건)
-    @GetMapping("/admin/order/count")
-    public ResponseEntity<?> getProductOrderDetailsAdminCount(GetProductOrderDetailsAdminCountRequestDto getProductOrderDetailsAdminCountRequestDto) {
-        return ResponseEntity.ok(productAdminService.getProductOrderDetailsAdminCount(getProductOrderDetailsAdminCountRequestDto));
     }
 }

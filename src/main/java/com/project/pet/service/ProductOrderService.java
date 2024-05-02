@@ -10,9 +10,11 @@ import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import com.project.pet.entity.product.ProductOrder;
 import com.project.pet.entity.product.ProductOrderDetail;
 import com.project.pet.entity.product.ProductOutgoingStock;
+import com.project.pet.entity.product.ProductStock;
 import com.project.pet.repository.ProductOrderDetailMapper;
 import com.project.pet.repository.ProductOrderMapper;
 import com.project.pet.repository.admin.ProductAdminMapper;
+import com.project.pet.repository.admin.ProductStockAdminMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,9 @@ public class ProductOrderService {
 
     @Autowired
     ProductAdminMapper productAdminMapper;
+
+    @Autowired
+    ProductStockAdminMapper productStockAdminMapper;
 
 
     public void postProductOrder(PostProductOrderRequestDto postProductOrderRequestDto) {
@@ -60,6 +65,10 @@ public class ProductOrderService {
                         .productOutgoingStockCount(productOrderCount)
                         .build()
         );
+
+        ProductStock productStock = productStockAdminMapper.getProductStock(productId, productSizeCategoryId);
+        int productStockCount = productStock.getProductStockCount();
+        productStockAdminMapper.updateProductStock(productId, productSizeCategoryId, (productStockCount - productOrderCount));
     }
 
     public void productOrderCarts(List<PostProductOrderRequestDto>  productOrderRequestDtoList) {
@@ -87,6 +96,10 @@ public class ProductOrderService {
                             .productOutgoingStockCount(productOrderCount)
                             .build()
             );
+
+            ProductStock productStock = productStockAdminMapper.getProductStock(productId, productSizeCategoryId);
+            int productStockCount = productStock.getProductStockCount();
+            productStockAdminMapper.updateProductStock(productId, productSizeCategoryId, (productStockCount - productOrderCount));
         }
     }
 
@@ -101,9 +114,19 @@ public class ProductOrderService {
 
     public void deleteProductOrder(DeleteProductOrderRequestDto deleteProductOrderRequestDto) {
         int productOrderId = deleteProductOrderRequestDto.getProductOrderId();
+
+        ProductOrder productOrder = productOrderMapper.getProductOrder(productOrderId);
+        int productOrderCount = productOrder.getProductOrderCount();
+        int productId = productOrder.getProductId();
+        int productSizeCategoryId = productOrder.getProductSizeCategoryId();
+
+        ProductStock productStock = productStockAdminMapper.getProductStock(productId, productSizeCategoryId);
+        int productStockCount = productStock.getProductStockCount();
+
         productOrderMapper.deleteProductOrder(productOrderId);
         productOrderDetailMapper.deleteProductOrder(productOrderId);
         productAdminMapper.deleteProductOutgoingStockAdmin(productOrderId);
+        productStockAdminMapper.updateProductStock(productId, productSizeCategoryId, (productStockCount + productOrderCount));
     }
 
     @Transactional(rollbackFor = Exception.class)

@@ -15,19 +15,4 @@ public interface ProductOrderDetailMapper {
 
     public int deleteProductOrders(List<Integer> productOrderIds);
 
-//    public List<ProductOrderDetail> getProductOrderDetailsAdmin(
-//            @Param("startIndex") int startIndex,
-//            @Param("count") int count
-//    );
-    public List<ProductOrder> getProductOrderDetailsAdmin(
-            @Param("startIndex") int startIndex,
-            @Param("count") int count,
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
-    );
-
-    public int getProductOrderDetailsAdminCount(
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
-    );
 }

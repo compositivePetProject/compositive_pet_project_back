@@ -1,7 +1,7 @@
 package com.project.pet.entity.product;
 
 import com.project.pet.dto.product.response.GetProductStockAdminResponseDto;
-import com.project.pet.dto.product.response.GetProductStocksAdminResponseDto;
+import com.project.pet.dto.admin.stockProduct.response.GetProductStocksAdminResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
