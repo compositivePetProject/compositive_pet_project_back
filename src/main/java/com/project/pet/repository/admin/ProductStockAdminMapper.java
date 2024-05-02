@@ -23,5 +23,16 @@ public interface ProductStockAdminMapper {
             @Param("productNameKor") String productNameKor
     );
 
+    public ProductStock getProductStock(
+            @Param("productId") int productId,
+            @Param("productSizeCategoryId") int productSizeCategoryId
+    );
+
+    public int updateProductStock(
+            @Param("productId") int productId,
+            @Param("productSizeCategoryId") int productSizeCategoryId,
+            @Param("productStockCount") int productStockCount
+    );
+
 
 }

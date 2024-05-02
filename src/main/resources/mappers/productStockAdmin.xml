@@ -115,4 +115,28 @@
         </if>
     </select>
 
+    <select id="getProductStock" resultMap="ProductStockResultMap">
+        select
+            product_stock_id,
+            product_id,
+            product_size_category_id,
+            product_stock_count,
+            create_date,
+            update_date
+        from
+            product_stock_tb
+        where
+            product_id = #{productId}
+            and product_size_category_id = #{productSizeCategoryId}
+    </select>
+
+    <update id="updateProductStock">
+        update
+            product_stock_tb
+        set
+            product_stock_count = #{productStockCount}
+        where
+            product_id = #{productId}
+            and product_size_category_id = #{productSizeCategoryId}
+    </update>
 </mapper>

@@ -27,4 +27,10 @@ public class ProductOrderAdminController {
         return ResponseEntity.ok(productOrderAdminService.getProductOrderDetailsAdminCount(getProductOrderDetailsAdminCountRequestDto));
     }
 
+    // 관리자 매출 현황 조회
+    @GetMapping("/order/sales")
+    public ResponseEntity<?> getProductOrderSalesAdmin() {
+        return ResponseEntity.ok(productOrderAdminService.getProductOrderSalesAdmin());
+    }
+
 }

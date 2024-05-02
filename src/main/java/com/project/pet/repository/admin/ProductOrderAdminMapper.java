@@ -21,4 +21,17 @@ public interface ProductOrderAdminMapper {
             @Param("productNameKor") String productNameKor
     );
 
+    public int getDogSales();
+
+    public int getCatSales();
+
+    public int getFeedSales();
+
+    public int getSnackSales();
+
+    public int getHygieneSales();
+
+    public int getBeautySales();
+
+    public int getTotalSales();
 }

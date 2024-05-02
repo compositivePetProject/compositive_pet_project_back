@@ -92,4 +92,81 @@
             and pt.product_name_kor like concat('%', #{productNameKor}, '%')
         </if>
     </select>
+
+    <select id="getDogSales" resultType="Integer">
+        select
+            coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pact.product_animal_category_id = 1
+    </select>
+    <select id="getCatSales" resultType="Integer">
+        select
+        coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pact.product_animal_category_id = 2
+    </select>
+    <select id="getFeedSales" resultType="Integer">
+        select
+            coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pct.product_category_id = 1
+    </select>
+    <select id="getSnackSales" resultType="Integer">
+        select
+            coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pct.product_category_id = 2
+    </select>
+    <select id="getHygieneSales" resultType="Integer">
+        select
+            coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pct.product_category_id = 3
+    </select>
+    <select id="getBeautySales" resultType="Integer">
+        select
+            coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+        where
+            pct.product_category_id = 4
+    </select>
+
+    <select id="getTotalSales" resultType="Integer">
+        select
+            coalesce(sum(pt.product_price * pot.product_order_count), 0)
+        from
+            product_order_tb pot
+            left outer join product_tb pt on(pt.product_id = pot.product_id)
+            left outer join product_category_tb pct on(pct.product_category_id = pt.product_category_id)
+            left outer join product_animal_category_tb pact on (pact.product_animal_category_id = pt.product_animal_category_id)
+    </select>
 </mapper>
