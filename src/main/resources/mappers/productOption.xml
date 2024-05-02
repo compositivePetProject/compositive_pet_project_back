@@ -20,7 +20,6 @@
         <result property="productSizeCategoryNameKor" column="product_size_category_name_kor"/>
     </resultMap>
 
-
     <select id="getAllProductTypes" resultMap="ProductTypeResultMap">
         select
             product_category_id,

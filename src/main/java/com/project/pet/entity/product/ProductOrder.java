@@ -1,6 +1,6 @@
 package com.project.pet.entity.product;
 
-import com.project.pet.dto.product.response.GetProductOrderDetailsAdminResponseDto;
+import com.project.pet.dto.admin.orderProduct.response.GetProductOrderDetailsAdminResponseDto;
 import com.project.pet.dto.product.response.GetProductOrderResponseDto;
 import com.project.pet.dto.product.response.GetProductOrdersResponseDto;
 import com.project.pet.entity.user.User;

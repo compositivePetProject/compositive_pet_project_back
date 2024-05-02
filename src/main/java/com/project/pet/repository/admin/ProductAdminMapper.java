@@ -35,8 +35,6 @@ public interface ProductAdminMapper {
 
     public int deleteProductsAdmin(List<Integer> productIds);
 
-    public int postProductIncomingStock(ProductIncomingStock productIncomingStock);
-
     public List<ProductIncomingStock> getProductIncomingStocksTest(
             @Param("startIndex") int startIndex,
             @Param("count") int count,
@@ -44,47 +42,19 @@ public interface ProductAdminMapper {
             @Param("searchText") String searchText
     );
 
-    public List<ProductIncomingStock> getProductIncomingStocks(
-            @Param("startIndex") int startIndex,
-            @Param("count") int count,
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
-    );
-
-    public int getProductIncomingCount(
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
-    );
-
     public ProductIncomingStock getProductIncomingStock(int productIncomingStockId);
 
     public int deleteProductIncomingStock(int productIncomingStockId);
 
-    public int deleteProductIncomingStocksAdmin(List<Integer> productIncomingStockIds);
-
     public int putProductIncomingStockAdmin(ProductIncomingStock productIncomingStock);
 
     public int postProductStockAdmin(ProductStock productStock);
-
-    public List<ProductStock> getProductStocksAdmin(
-            @Param("startIndex") int startIndex,
-            @Param("count") int count,
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
-    );
-
-    public int getProductStocksCount(
-            @Param("productSizeCategoryId") int productSizeCategoryId,
-            @Param("productNameKor") String productNameKor
-    );
 
     public ProductStock getProductStockAdmin(int productStockId);
 
     public int deleteProductStockAdmin(int productStockId);
 
     public int deleteProductStocksAdmin(List<Integer> productStockIds);
-
-    public int putProductStockAdmin(ProductStock productStock);
 
     public int postProductOutgoingStockAdmin(ProductOutgoingStock productOutgoingStock);
 

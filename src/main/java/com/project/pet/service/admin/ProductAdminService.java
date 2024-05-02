@@ -1,5 +1,10 @@
 package com.project.pet.service.admin;
 
+import com.project.pet.dto.admin.incomingProduct.request.PutProductIncomingStockAdminRequestDto;
+import com.project.pet.dto.admin.outgoingProduct.request.GetProductOutgoingCountAdminRequestDto;
+import com.project.pet.dto.admin.outgoingProduct.request.GetProductOutgoingStocksAdminRequestDto;
+import com.project.pet.dto.admin.outgoingProduct.response.GetProductOutgoingCountAdminResponseDto;
+import com.project.pet.dto.admin.outgoingProduct.response.GetProductOutgoingStocksAdminResponseDto;
 import com.project.pet.dto.product.request.*;
 import com.project.pet.dto.product.response.*;
 import com.project.pet.entity.product.*;
@@ -74,9 +79,6 @@ public class ProductAdminService {
         productAdminMapper.deleteProductsAdmin(productIds);
     }
 
-    public void postProductIncomingStock(PostProductIncomingStockRequestDto postProductIncomingStockRequestDto) {
-        productAdminMapper.postProductIncomingStock(postProductIncomingStockRequestDto.toEntity());
-    }
 
     public List<GetProductIncomingStocksTestResponseDto> getProductIncomingStocksTest(GetProductIncomingStocksTestRequestDto getProductIncomingStocksTestRequestDto) {
         int startIndex = (getProductIncomingStocksTestRequestDto.getPage() - 1) * getProductIncomingStocksTestRequestDto.getCount();
@@ -89,44 +91,13 @@ public class ProductAdminService {
         return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksTestResponseDto).collect(Collectors.toList());
     }
 
-    public List<GetProductIncomingStocksResponseDto> getProductIncomingStocks(GetProductIncomingStocksRequestDto getProductIncomingStocksRequestDto) {
-        int startIndex = (getProductIncomingStocksRequestDto.getPage() - 1) * getProductIncomingStocksRequestDto.getCount();
-        List<ProductIncomingStock> list = productAdminMapper.getProductIncomingStocks(
-                startIndex,
-                getProductIncomingStocksRequestDto.getCount(),
-                getProductIncomingStocksRequestDto.getProductSizeCategoryId(),
-                getProductIncomingStocksRequestDto.getProductNameKor()
-        );
-        return list.stream().map(ProductIncomingStock::toGetProductIncomingStocksResponseDto).collect(Collectors.toList());
-    }
-
-    public GetProductIncomingCountResponseDto getProductIncomingCount(GetProductIncomingCountRequestDto getProductIncomingCountRequestDto) {
-        int productCount = productAdminMapper.getProductIncomingCount(
-                getProductIncomingCountRequestDto.getProductSizeCategoryId(),
-                getProductIncomingCountRequestDto.getProductNameKor()
-        );
-
-        int maxPageNumber = (int) Math.ceil(((double) productCount) / getProductIncomingCountRequestDto.getCount());
-
-        return GetProductIncomingCountResponseDto.builder()
-                .totalCount(productCount)
-                .maxPageNumber(maxPageNumber)
-                .build();
-    }
-
     public GetProductIncomingStockResponseDto getProductIncomingStock(int productIncomingStockId) {
         ProductIncomingStock productIncomingStock = productAdminMapper.getProductIncomingStock(productIncomingStockId);
         return productIncomingStock.toGetProductIncomingStockResponseDto();
     }
 
-
     public void deleteProductIncomingStock(int productIncomingStockId) {
         productAdminMapper.deleteProductIncomingStock(productIncomingStockId);
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public void deleteProductIncomingStocksAdmin(List<Integer> productIncomingStockIds) {
-        productAdminMapper.deleteProductIncomingStocksAdmin(productIncomingStockIds);
     }
 
     public void putProductIncomingStockAdmin(int productIncomingStockId, PutProductIncomingStockAdminRequestDto putProductIncomingStockAdminRequestDto) {
@@ -136,29 +107,6 @@ public class ProductAdminService {
 
     public void postProductStockAdmin(PostProductStockAdminRequestDto postProductStockAdminRequestDto) {
         productAdminMapper.postProductStockAdmin(postProductStockAdminRequestDto.toEntity());
-    }
-
-    public List<GetProductStocksAdminResponseDto> getProductStocksAdmin(GetProductStocksAdminRequestDto getProductStocksAdminRequestDto) {
-        int startIndex = (getProductStocksAdminRequestDto.getPage() - 1) * getProductStocksAdminRequestDto.getCount();
-        List<ProductStock> list = productAdminMapper.getProductStocksAdmin(
-                startIndex,
-                getProductStocksAdminRequestDto.getCount(),
-                getProductStocksAdminRequestDto.getProductSizeCategoryId(),
-                getProductStocksAdminRequestDto.getProductNameKor()
-        );
-        return list.stream().map(ProductStock::toGetProductStocksResponseDto).collect(Collectors.toList());
-    }
-
-    public GetProductStocksCountResponseDto getProductStocksCount(GetProductStocksCountRequestDto getProductStocksCountRequestDto) {
-        int productStockCount = productAdminMapper.getProductStocksCount(
-                getProductStocksCountRequestDto.getProductSizeCategoryId(),
-                getProductStocksCountRequestDto.getProductNameKor()
-        );
-        int maxPageNumber = (int) Math.ceil(((double) productStockCount) / getProductStocksCountRequestDto.getCount());
-        return GetProductStocksCountResponseDto.builder()
-                .totalCount(productStockCount)
-                .maxPageNumber(maxPageNumber)
-                .build();
     }
 
     public GetProductStockAdminResponseDto getProductStockAdmin(int productStockId) {
@@ -173,11 +121,6 @@ public class ProductAdminService {
     @Transactional(rollbackFor = Exception.class)
     public void deleteProductStocksAdmin(List<Integer> productStockIds) {
         productAdminMapper.deleteProductStocksAdmin(productStockIds);
-    }
-
-    public void putProductStockAdmin(int productStockId, PutProductStockAdminRequestDto productStockAdminRequestDto) {
-        productStockAdminRequestDto.setProductStockId(productStockId);
-        productAdminMapper.putProductStockAdmin(productStockAdminRequestDto.toEntity());
     }
 
     public void postProductOutgoingStockAdmin(PostProductOutgoingStockAdminRequestDto postProductOutgoingStockAdminRequestDto) {
@@ -220,37 +163,5 @@ public class ProductAdminService {
         putProductOutgoingStockAdminRequestDto.setProductOutgoingStockId(productOutgoingStockId);
         productAdminMapper.putProductOutgoingStockAdmin(putProductOutgoingStockAdminRequestDto.toEntity());
     }
-
-//    public List<GetProductOrderDetailsAdminResponseDto> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
-//        int startIndex = (getProductOrderDetailsAdminRequestDto.getPage() - 1) * getProductOrderDetailsAdminRequestDto.getCount();
-//        List<ProductOrderDetail> list = productOrderDetailMapper.getProductOrderDetailsAdmin(
-//                startIndex,
-//                getProductOrderDetailsAdminRequestDto.getCount()
-//        );
-//        return list.stream().map(ProductOrderDetail::toGetProductOrderDetailsAdminResponseDto).collect(Collectors.toList());
-//    }
-    public List<GetProductOrderDetailsAdminResponseDto> getProductOrderDetailsAdmin(GetProductOrderDetailsAdminRequestDto getProductOrderDetailsAdminRequestDto) {
-        int startIndex = (getProductOrderDetailsAdminRequestDto.getPage() - 1) * getProductOrderDetailsAdminRequestDto.getCount();
-        List<ProductOrder> list = productOrderDetailMapper.getProductOrderDetailsAdmin(
-                startIndex,
-                getProductOrderDetailsAdminRequestDto.getCount(),
-                getProductOrderDetailsAdminRequestDto.getProductSizeCategoryId(),
-                getProductOrderDetailsAdminRequestDto.getProductNameKor()
-        );
-        return list.stream().map(ProductOrder::toGetProductOrderDetailsAdminResponseDto).collect(Collectors.toList());
-    }
-
-    public GetProductOrderDetailsAdminCountResponseDto getProductOrderDetailsAdminCount(GetProductOrderDetailsAdminCountRequestDto getProductOrderDetailsAdminCountRequestDto) {
-        int productOrderDeatilsCount = productOrderDetailMapper.getProductOrderDetailsAdminCount(
-                getProductOrderDetailsAdminCountRequestDto.getProductSizeCategoryId(),
-                getProductOrderDetailsAdminCountRequestDto.getProductNameKor()
-        );
-        int maxPageNumber = (int) Math.ceil(((double) productOrderDeatilsCount) / getProductOrderDetailsAdminCountRequestDto.getCount());
-        return GetProductOrderDetailsAdminCountResponseDto.builder()
-                .maxPageNumber(maxPageNumber)
-                .totalCount(productOrderDeatilsCount)
-                .build();
-    }
-
 
 }

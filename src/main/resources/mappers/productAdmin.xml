@@ -230,17 +230,6 @@
             )
     </delete>
 
-    <insert id="postProductIncomingStock"
-            parameterType="com.project.pet.entity.product.ProductIncomingStock"
-            keyProperty="productIncomingStockId"
-            useGeneratedKeys="true"
-    >
-            insert into
-                product_incoming_stock_tb
-            values
-                (0, #{productId}, #{productSizeCategoryId}, #{productIncomingStockCount}, now(), now())
-    </insert>
-
     <select id="getProductIncomingStocksTest" resultMap="ProductIncomingStockResultMap">
         select
             pist.product_incoming_stock_id,
@@ -289,46 +278,6 @@
         limit #{startIndex}, #{count}
     </select>
 
-    <select id="getProductIncomingStocks" resultMap="ProductIncomingStockResultMap">
-        select
-            pist.product_incoming_stock_id,
-            pist.product_id,
-            pt.product_name_kor,
-            pist.product_size_category_id,
-            psct.product_size_category_name,
-            pist.product_incoming_stock_count
-        from
-            product_incoming_stock_tb pist
-            left outer join product_tb pt on(pt.product_id = pist.product_id)
-            left outer join product_size_category_tb psct on(psct.product_size_category_id = pist.product_size_category_id)
-        where
-            1 = 1
-            <if test="productSizeCategoryId != 0">
-                and pist.product_size_category_Id = #{productSizeCategoryId}
-            </if>
-            <if test="productNameKor != '' and productNameKor != null">
-                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
-            </if>
-        limit #{startIndex}, #{count}
-    </select>
-
-    <select id="getProductIncomingCount" resultType="Integer">
-        select
-            count(*)
-        from
-            product_incoming_stock_tb pist
-            left outer join product_tb pt on(pt.product_id = pist.product_id)
-            left outer join product_size_category_tb psct on(psct.product_size_category_id = pist.product_size_category_id)
-        where
-            1 = 1
-            <if test="productSizeCategoryId != 0">
-                and pist.product_size_category_id = #{productSizeCategoryId}
-            </if>
-            <if test="productNameKor != '' and productNameKor != null">
-                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
-            </if>
-    </select>
-
     <select id="getProductIncomingStock" parameterType="Integer" resultMap="ProductIncomingStockResultMap">
         select
             pist.product_incoming_stock_id,
@@ -356,18 +305,6 @@
             product_incoming_stock_id = #{productIncomingStockId}
     </delete>
 
-    <delete id="deleteProductIncomingStocksAdmin" parameterType="List">
-        delete
-        from
-            product_incoming_stock_tb
-        where
-            product_incoming_stock_id in (
-                <foreach collection="productIncomingStockIds" item="productIncomingStockId" separator=",">
-                    #{productIncomingStockId}
-                </foreach>
-            )
-    </delete>
-
     <update id="putProductIncomingStockAdmin" parameterType="com.project.pet.entity.product.ProductIncomingStock">
         update
             product_incoming_stock_tb
@@ -391,46 +328,6 @@
             (0, #{productId}, 3, 0, now(), now()),
             (0, #{productId}, 4, 0, now(), now())
     </insert>
-
-    <select id="getProductStocksAdmin" resultMap="ProductStockResultMap">
-        select
-            pst.product_stock_id,
-            pst.product_id,
-            pt.product_name_kor,
-            pst.product_size_category_id,
-            psct.product_size_category_name,
-            pst.product_stock_count
-        from
-            product_stock_tb pst
-            left outer join product_tb pt on(pt.product_id = pst.product_id)
-            left outer join product_size_category_tb psct on(psct.product_size_category_id = pst.product_size_category_id)
-        where
-            1 = 1
-            <if test="productSizeCategoryId != 0">
-                and pst.product_size_category_id = #{productSizeCategoryId}
-            </if>
-            <if test="productNameKor != '' and productNameKor != null">
-                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
-            </if>
-        limit #{startIndex}, #{count}
-    </select>
-
-    <select id="getProductStocksCount" resultType="Integer">
-        select
-            count(*)
-        from
-            product_stock_tb pst
-            left outer join product_tb pt on(pt.product_id = pst.product_id)
-            left outer join product_size_category_tb psct on(psct.product_size_category_id = pst.product_size_category_id)
-        where
-        1 = 1
-            <if test="productSizeCategoryId != 0">
-                and pst.product_size_category_id = #{productSizeCategoryId}
-            </if>
-            <if test="productNameKor != '' and productNameKor != null">
-                and pt.product_name_kor like concat('%', #{productNameKor}, '%')
-            </if>
-    </select>
 
     <select id="getProductStockAdmin" parameterType="Integer" resultMap="ProductStockResultMap">
         select
@@ -470,23 +367,14 @@
                 </foreach>
             )
     </delete>
-    <update id="putProductStockAdmin" parameterType="com.project.pet.entity.product.ProductStock">
-        update
-            product_stock_tb
-        set
-            product_id = #{productId},
-            product_size_category_id = #{productSizeCategoryId},
-            product_stock_count = #{productStockCount},
-            update_date = now()
-        where
-            product_stock_id = #{productStockId}
-    </update>
+
     <insert id="postProductOutgoingStockAdmin" parameterType="com.project.pet.entity.product.ProductOutgoingStock">
         insert into
             product_outgoing_stock_tb
         values
             (0, #{productOrderId}, #{productId}, #{productSizeCategoryId}, #{productOutgoingStockCount}, now(), now())
     </insert>
+
     <select id="getProductOutgoingStocksAdmin" resultMap="ProductOutgoingStockResultMap">
         select
             post.product_outgoing_stock_id,
@@ -509,6 +397,7 @@
             </if>
         limit #{startIndex}, #{count}
     </select>
+
     <select id="getProductOutgoingCountAdmin" resultType="Integer">
         select
             count(*)
@@ -526,6 +415,7 @@
                 and pt.product_name_kor like concat('%', #{productNameKor}, '%')
             </if>
     </select>
+
     <delete id="deleteProductOutgoingStockAdmin" parameterType="Integer">
         delete
         from
@@ -533,6 +423,7 @@
         where
             product_order_id = #{productOrderId}
     </delete>
+
     <delete id="deleteProductOutgoingStocksAdmin" parameterType="List">
         delete
         from
@@ -544,6 +435,7 @@
                 </foreach>
             )
     </delete>
+
     <update id="putProductOutgoingStockAdmin" parameterType="com.project.pet.entity.product.ProductOutgoingStock">
         update
             product_outgoing_stock_tb
