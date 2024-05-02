@@ -32,7 +32,7 @@
         <result property="adoptationBoardContent" column="adoptation_board_content"/>
         <result property="boardAnimalCategoryId" column="board_animal_category_id"/>
         <result property="totalCount" column="count(abft.adoptation_favorite_id)"/>
-        <result property="viewCount" column=" count(abvt.adoptation_board_view_id)"/>
+        <result property="viewCount" column="count(abvt.adoptation_board_view_id)"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
         <association property="adoptationBoardAnimalCategory" resultMap="AdoptationBoardAnimalCategoryResultMap"/>

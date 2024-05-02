@@ -24,10 +24,11 @@ public class AdoptationBoard {
     private String adoptationBoardTitle;
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
-    private LocalDate createDate;
-    private LocalDate updateDate;
     private int totalCount;
     private int viewCount;
+    private LocalDate createDate;
+    private LocalDate updateDate;
+
 
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
