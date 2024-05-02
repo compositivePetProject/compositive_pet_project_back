@@ -27,10 +27,12 @@ public class AdoptationBoard {
     private LocalDate createDate;
     private LocalDate updateDate;
     private int totalCount;
+    private int viewCount;
 
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
     public AdoptationBoardFavorite adoptationBoardFavorite;
+    public AdoptationBoardView adoptationBoardView;
 
     // Entity -> ResponseDto
     public GetAdoptationBoardRespDto toGetAdoptationBoardRespDto () {
@@ -42,6 +44,8 @@ public class AdoptationBoard {
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
+                .totalCount(totalCount)
+                .viewCount(viewCount)
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();

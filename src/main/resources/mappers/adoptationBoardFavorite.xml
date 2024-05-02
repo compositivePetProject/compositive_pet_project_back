@@ -41,5 +41,15 @@
         where
             adoptation_board_id = #{boardId}
     </select>
+    <select id="findMyUserIdByBoardId"
+            resultType="integer"
+            >
+        SELECT
+            user_id
+        FROM
+            pet_db.adoptation_board_favorite_tb
+        where
+            adoptation_board_id = #{boardId}
+    </select>
 
 </mapper>

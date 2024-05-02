@@ -16,4 +16,5 @@ public interface AdoptationBoardFavoriteMapper {
     public int deleteAdoptationBoardFavorite(Map<String, Integer> params);
     public int getAdoptationBoardFavorite(int boardId);
     public List<Integer> getAdoptationBoardFavorites(int boardId);
+    public int findMyUserIdByBoardId(int boardId);
 }
