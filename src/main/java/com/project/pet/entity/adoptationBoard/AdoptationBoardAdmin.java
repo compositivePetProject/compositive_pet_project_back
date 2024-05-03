@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -20,8 +21,8 @@ public class AdoptationBoardAdmin {
     private int userId;
     private String adoptationBoardAdminTitle;
     private String adoptationBoardAdminContent;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private LocalDate createDate;
+    private LocalDate updateDate;
     private User user;
 
     public GetAdoptationBoardAdminRespDto toGetAdoptationBoardAdminRespDto() {

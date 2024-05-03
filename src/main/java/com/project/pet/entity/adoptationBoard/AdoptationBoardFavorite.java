@@ -1,6 +1,7 @@
 package com.project.pet.entity.adoptationBoard;
 
 
+import com.project.pet.dto.adoptation.response.GetAdoptationFavoriteRespDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +22,15 @@ public class AdoptationBoardFavorite {
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
+    public GetAdoptationFavoriteRespDto toGetAdoptationFavoriteRespDto() {
+        return GetAdoptationFavoriteRespDto.builder()
+                .adoptationFavoriteId(adoptationFavoriteId)
+                .adoptationBoardId(adoptationBoardId)
+                .userId(userId)
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
 
 }

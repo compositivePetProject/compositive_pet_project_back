@@ -1,9 +1,7 @@
 package com.project.pet.service;
 
-import com.project.pet.dto.adoptation.request.PostAdoptationBoardReqDto;
-import com.project.pet.dto.adoptation.request.UpdateAdoptationBoardReqDto;
-import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
-import com.project.pet.dto.adoptation.response.GetLikedAdoptationBoardByUserIdRespDto;
+import com.project.pet.dto.adoptation.request.*;
+import com.project.pet.dto.adoptation.response.*;
 import com.project.pet.entity.adoptationBoard.AdoptationBoard;
 import com.project.pet.repository.AdoptationBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +16,68 @@ public class AdoptationBoardService {
     @Autowired
     private AdoptationBoardMapper adoptationBoardMapper;
 
+
+
+
+
+
+
     //게시판 작성
     public void postAdoptationBoard(PostAdoptationBoardReqDto postAdoptationBoardReqDto) {
+
         adoptationBoardMapper.postAdoptationBoard(postAdoptationBoardReqDto.toEntity());
+
+    }
+
+    // 전체 분양 게시판 수 조회
+    public GetAdoptationBoardCountRespDto getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCount();
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardCountReqDto.getCount()));
+        return GetAdoptationBoardCountRespDto.builder()
+                .maxPageNumber(maxPageNumber)
+                .totalCount(adoptionBoardCount)
+                .build();
+    }
+
+
+    // 강아지 분양 게시판 수 조회
+    public GetAdoptationBoardDogCountRespDto getAdoptationBoardDogCount(GetAdoptationBoardDogCountReqDto getAdoptationBoardDogCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardDogCount();
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardDogCountReqDto.getCount()));
+        return GetAdoptationBoardDogCountRespDto.builder()
+                .maxPageNumberDog(maxPageNumber)
+                .totalCountDog(adoptionBoardCount)
+                .build();
+    }
+
+
+    public GetAdoptationBoardCatCountRespDto getAdoptationBoardCatCount(GetAdoptationBoardCatCountReqDto getAdoptationBoardCatCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCatCount();
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardCatCountReqDto.getCount()));
+        return GetAdoptationBoardCatCountRespDto.builder()
+                .maxPageNumberCat(maxPageNumber)
+                .totalCountCat(adoptionBoardCount)
+                .build();
+    }
+
+    //마이페이지 게시판 수 조회
+    public GetAdoptationBoardUserCountRespDto getAdoptationBoardUserCount(GetAdoptationBoardUserCountReqDto getAdoptationBoardUserCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardUserCount(getAdoptationBoardUserCountReqDto.getUserId());
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardUserCountReqDto.getCount()));
+        return GetAdoptationBoardUserCountRespDto.builder()
+                .maxPageNumber(maxPageNumber)
+                .totalCount(adoptionBoardCount)
+                .build();
     }
 
     //전체 게시판 조회(다건)
     public List<GetAdoptationBoardRespDto> getAdoptationBoards() {
         List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoards();
+        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
+    }
+
+    public List<GetAdoptationBoardRespDto> getAdoptationBoardByUserId(int userId) {
+        List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardByUserId(userId);
         return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 
@@ -37,6 +89,11 @@ public class AdoptationBoardService {
 
     public List<GetAdoptationBoardRespDto> getAdoptationBoardsDog() {
         List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardsDog();
+        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
+    }
+
+    public List<GetAdoptationBoardRespDto> getAdoptationBoardsCat() {
+        List <AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoardsCat();
         return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 

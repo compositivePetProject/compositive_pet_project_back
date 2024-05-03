@@ -38,4 +38,10 @@ public class ProductFavoriteController {
         boolean isLiked = productFavoriteService.getUserLikeStatus(getProductFavoriteRequestDto);
         return ResponseEntity.ok(isLiked);
     }
+
+    @GetMapping("/likes")
+    public ResponseEntity<?> getUserLikesStatus(GetProductFavoriteRequestDto getProductFavoriteRequestDto) {
+        boolean isLiked = productFavoriteService.getUserLikeStatus(getProductFavoriteRequestDto);
+        return ResponseEntity.ok(isLiked);
+    }
 }
