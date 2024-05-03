@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class GetCommunityBoardPageCountReqDto {
-
     private int page;
     private int count;
+    private String searchText;
 }
