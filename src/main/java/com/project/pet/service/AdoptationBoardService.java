@@ -50,6 +50,16 @@ public class AdoptationBoardService {
                 .build();
     }
 
+
+    public GetAdoptationBoardCatCountRespDto getAdoptationBoardCatCount(GetAdoptationBoardCatCountReqDto getAdoptationBoardCatCountReqDto) {
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCatCount();
+        int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardCatCountReqDto.getCount()));
+        return GetAdoptationBoardCatCountRespDto.builder()
+                .maxPageNumberCat(maxPageNumber)
+                .totalCountCat(adoptionBoardCount)
+                .build();
+    }
+
     //마이페이지 게시판 수 조회
     public GetAdoptationBoardUserCountRespDto getAdoptationBoardUserCount(GetAdoptationBoardUserCountReqDto getAdoptationBoardUserCountReqDto) {
         int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardUserCount(getAdoptationBoardUserCountReqDto.getUserId());

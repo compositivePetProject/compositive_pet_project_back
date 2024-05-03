@@ -32,7 +32,6 @@
         <result property="adoptationBoardContent" column="adoptation_board_content"/>
         <result property="boardAnimalCategoryId" column="board_animal_category_id"/>
         <result property="totalCount" column="count(abft.adoptation_favorite_id)"/>
-        <result property="viewCount" column="count(abvt.adoptation_board_view_id)"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
         <association property="adoptationBoardAnimalCategory" resultMap="AdoptationBoardAnimalCategoryResultMap"/>
@@ -73,14 +72,12 @@
             abact.board_animal_category_name_kor,
             abt.create_date,
             abt.update_date,
-            count(abft.adoptation_favorite_id),
-            count(abvt.adoptation_board_view_id)
+            count(abft.adoptation_favorite_id)
         from
             adoptation_board_tb abt
             left outer join user_tb ut on (ut.user_id = abt.user_id)
             left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
             left outer join adoptation_board_favorite_tb abft on(abft.adoptation_board_id = abt.adoptation_board_id)
-            left outer join adoptation_board_view_tb abvt on(abvt.adoptation_board_id = abt.adoptation_board_id)
         group by
             adoptation_board_id
     </select>
@@ -140,24 +137,40 @@
             abt.board_animal_category_id = 1;
     </select>
 
+    <select id="getAdoptationBoardCatCount"
+            resultType="integer">
+        select
+        count(*)
+        from
+        adoptation_board_tb abt
+        left outer join user_tb ut on (ut.user_id = abt.user_id)
+        left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
+        where
+        abt.board_animal_category_id = 2;
+    </select>
+
     <select id="getAdoptationBoardsDog"
             resultMap="AdoptationBoardResultMap">
         select
-            abt.adoptation_board_id,
-            abt.user_id,
-            ut.user_username,
-            abt.adoptation_board_title,
-            abt.adoptation_board_content,
-            abt.board_animal_category_id,
-            abact.board_animal_category_name_kor,
-            abt.create_date,
-            abt.update_date
+        abt.adoptation_board_id,
+        abt.user_id,
+        ut.user_username,
+        abt.adoptation_board_title,
+        abt.adoptation_board_content,
+        abt.board_animal_category_id,
+        abact.board_animal_category_name_kor,
+        count(abft.adoptation_favorite_id),
+        abt.create_date,
+        abt.update_date
         from
-            adoptation_board_tb abt
-            left outer join user_tb ut on (ut.user_id = abt.user_id)
-            left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
+        adoptation_board_tb abt
+        left outer join user_tb ut on (ut.user_id = abt.user_id)
+        left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
+        left outer join adoptation_board_favorite_tb abft on(abft.adoptation_board_id = abt.adoptation_board_id)
         where
-            abt.board_animal_category_id = 1;
+        abt.board_animal_category_id = 1
+        group by
+        adoptation_board_id;
     </select>
 
     <select id="getAdoptationBoardsCat"
@@ -170,14 +183,19 @@
         abt.adoptation_board_content,
         abt.board_animal_category_id,
         abact.board_animal_category_name_kor,
+        count(abft.adoptation_favorite_id),
         abt.create_date,
         abt.update_date
         from
         adoptation_board_tb abt
         left outer join user_tb ut on (ut.user_id = abt.user_id)
         left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
+        left outer join adoptation_board_favorite_tb abft on(abft.adoptation_board_id = abt.adoptation_board_id)
         where
-        abt.board_animal_category_id = 2;
+            abt.board_animal_category_id = 2
+        group by
+        adoptation_board_id;
+
     </select>
 
     <select id="getAdoptationBoardByBoardId"

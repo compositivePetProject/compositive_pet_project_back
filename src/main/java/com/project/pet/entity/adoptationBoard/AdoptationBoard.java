@@ -25,7 +25,6 @@ public class AdoptationBoard {
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
     private int totalCount;
-    private int viewCount;
     private LocalDate createDate;
     private LocalDate updateDate;
 
@@ -46,7 +45,6 @@ public class AdoptationBoard {
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
                 .totalCount(totalCount)
-                .viewCount(viewCount)
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();

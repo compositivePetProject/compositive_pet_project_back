@@ -22,6 +22,8 @@ public interface AdoptationBoardMapper {
 
     public int getAdoptationBoardDogCount();
 
+    public int getAdoptationBoardCatCount();
+
     public int getAdoptationBoardUserCount(int userId);
 
 

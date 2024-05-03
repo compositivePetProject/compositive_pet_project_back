@@ -51,6 +51,12 @@ public class AdoptationBoardController {
         return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardDogCount(getAdoptationBoardDogCountReqDto));
     }
 
+    @GetMapping("/board/catCount")
+    public ResponseEntity<?> getAdoptationBoardCatCount(GetAdoptationBoardCatCountReqDto getAdoptationBoardCatCountReqDto) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoardCatCount(getAdoptationBoardCatCountReqDto));
+    }
+
+
     //마이페이지 게시판 페이지네이션
     @GetMapping("/board/userCount")
     public ResponseEntity<?> getAdoptationBoardUserCount(GetAdoptationBoardUserCountReqDto getAdoptationBoardUserCountReqDto) {
