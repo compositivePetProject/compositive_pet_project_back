@@ -27,7 +27,16 @@ public interface CommunityBoardMapper {
 
     public List<CommunityBoard> getMyBoardByUserId(int userId);
 
-    public int getBoardPageCount();
+    // 전체 게시판 페이지
+    public List<CommunityBoard> getBoardPageCount(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count,
+            @Param("searchText") String searchText
+    );
+
+    public int getBoardCount(
+            @Param("searchText") String searchText);
+
 
     public int getDogBoardPageCount();
 
