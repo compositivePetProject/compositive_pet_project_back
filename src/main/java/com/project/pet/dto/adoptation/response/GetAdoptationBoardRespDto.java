@@ -19,6 +19,7 @@ public class GetAdoptationBoardRespDto {
     private String boardAnimalCategoryNameKor;
     private int totalCount;
     private int viewCount;
+    private int commentCount;
     private LocalDate createDate;
     private LocalDate updateDate;
 }
