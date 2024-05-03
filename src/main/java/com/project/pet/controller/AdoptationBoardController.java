@@ -27,8 +27,8 @@ public class AdoptationBoardController {
 
     //전체 게시판 조회(다건)
     @GetMapping("/board")
-    public ResponseEntity<?> getAdoptationBoards() {
-        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards());
+    public ResponseEntity<?> getAdoptationBoards(GetAdoptationBoardsRequestDto getAdoptationBoardsRequestDto) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards(getAdoptationBoardsRequestDto));
     }
 
 

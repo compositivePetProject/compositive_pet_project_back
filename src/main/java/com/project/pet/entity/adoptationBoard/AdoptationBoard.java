@@ -40,6 +40,7 @@ public class AdoptationBoard {
                 .adoptationBoardId(adoptationBoardId)
                 .userId(user.getUserId())
                 .username(user.getUsername())
+                .userNickname(user.getNickname())
                 .adoptationBoardTitle(adoptationBoardTitle)
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)

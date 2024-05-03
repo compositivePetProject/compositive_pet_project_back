@@ -4,6 +4,7 @@ package com.project.pet.repository;
 import com.project.pet.dto.adoptation.request.GetAdoptationBoardByUserIdReqDto;
 import com.project.pet.entity.adoptationBoard.AdoptationBoard;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,11 +15,19 @@ public interface AdoptationBoardMapper {
     public int postAdoptationBoard(AdoptationBoard adoptationBoard);
 
     //전체 게시글 조회
-    public List<AdoptationBoard> getAdoptationBoards();
+    public List<AdoptationBoard> getAdoptationBoards(
+            @Param("startIndex") int startIndex,
+            @Param("count") int count,
+            @Param("boardAnimalCategoryId") int boardAnimalCategoryId,
+            @Param("adoptationBoardTitle") String adoptationBoardTitle
+    );
 
     public List<AdoptationBoard> getAdoptationBoardByUserId(int userId);
 
-    public int getAdoptationBoardCount();
+    public int getAdoptationBoardCount(
+            @Param("boardAnimalCategoryId") int boardAnimalCategoryId,
+            @Param("adoptationBoardTitle") String adoptationBoardTitle
+    );
 
     public int getAdoptationBoardDogCount();
 

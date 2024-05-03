@@ -12,6 +12,7 @@ public class GetAdoptationBoardRespDto {
     private int adoptationBoardId;
     private int userId;
     private String username;
+    private String userNickname;
     private String adoptationBoardTitle;
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
