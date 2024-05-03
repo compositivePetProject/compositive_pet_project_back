@@ -26,4 +26,6 @@ public class AdoptationBoardViewController {
     public ResponseEntity<?> getAdoptationViewCount (@RequestParam("boardId") int boardId) {
         return ResponseEntity.ok(adoptationBoardViewService.getAdoptationBoardViewCount(boardId));
     }
+
+    
 }
