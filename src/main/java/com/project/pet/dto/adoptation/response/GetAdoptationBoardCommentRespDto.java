@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class GetAdoptationBoardCommentRespDto {
     private int adoptationBoardId;
     private String username;
+    private String userNickname;
     private String adoptationBoardCommentContent;
     private LocalDate createDate;
     private LocalDate updateDate;

@@ -235,7 +235,7 @@
         where
             abt.board_animal_category_id = 2
         group by
-        adoptation_board_id;
+        abt.adoptation_board_id;
 
     </select>
 
@@ -243,22 +243,28 @@
             parameterType="integer"
             resultMap="AdoptationBoardResultMap">
         select
-            abt.adoptation_board_id,
-            abt.user_id,
-            ut.user_username,
-            ut.user_nickname,
-            abt.adoptation_board_title,
-            abt.adoptation_board_content,
-            abt.board_animal_category_id,
-            abact.board_animal_category_name_kor,
-            abt.create_date,
-            abt.update_date
+        abt.adoptation_board_id,
+        abt.user_id,
+        ut.user_username,
+        ut.user_nickname,
+        abt.adoptation_board_title,
+        abt.adoptation_board_content,
+        abt.board_animal_category_id,
+        abact.board_animal_category_name_kor,
+        abt.create_date,
+        abt.update_date,
+        count(distinct abft.adoptation_favorite_id),
+        count(distinct abvt.adoptation_board_view_id),
+        count(distinct abct.adoptation_board_comment_id)
         from
             adoptation_board_tb abt
             left outer join user_tb ut on (ut.user_id = abt.user_id)
             left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
+            left outer join adoptation_board_favorite_tb abft on(abft.adoptation_board_id = abt.adoptation_board_id)
+            left outer join adoptation_board_view_tb abvt on(abvt.adoptation_board_id = abt.adoptation_board_id)
+            left outer join adoptation_board_comment_tb abct on (abct.adoptation_board_id = abt.adoptation_board_id)
         where
-            adoptation_board_id = #{boardId}
+            abt.adoptation_board_id = #{boardId}
     </select>
 
     <delete id="deleteAdoptationBoardByBoardId"

@@ -27,8 +27,8 @@ public class AdoptationBoardCommentController {
     }
 
     //boardId로 해당 게시판 댓글 다건 조회
-    @GetMapping("/comments")
-    public ResponseEntity<?> getAdoptationBoardComment(@RequestParam int boardId) {
+    @GetMapping("/comments/{boardId}")
+    public ResponseEntity<?> getAdoptationBoardComment(@PathVariable int boardId) {
 
         return ResponseEntity.ok(adoptationBoardCommentService.getAdoptationBoardCommentByBoardId(boardId));
     }

@@ -44,4 +44,9 @@ public class AdoptationBoardFavoriteController {
         return ResponseEntity.ok(adoptationBoardFavoriteService.getAdoptationBoardFavorite(adoptationBoardId));
     }
 
+    @GetMapping("/favorite/{boardId}")
+    public ResponseEntity<?> getFindUserByBoardId (@PathVariable int boardId) {
+        return ResponseEntity.ok(adoptationBoardFavoriteService.findMyUserIdByBoardId(boardId));
+    }
+
 }

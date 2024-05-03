@@ -31,6 +31,7 @@ public class AdoptationBoardComment {
         return GetAdoptationBoardCommentRespDto.builder()
                 .adoptationBoardId(adoptationBoardId)
                 .username(user.getUsername())
+                .userNickname(user.getNickname())
                 .adoptationBoardCommentContent(adoptationBoardCommentContent)
                 .createDate(createDate)
                 .updateDate(updateDate)
