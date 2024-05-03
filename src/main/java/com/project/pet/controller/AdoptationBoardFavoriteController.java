@@ -44,7 +44,4 @@ public class AdoptationBoardFavoriteController {
         return ResponseEntity.ok(adoptationBoardFavoriteService.getAdoptationBoardFavorite(adoptationBoardId));
     }
 
-
-
-
 }

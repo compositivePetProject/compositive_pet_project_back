@@ -26,6 +26,7 @@ public class CommunityBoardAdmin {
     public User user;
 
     public GetCommunityBoardAdminResponseDto toGetCommunityBoardAdminResponseDto () {
+
         return GetCommunityBoardAdminResponseDto.builder()
                 .communityBoardAdminId(communityBoardAdminId)
                 .userId(user.getUserId())

@@ -1,6 +1,7 @@
 package com.project.pet.entity.communityBoard;
 
 import com.project.pet.dto.communityboard.response.GetCommunityBoardFavoriteResponseDto;
+import com.project.pet.dto.communityboard.response.GetCommunityBoardLikedByUserIdResDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
 import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
@@ -21,12 +22,14 @@ public class CommunityBoard {
     private String communityBoardTitle;
     private String communityBoardContent;
     private int communityBoardAnimalCategoryId;
+    private int viewCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
     private CommunityBoardFavorite communityBoardFavorite;
     private User user;
     private  CommunityBoardAnimalCategory communityBoardAnimalCategory;
+    private  CommunityBoardView communityBoardView;
 
 
 
@@ -40,6 +43,7 @@ public class CommunityBoard {
              .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
              .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
+             .viewCount(viewCount)
              .createDate(createDate)
              .updateDate(updateDate)
              .build();
@@ -54,6 +58,21 @@ public class CommunityBoard {
                 .communityBoardContent(communityBoardContent)
                 .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
                 .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
+                .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
+                .totalUserIdCount(communityBoardFavorite.getTotalUserIdCount())
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public GetCommunityBoardLikedByUserIdResDto toGetCommunityBoardLikedByUserIdResDto() {
+        return  GetCommunityBoardLikedByUserIdResDto.builder()
+                .communityBoardId(communityBoardId)
+                .userId(user.getUserId())
+                .userName(user.getUsername())
+                .communityBoardTitle(communityBoardTitle)
+                .communityBoardContent(communityBoardContent)
+                .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
                 .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
                 .createDate(createDate)
                 .updateDate(updateDate)

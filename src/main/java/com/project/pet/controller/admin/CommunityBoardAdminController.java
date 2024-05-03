@@ -1,7 +1,9 @@
 package com.project.pet.controller.admin;
 
 import com.project.pet.dto.communityboard.request.CommunityBoardAdminRequestDto;
+import com.project.pet.dto.communityboard.request.GetCommunityBoardAdminRequestDto;
 import com.project.pet.dto.communityboard.request.UpdateCommunityBoardAdminRequestDto;
+import com.project.pet.dto.communityboard.response.GetCommunityBoardAdminResponseDto;
 import com.project.pet.service.admin.CommunityBoardAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,27 +19,27 @@ public class CommunityBoardAdminController {
     private @Autowired CommunityBoardAdminService communityBoardAdminService;
 
     // 커뮤니티 게시판 관리자 게시물 추가
-    @PostMapping("/admin")
+    @PostMapping("/admin/noticewrite")
     public ResponseEntity<?> postCommunityBoardAdmin(@RequestBody CommunityBoardAdminRequestDto communityBoardAdminRequestDto) {
         communityBoardAdminService.CommunityBoardAdminRequestDto(communityBoardAdminRequestDto);
         return ResponseEntity.created(null).body(true);
     }
 
     // 커뮤니티 게시판 관리자 게시물 단건 조회
-    @GetMapping("/admin/{boardAdminId}")
-    public ResponseEntity<?> getCommunityAdminBoard(@PathVariable int boardAdminId) {
-            return ResponseEntity.ok(communityBoardAdminService.getCommunityBoardAdminByBoardId(boardAdminId));
+    @GetMapping("/admin")
+    public ResponseEntity<?> getCommunityAdminBoard(GetCommunityBoardAdminRequestDto getCommunityBoardAdminRequestDto ) {
+            return ResponseEntity.ok(communityBoardAdminService.getCommunityBoardAdminByBoardId(getCommunityBoardAdminRequestDto));
     }
     // 커뮤니티 게시판 관리자 게시물 다건 조회
-    @GetMapping("/admin/boards")
+    @GetMapping("/admin/list/boards")
     public ResponseEntity<?> getCommunityAdminBoards() {
         return ResponseEntity.ok(communityBoardAdminService.getCommunityBoardsAdminByBoardId());
     }
 
      // 커뮤니티 게시판  관리자 공지사항 게시물 단건 삭제
-    @DeleteMapping("/admin/{boardAdminId}")
-    public ResponseEntity<?> deleteCommunityAdminBoard(@PathVariable int boardAdminId) {
-        communityBoardAdminService.deleteCommunityBoardAdminByBoardId(boardAdminId);
+    @DeleteMapping("/delete/admin/{communityBoardAdminId}")
+    public ResponseEntity<?> deleteCommunityAdminBoard(@PathVariable int communityBoardAdminId) {
+        communityBoardAdminService.deleteCommunityBoardAdminByBoardId(communityBoardAdminId);
         return ResponseEntity.ok().body("게시물 삭제 완료");
     }
 
@@ -50,9 +52,8 @@ public class CommunityBoardAdminController {
     }
 
     // 커뮤니티 게시판 관리자 공지사항 게시물 단건 수정.
-    @PutMapping("/admin/{communityBoardAdminId}")
-    public ResponseEntity<?> putCommunityAdminBoard(@PathVariable int communityBoardAdminId, @RequestBody UpdateCommunityBoardAdminRequestDto updateCommunityBoardAdminRequestDto) {
-        updateCommunityBoardAdminRequestDto.setCommunityBoardAdminId(communityBoardAdminId);
+    @PutMapping("/update/admin")
+    public ResponseEntity<?> putCommunityAdminBoard(@RequestBody UpdateCommunityBoardAdminRequestDto updateCommunityBoardAdminRequestDto) {
         communityBoardAdminService.putCommunityAdminBoard(updateCommunityBoardAdminRequestDto);
         return ResponseEntity.ok("게시물 수정 완료");
     }

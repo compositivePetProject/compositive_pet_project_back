@@ -2,6 +2,7 @@ package com.project.pet.repository;
 
 import com.project.pet.entity.communityBoard.CommunityBoard;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,15 +16,28 @@ public interface CommunityBoardMapper {
     public List<CommunityBoard> GetCommunityBoards();
 
     //게시판 해당BoardId로 조회 단건(Get)
-    public CommunityBoard getCommunityBoardBoardId(int boardId);
+    public CommunityBoard getCommunityBoardBoardId(int communityBoardAdminId);
 
     // 게시판에 좋아요한 userId조회
     public List<CommunityBoard> getFavoriteCommunityBoardsByUserId(int userId);
 
     public List<CommunityBoard> getCommunityBoardsDog();
 
+    public List<CommunityBoard> getCommunityBoardCat();
+
+    public List<CommunityBoard> getMyBoardByUserId(int userId);
+
+    public int getBoardPageCount();
+
+    public int getDogBoardPageCount();
+
+    public int getCatBoardPageCount();
+
+    public int getMyBoardPageCount();
+
+
     // 게시판 해당BoardId로 단건 삭제(Delete)
-    public void deleteCommunityBoardByBoardId(int boardId);
+    public void deleteCommunityBoardByBoardId(int communityBoardId);
 
     //게시판 다건 삭제(Delete)
     public int deleteCommunityBoards(List<Integer> boardIds);

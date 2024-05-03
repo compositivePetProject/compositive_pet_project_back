@@ -10,5 +10,10 @@ import java.util.List;
 public interface CommunityBoardFavoriteMapper {
 
     public int saveCommunityBoardFavorite(CommunityBoardFavorite communityBoardFavorite);
-    public int deleteCommunityBoardFavorite(int userId);
+
+    public CommunityBoard getBoardFavoritesCount(int communityBoardId);
+
+    public boolean existsByUserIdAndBoardId(CommunityBoardFavorite communityBoardFavorite);
+
+    public int deleteCommunityBoardFavorite(int userId, int communityBoardId);
 }
