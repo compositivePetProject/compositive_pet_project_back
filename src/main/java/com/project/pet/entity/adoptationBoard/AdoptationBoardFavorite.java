@@ -2,6 +2,7 @@ package com.project.pet.entity.adoptationBoard;
 
 
 import com.project.pet.dto.adoptation.response.GetAdoptationFavoriteRespDto;
+import com.project.pet.dto.adoptation.response.GetFindUserResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,12 @@ public class AdoptationBoardFavorite {
                 .userId(userId)
                 .createDate(createDate)
                 .updateDate(updateDate)
+                .build();
+    }
+
+    public GetFindUserResponseDto toGetFindUserResponseDto() {
+        return GetFindUserResponseDto.builder()
+                .userId(userId)
                 .build();
     }
 
