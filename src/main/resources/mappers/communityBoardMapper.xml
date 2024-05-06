@@ -133,8 +133,14 @@
             left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
         where
         1 = 1
+        <if test="boardAnimalCategoryId != 0">
+            and cbt.board_animal_category_id = #{boardAnimalCategoryId}
+        </if>
         <if test="searchText != null and searchText != ''">
-            AND cbt.community_board_content LIKE CONCAT('%', #{searchText}, '%')
+            and (
+                cbt.community_board_content LIKE concat('%', #{searchText}, '%')
+                or cbt.community_board_title LIKE concat('%', #{searchText}, '%')
+            )
         </if>
         LIMIT
             #{startIndex}, #{count}
@@ -145,16 +151,20 @@
         select
             count(*)
         from
-        community_board_tb cbt
-        left outer join user_tb ut on (ut.user_id = cbt.user_id)
-        left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+            community_board_tb cbt
+            left outer join user_tb ut on (ut.user_id = cbt.user_id)
+            left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
         where
         1 = 1
-        <choose>
-            <when test="searchText != null and searchText != ''">
-                and  pt.product_name_kor like concat('%', #{searchText}, '%')
-            </when>
-        </choose>
+        <if test="boardAnimalCategoryId != 0">
+            and cbt.board_animal_category_id = #{boardAnimalCategoryId}
+        </if>
+        <if test="searchText != null and searchText != ''">
+            and (
+            cbt.community_board_content LIKE concat('%', #{searchText}, '%')
+            or cbt.community_board_title LIKE concat('%', #{searchText}, '%')
+            )
+        </if>
     </select>
 
     <select id="getDogBoardPageCount"

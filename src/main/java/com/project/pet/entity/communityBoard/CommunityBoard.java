@@ -9,7 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
@@ -34,6 +36,14 @@ public class CommunityBoard {
 
 
     public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = createDate.toLocalDate();
+        String formatCreateDate = date.format(formatter);
+
+        LocalDate update = updateDate.toLocalDate();
+        String formatUpdateDate = date.format(formatter);
+
+
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
              .userId(user.getUserId())
@@ -44,8 +54,8 @@ public class CommunityBoard {
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
              .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
              .viewCount(viewCount)
-             .createDate(createDate)
-             .updateDate(updateDate)
+             .createDate(formatCreateDate)
+             .updateDate(formatUpdateDate)
              .build();
     }
 

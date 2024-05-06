@@ -48,6 +48,7 @@ public class CommunityBoardService {
         List<CommunityBoard>  communityBoardList = communityBoardMapper.getBoardPageCount(
                 startIndex,
                 getCommunityBoardPageCountReqDto.getCount(),
+                getCommunityBoardPageCountReqDto.getBoardAnimalCategoryId(),
                 getCommunityBoardPageCountReqDto.getSearchText());
         return communityBoardList.stream().map(CommunityBoard::toGetCommunityBoardResponseDto).collect(Collectors.toList());
     }
@@ -55,7 +56,9 @@ public class CommunityBoardService {
     // 페이지 카운트
     public GetCommunityBoardPageCountResponseDto  getBoardCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
         int boardCount = communityBoardMapper.getBoardCount(
-                getCommunityBoardPageCountReqDto.getSearchText());
+                getCommunityBoardPageCountReqDto.getSearchText(),
+                getCommunityBoardPageCountReqDto.getBoardAnimalCategoryId()
+        );
         int maxPageNumber = (int) Math.ceil(((double) boardCount) / getCommunityBoardPageCountReqDto.getCount());
 
         return GetCommunityBoardPageCountResponseDto.builder()

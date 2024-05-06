@@ -25,7 +25,7 @@ public class GetCommunityBoardResponseDto {
     private String communityBoardAnimalCategoryName;
     private String communityBoardAnimalCategoryNameKor;
     private int viewCount;
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
+    private String createDate;
+    private String updateDate;
 
 }

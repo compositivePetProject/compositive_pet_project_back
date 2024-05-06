@@ -47,8 +47,6 @@ public class CommunityBoardController {
         return  ResponseEntity.ok(communityBoardService.getMyBoardPageCount(getCommunityBoardMyPageCountReqDto));
     }
 
-
-
     // 커뮤니티 게시판 페이지 전체 페이지네이션 (Get)
     @GetMapping("/board/page")
     public ResponseEntity<?> getBoardPageCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
