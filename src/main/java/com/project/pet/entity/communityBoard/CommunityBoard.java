@@ -33,7 +33,7 @@ public class CommunityBoard {
     public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
-//             .userId(userId)
+             .userId(userId)
 //             .userName(user.getUsername())
              .communityBoardTitle(communityBoardTitle)
              .communityBoardContent(communityBoardContent)

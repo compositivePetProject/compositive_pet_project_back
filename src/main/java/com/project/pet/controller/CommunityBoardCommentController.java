@@ -1,10 +1,7 @@
 package com.project.pet.controller;
 
 
-import com.project.pet.dto.communityboard.request.CommunityBoardCommentRequestDto;
-import com.project.pet.dto.communityboard.request.GetCommunityBoardCommentByBoardIdReqDto;
-import com.project.pet.dto.communityboard.request.GetCommunityBoardCommentByUserIdReqDto;
-import com.project.pet.dto.communityboard.request.UpdateCommunityBoardCommentRequestDto;
+import com.project.pet.dto.communityboard.request.*;
 import com.project.pet.service.CommunityBoardCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,17 +47,16 @@ public class CommunityBoardCommentController {
 
     // 커뮤니티 게시판 댓글 다건 삭제(Delete) -  마이페이지 내가 작성한 댓글에서 사용
     @DeleteMapping("/delete/comments")
-    public ResponseEntity<?> deleteCommunityBoardComments(@RequestBody List<Integer> commentIds) {
-        communityBoardCommentService.deleteCommunityBoardCommentsId(commentIds);
+    public ResponseEntity<?> deleteCommunityBoardComment(@RequestBody DeleteCommunityBoardCommentRequestDto deleteCommunityBoardCommentRequestDto) {
+        communityBoardCommentService.deleteCommunityBoardComment(deleteCommunityBoardCommentRequestDto);
         return ResponseEntity.ok(true);
 
     }
 
     // 커뮤니티 게시판 댓글 단건 수정(Put) -
     @PutMapping("/update/comment")
-    public ResponseEntity<?> updateCommunityBoardComment(@PathVariable int commentId, @RequestBody UpdateCommunityBoardCommentRequestDto updateCommunityBoardCommentRequestDto) {
-        updateCommunityBoardCommentRequestDto.setCommunityBoardCommentId(commentId);
-        communityBoardCommentService.updateCommunityBoardCommentId(updateCommunityBoardCommentRequestDto);
+    public ResponseEntity<?> updateCommunityBoardComment(@RequestBody UpdateCommunityBoardCommentRequestDto updateCommunityBoardCommentRequestDto) {
+        communityBoardCommentService.updateCommunityBoardComment(updateCommunityBoardCommentRequestDto);
         return ResponseEntity.ok().body(true);
     }
 }

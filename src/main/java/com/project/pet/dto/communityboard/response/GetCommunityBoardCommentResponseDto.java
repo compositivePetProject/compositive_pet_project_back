@@ -14,9 +14,11 @@ import java.time.LocalDateTime;
 public class GetCommunityBoardCommentResponseDto {
     private int communityBoardCommentId;
     private int communityBoardId;
-    private String userName;
+   // private String userName;
     private int userId;
     private String communityBoardCommentContent;
+    public int communityBoardCommentRatingId;
+    public int communityBoardCommentRatingValue;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 

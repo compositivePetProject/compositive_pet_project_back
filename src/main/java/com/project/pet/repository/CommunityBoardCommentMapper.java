@@ -18,7 +18,7 @@ public interface CommunityBoardCommentMapper {
     public List <CommunityBoardComment> getCommunityBoardCommentByUserId(int userId);
 
     // 커뮤니티 게시판 단건 삭제(Delete)
-    public int deleteCommunityBoardComment(int commentId);
+    public int deleteCommunityBoardComment(int communityBoardCommentId);
 
     // 커뮤니티 게시판 다건 삭제(Delete)
     public int deleteCommunityBoardComments(List<Integer> commentIds);

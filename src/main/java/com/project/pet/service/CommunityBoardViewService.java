@@ -1,7 +1,9 @@
 package com.project.pet.service;
 
 
+import com.project.pet.dto.communityboard.request.GetCommunityBoardViewReqDto;
 import com.project.pet.dto.communityboard.request.PostCommunityBoardViewReqDto;
+import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
 import com.project.pet.repository.CommunityBoardViewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,9 @@ public class CommunityBoardViewService {
     }
 
 
-    public void getBoardViewCount (int communityBoardId) {
+    public GetCommunityBoardResponseDto getBoardViewCount (GetCommunityBoardViewReqDto getCommunityBoardViewReqDto) {
 
-     communityBoardViewMapper.getCommunityBoardViewCount(communityBoardId);
+     return communityBoardViewMapper.getCommunityBoardViewCount(getCommunityBoardViewReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardResponseDto();
 
     }
 }

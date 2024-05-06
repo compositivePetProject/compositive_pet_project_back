@@ -11,6 +11,7 @@ public class CommunityBoardCommentRequestDto {
     private int communityBoardId;
     private int userId;
     private String communityBoardCommentContent;
+    public int communityBoardCommentRatingValue;
 
 
     public CommunityBoardComment toEntity() {
