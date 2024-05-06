@@ -137,6 +137,17 @@ public class AdoptationBoardService {
             adoptationBoardMapper.updateAdoptationBoard(updateAdoptationBoardReqDto.toEntity());
     }
 
+    public void getAdoptationBoardMyPage (GetAdoptationBoardMyPageReqDto getAdoptationBoardMyPageReqDto) {
+        int startIndex = (getAdoptationBoardMyPageReqDto.getPage() - 1) * getAdoptationBoardMyPageReqDto.getCount();
+        List<AdoptationBoard> list = adoptationBoardMapper.getAdoptationBoardMyPage(
+                startIndex,
+                getAdoptationBoardMyPageReqDto.getCount(),
+                getAdoptationBoardMyPageReqDto.getUserId()
+        );
+
+
+    }
+
 }
 
 

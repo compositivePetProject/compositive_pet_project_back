@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @Builder
 public class GetAdoptationBoardCommentRespDto {
     private int adoptationBoardId;
+    private int adoptationBoardCommentId;
+    private int userId;
     private String username;
     private String userNickname;
     private String adoptationBoardCommentContent;
