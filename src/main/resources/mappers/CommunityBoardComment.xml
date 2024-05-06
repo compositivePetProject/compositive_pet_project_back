@@ -11,7 +11,17 @@
         <result property="communityBoardCommentContent" column="community_board_comment_content" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
-        <association property="user" resultMap="UserResultMap" />
+        <association property="communityBoardId" resultMap="CommunityBoardResultMap" />
+    </resultMap>
+
+    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
+    <id property="communityBoardId" column="community_board_id"/>
+    <result property="userId" column="user_id" />
+    <result property="communityBoardTitle" column="community_board_title" />
+    <result property="communityBoardContent" column="community_board_content" />
+    <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
+    <result property="createDate" column="create_date" />
+    <result property="updateDate" column="update_date" />
     </resultMap>
 
     <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
@@ -30,6 +40,8 @@
 
     <insert id="saveCommunityBoardComment"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoardComment"
+            useGeneratedKeys="true"
+            keyProperty="communityBoardCommentId"
     >
         insert into
             community_board_comment_tb
@@ -38,31 +50,34 @@
 
     </insert>
 
-    <select id="getCommunityBoardComments"
+    <select id="getCommunityBoardAllCommentsByBoardId"
             parameterType="integer"
             resultMap="CommunityBoardCommentResultMap"
     >
         select
             cbct.community_board_comment_id,
-            ut.user_username,
+            cbct.community_board_id,
+            cbct.user_id,
             cbct.community_board_comment_content,
             cbct.create_date,
             cbct.update_date
         from
             community_board_comment_tb cbct
         left outer join
-            user_tb ut on (ut.user_id = cbct.user_id)
+            community_board_tb cbt on (cbt.community_board_id = cbct.community_board_id)
         where
-            community_board_id = #{boardId};
+            cbct.community_board_id = #{communityBoardId};
 
     </select>
 
-    <select id="getCommunityBoardComment"
+    <select id="getCommunityBoardCommentByUserId"
             parameterType="integer"
             resultMap="CommunityBoardCommentResultMap"
     >
         select
+            cbct.community_board_comment_id,
             cbct.community_board_id,
+            cbct.user_id,
             ut.user_username,
             cbct.community_board_comment_content,
             cbct.create_date,
@@ -70,9 +85,9 @@
         from
             community_board_comment_tb cbct
         left outer join
-            user_tb ut on (ut.user_id = cbct.user_id)
+            community_board_tb cbt on (cbt.community_board_id = cbct.community_board_id)
         where
-            community_board_comment_id = #{commentId};
+        cbct.user_id = #{userId};
     </select>
 
     <delete id="deleteCommunityBoardComment"
@@ -81,7 +96,7 @@
         from
             community_board_comment_tb
         where
-            community_board_comment_id = #{commentId};
+            community_board_comment_id = #{communityBoardCommentId};
     </delete>
 
     <delete id="deleteCommunityBoardComments"

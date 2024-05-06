@@ -22,48 +22,30 @@ public class CommunityBoard {
     private String communityBoardTitle;
     private String communityBoardContent;
     private int communityBoardAnimalCategoryId;
-    private int viewCount;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-
-    private CommunityBoardFavorite communityBoardFavorite;
     private User user;
-    private  CommunityBoardAnimalCategory communityBoardAnimalCategory;
-    private  CommunityBoardView communityBoardView;
-
-
+    private CommunityBoardAnimalCategory communityBoardAnimalCategory;
+    private CommunityBoardView communityBoardView;
+    private CommunityBoardFavorite communityBoardFavorite;
+    private int totalCount;
 
     public GetCommunityBoardResponseDto toGetCommunityBoardResponseDto () {
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
-             .userId(user.getUserId())
-             .userName(user.getUsername())
+//             .userId(userId)
+//             .userName(user.getUsername())
              .communityBoardTitle(communityBoardTitle)
              .communityBoardContent(communityBoardContent)
-             .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
+//             .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
-             .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
-             .viewCount(viewCount)
+//             .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
+             .totalCount(totalCount)
              .createDate(createDate)
              .updateDate(updateDate)
              .build();
     }
 
-    public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto() {
-        return GetCommunityBoardFavoriteResponseDto.builder()
-                .communityBoardId(communityBoardId)
-                .userId(user.getUserId())
-                .userName(user.getUsername())
-                .communityBoardTitle(communityBoardTitle)
-                .communityBoardContent(communityBoardContent)
-                .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
-                .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
-                .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
-                .totalUserIdCount(communityBoardFavorite.getTotalUserIdCount())
-                .createDate(createDate)
-                .updateDate(updateDate)
-                .build();
-    }
 
     public GetCommunityBoardLikedByUserIdResDto toGetCommunityBoardLikedByUserIdResDto() {
         return  GetCommunityBoardLikedByUserIdResDto.builder()

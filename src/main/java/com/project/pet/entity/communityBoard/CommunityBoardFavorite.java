@@ -1,7 +1,6 @@
 package com.project.pet.entity.communityBoard;
 
 
-import com.project.pet.dto.communityboard.response.GetCommunityBoardFavoriteResponseDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommunityBoardFavorite {
-    private int communityFavoriteId;
+
+    private int communityBoardFavoriteId;
     private int communityBoardId;
     private int userId;
     private LocalDateTime createDate;

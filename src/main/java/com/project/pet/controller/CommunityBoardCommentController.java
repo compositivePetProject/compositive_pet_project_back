@@ -2,6 +2,8 @@ package com.project.pet.controller;
 
 
 import com.project.pet.dto.communityboard.request.CommunityBoardCommentRequestDto;
+import com.project.pet.dto.communityboard.request.GetCommunityBoardCommentByBoardIdReqDto;
+import com.project.pet.dto.communityboard.request.GetCommunityBoardCommentByUserIdReqDto;
 import com.project.pet.dto.communityboard.request.UpdateCommunityBoardCommentRequestDto;
 import com.project.pet.service.CommunityBoardCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +28,21 @@ public class CommunityBoardCommentController {
 
     }
 
-    // 커뮤니티 게시판 댓글 조회(단건) - boardId를 통해 게시판에 단 댓글을 조회.
-    @GetMapping("/comments/{boardId}")
-    public  ResponseEntity<?> getCommunityBoardComments(@PathVariable int boardId) {
-        return  ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentsBoardId(boardId));
+    // 커뮤니티 게시판 댓글 조회(다건) - 게시판 상세 페이지(boardId)를 통해 게시판에 단 댓글을 조회.
+    @GetMapping("/comments")
+    public  ResponseEntity<?> getCommunityBoardAllCommentsByBoardId(GetCommunityBoardCommentByBoardIdReqDto getCommunityBoardCommentByBoardIdReqDto) {
+        return  ResponseEntity.ok(communityBoardCommentService.getCommunityBoardAllCommentsByBoardId(getCommunityBoardCommentByBoardIdReqDto));
     }
 
-    // 커뮤니티 게시판 댓글 조회(다건) - 상세페이지 게시물에서 사용 & 마이페이지 내가 작성한 댓글에서 사용 (Get/다건)//
-    @GetMapping("/comment/{commentId}")
-    public ResponseEntity<?> getCommunityBoardComment(@PathVariable int commentId) {
-        return ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentByCommentId(commentId));
+    // 커뮤니티 게시판 댓글 조회(단건) - 마이 페이지에서 내가 쓴 댓글을 조회 및 상세 페이지에도 사용.
+    @GetMapping("/user/comment")
+    public ResponseEntity<?> getCommunityBoardCommentByUserId(GetCommunityBoardCommentByUserIdReqDto getCommunityBoardCommentByUserIdReqDto) {
+        return ResponseEntity.ok(communityBoardCommentService.getCommunityBoardCommentByUserId(getCommunityBoardCommentByUserIdReqDto));
     }
+
 
     // 커뮤니티 게시판 댓글 단건 삭제(Delete) - 상세페이지 게시물에서 사용
-    @DeleteMapping("/delete/comment/{commentId}")
+    @DeleteMapping("/delete/comment")
     public ResponseEntity<?> deleteCommunityBoardComment(@PathVariable int commentId) {
         communityBoardCommentService.deleteCommunityBoardCommentId(commentId);
         return  ResponseEntity.ok(true);
@@ -54,7 +57,7 @@ public class CommunityBoardCommentController {
     }
 
     // 커뮤니티 게시판 댓글 단건 수정(Put) -
-    @PutMapping("/update/comment/{commentId}")
+    @PutMapping("/update/comment")
     public ResponseEntity<?> updateCommunityBoardComment(@PathVariable int commentId, @RequestBody UpdateCommunityBoardCommentRequestDto updateCommunityBoardCommentRequestDto) {
         updateCommunityBoardCommentRequestDto.setCommunityBoardCommentId(commentId);
         communityBoardCommentService.updateCommunityBoardCommentId(updateCommunityBoardCommentRequestDto);

@@ -9,9 +9,9 @@ import java.util.List;
 @Mapper
 public interface CommunityBoardFavoriteMapper {
 
-    public int saveCommunityBoardFavorite(CommunityBoardFavorite communityBoardFavorite);
+    public int saveBoardFavorite(CommunityBoardFavorite communityBoardFavorite);
 
-    public CommunityBoard getBoardFavoritesCount(int communityBoardId);
+    public CommunityBoard getBoardFavoritesCount(int getCommunityBoardId);
 
     public boolean existsByUserIdAndBoardId(CommunityBoardFavorite communityBoardFavorite);
 

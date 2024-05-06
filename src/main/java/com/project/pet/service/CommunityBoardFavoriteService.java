@@ -4,6 +4,7 @@ import com.project.pet.dto.communityboard.request.CommunityBoardFavoriteRequestD
 import com.project.pet.dto.communityboard.request.DeleteCommunityBoardLikeReqDto;
 import com.project.pet.dto.communityboard.request.GetCommunityBoardLikeReqDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardFavoriteResponseDto;
+import com.project.pet.dto.communityboard.response.GetCommunityBoardResponseDto;
 import com.project.pet.entity.communityBoard.CommunityBoard;
 import com.project.pet.entity.communityBoard.CommunityBoardFavorite;
 import com.project.pet.entity.user.PrincipalUser;
@@ -26,12 +27,14 @@ public class CommunityBoardFavoriteService {
 
 
     // 게시물 좋아요 증가 등록(Post)
-    public void saveCommunityBoardFavoriteByBoardId (CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
-        communityBoardFavoriteMapper.saveCommunityBoardFavorite(communityBoardFavoriteRequestDto.toEntity());
+    public void saveBoardFavorite (CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
+        communityBoardFavoriteMapper.saveBoardFavorite(communityBoardFavoriteRequestDto.toEntity());
     }
 
-    public GetCommunityBoardFavoriteResponseDto getBoardFavoritesCount (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
-        return communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardFavoriteResponseDto();
+    public GetCommunityBoardResponseDto getBoardFavoritesCount (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
+        System.out.println(getCommunityBoardLikeReqDto.getCommunityBoardId());
+        System.out.println(communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardResponseDto());
+        return  communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardResponseDto();
     }
 
     public boolean getUserBoardLikeStatus(GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {

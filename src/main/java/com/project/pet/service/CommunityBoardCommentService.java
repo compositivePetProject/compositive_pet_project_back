@@ -1,6 +1,8 @@
 package com.project.pet.service;
 
 import com.project.pet.dto.communityboard.request.CommunityBoardCommentRequestDto;
+import com.project.pet.dto.communityboard.request.GetCommunityBoardCommentByBoardIdReqDto;
+import com.project.pet.dto.communityboard.request.GetCommunityBoardCommentByUserIdReqDto;
 import com.project.pet.dto.communityboard.request.UpdateCommunityBoardCommentRequestDto;
 import com.project.pet.dto.communityboard.response.GetCommunityBoardCommentResponseDto;
 import com.project.pet.entity.communityBoard.CommunityBoardComment;
@@ -27,15 +29,17 @@ public class CommunityBoardCommentService {
     }
 
     // 커뮤니티 게시판 댓글 다건 조회 (get)
-    public List<GetCommunityBoardCommentResponseDto> getCommunityBoardCommentsBoardId(int boardId) {
-        List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardComments(boardId);
+    public List<GetCommunityBoardCommentResponseDto> getCommunityBoardAllCommentsByBoardId(GetCommunityBoardCommentByBoardIdReqDto getCommunityBoardCommentByBoardIdReqDto) {
+        System.out.println(getCommunityBoardCommentByBoardIdReqDto);
+        System.out.println(communityBoardCommentMapper.getCommunityBoardAllCommentsByBoardId(getCommunityBoardCommentByBoardIdReqDto.getCommunityBoardId()));
+        List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardAllCommentsByBoardId(getCommunityBoardCommentByBoardIdReqDto.getCommunityBoardId());
         return  communityBoardComments.stream().map(CommunityBoardComment::toGetCommunityBoardCommentResponseDto).collect(Collectors.toList());
      }
 
     // 커뮤니티 게시판 댓글 조회(단건) - boardId를 통해 게시판에 단 댓글을 조회.
-     public GetCommunityBoardCommentResponseDto getCommunityBoardCommentByCommentId(int commentId) {
-         CommunityBoardComment communityBoardComment = communityBoardCommentMapper.getCommunityBoardComment(commentId);
-         return communityBoardComment.toGetCommunityBoardCommentResponseDto();
+     public List<GetCommunityBoardCommentResponseDto> getCommunityBoardCommentByUserId(GetCommunityBoardCommentByUserIdReqDto getCommunityBoardCommentByUserIdReqDto) {
+         List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardCommentByUserId(getCommunityBoardCommentByUserIdReqDto.getUserId());
+         return  communityBoardComments.stream().map(CommunityBoardComment::toGetCommunityBoardCommentResponseDto).collect(Collectors.toList());
      }
 
      // 커뮤니티 게시판 댓글 단건 삭제 (Delete)
