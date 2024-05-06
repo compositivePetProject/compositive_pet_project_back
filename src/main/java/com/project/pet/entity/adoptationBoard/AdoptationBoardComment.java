@@ -30,6 +30,8 @@ public class AdoptationBoardComment {
     public GetAdoptationBoardCommentRespDto toGetAdoptationBoardCommentRespDto() {
         return GetAdoptationBoardCommentRespDto.builder()
                 .adoptationBoardId(adoptationBoardId)
+                .adoptationBoardCommentId(adoptationBoardCommentId)
+                .userId(userId)
                 .username(user.getUsername())
                 .userNickname(user.getNickname())
                 .adoptationBoardCommentContent(adoptationBoardCommentContent)

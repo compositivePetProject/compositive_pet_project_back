@@ -34,6 +34,8 @@
             resultMap="AdoptationBoardCommentResultMap">
         select
             abct.adoptation_board_id,
+            abct.adoptation_board_comment_id,
+            ut.user_id,
             ut.user_username,
             ut.user_nickname,
             abct.adoptation_board_comment_content,

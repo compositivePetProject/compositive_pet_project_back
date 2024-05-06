@@ -29,7 +29,6 @@ public class AdoptationBoardCommentController {
     //boardId로 해당 게시판 댓글 다건 조회
     @GetMapping("/comments/{boardId}")
     public ResponseEntity<?> getAdoptationBoardComment(@PathVariable int boardId) {
-
         return ResponseEntity.ok(adoptationBoardCommentService.getAdoptationBoardCommentByBoardId(boardId));
     }
 
@@ -56,12 +55,9 @@ public class AdoptationBoardCommentController {
     }
 
     //게시판 댓글 단건 수정
-    @PutMapping("/comment/{commentId}")
-    public ResponseEntity<?> DeleteAdoptationBoardCommentByCommentId(@PathVariable int commentId,
-                                                                     @RequestBody UpdateAdoptionBoardCommentReqDto updateAdoptionBoardCommentReqDto) {
-        updateAdoptionBoardCommentReqDto.setAdoptationBoardCommentId(commentId);
+    @PutMapping("/comment")
+    public ResponseEntity<?> DeleteAdoptationBoardCommentByCommentId(@RequestBody UpdateAdoptionBoardCommentReqDto updateAdoptionBoardCommentReqDto) {
         adoptationBoardCommentService.updateAdoptationBoardCommentByCommentId(updateAdoptionBoardCommentReqDto);
-
         return ResponseEntity.ok(true);
     }
 
