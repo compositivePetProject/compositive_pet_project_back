@@ -29,6 +29,11 @@ public class AdoptationBoardService {
 
     }
 
+    public List<GetTop3AdoptationBoardsResDto> getTop3AdoptationBoards() {
+        List<AdoptationBoard> list = adoptationBoardMapper.getTop3AdoptationBoards();
+        return list.stream().map(AdoptationBoard::toGetTop3AdoptationBoardsResDto).collect(Collectors.toList());
+    }
+
     // 전체 분양 게시판 수 조회
     public GetAdoptationBoardCountRespDto getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
         int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCount(
