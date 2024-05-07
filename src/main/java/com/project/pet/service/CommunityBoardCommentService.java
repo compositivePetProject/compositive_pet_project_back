@@ -60,8 +60,8 @@ public class CommunityBoardCommentService {
      }
 
      // 커뮤니티 게시판 댓글 단건 삭제 (Delete)
-     public void deleteCommunityBoardCommentId(int commentId) {
-         communityBoardCommentMapper.deleteCommunityBoardComment(commentId);
+     public void deleteCommunityBoardCommentId(DeleteCommunityBoardCommentRequestDto deleteCommunityBoardCommentRequestDto) {
+         communityBoardCommentMapper.deleteCommunityBoardComment(deleteCommunityBoardCommentRequestDto.getCommunityBoardCommentId());
      }
 
      // 커뮤니티 게시판 댓글 다건 삭제 (Delete)

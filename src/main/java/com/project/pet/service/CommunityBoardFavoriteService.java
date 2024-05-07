@@ -31,10 +31,10 @@ public class CommunityBoardFavoriteService {
         communityBoardFavoriteMapper.saveBoardFavorite(communityBoardFavoriteRequestDto.toEntity());
     }
 
-    public GetCommunityBoardResponseDto getBoardFavoritesCount (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
+    public GetCommunityBoardFavoriteResponseDto getBoardFavoritesCount (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
         System.out.println(getCommunityBoardLikeReqDto.getCommunityBoardId());
-        System.out.println(communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardResponseDto());
-        return  communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardResponseDto();
+        System.out.println(communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardFavoriteResponseDto());
+        return communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardFavoriteResponseDto();
     }
 
     public boolean getUserBoardLikeStatus(GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {

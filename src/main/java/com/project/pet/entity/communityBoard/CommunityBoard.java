@@ -24,6 +24,7 @@ public class CommunityBoard {
     private int communityBoardAnimalCategoryId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+
     private User user;
     private CommunityBoardAnimalCategory communityBoardAnimalCategory;
     private CommunityBoardView communityBoardView;
@@ -34,16 +35,27 @@ public class CommunityBoard {
      return  GetCommunityBoardResponseDto.builder()
              .communityBoardId(communityBoardId)
              .userId(userId)
-//             .userName(user.getUsername())
+             .userName(user.getUsername())
              .communityBoardTitle(communityBoardTitle)
              .communityBoardContent(communityBoardContent)
-//             .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
+             .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
-//             .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
+             .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
              .totalCount(totalCount)
              .createDate(createDate)
              .updateDate(updateDate)
              .build();
+    }
+
+    public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto () {
+        return  GetCommunityBoardFavoriteResponseDto.builder()
+                .communityBoardId(communityBoardId)
+                .userId(userId)
+                .userName(user.getUsername())
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .totalUserIdCount(communityBoardFavorite.getTotalUserIdCount())
+                .build();
     }
 
 

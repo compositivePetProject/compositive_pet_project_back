@@ -39,19 +39,19 @@ public class CommunityBoardCommentController {
 
 
     // 커뮤니티 게시판 댓글 단건 삭제(Delete) - 상세페이지 게시물에서 사용
-    @DeleteMapping("/delete/comment")
-    public ResponseEntity<?> deleteCommunityBoardComment(@PathVariable int commentId) {
-        communityBoardCommentService.deleteCommunityBoardCommentId(commentId);
+    @DeleteMapping("/delete/comment/{communityBoardCommentId}")
+    public ResponseEntity<?> deleteCommunityBoardComment(DeleteCommunityBoardCommentRequestDto deleteCommunityBoardCommentRequestDto) {
+        communityBoardCommentService.deleteCommunityBoardCommentId(deleteCommunityBoardCommentRequestDto);
         return  ResponseEntity.ok(true);
     }
 
     // 커뮤니티 게시판 댓글 다건 삭제(Delete) -  마이페이지 내가 작성한 댓글에서 사용
-    @DeleteMapping("/delete/comments")
-    public ResponseEntity<?> deleteCommunityBoardComment(@RequestBody DeleteCommunityBoardCommentRequestDto deleteCommunityBoardCommentRequestDto) {
-        communityBoardCommentService.deleteCommunityBoardComment(deleteCommunityBoardCommentRequestDto);
-        return ResponseEntity.ok(true);
-
-    }
+//    @DeleteMapping("/delete/comments")
+//    public ResponseEntity<?> deleteCommunityBoardComment(@RequestBody DeleteCommunityBoardCommentRequestDto deleteCommunityBoardCommentRequestDto) {
+//        communityBoardCommentService.deleteCommunityBoardComment(deleteCommunityBoardCommentRequestDto);
+//        return ResponseEntity.ok(true);
+//
+//    }
 
     // 커뮤니티 게시판 댓글 단건 수정(Put) -
     @PutMapping("/update/comment")
