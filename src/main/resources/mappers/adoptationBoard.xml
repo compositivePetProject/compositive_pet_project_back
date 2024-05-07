@@ -43,6 +43,7 @@
         <association property="adoptationBoardView" resultMap="AdoptationBoardViewResultMap"/>
         <association property="adoptationBoardComment" resultMap="AdoptationBoardCommentResultMap"/>
     </resultMap>
+
     <resultMap id="AdoptationBoardFavoriteResultMap" type="com.project.pet.entity.adoptationBoard.AdoptationBoardFavorite">
         <id property="adoptationFavoriteId" column="adoptation_favorite_id"/>
         <result property="adoptationBoardId" column="adoptation_board_id"/>

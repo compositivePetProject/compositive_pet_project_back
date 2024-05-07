@@ -1,11 +1,7 @@
 package com.project.pet.service;
-
 import com.project.pet.dto.communityboard.request.*;
 import com.project.pet.dto.communityboard.response.*;
-import com.project.pet.dto.product.request.GetProductSearchProductRequestDto;
-import com.project.pet.dto.product.response.GetProductCountResponseDto;
 import com.project.pet.entity.communityBoard.CommunityBoard;
-import com.project.pet.entity.product.Product;
 import com.project.pet.repository.CommunityBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +14,11 @@ public class CommunityBoardService {
 
     @Autowired
     private CommunityBoardMapper communityBoardMapper;
+
+    public List<GetTop3BoardsResponseDto> getTop3Boards() {
+        List<CommunityBoard> list = communityBoardMapper.getTop3Boards();
+        return list.stream().map(CommunityBoard::toGetTop3BoardsResDto).collect(Collectors.toList());
+    }
 
     // 게시물 추가 (post)
     public void  PostCommunityBoardRequestDto (PostCommunityBoardRequestDto postCommunityBoardRequestDto) {

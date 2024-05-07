@@ -12,6 +12,8 @@ public interface CommunityBoardMapper {
     // 게시판 작성(Post)
     public int postCommunityBoard(CommunityBoard communityBoard);
 
+
+    public List<CommunityBoard> getTop3Boards();
     // 게시판 조회 다건(Get)
     public List<CommunityBoard> GetCommunityBoards();
 

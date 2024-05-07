@@ -1,18 +1,12 @@
 package com.project.pet.dto.communityboard.response;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-
-// 게시판 작성 단건(get) 응답
-@Data
 @Builder
-public class GetCommunityBoardResponseDto {
+@Data
+public class GetTop3BoardsResponseDto {
     private int communityBoardId;
     private int userId;
     private String userName;
@@ -25,6 +19,7 @@ public class GetCommunityBoardResponseDto {
     private int totalCount;
     private int viewCount;
     private int commentCount;
+    private int totalSum;
     private String createDate;
     private String updateDate;
 }

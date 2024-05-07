@@ -18,6 +18,11 @@ public class CommunityBoardController {
 
     // 컨트롤러 보드 변수명(boradId >> communityBoardId로 수정.)
 
+    @GetMapping("/board/top3")
+    public ResponseEntity<?> getTop3Boards() {
+        return ResponseEntity.ok(communityBoardService.getTop3Boards());
+    }
+
     //커뮤니티 게시판 작성(Post) - 게시물 작성페이지에서 사용
     @PostMapping("/board/write")
     public ResponseEntity<?> postCommunityBoard(@RequestBody PostCommunityBoardRequestDto postCommunityBoardRequestDto) {
