@@ -18,9 +18,9 @@
         <result property="password" column="user_password"/>
         <result property="name" column="user_name"/>
         <result property="address" column="user_address"/>
-        <result property="telNumber" column="user_address"/>
-        <result property="nickname" column="user_address"/>
-        <result property="email" column="user_address"/>
+        <result property="telNumber" column="user_tel_number"/>
+        <result property="nickname" column="user_nickname"/>
+        <result property="email" column="user_email"/>
         <result property="createDate" column="create_date"/>
         <result property="updateDate" column="update_date"/>
     </resultMap>
@@ -34,7 +34,10 @@
             resultMap="AdoptationBoardCommentResultMap">
         select
             abct.adoptation_board_id,
+            abct.adoptation_board_comment_id,
+            ut.user_id,
             ut.user_username,
+            ut.user_nickname,
             abct.adoptation_board_comment_content,
             abct.create_date,
             abct.update_date

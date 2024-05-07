@@ -41,8 +41,9 @@
         where
             adoptation_board_id = #{boardId}
     </select>
+
     <select id="findMyUserIdByBoardId"
-            resultType="integer"
+            resultMap="AdoptationBoardFavoriteResultMap"
             >
         SELECT
             user_id

@@ -25,10 +25,16 @@ public class AdoptationBoardController {
         return ResponseEntity.created(null).body("게시글 작성 완료");
     }
 
+    // Top3 게시판 조회(다건)
+    @GetMapping("/board/top3")
+    public ResponseEntity<?> getTop3AdoptationBoards() {
+        return ResponseEntity.ok(adoptationBoardService.getTop3AdoptationBoards());
+    }
+
     //전체 게시판 조회(다건)
     @GetMapping("/board")
-    public ResponseEntity<?> getAdoptationBoards() {
-        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards());
+    public ResponseEntity<?> getAdoptationBoards(GetAdoptationBoardsRequestDto getAdoptationBoardsRequestDto) {
+        return ResponseEntity.ok(adoptationBoardService.getAdoptationBoards(getAdoptationBoardsRequestDto));
     }
 
 
@@ -117,6 +123,14 @@ public class AdoptationBoardController {
     }
 
 
+    // 마이페이지 분양게시판 조회(다건)
+    @GetMapping("/board/my")
+    public ResponseEntity<?> getAdoptationBoardMyPage(@RequestBody GetAdoptationBoardMyPageReqDto getAdoptationBoardMyPageReqDto) {
+        return ResponseEntity.ok(true);
+    }
 
+    // 마이페이지 분양게시판 조회 count
+//    @GetMapping("/board/my/count")
+//    public ResponseEntity<?>
 }
 

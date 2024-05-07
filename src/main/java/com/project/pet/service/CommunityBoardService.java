@@ -2,7 +2,10 @@ package com.project.pet.service;
 
 import com.project.pet.dto.communityboard.request.*;
 import com.project.pet.dto.communityboard.response.*;
+import com.project.pet.dto.product.request.GetProductSearchProductRequestDto;
+import com.project.pet.dto.product.response.GetProductCountResponseDto;
 import com.project.pet.entity.communityBoard.CommunityBoard;
+import com.project.pet.entity.product.Product;
 import com.project.pet.repository.CommunityBoardMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,14 +41,29 @@ public class CommunityBoardService {
         return communityBoards.stream().map(CommunityBoard::toGetCommunityBoardResponseDto).collect(Collectors.toList());
     }
 
+    // 페이지 조회
+    public List<GetCommunityBoardResponseDto> getBoardPageCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
+        int startIndex = (getCommunityBoardPageCountReqDto.getPage() - 1) * getCommunityBoardPageCountReqDto.getCount();
 
-    public GetCommunityBoardPageCountResponseDto getBoardPageCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
-        int boardCount = communityBoardMapper.getBoardPageCount();
-        int maxPageNumber = (int) Math.ceil(((double) boardCount / getCommunityBoardPageCountReqDto.getCount()));
+        List<CommunityBoard>  communityBoardList = communityBoardMapper.getBoardPageCount(
+                startIndex,
+                getCommunityBoardPageCountReqDto.getCount(),
+                getCommunityBoardPageCountReqDto.getBoardAnimalCategoryId(),
+                getCommunityBoardPageCountReqDto.getSearchText());
+        return communityBoardList.stream().map(CommunityBoard::toGetCommunityBoardResponseDto).collect(Collectors.toList());
+    }
+
+    // 페이지 카운트
+    public GetCommunityBoardPageCountResponseDto  getBoardCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
+        int boardCount = communityBoardMapper.getBoardCount(
+                getCommunityBoardPageCountReqDto.getSearchText(),
+                getCommunityBoardPageCountReqDto.getBoardAnimalCategoryId()
+        );
+        int maxPageNumber = (int) Math.ceil(((double) boardCount) / getCommunityBoardPageCountReqDto.getCount());
 
         return GetCommunityBoardPageCountResponseDto.builder()
-                .pageMaxNumbers(maxPageNumber)
                 .totalCount(boardCount)
+                .maxPageNumber(maxPageNumber)
                 .build();
     }
 

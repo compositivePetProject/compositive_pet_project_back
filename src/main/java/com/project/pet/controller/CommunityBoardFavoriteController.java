@@ -19,7 +19,7 @@ public class CommunityBoardFavoriteController {
 
     // 게시물 좋아요 등록(단건) - 상세페이지 게시물에서 사용(Post)
     @PostMapping("/favorite")
-  public ResponseEntity<?> saveBoardFavorite (@RequestBody CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
+    public ResponseEntity<?> saveBoardFavorite (@RequestBody CommunityBoardFavoriteRequestDto communityBoardFavoriteRequestDto) {
         communityBoardFavoriteService.saveBoardFavorite(communityBoardFavoriteRequestDto);
         return ResponseEntity.created(null).body(true);
     }
@@ -38,8 +38,7 @@ public class CommunityBoardFavoriteController {
         System.out.println(getCommunityBoardLikeReqDto);
         return ResponseEntity.ok(communityBoardFavoriteService.getBoardFavoritesCount(getCommunityBoardLikeReqDto));
     }
-
-     //게시물 좋아요 상태 조회.
+  
     @GetMapping("/favorite")
     public ResponseEntity<?> getUserBoardLikeStatus (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
         boolean isLiked =  communityBoardFavoriteService.getUserBoardLikeStatus(getCommunityBoardLikeReqDto);

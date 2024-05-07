@@ -1,6 +1,7 @@
 package com.project.pet.controller;
 
 import com.project.pet.dto.communityboard.request.*;
+import com.project.pet.dto.product.request.GetProductCommentRequestDto;
 import com.project.pet.service.CommunityBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,6 @@ public class CommunityBoardController {
     //커뮤니티 게시판 작성(Post) - 게시물 작성페이지에서 사용
     @PostMapping("/board/write")
     public ResponseEntity<?> postCommunityBoard(@RequestBody PostCommunityBoardRequestDto postCommunityBoardRequestDto) {
-        System.out.println(postCommunityBoardRequestDto);
         communityBoardService.PostCommunityBoardRequestDto(postCommunityBoardRequestDto);
         return ResponseEntity.created(null).body(true);
     }
@@ -37,9 +37,9 @@ public class CommunityBoardController {
         return ResponseEntity.ok(communityBoardService.getCommunityBoardByBoardId(getCommunityBoardRequestDto));
     }
 
-    @GetMapping("/board/mylist/{userId}")
-    public ResponseEntity<?> getMyWriteBoardByUserId(@PathVariable int userId) {
-        return ResponseEntity.ok(communityBoardService.getMyWriteBoardByUserId(userId));
+    @GetMapping("/board/mylist")
+    public ResponseEntity<?> getMyWriteBoardByUserId(GetProductCommentRequestDto getProductCommentRequestDto) {
+        return ResponseEntity.ok(communityBoardService.getMyWriteBoardByUserId(getProductCommentRequestDto.getUserId()));
     }
 
     @GetMapping("/board/count/mypage")
@@ -48,10 +48,14 @@ public class CommunityBoardController {
     }
 
     // 커뮤니티 게시판 페이지 전체 페이지네이션 (Get)
-    @GetMapping("/board/count/page")
+    @GetMapping("/board/page")
     public ResponseEntity<?> getBoardPageCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
-        System.out.println(getCommunityBoardPageCountReqDto);
         return  ResponseEntity.ok(communityBoardService.getBoardPageCount(getCommunityBoardPageCountReqDto));
+    }
+
+    @GetMapping("/board/count")
+    public ResponseEntity<?> getBoardCount(GetCommunityBoardPageCountReqDto getCommunityBoardPageCountReqDto) {
+        return  ResponseEntity.ok(communityBoardService.getBoardCount(getCommunityBoardPageCountReqDto));
     }
 
 
@@ -71,7 +75,6 @@ public class CommunityBoardController {
     @GetMapping("/favorite/board/{userId}")
     public ResponseEntity<?> getFavoriteCommunityBoardByUserId(@PathVariable int userId) {
         return ResponseEntity.ok(communityBoardService.getFavoriteCommunityBoards(userId));
-
     }
 
     //강아지 게시판 다건 조회

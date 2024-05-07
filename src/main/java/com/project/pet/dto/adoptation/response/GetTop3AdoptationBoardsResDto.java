@@ -4,13 +4,13 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Builder
 @Data
-public class GetAdoptationBoardRespDto {
+public class GetTop3AdoptationBoardsResDto {
     private int adoptationBoardId;
     private int userId;
+    private int totalSum;
     private String username;
     private String userNickname;
     private String adoptationBoardTitle;

@@ -29,9 +29,17 @@ public class AdoptationBoardService {
 
     }
 
+    public List<GetTop3AdoptationBoardsResDto> getTop3AdoptationBoards() {
+        List<AdoptationBoard> list = adoptationBoardMapper.getTop3AdoptationBoards();
+        return list.stream().map(AdoptationBoard::toGetTop3AdoptationBoardsResDto).collect(Collectors.toList());
+    }
+
     // 전체 분양 게시판 수 조회
     public GetAdoptationBoardCountRespDto getAdoptationBoardCount(GetAdoptationBoardCountReqDto getAdoptationBoardCountReqDto) {
-        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCount();
+        int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCount(
+                getAdoptationBoardCountReqDto.getBoardAnimalCategoryId(),
+                getAdoptationBoardCountReqDto.getAdoptationBoardTitle()
+        );
         int maxPageNumber = (int) Math.ceil(((double) adoptionBoardCount / getAdoptationBoardCountReqDto.getCount()));
         return GetAdoptationBoardCountRespDto.builder()
                 .maxPageNumber(maxPageNumber)
@@ -71,9 +79,18 @@ public class AdoptationBoardService {
     }
 
     //전체 게시판 조회(다건)
-    public List<GetAdoptationBoardRespDto> getAdoptationBoards() {
-        List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoards();
-        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
+    public List<GetAdoptationBoardRespDto> getAdoptationBoards(GetAdoptationBoardsRequestDto getAdoptationBoardsRequestDto) {
+        int startIndex = (getAdoptationBoardsRequestDto.getPage() - 1) * getAdoptationBoardsRequestDto.getCount();
+        List<AdoptationBoard> list = adoptationBoardMapper.getAdoptationBoards(
+                startIndex,
+                getAdoptationBoardsRequestDto.getCount(),
+                getAdoptationBoardsRequestDto.getBoardAnimalCategoryId(),
+                getAdoptationBoardsRequestDto.getAdoptationBoardTitle()
+        );
+
+        return list.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
+//        List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoards();
+//        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 
     public List<GetAdoptationBoardRespDto> getAdoptationBoardByUserId(int userId) {
@@ -123,6 +140,17 @@ public class AdoptationBoardService {
     //해당 게시판 수정
     public void updateAdoptationBoard (UpdateAdoptationBoardReqDto updateAdoptationBoardReqDto) {
             adoptationBoardMapper.updateAdoptationBoard(updateAdoptationBoardReqDto.toEntity());
+    }
+
+    public void getAdoptationBoardMyPage (GetAdoptationBoardMyPageReqDto getAdoptationBoardMyPageReqDto) {
+        int startIndex = (getAdoptationBoardMyPageReqDto.getPage() - 1) * getAdoptationBoardMyPageReqDto.getCount();
+        List<AdoptationBoard> list = adoptationBoardMapper.getAdoptationBoardMyPage(
+                startIndex,
+                getAdoptationBoardMyPageReqDto.getCount(),
+                getAdoptationBoardMyPageReqDto.getUserId()
+        );
+
+
     }
 
 }

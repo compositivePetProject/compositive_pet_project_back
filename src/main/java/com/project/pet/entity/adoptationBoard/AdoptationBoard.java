@@ -3,6 +3,7 @@ package com.project.pet.entity.adoptationBoard;
 
 import com.project.pet.dto.adoptation.response.GetAdoptationBoardRespDto;
 import com.project.pet.dto.adoptation.response.GetLikedAdoptationBoardByUserIdRespDto;
+import com.project.pet.dto.adoptation.response.GetTop3AdoptationBoardsResDto;
 import com.project.pet.entity.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,9 @@ public class AdoptationBoard {
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
     private int totalCount;
+    private int viewCount;
+    private int commentCount;
+    private int totalSum;
     private LocalDate createDate;
     private LocalDate updateDate;
 
@@ -33,6 +37,7 @@ public class AdoptationBoard {
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
     public AdoptationBoardFavorite adoptationBoardFavorite;
     public AdoptationBoardView adoptationBoardView;
+    public AdoptationBoardComment adoptationBoardComment;
 
     // Entity -> ResponseDto
     public GetAdoptationBoardRespDto toGetAdoptationBoardRespDto () {
@@ -40,11 +45,14 @@ public class AdoptationBoard {
                 .adoptationBoardId(adoptationBoardId)
                 .userId(user.getUserId())
                 .username(user.getUsername())
+                .userNickname(user.getNickname())
                 .adoptationBoardTitle(adoptationBoardTitle)
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
                 .totalCount(totalCount)
+                .viewCount(viewCount)
+                .commentCount(commentCount)
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
@@ -59,6 +67,25 @@ public class AdoptationBoard {
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
+                .createDate(createDate)
+                .updateDate(updateDate)
+                .build();
+    }
+
+    public GetTop3AdoptationBoardsResDto toGetTop3AdoptationBoardsResDto() {
+        return GetTop3AdoptationBoardsResDto.builder()
+                .adoptationBoardId(adoptationBoardId)
+                .userId(user.getUserId())
+                .totalSum(totalSum)
+                .username(user.getUsername())
+                .userNickname(user.getNickname())
+                .adoptationBoardTitle(adoptationBoardTitle)
+                .adoptationBoardContent(adoptationBoardContent)
+                .boardAnimalCategoryId(boardAnimalCategoryId)
+                .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
+                .totalCount(totalCount)
+                .viewCount(viewCount)
+                .commentCount(commentCount)
                 .createDate(createDate)
                 .updateDate(updateDate)
                 .build();
