@@ -19,5 +19,6 @@ public class CommunityBoardView {
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private int totalViewUserIdCount;
 
 }

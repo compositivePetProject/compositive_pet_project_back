@@ -6,19 +6,9 @@
 <mapper namespace="com.project.pet.repository.CommunityBoardFavoriteMapper">
 
     <resultMap id="CommunityBoardFavoriteResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardFavorite">
-        <id property="communityFavoriteId" column="community_favorite_id" />
+        <id property="communityBoardFavoriteId" column="community_board_favorite_id" />
         <result property="communityBoardId" column="community_board_id" />
         <result property="userId" column="user_id" />
-        <result property="createDate" column="create_date" />
-        <result property="updateDate" column="update_date" />
-    </resultMap>
-
-    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
-        <id property="communityBoardId" column="community_board_id"/>
-        <result property="userId" column="user_id" />
-        <result property="communityBoardTitle" column="community_board_title" />
-        <result property="communityBoardContent" column="community_board_content" />
-        <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
     </resultMap>
@@ -37,10 +27,33 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+    <resultMap id="CommunityBoardAnimalCategoryResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardAnimalCategory" >
+        <id property="communityBoardAnimalCategoryId" column="community_board_id" />
+        <result property="communityBoardAnimalCategoryName" column="community_board_animal_category_name"/>
+        <result property="communityBoardAnimalCategoryNameKor" column="community_board_animal_category_name_kor"/>
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+
+    <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
+        <id property="communityBoardId" column="community_board_id"/>
+        <result property="userId" column="user_id" />
+        <result property="communityBoardTitle" column="community_board_title" />
+        <result property="communityBoardContent" column="community_board_content" />
+        <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+        <result property="totalCount" column="total_user_id_count"/>
+        <association property="communityBoardFavorite" resultMap="CommunityBoardFavoriteResultMap" />
+        <association property="user" resultMap="UserResultMap" />
+    </resultMap>
 
 
 
-    <insert id="saveCommunityBoardFavorite"
+
+
+    <insert id="saveBoardFavorite"
             parameterType="com.project.pet.entity.communityBoard.CommunityBoardFavorite"
     >
         insert into
@@ -64,14 +77,11 @@
 
     <select id="getBoardFavoritesCount"
             parameterType="integer"
-            resultMap="CommunityBoardFavoriteResultMap">
-
+            resultMap="CommunityBoardResultMap"
+    >
         select
             cbt.community_board_id,
             cbt.user_id,
-            cbt.community_board_title,
-            cbt.community_board_content,
-            cbt.community_board_animal_category_id,
             cbt.create_date,
             cbt.update_date,
             COUNT(cbft.user_id) AS total_user_id_count
@@ -79,10 +89,7 @@
             community_board_tb cbt
             left outer join community_board_favorite_tb cbft on(cbft.community_board_id = cbt.community_board_id)
         where
-            cbt.community_board_id = #{communityBoardId}
-
-
-
+            cbt.community_board_id = #{getCommunityBoardId}
     </select>
 
     <delete id="deleteCommunityBoardFavorite"

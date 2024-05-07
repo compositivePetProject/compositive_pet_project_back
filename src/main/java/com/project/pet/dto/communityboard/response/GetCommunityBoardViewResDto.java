@@ -1,27 +1,17 @@
-package com.project.pet.entity.communityBoard;
+package com.project.pet.dto.communityboard.response;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class CommunityBoardFavorite {
-
-    private int communityBoardFavoriteId;
+public class GetCommunityBoardViewResDto {
+    private int communityBoardViewId;
     private int communityBoardId;
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
     private int totalUserIdCount;
-
-
-
-
 }

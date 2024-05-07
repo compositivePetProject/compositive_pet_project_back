@@ -11,14 +11,14 @@ public interface CommunityBoardCommentMapper {
     // 커뮤니티 게시판 추가(Post)
     public int  saveCommunityBoardComment(CommunityBoardComment communityBoardComment);
 
-    // 커뮤니티 게시판 다건 조회(Get)
-    public List <CommunityBoardComment> getCommunityBoardComments(int boardId);
+    // 커뮤니티 게시판 해당 게시판(BoardId)에 달린 댓글 전체 조회.
+    public List <CommunityBoardComment> getCommunityBoardAllCommentsByBoardId(int communityBoardId);
 
     // 커뮤니티 게시판 단건 조회(Get)
-    public CommunityBoardComment getCommunityBoardComment(int commentId);
+    public List <CommunityBoardComment> getCommunityBoardCommentByUserId(int userId);
 
     // 커뮤니티 게시판 단건 삭제(Delete)
-    public int deleteCommunityBoardComment(int commentId);
+    public int deleteCommunityBoardComment(int communityBoardCommentId);
 
     // 커뮤니티 게시판 다건 삭제(Delete)
     public int deleteCommunityBoardComments(List<Integer> commentIds);

@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 // 게시판 작성 단건(get) 응답
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class GetCommunityBoardResponseDto {
 
     private int communityBoardId;
@@ -24,8 +22,10 @@ public class GetCommunityBoardResponseDto {
     private int communityBoardAnimalCategoryId;
     private String communityBoardAnimalCategoryName;
     private String communityBoardAnimalCategoryNameKor;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
+    private int totalCount;
     private int viewCount;
     private String createDate;
     private String updateDate;
-
 }

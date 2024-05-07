@@ -1,5 +1,6 @@
 package com.project.pet.controller;
 
+import com.project.pet.dto.communityboard.request.GetCommunityBoardViewReqDto;
 import com.project.pet.dto.communityboard.request.PostCommunityBoardViewReqDto;
 import com.project.pet.service.CommunityBoardViewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,9 @@ public class CommunityBoardViewController {
     }
 
 
-    @GetMapping("/board/view/{communityBoardId}")
-    public ResponseEntity<?> getBoardViewCount (@PathVariable int communityBoardId) {
-        communityBoardViewService.getBoardViewCount(communityBoardId);
-        return ResponseEntity.ok().body("true");
+    @GetMapping("/view")
+    public ResponseEntity<?> getBoardViewCount (GetCommunityBoardViewReqDto getCommunityBoardViewReqDto) {
+        return ResponseEntity.ok(communityBoardViewService.getBoardViewCount(getCommunityBoardViewReqDto));
     }
 
 }

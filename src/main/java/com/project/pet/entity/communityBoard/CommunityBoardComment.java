@@ -22,12 +22,13 @@ public class CommunityBoardComment {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-    private User user;
+    private CommunityBoard communityBoard;
 
     public GetCommunityBoardCommentResponseDto toGetCommunityBoardCommentResponseDto() {
         return  GetCommunityBoardCommentResponseDto.builder()
+                .communityBoardCommentId(communityBoardCommentId)
                 .communityBoardId(communityBoardId)
-                .userName(user.getUsername())
+                .userId(userId)
                 .communityBoardCommentContent(communityBoardCommentContent)
                 .createDate(createDate)
                 .updateDate(updateDate)
