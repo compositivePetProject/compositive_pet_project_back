@@ -14,6 +14,8 @@ public interface AdoptationBoardMapper {
     //게시글 작성
     public int postAdoptationBoard(AdoptationBoard adoptationBoard);
 
+    public List<AdoptationBoard> getTop3AdoptationBoards();
+
     //전체 게시글 조회
     public List<AdoptationBoard> getAdoptationBoards(
             @Param("startIndex") int startIndex,

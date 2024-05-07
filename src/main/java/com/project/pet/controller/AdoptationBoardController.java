@@ -25,6 +25,12 @@ public class AdoptationBoardController {
         return ResponseEntity.created(null).body("게시글 작성 완료");
     }
 
+    // Top3 게시판 조회(다건)
+    @GetMapping("/board/top3")
+    public ResponseEntity<?> getTop3AdoptationBoards() {
+        return ResponseEntity.ok(adoptationBoardService.getTop3AdoptationBoards());
+    }
+
     //전체 게시판 조회(다건)
     @GetMapping("/board")
     public ResponseEntity<?> getAdoptationBoards(GetAdoptationBoardsRequestDto getAdoptationBoardsRequestDto) {
