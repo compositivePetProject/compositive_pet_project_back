@@ -13,6 +13,22 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+    <resultMap id="CommunityBoardViewResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardView">
+        <id property="communityViewId" column="community_board_view_id" />
+        <result property="communityBoardId" column="community_board_id" />
+        <result property="userId" column="user_id" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
+    <resultMap id="CommunityBoardFavoriteResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardFavorite">
+        <id property="communityBoardFavoriteId" column="community_board_favorite_id" />
+        <result property="communityBoardId" column="community_board_id" />
+        <result property="userId" column="user_id" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
+
     <resultMap id="UserResultMap" type="com.project.pet.entity.user.User">
         <id property="userId" column="user_id" />
         <result property="username" column="user_username" />
@@ -27,6 +43,14 @@
         <result property="updateDate" column="update_date" />
     </resultMap>
 
+    <resultMap id="CommunityBoardCommentResultMap" type="com.project.pet.entity.communityBoard.CommunityBoardComment">
+        <id property="communityBoardCommentId" column="community_board_comment_id" />
+        <result property="communityBoardId" column="community_board_id" />
+        <result property="userId" column="user_id" />
+        <result property="communityBoardCommentContent" column="community_board_comment_content" />
+        <result property="createDate" column="create_date" />
+        <result property="updateDate" column="update_date" />
+    </resultMap>
 
     <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
         <id property="communityBoardId" column="community_board_id"/>
@@ -34,12 +58,18 @@
         <result property="communityBoardTitle" column="community_board_title" />
         <result property="communityBoardContent" column="community_board_content" />
         <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
+        <result property="totalCount" column="count(distinct cbft.community_board_favorite_id)"/>
+        <result property="viewCount" column="count(distinct cbvt.community_board_view_id)"/>
+        <result property="commentCount" column="count(distinct cbct.community_board_comment_id)"/>
+        <result property="totalSum" column="total_sum"/>
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
         <association property="communityBoardAnimalCategory" resultMap="CommunityBoardAnimalCategoryResultMap" />
         <association property="user" resultMap="UserResultMap" />
+        <association property="communityBoardComment" resultMap="CommunityBoardCommentResultMap" />
+        <association property="communityBoardFavorite" resultMap="CommunityBoardFavoriteResultMap" />
+        <association property="communityBoardView" resultMap="CommunityBoardViewResultMap" />
     </resultMap>
-
 
 
     <insert id="postCommunityBoard"
@@ -50,6 +80,36 @@
         values
             (0, #{userId}, #{communityBoardTitle}, #{communityBoardContent}, #{communityBoardAnimalCategoryId}, now(), now())
     </insert>
+
+    <select id="getTop3Boards" resultMap="CommunityBoardResultMap">
+        select
+            cbt.community_board_id,
+            cbt.user_id,
+            ut.user_username,
+            ut.user_nickname,
+            cbt.community_board_title,
+            cbt.community_board_content,
+            cbt.community_board_animal_category_id,
+            cbact.community_board_animal_category_name,
+            cbact.community_board_animal_category_name_kor,
+            cbt.create_date,
+            cbt.update_date,
+            count(distinct cbft.community_board_favorite_id),
+            count(distinct cbvt.community_board_view_id),
+            count(distinct cbct.community_board_comment_id),
+            count(distinct cbft.community_board_favorite_id) + count(distinct cbvt.community_board_view_id) + count(distinct cbct.community_board_comment_id) as total_sum
+        from
+        community_board_tb cbt
+            left outer join user_tb ut on (ut.user_id = cbt.user_id)
+            left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
+            left outer join community_board_view_tb cbvt on(cbvt.community_board_id = cbt.community_board_id)
+            left outer join community_board_comment_tb cbct on(cbct.community_board_id = cbt.community_board_id)
+            left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
+        group by
+            cbt.community_board_id
+        order by
+            total_sum desc limit 3
+    </select>
 
     <select id="GetCommunityBoards"
             resultMap="CommunityBoardResultMap">
@@ -77,19 +137,26 @@
                 cbt.community_board_id,
                 cbt.user_id,
                 ut.user_username,
+                ut.user_nickname,
                 cbt.community_board_title,
                 cbt.community_board_content,
                 cbt.community_board_animal_category_id,
                 cbact.community_board_animal_category_name,
                 cbact.community_board_animal_category_name_kor,
                 cbt.create_date,
-                cbt.update_date
+                cbt.update_date,
+                count(distinct cbft.community_board_favorite_id),
+                count(distinct cbvt.community_board_view_id),
+                count(distinct cbct.community_board_comment_id)
             from
                 community_board_tb cbt
                 left outer join user_tb ut on (ut.user_id = cbt.user_id)
+                left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
+                left outer join community_board_view_tb cbvt on(cbvt.community_board_id = cbt.community_board_id)
+                left outer join community_board_comment_tb cbct on(cbct.community_board_id = cbt.community_board_id)
                 left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
             where
-                community_board_id = #{communityBoardId}
+                cbt.community_board_id = #{communityBoardId}
     </select>
 
     <select id="getMyBoardByUserId"
@@ -120,28 +187,37 @@
             cbt.community_board_id,
             cbt.user_id,
             ut.user_username,
+            ut.user_nickname,
             cbt.community_board_title,
             cbt.community_board_content,
             cbt.community_board_animal_category_id,
             cbact.community_board_animal_category_name,
             cbact.community_board_animal_category_name_kor,
             cbt.create_date,
-            cbt.update_date
+            cbt.update_date,
+            count(distinct cbft.community_board_favorite_id),
+            count(distinct cbvt.community_board_view_id),
+            count(distinct cbct.community_board_comment_id)
         from
             community_board_tb cbt
             left outer join user_tb ut on (ut.user_id = cbt.user_id)
+            left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
+            left outer join community_board_view_tb cbvt on(cbvt.community_board_id = cbt.community_board_id)
+            left outer join community_board_comment_tb cbct on(cbct.community_board_id = cbt.community_board_id)
             left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
         where
         1 = 1
         <if test="boardAnimalCategoryId != 0">
-            and cbt.board_animal_category_id = #{boardAnimalCategoryId}
+            and cbt.community_board_animal_category_id = #{boardAnimalCategoryId}
         </if>
         <if test="searchText != null and searchText != ''">
             and (
-                cbt.community_board_content LIKE concat('%', #{searchText}, '%')
-                or cbt.community_board_title LIKE concat('%', #{searchText}, '%')
+            cbt.community_board_content LIKE concat('%', #{searchText}, '%')
+            or cbt.community_board_title LIKE concat('%', #{searchText}, '%')
             )
         </if>
+        group by
+            cbt.community_board_id
         LIMIT
             #{startIndex}, #{count}
     </select>
@@ -166,6 +242,8 @@
             )
         </if>
     </select>
+
+
 
     <select id="getDogBoardPageCount"
             resultType="integer" >

@@ -98,7 +98,8 @@
         from
             community_board_favorite_tb
         where
-        user_id = #{userId}
+            user_id = #{userId}
+            and community_board_id = #{communityBoardId}
 
     </delete>
 </mapper>
