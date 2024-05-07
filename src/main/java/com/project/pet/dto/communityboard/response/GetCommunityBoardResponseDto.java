@@ -26,6 +26,4 @@ public class GetCommunityBoardResponseDto {
     private LocalDateTime updateDate;
     private int totalCount;
     private int viewCount;
-    private String createDate;
-    private String updateDate;
 }
