@@ -49,6 +49,7 @@ public interface AdoptationBoardMapper {
     public List<AdoptationBoard> getLikedAdoptationBoardByUserId(int userId);
 
 
+    public int setAdoptationBoardViewCountUp(int boardId);
     //해당 게시글 단건 조회
     public AdoptationBoard getAdoptationBoardByBoardId(int boardId);
 

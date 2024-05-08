@@ -25,7 +25,7 @@ public class AdoptationBoard {
     private String adoptationBoardTitle;
     private String adoptationBoardContent;
     private int boardAnimalCategoryId;
-    private int totalCount;
+    private int favoriteCount;
     private int viewCount;
     private int commentCount;
     private int totalSum;
@@ -50,7 +50,7 @@ public class AdoptationBoard {
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
-                .totalCount(totalCount)
+                .favoriteCount(favoriteCount)
                 .viewCount(viewCount)
                 .commentCount(commentCount)
                 .createDate(createDate)
@@ -83,7 +83,7 @@ public class AdoptationBoard {
                 .adoptationBoardContent(adoptationBoardContent)
                 .boardAnimalCategoryId(boardAnimalCategoryId)
                 .boardAnimalCategoryNameKor(adoptationBoardAnimalCategory.getBoardAnimalCategoryNameKor())
-                .totalCount(totalCount)
+                .favoriteCount(favoriteCount)
                 .viewCount(viewCount)
                 .commentCount(commentCount)
                 .createDate(createDate)
