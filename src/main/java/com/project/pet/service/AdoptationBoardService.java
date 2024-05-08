@@ -89,8 +89,6 @@ public class AdoptationBoardService {
         );
 
         return list.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
-//        List<AdoptationBoard> adoptationBoards = adoptationBoardMapper.getAdoptationBoards();
-//        return adoptationBoards.stream().map(AdoptationBoard::toGetAdoptationBoardRespDto).collect(Collectors.toList());
     }
 
     public List<GetAdoptationBoardRespDto> getAdoptationBoardByUserId(int userId) {
@@ -116,6 +114,7 @@ public class AdoptationBoardService {
 
     //id를 사용하여 해당 게시판 조회(단건)
     public GetAdoptationBoardRespDto getAdoptationBoardByBoardId(int boardId) {
+        adoptationBoardMapper.setAdoptationBoardViewCountUp(boardId);
         AdoptationBoard adoptationBoard = adoptationBoardMapper.getAdoptationBoardByBoardId(boardId);
         return adoptationBoard.toGetAdoptationBoardRespDto();
     }
