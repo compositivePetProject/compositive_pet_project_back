@@ -25,7 +25,7 @@ public class CommunityBoard {
     private String communityBoardTitle;
     private String communityBoardContent;
     private int communityBoardAnimalCategoryId;
-    private int totalCount;
+    private int favoriteCount;
     private int viewCount;
     private int commentCount;
     private int totalSum;
@@ -57,7 +57,7 @@ public class CommunityBoard {
              .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
              .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
              .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
-             .totalCount(totalCount)
+             .favoriteCount(favoriteCount)
              .viewCount(viewCount)
              .commentCount(commentCount)
              .createDate(formatCreateDate)
@@ -84,7 +84,7 @@ public class CommunityBoard {
                 .communityBoardAnimalCategoryName(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryName())
                 .communityBoardAnimalCategoryId(communityBoardAnimalCategoryId)
                 .communityBoardAnimalCategoryNameKor(communityBoardAnimalCategory.getCommunityBoardAnimalCategoryNameKor())
-                .totalCount(totalCount)
+                .favoriteCount(favoriteCount)
                 .viewCount(viewCount)
                 .commentCount(commentCount)
                 .totalSum(totalSum)
@@ -98,11 +98,7 @@ public class CommunityBoard {
     public GetCommunityBoardFavoriteResponseDto toGetCommunityBoardFavoriteResponseDto () {
         return  GetCommunityBoardFavoriteResponseDto.builder()
                 .communityBoardId(communityBoardId)
-                .userId(userId)
-                .userName(user.getUsername())
-                .createDate(createDate)
-                .updateDate(updateDate)
-                .totalUserIdCount(communityBoardFavorite.getTotalUserIdCount())
+                .favoriteCount(favoriteCount)
                 .build();
     }
 

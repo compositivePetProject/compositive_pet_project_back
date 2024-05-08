@@ -58,9 +58,9 @@
         <result property="communityBoardTitle" column="community_board_title" />
         <result property="communityBoardContent" column="community_board_content" />
         <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
-        <result property="totalCount" column="count(distinct cbft.community_board_favorite_id)"/>
-        <result property="viewCount" column="count(distinct cbvt.community_board_view_id)"/>
-        <result property="commentCount" column="count(distinct cbct.community_board_comment_id)"/>
+        <result property="favoriteCount" column="favorite_count"/>
+        <result property="viewCount" column="view_count"/>
+        <result property="commentCount" column="comment_count"/>
         <result property="totalSum" column="total_sum"/>
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
@@ -94,10 +94,10 @@
             cbact.community_board_animal_category_name_kor,
             cbt.create_date,
             cbt.update_date,
-            count(distinct cbft.community_board_favorite_id),
-            count(distinct cbvt.community_board_view_id),
-            count(distinct cbct.community_board_comment_id),
-            count(distinct cbft.community_board_favorite_id) + count(distinct cbvt.community_board_view_id) + count(distinct cbct.community_board_comment_id) as total_sum
+            (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count,
+            cbt.view_count,
+            (select count(*) from community_board_comment_tb where community_board_id = cbt.community_board_id group by community_board_id) as comment_count,
+            (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id) + cbt.view_count + (select count(*) from community_board_comment_tb where community_board_id = cbt.community_board_id) as total_sum
         from
         community_board_tb cbt
             left outer join user_tb ut on (ut.user_id = cbt.user_id)
@@ -143,11 +143,11 @@
                 cbt.community_board_animal_category_id,
                 cbact.community_board_animal_category_name,
                 cbact.community_board_animal_category_name_kor,
+                (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count,
+                cbt.view_count,
+                (select count(*) from community_board_comment_tb where community_board_id = cbt.community_board_id group by community_board_id) as comment_count,
                 cbt.create_date,
-                cbt.update_date,
-                count(distinct cbft.community_board_favorite_id),
-                count(distinct cbvt.community_board_view_id),
-                count(distinct cbct.community_board_comment_id)
+                cbt.update_date
             from
                 community_board_tb cbt
                 left outer join user_tb ut on (ut.user_id = cbt.user_id)
@@ -193,11 +193,11 @@
             cbt.community_board_animal_category_id,
             cbact.community_board_animal_category_name,
             cbact.community_board_animal_category_name_kor,
+            (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count,
+            cbt.view_count,
+            (select count(*) from community_board_comment_tb where community_board_id = cbt.community_board_id group by community_board_id) as comment_count,
             cbt.create_date,
-            cbt.update_date,
-            count(distinct cbft.community_board_favorite_id),
-            count(distinct cbvt.community_board_view_id),
-            count(distinct cbct.community_board_comment_id)
+            cbt.update_date
         from
             community_board_tb cbt
             left outer join user_tb ut on (ut.user_id = cbt.user_id)
@@ -315,6 +315,8 @@
 
     </select>
 
+
+
     <select id="getCommunityBoardsDog"
             resultMap="CommunityBoardResultMap">
         select
@@ -396,6 +398,14 @@
             update_date = now()
         where
             community_board_id = #{communityBoardId}
+    </update>
+
+    <update id="setBoardViewCountUp" parameterType="integer">
+        update community_board_tb
+        set
+        view_count = view_count + 1
+        where
+        community_board_id = #{communityBoardId}
     </update>
 
 </mapper>

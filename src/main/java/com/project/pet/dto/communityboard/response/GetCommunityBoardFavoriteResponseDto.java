@@ -10,12 +10,11 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class GetCommunityBoardFavoriteResponseDto {
-
-private int communityBoardId;
-private int userId;
-private String userName;
-private LocalDateTime createDate;
-private LocalDateTime updateDate;
-private int totalUserIdCount;
+    private int communityBoardId;
+    private int userId;
+    private String userName;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
+    private int favoriteCount;
 
 }

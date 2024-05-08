@@ -32,9 +32,7 @@ public class CommunityBoardFavoriteService {
     }
 
     public GetCommunityBoardFavoriteResponseDto getBoardFavoritesCount (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
-        System.out.println(getCommunityBoardLikeReqDto.getCommunityBoardId());
-        System.out.println(communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardFavoriteResponseDto());
-        return communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.toEntity().getCommunityBoardId()).toGetCommunityBoardFavoriteResponseDto();
+        return communityBoardFavoriteMapper.getBoardFavoritesCount(getCommunityBoardLikeReqDto.getCommunityBoardId()).toGetCommunityBoardFavoriteResponseDto();
     }
 
     public boolean getUserBoardLikeStatus(GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {

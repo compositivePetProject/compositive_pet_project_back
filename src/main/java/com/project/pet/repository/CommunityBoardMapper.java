@@ -23,6 +23,8 @@ public interface CommunityBoardMapper {
     // 게시판에 좋아요한 userId조회
     public List<CommunityBoard> getFavoriteCommunityBoardsByUserId(int userId);
 
+    public int setBoardViewCountUp(int communityBoardId);
+
     public List<CommunityBoard> getCommunityBoardsDog();
 
     public List<CommunityBoard> getCommunityBoardCat();

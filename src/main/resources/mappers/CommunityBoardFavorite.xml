@@ -44,13 +44,10 @@
         <result property="communityBoardAnimalCategoryId" column="community_board_animal_category_id" />
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
-        <result property="totalCount" column="total_user_id_count"/>
+        <result property="favoriteCount" column="favorite_count"/>
         <association property="communityBoardFavorite" resultMap="CommunityBoardFavoriteResultMap" />
         <association property="user" resultMap="UserResultMap" />
     </resultMap>
-
-
-
 
 
     <insert id="saveBoardFavorite"
@@ -80,14 +77,11 @@
             resultMap="CommunityBoardResultMap"
     >
         select
-            cbt.community_board_id,
-            cbt.user_id,
-            cbt.create_date,
-            cbt.update_date,
-            COUNT(cbft.user_id) AS total_user_id_count
+            *,
+            (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count
         from
             community_board_tb cbt
-            left outer join community_board_favorite_tb cbft on(cbft.community_board_id = cbt.community_board_id)
+            left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
         where
             cbt.community_board_id = #{getCommunityBoardId}
     </select>
@@ -100,7 +94,6 @@
         where
             user_id = #{userId}
             and community_board_id = #{communityBoardId}
-
     </delete>
 </mapper>
 
