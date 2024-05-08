@@ -22,7 +22,7 @@ public class GetCommunityBoardResponseDto {
     private int communityBoardAnimalCategoryId;
     private String communityBoardAnimalCategoryName;
     private String communityBoardAnimalCategoryNameKor;
-    private int totalCount;
+    private int favoriteCount;
     private int viewCount;
     private int commentCount;
     private String createDate;

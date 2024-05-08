@@ -33,9 +33,13 @@ public class CommunityBoardService {
 
     // 게시물 해당BoardId로 단건 조회 (Get)
     public GetCommunityBoardResponseDto getCommunityBoardByBoardId(GetCommunityBoardRequestDto getCommunityBoardRequestDto) {
+        communityBoardMapper.setBoardViewCountUp(getCommunityBoardRequestDto.getCommunityBoardId());
         CommunityBoard communityBoard = communityBoardMapper.getCommunityBoardBoardId(getCommunityBoardRequestDto.getCommunityBoardId());
         return communityBoard.toGetCommunityBoardResponseDto();
     }
+
+
+
 
     public List<GetCommunityBoardResponseDto> getMyWriteBoardByUserId(int userId)  {
         List <CommunityBoard> communityBoards = communityBoardMapper.getMyBoardByUserId(userId);

@@ -35,7 +35,6 @@ public class CommunityBoardFavoriteController {
     // 게시물 좋아요 수 총 카운트.
     @GetMapping("/favorite/count")
     public ResponseEntity<?> getBoardFavoritesCount (GetCommunityBoardLikeReqDto getCommunityBoardLikeReqDto) {
-        System.out.println(getCommunityBoardLikeReqDto);
         return ResponseEntity.ok(communityBoardFavoriteService.getBoardFavoritesCount(getCommunityBoardLikeReqDto));
     }
   

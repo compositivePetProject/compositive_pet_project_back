@@ -13,15 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommunityBoardFavorite {
-
     private int communityBoardFavoriteId;
     private int communityBoardId;
     private int userId;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private int totalUserIdCount;
-
-
-
-
 }
