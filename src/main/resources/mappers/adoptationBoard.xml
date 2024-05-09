@@ -95,7 +95,6 @@
             left outer join user_tb ut on (ut.user_id = abt.user_id)
             left outer join adoptation_board_animal_category_tb abact on (abact.board_animal_category_id = abt.board_animal_category_id)
             left outer join adoptation_board_favorite_tb abft on(abft.adoptation_board_id = abt.adoptation_board_id)
-            left outer join adoptation_board_view_tb abvt on(abvt.adoptation_board_id = abt.adoptation_board_id)
             left outer join adoptation_board_comment_tb abct on (abct.adoptation_board_id = abt.adoptation_board_id)
         group by
             abt.adoptation_board_id
@@ -287,7 +286,6 @@
             abt.adoptation_board_title,
             abt.adoptation_board_content,
             abt.board_animal_category_id,
-            abact.board_animal_category_name_kor,
             (select count(*) from adoptation_board_favorite_tb where adoptation_board_id = abt.adoptation_board_id group by adoptation_board_id) as favorite_count,
             abt.view_count,
             (select count(*) from adoptation_board_comment_tb where adoptation_board_id = abt.adoptation_board_id group by adoptation_board_id) as comment_count,
