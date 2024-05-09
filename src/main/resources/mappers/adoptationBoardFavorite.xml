@@ -26,9 +26,8 @@
         from
             adoptation_board_favorite_tb
         where
-            user_id = #{userId}
-        and
-            adoptation_board_id = #{adoptationBoardId};
+        user_id = #{userId}
+        and adoptation_board_id = #{adoptationBoardId};
     </delete>
 
     <select id="getAdoptationBoardFavorite"
