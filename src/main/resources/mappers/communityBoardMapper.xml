@@ -90,8 +90,6 @@
             cbt.community_board_title,
             cbt.community_board_content,
             cbt.community_board_animal_category_id,
-            cbact.community_board_animal_category_name,
-            cbact.community_board_animal_category_name_kor,
             cbt.create_date,
             cbt.update_date,
             (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count,
@@ -101,10 +99,6 @@
         from
         community_board_tb cbt
             left outer join user_tb ut on (ut.user_id = cbt.user_id)
-            left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
-            left outer join community_board_view_tb cbvt on(cbvt.community_board_id = cbt.community_board_id)
-            left outer join community_board_comment_tb cbct on(cbct.community_board_id = cbt.community_board_id)
-            left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
         group by
             cbt.community_board_id
         order by
@@ -141,8 +135,6 @@
                 cbt.community_board_title,
                 cbt.community_board_content,
                 cbt.community_board_animal_category_id,
-                cbact.community_board_animal_category_name,
-                cbact.community_board_animal_category_name_kor,
                 (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count,
                 cbt.view_count,
                 (select count(*) from community_board_comment_tb where community_board_id = cbt.community_board_id group by community_board_id) as comment_count,
@@ -151,10 +143,6 @@
             from
                 community_board_tb cbt
                 left outer join user_tb ut on (ut.user_id = cbt.user_id)
-                left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
-                left outer join community_board_view_tb cbvt on(cbvt.community_board_id = cbt.community_board_id)
-                left outer join community_board_comment_tb cbct on(cbct.community_board_id = cbt.community_board_id)
-                left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
             where
                 cbt.community_board_id = #{communityBoardId}
     </select>
@@ -191,8 +179,6 @@
             cbt.community_board_title,
             cbt.community_board_content,
             cbt.community_board_animal_category_id,
-            cbact.community_board_animal_category_name,
-            cbact.community_board_animal_category_name_kor,
             (select count(*) from community_board_favorite_tb where community_board_id = cbt.community_board_id group by community_board_id) as favorite_count,
             cbt.view_count,
             (select count(*) from community_board_comment_tb where community_board_id = cbt.community_board_id group by community_board_id) as comment_count,
@@ -201,9 +187,6 @@
         from
             community_board_tb cbt
             left outer join user_tb ut on (ut.user_id = cbt.user_id)
-            left outer join community_board_favorite_tb cbft on (cbft.community_board_id =  cbt.community_board_id)
-            left outer join community_board_view_tb cbvt on(cbvt.community_board_id = cbt.community_board_id)
-            left outer join community_board_comment_tb cbct on(cbct.community_board_id = cbt.community_board_id)
             left outer join community_board_animal_category_tb cbact on (cbact.community_board_animal_category_id = cbt.community_board_animal_category_id)
         where
         1 = 1
