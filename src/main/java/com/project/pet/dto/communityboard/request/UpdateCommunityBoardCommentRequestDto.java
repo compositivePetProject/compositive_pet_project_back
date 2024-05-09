@@ -12,9 +12,6 @@ public class UpdateCommunityBoardCommentRequestDto {
     private int communityBoardId;
     private int userId;
     private String communityBoardCommentContent;
-    private int communityBoardCommentRatingId;
-    private int communityBoardCommentRatingValue;
-
 
 
     public CommunityBoardComment toEntity() {

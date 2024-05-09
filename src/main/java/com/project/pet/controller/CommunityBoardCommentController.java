@@ -56,7 +56,7 @@ public class CommunityBoardCommentController {
     // 커뮤니티 게시판 댓글 단건 수정(Put) -
     @PutMapping("/update/comment")
     public ResponseEntity<?> updateCommunityBoardComment(@RequestBody UpdateCommunityBoardCommentRequestDto updateCommunityBoardCommentRequestDto) {
-        communityBoardCommentService.updateCommunityBoardComment(updateCommunityBoardCommentRequestDto);
+        communityBoardCommentService.updateCommunityBoardCommentId(updateCommunityBoardCommentRequestDto);
         return ResponseEntity.ok().body(true);
     }
 }

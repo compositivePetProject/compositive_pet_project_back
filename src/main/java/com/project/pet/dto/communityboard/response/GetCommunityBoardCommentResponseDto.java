@@ -17,8 +17,6 @@ public class GetCommunityBoardCommentResponseDto {
    // private String userName;
     private int userId;
     private String communityBoardCommentContent;
-    public int communityBoardCommentRatingId;
-    public int communityBoardCommentRatingValue;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
