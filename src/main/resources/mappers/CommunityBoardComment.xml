@@ -13,6 +13,7 @@
         <result property="createDate" column="create_date" />
         <result property="updateDate" column="update_date" />
         <association property="communityBoard" resultMap="CommunityBoardResultMap"/>
+        <association property="user" resultMap="UserResultMap"/>
     </resultMap>
 
     <resultMap id="CommunityBoardResultMap" type="com.project.pet.entity.communityBoard.CommunityBoard" >
@@ -59,13 +60,15 @@
             cbct.community_board_comment_id,
             cbct.community_board_id,
             cbct.user_id,
+            ut.user_username,
+            ut.user_nickname,
             cbct.community_board_comment_content,
             cbct.create_date,
             cbct.update_date
         from
             community_board_comment_tb cbct
-        left outer join
-            community_board_tb cbt on (cbt.community_board_id = cbct.community_board_id)
+            left outer join community_board_tb cbt on (cbt.community_board_id = cbct.community_board_id)
+            left outer join user_tb ut on (ut.user_id = cbct.user_id)
         where
             cbct.community_board_id = #{communityBoardId};
 

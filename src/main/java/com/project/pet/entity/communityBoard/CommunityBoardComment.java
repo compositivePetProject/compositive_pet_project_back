@@ -8,7 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Builder
@@ -23,15 +25,25 @@ public class CommunityBoardComment {
     private LocalDateTime updateDate;
 
     private CommunityBoard communityBoard;
+    private User user;
 
     public GetCommunityBoardCommentResponseDto toGetCommunityBoardCommentResponseDto() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = createDate.toLocalDate();
+        String formatCreateDate = date.format(formatter);
+
+        LocalDate update = updateDate.toLocalDate();
+        String formatUpdateDate = date.format(formatter);
+
         return  GetCommunityBoardCommentResponseDto.builder()
                 .communityBoardCommentId(communityBoardCommentId)
                 .communityBoardId(communityBoardId)
-                .userId(userId)
+                .userId(user.getUserId())
+                .userName(user.getUsername())
+                .userNickname(user.getNickname())
                 .communityBoardCommentContent(communityBoardCommentContent)
-                .createDate(createDate)
-                .updateDate(updateDate)
+                .createDate(formatCreateDate)
+                .updateDate(formatUpdateDate)
                 .build();
     }
 
