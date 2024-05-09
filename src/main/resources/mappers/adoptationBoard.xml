@@ -71,7 +71,7 @@
     <insert id="postAdoptationBoard" parameterType="com.project.pet.entity.adoptationBoard.AdoptationBoard">
         insert into
             adoptation_board_tb
-        values(0,#{userId},#{adoptationBoardTitle},#{adoptationBoardContent},#{boardAnimalCategoryId},now(),now())
+        values(0,#{userId},#{adoptationBoardTitle},#{adoptationBoardContent},#{boardAnimalCategoryId}, 0, now(), now())
     </insert>
 
     <select id="getTop3AdoptationBoards" resultMap="AdoptationBoardResultMap">
