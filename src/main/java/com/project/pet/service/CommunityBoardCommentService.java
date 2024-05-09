@@ -27,8 +27,6 @@ public class CommunityBoardCommentService {
 
     // 커뮤니티 게시판 댓글 다건 조회 (get)
     public List<GetCommunityBoardCommentResponseDto> getCommunityBoardAllCommentsByBoardId(GetCommunityBoardCommentByBoardIdReqDto getCommunityBoardCommentByBoardIdReqDto) {
-        System.out.println(getCommunityBoardCommentByBoardIdReqDto);
-        System.out.println(communityBoardCommentMapper.getCommunityBoardAllCommentsByBoardId(getCommunityBoardCommentByBoardIdReqDto.getCommunityBoardId()));
         List<CommunityBoardComment> communityBoardComments = communityBoardCommentMapper.getCommunityBoardAllCommentsByBoardId(getCommunityBoardCommentByBoardIdReqDto.getCommunityBoardId());
         return  communityBoardComments.stream().map(CommunityBoardComment::toGetCommunityBoardCommentResponseDto).collect(Collectors.toList());
      }
