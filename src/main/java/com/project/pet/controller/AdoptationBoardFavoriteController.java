@@ -40,7 +40,6 @@ public class AdoptationBoardFavoriteController {
 
     @GetMapping("/favorite/board")
     public ResponseEntity<?> getAdoptationBoardFavoriteByBoardId (@RequestParam int adoptationBoardId) {
-        System.out.println(adoptationBoardFavoriteService.getAdoptationBoardFavorite(adoptationBoardId));
         return ResponseEntity.ok(adoptationBoardFavoriteService.getAdoptationBoardFavorite(adoptationBoardId));
     }
 
