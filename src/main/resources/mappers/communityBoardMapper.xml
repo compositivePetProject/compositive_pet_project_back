@@ -78,7 +78,7 @@
         insert into
             community_board_tb
         values
-            (0, #{userId}, #{communityBoardTitle}, #{communityBoardContent}, #{communityBoardAnimalCategoryId}, now(), now())
+            (0, #{userId}, #{communityBoardTitle}, #{communityBoardContent}, #{communityBoardAnimalCategoryId}, #{viewCount}, now(), now())
     </insert>
 
     <select id="getTop3Boards" resultMap="CommunityBoardResultMap">
@@ -233,7 +233,7 @@
         where
         1 = 1
         <if test="boardAnimalCategoryId != 0">
-            and cbt.board_animal_category_id = #{boardAnimalCategoryId}
+            and cbt.community_board_animal_category_id = #{boardAnimalCategoryId}
         </if>
         <if test="searchText != null and searchText != ''">
             and (
