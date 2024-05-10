@@ -36,7 +36,6 @@ public class AdoptationBoard {
     public User user;
     public AdoptationBoardAnimalCategory adoptationBoardAnimalCategory;
     public AdoptationBoardFavorite adoptationBoardFavorite;
-    public AdoptationBoardView adoptationBoardView;
     public AdoptationBoardComment adoptationBoardComment;
 
     // Entity -> ResponseDto

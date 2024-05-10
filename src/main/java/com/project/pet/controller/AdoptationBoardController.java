@@ -122,15 +122,5 @@ public class AdoptationBoardController {
 
     }
 
-
-    // 마이페이지 분양게시판 조회(다건)
-    @GetMapping("/board/my")
-    public ResponseEntity<?> getAdoptationBoardMyPage(@RequestBody GetAdoptationBoardMyPageReqDto getAdoptationBoardMyPageReqDto) {
-        return ResponseEntity.ok(true);
-    }
-
-    // 마이페이지 분양게시판 조회 count
-//    @GetMapping("/board/my/count")
-//    public ResponseEntity<?>
 }
 
