@@ -56,33 +56,4 @@ public class ProductIncomingStockAdminController {
         return ResponseEntity.ok(productIncomingAdminService.getProductIncomingCount(getProductIncomingCountRequestDto));
     }
 
-
-//    @GetMapping("admin/incoming/stocks/test")
-//    public ResponseEntity<?> getProductIncomingStocksTest(GetProductIncomingStocksTestRequestDto getProductIncomingStocksTestRequestDto) {
-//        return ResponseEntity.ok(productAdminService.getProductIncomingStocksTest(getProductIncomingStocksTestRequestDto));
-//    }
-//
-
-//
-
-//
-//
-//    // 관리자 상품 가입고 테이블 조회(단건)
-//    @GetMapping("admin/incoming/stock/{productIncomingStockId}")
-//    public ResponseEntity<?> getProductIncomingStock(@PathVariable int productIncomingStockId) {
-//        return ResponseEntity.ok(productAdminService.getProductIncomingStock(productIncomingStockId));
-//    }
-//
-//    // 관리자 상품 가입고 테이블 삭제(단건)
-//    @DeleteMapping("admin/incoming/stock/{productIncomingStockId}")
-//    public ResponseEntity<?> deleteProductIncomingStock(@PathVariable int productIncomingStockId) {
-//        productAdminService.deleteProductIncomingStock(productIncomingStockId);
-//        return ResponseEntity.ok(true);
-//    }
-//
-
-//
-
-
-
 }

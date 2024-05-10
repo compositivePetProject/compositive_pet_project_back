@@ -16,17 +16,9 @@ public class AdoptationBoardService {
     @Autowired
     private AdoptationBoardMapper adoptationBoardMapper;
 
-
-
-
-
-
-
     //게시판 작성
     public void postAdoptationBoard(PostAdoptationBoardReqDto postAdoptationBoardReqDto) {
-
         adoptationBoardMapper.postAdoptationBoard(postAdoptationBoardReqDto.toEntity());
-
     }
 
     public List<GetTop3AdoptationBoardsResDto> getTop3AdoptationBoards() {
@@ -57,7 +49,6 @@ public class AdoptationBoardService {
                 .totalCountDog(adoptionBoardCount)
                 .build();
     }
-
 
     public GetAdoptationBoardCatCountRespDto getAdoptationBoardCatCount(GetAdoptationBoardCatCountReqDto getAdoptationBoardCatCountReqDto) {
         int adoptionBoardCount = adoptationBoardMapper.getAdoptationBoardCatCount();
@@ -126,7 +117,6 @@ public class AdoptationBoardService {
 
     //게시판 다건 삭제
     public void deleteAdoptationBoards (List<Integer> boardIds) {
-        System.out.println(boardIds);
         try {
             for (int boardId : boardIds) {
                 deleteAdoptationBoardByBoardId(boardId);
@@ -148,8 +138,6 @@ public class AdoptationBoardService {
                 getAdoptationBoardMyPageReqDto.getCount(),
                 getAdoptationBoardMyPageReqDto.getUserId()
         );
-
-
     }
 
 }
