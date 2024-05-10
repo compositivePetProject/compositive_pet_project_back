@@ -31,11 +31,11 @@ public class ProductService {
 
     public List<GetProductsResponseDto> productPage(GetProductSearchProductRequestDto getProductSearchProductRequestDto){
         int startIndex = (getProductSearchProductRequestDto.getPage() - 1) * getProductSearchProductRequestDto.getCount();
-
         List<Product>  productList = productMapper.findProducts(
                 startIndex,
                 getProductSearchProductRequestDto.getCount(),
                 getProductSearchProductRequestDto.getProductCategoryId(),
+                getProductSearchProductRequestDto.getProductAnimalCategoryId(),
                 getProductSearchProductRequestDto.getSearchText(),
                 getProductSearchProductRequestDto.getOrderBy());
 
@@ -45,6 +45,7 @@ public class ProductService {
     public GetProductCountResponseDto getProductCount(GetProductSearchProductRequestDto getProductSearchProductRequestDto) {
         int productCount = productMapper.getProductCount(
                 getProductSearchProductRequestDto.getProductCategoryId(),
+                getProductSearchProductRequestDto.getProductAnimalCategoryId(),
                 getProductSearchProductRequestDto.getSearchText());
         int maxPageNumber = (int) Math.ceil(((double) productCount) / getProductSearchProductRequestDto.getCount());
 

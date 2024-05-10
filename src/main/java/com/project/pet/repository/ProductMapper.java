@@ -16,11 +16,13 @@ public interface ProductMapper {
             @Param("startIndex") int startIndex,
             @Param("count") int count,
             @Param("productCategoryId") int productCategoryId,
+            @Param("productAnimalCategoryId") int productAnimalCategoryId,
             @Param("searchText") String searchText,
             @Param("orderBy") String orderBy);
 
 
     public int getProductCount(
             @Param("productCategoryId") int productCategoryId,
+            @Param("productAnimalCategoryId") int productAnimalCategoryId,
             @Param("searchText") String searchText);
 }
