@@ -18,8 +18,9 @@ public class OAuth2SignupRequestDto {
     private String password;
     @Pattern(regexp = "^[가-힣]{1,}$", message = "한글문자 형식이어야 합니다")
     private String name;
-    @Pattern(regexp = "^(?=.*[가-힣])[가-힣A-Za-z0-9~\\-\\. ]+(읍|면|동|가|리|길|로)+$", message = "도로명 or 지번 주소 형태가 아닙니다.")
+    @NotBlank(message = "도로명 or 지번 주소 형식이어야 합니다.")
     private String address;
+    @NotBlank(message = "상세주소를 입력해주세요")
     private String detailAddress;
     @Pattern(regexp = "^01([0|1|6|7|8|9])-([0-9]{3,4})-([0-9]{4})+$",  message = "ex) 010-1234-5678 형식이어야 합니다")
     private String telNumber;
@@ -27,7 +28,7 @@ public class OAuth2SignupRequestDto {
     private String nickname;
     @Email(regexp =  "^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{1,3}$", message = "이메일 형식이어야 합니다")
     private String email;
-    @NotBlank(message = "공백일 수 없습니다.")
+    @NotBlank(message = "이미지를 선택해주세요.")
     private String profileImageUrl;
     @NotBlank(message = "공백일 수 없습니다.")
     private String oauth2Name;
