@@ -28,7 +28,8 @@ public class  JwtAuthenticationFilter extends GenericFilter {
                 "/auth",
                 "/community",
                 "/product",
-                "/adoptation"
+                "/adoptation",
+                "/server"
         );
 
         String url = request.getRequestURI();
